@@ -27,7 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	WeatherUserDetailService userDetailsService;
-
+	 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
@@ -46,9 +46,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	      /*
 	      	.antMatchers("/registration","/test").permitAll()
 	        .antMatchers("/").access("hasRole('ROLE_USER')")
+	        .antMatchers("/auth/**").access("hasRole('ROLE_USER')")	        
 	        */
-	        .antMatchers("/auth/**").access("hasRole('ROLE_USER')")
-	        .and().formLogin();
+	      	.antMatchers("/","/registration","/test").permitAll()
+	        .anyRequest().authenticated();
+	        http.httpBasic().
+	        and().formLogin();
 	       
 	      http.csrf().disable();
 	    }   

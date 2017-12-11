@@ -44,8 +44,7 @@ public class HomeController {
 	@RequestMapping("/auth/")
 	public String authHome(Model model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		
-		System.out.println("in home");
+		System.out.println("in auth/home   "+authentication.getPrincipal());
 		return "home";
 	}
 	
@@ -58,7 +57,7 @@ public class HomeController {
     	
     	newUser.setPassword(passwordEncoder().encode(newUser.getPassword()));
     	System.out.println("password="+newUser.getPassword());
-        userService.addUser(newUser );;
+        userService.addUser(newUser );
 
         return "OK";
     }
@@ -74,12 +73,12 @@ public class HomeController {
     
     
     
-    @RequestMapping(value = "/showUser", method = RequestMethod.GET)
+    @RequestMapping(value = "/auth/showUser", method = RequestMethod.GET)
     public @ResponseBody ResponseEntity showUSer() {
     	
-    	Object ob = SecurityContextHolder.getContext().getAuthentication();
-    	User user=new User();
-    	System.out.println(user);
-    	return new ResponseEntity(user, HttpStatus.OK);
+    	Object ob = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    	
+    	
+    	return new ResponseEntity( ((User) ob) , HttpStatus.OK);
     }
 }
