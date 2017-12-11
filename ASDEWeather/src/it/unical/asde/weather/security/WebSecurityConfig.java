@@ -8,15 +8,20 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 
-
+/*
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+*/
+@Deprecated
+public class WebSecurityConfig {
+/*
+	extends WebSecurityConfigurerAdapter {
 	     
 	
 	@Bean
@@ -42,17 +47,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	        .antMatchers("/admin**").access("hasRole('ADMIN')")
 	    	 */        
 	   
-	      http.authorizeRequests()
-	      /*
-	      	.antMatchers("/registration","/test").permitAll()
-	        .antMatchers("/").access("hasRole('ROLE_USER')")
-	        .antMatchers("/auth/**").access("hasRole('ROLE_USER')")	        
-	        */
-	      	.antMatchers("/","/registration","/test").permitAll()
-	        .anyRequest().authenticated();
-	        http.httpBasic().
-	        and().formLogin();
+	    	
+//	    	http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+	
+	//http.authorizeRequests().antMatchers("/","/registration","/test").permitAll().anyRequest();
+	  
+	/*
+	    	http.csrf().disable().authorizeRequests()
+			.anyRequest().authenticated()
+	    	.and().formLogin();
+//			.and().httpBasic();
+	    			
+	    	/*
+			http.httpBasic().and().authorizeRequests()
+			.antMatchers("/","/registration","/test").permitAll()
+			.anyRequest().authenticated()
+			.and().formLogin();
+			/*
+			.antMatchers("/registration","/test").permitAll()
+			.antMatchers("/").access("hasRole('ROLE_USER')")
+			.antMatchers("/auth/**").access("hasRole('ROLE_USER')")	        
+			 */
 	       
-	      http.csrf().disable();
-	    }   
+
 }

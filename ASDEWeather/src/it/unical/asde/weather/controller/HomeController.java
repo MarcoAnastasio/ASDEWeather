@@ -74,11 +74,12 @@ public class HomeController {
     
     
     @RequestMapping(value = "/auth/showUser", method = RequestMethod.GET)
-    public @ResponseBody ResponseEntity showUSer() {
+    public @ResponseBody ResponseEntity<?> showUSer() {
     	
     	Object ob = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     	
+    	User temp=(User)ob;
     	
-    	return new ResponseEntity( ((User) ob) , HttpStatus.OK);
+    	return new ResponseEntity<>( temp, HttpStatus.OK);
     }
 }
