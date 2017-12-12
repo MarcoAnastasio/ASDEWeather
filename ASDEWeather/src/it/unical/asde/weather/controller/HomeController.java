@@ -38,7 +38,7 @@ public class HomeController {
 	@RequestMapping("/")
 	public String home(Model model) {
 		System.out.println("in home");
-		return "home";
+		return "index";
 	}
 	
 	@RequestMapping("/auth/")
