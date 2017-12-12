@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,15 +39,16 @@
 <body id="page-top">
 
 	<!-- Navigation -->
-	<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="align:left">
+	<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav"
+		style="align: left">
 		<div class="container">
-					<a class="navbar-brand js-scroll-trigger" href="#page-top">Weather</a>
-		
+			<a class="navbar-brand js-scroll-trigger" href="#page-top">Weather</a>
+
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class=" navbar-nav text-uppercase navbar-list-left">
 					<li class="nav-item"><a class="nav-link js-scroll-trigger"
 						href="#portfolio">My cities</a></li>
-						<li class="nav-item"><a class="nav-link js-scroll-trigger"
+					<li class="nav-item"><a class="nav-link js-scroll-trigger"
 						href="#portfolio">Other cities</a></li>
 					<li class="nav-item"><a class="nav-link js-scroll-trigger"
 						href="#about">About</a></li>
@@ -52,9 +56,11 @@
 						href="#team">Team</a></li>
 					<li class="nav-item"><a class="nav-link js-scroll-trigger"
 						href="#contact">Contact</a></li>
-					<li class="nav-item"><a class="nav-link js-scroll-trigger hidden-lg hidden-md"
+					<li class="nav-item"><a
+						class="nav-link js-scroll-trigger hidden-lg hidden-md"
 						href="#contact">Login</a></li>
-					<li class="nav-item"><a class="nav-link js-scroll-trigger hidden-lg hidden-md"
+					<li class="nav-item"><a
+						class="nav-link js-scroll-trigger hidden-lg hidden-md"
 						href="#contact">Register</a></li>
 				</ul>
 			</div>
@@ -67,8 +73,10 @@
 			</button>
 
 			<div>
-				<button class="btn btn-primary btn-md hidden-sm visible-md"> Log In </button>
-				<button class="btn btn-primary btn-md hidden-sm visible-md "> Register </button>
+				<button class="btn btn-primary btn-md hidden-sm visible-md">
+					Log In</button>
+				<button class="btn btn-primary btn-md hidden-sm visible-md ">
+					Register</button>
 			</div>
 
 		</div>
@@ -139,21 +147,26 @@
 
 			<div class="row">
 
-				<div class="col-md-4 col-sm-6 portfolio-item">
-					<a class="portfolio-link" data-toggle="modal"
-						href="#portfolioModal1">
-						<div class="portfolio-hover">
-							<div class="portfolio-hover-content">
-								<i class="fa fa-plus fa-3x"></i>
-							</div>
-						</div> <img class="img-fluid"
-						src="resources/img/portfolio/01-thumbnail.jpg" alt="">
-					</a>
-					<div class="portfolio-caption">
-						<h4>Threads</h4>
-						<p class="text-muted">Illustration</p>
+				<c:forEach items="${listCities}" var="cities">
+
+					<div class="col-md-4 col-sm-6 portfolio-item">
+						<a class="portfolio-link" data-toggle="modal"
+							href="#portfolioModal1">
+							<div class="portfolio-hover">
+								<div class="portfolio-hover-content">
+									<i class="fa fa-plus fa-3x"></i>
+								</div>
+							</div> <img class="img-fluid"
+							src="resources/img/portfolio/01-thumbnail.jpg" alt="">
+						</a>
+						<div class="portfolio-caption">
+							<h4>${cities.name}</h4>
+							<p class="text-muted">${cities.id}</p>
+						</div>
 					</div>
-				</div>
+
+				</c:forEach>
+
 
 			</div>
 		</div>
