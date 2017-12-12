@@ -19,28 +19,28 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import it.unical.asde.weather.core.UserService;
+import it.unical.asde.weather.dao.CityDao;
 import it.unical.asde.weather.model.User;
 
 
 @Controller
-public class HomeController {
-
+public class IndexController {
 
 	@Autowired
-	UserService userService;
-	
-	@Bean
-	public PasswordEncoder passwordEncoder(){
-		PasswordEncoder encoder = new BCryptPasswordEncoder();
-		return encoder;
-	}
+	private CityDao cityDao;
+
 	
 	@RequestMapping("/")
-	public String home(Model model) {
-		System.out.println("in home");
+	public String index(Model model) {
+
+		System.out.println("index");
+		
+		
+		model.addAttribute("listCities",cityDao.getRandomCities());
 		return "index";
 	}
 	
+	/*
 	@RequestMapping("/auth/")
 	public String authHome(Model model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -82,4 +82,5 @@ public class HomeController {
     	
     	return new ResponseEntity<>( temp, HttpStatus.OK);
     }
+    */
 }

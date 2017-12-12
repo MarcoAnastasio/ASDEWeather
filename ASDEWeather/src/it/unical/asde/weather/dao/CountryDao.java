@@ -25,8 +25,8 @@ public class CountryDao {
 	private void init(){
 		countryList=new HashMap<>();
 		try {
-//			bulckLoader.loadCountryFromFile();
-			bulckLoader.loadCityFromFile();
+			bulckLoader.loadCountryFromFile();
+//			bulckLoader.loadCityFromFile();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
