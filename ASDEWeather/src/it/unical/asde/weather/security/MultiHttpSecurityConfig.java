@@ -39,7 +39,7 @@ public class MultiHttpSecurityConfig {
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			http
-				.authorizeRequests().antMatchers("/","/registration","/test").permitAll()
+				.authorizeRequests().antMatchers("/","/resources/**","/registration","/test").permitAll()
 				.anyRequest().hasRole("USER").and().formLogin();
 		}
 	}

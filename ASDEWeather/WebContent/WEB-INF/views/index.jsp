@@ -29,7 +29,7 @@
 	rel='stylesheet' type='text/css'>
 
 <!-- Custom styles for this template -->
-<link href="css/agency.min.css" rel="stylesheet">
+<link href="resources/css/agency.min.css" rel="stylesheet">
 
 </head>
 
