@@ -21,10 +21,10 @@ import it.unical.asde.weather.model.bean.geographical.Country;
 public class BulkLoaderCountryCities {
 
 	private static final String COUNTRY_LIST=
-			"C:\\Users\\wwwgi\\git\\ASDEWeather\\ASDEWeather\\tempData\\SimpleCountryList.csv";
+			"C:/Users/Marco/git/ASDEWeather2/ASDEWeather/tempData/SimpleCountryList.csv";
 	
 	private static final String CITY_LIST=
-			"C:\\Users\\wwwgi\\git\\ASDEWeather\\ASDEWeather\\tempData\\city.list.json";
+			"C:/Users/Marco/git/ASDEWeather2/ASDEWeather/tempData/city.list.json";
 	
 	
 	public HashMap<Long,Country> loadCountryFromFile()throws Exception{
