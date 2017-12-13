@@ -42,7 +42,7 @@ public class CityDao {
 		List<Long> keysAsArray = new ArrayList<Long>(cities.keySet());
 		
 		for(int i=0;i<6;i++){
-			int randomNum = ThreadLocalRandom.current().nextInt(0, cities.keySet().size()+ 1);
+			int randomNum = ThreadLocalRandom.current().nextInt(0, cities.keySet().size());
 			returnList.add(cities.get(keysAsArray.get(randomNum)));
 		}
 		

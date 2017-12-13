@@ -69,6 +69,11 @@ public class BulkLoaderCountryCities {
 				cities.put(id, new City(id,name,longitude,latitude,null));
 				
 				System.out.println(new City(id,name,longitude,latitude,null));
+				
+				//stop condition.. to boring wit so match
+				if(n>40){
+					break;
+				}
 			}
 	    		
 			

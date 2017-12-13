@@ -26,10 +26,14 @@ public class MultiHttpSecurityConfig {
 	@Order(1)                                                        
 	public static class ApiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
 		protected void configure(HttpSecurity http) throws Exception {
+			http.csrf().disable()
+				.antMatcher("/api**").authorizeRequests().anyRequest().hasRole("USER").and().httpBasic();
+			
+			http.authorizeRequests().antMatchers("/registration","/registration**").permitAll();
+	/*		
 			http
-				.antMatcher("/api/**")                               
-				.authorizeRequests().anyRequest().hasRole("USER")
-				.and().httpBasic();
+			.antMatcher("/api**").authorizeRequests().anyRequest().hasRole("USER").and().httpBasic();
+			*/
 		}
 	}
 
@@ -38,9 +42,9 @@ public class MultiHttpSecurityConfig {
 
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
-			http
-				.authorizeRequests().antMatchers("/","/resources/**","/registration","/test").permitAll()
-				.anyRequest().hasRole("USER").and().formLogin();
+//			http.authorizeRequests().antMatchers("/registration","/registration**").permitAll();
+			
+			http.csrf().disable().authorizeRequests().antMatchers("/","/resources/**","/registration**","/test").permitAll();
 		}
 	}
 	

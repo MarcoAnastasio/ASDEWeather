@@ -40,6 +40,11 @@ public class IndexController {
 		return "index";
 	}
 	
+	
+	
+
+	
+	
 	/*
 	@RequestMapping("/auth/")
 	public String authHome(Model model) {
