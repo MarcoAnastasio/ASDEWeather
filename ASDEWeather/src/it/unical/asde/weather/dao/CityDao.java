@@ -1,9 +1,12 @@
 package it.unical.asde.weather.dao;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import javax.annotation.PostConstruct;
 
@@ -48,5 +51,20 @@ public class CityDao {
 		
 		return returnList;
 	}
+	
+	
+	public City getCityFromName(String cityName){
+		
+		 Iterator it = cities.entrySet().iterator();
+	    while (it.hasNext()) {
+	        Map.Entry pair = (Map.Entry)it.next();
+	        if( ((City)pair.getValue()).getName().equals(cityName)){
+	        	return (City)pair.getValue();
+	        }
+	    }
+	    return null;
+		    
+	}
+
 	
 }

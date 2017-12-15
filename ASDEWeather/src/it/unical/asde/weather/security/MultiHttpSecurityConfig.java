@@ -29,7 +29,7 @@ public class MultiHttpSecurityConfig {
 			http.csrf().disable()
 				.antMatcher("/api**").authorizeRequests().anyRequest().hasRole("USER").and().httpBasic();
 			
-			http.authorizeRequests().antMatchers("/registration","/registration**").permitAll();
+			http.authorizeRequests().antMatchers("/registration","/registration**","/test**").permitAll();
 	/*		
 			http
 			.antMatcher("/api**").authorizeRequests().anyRequest().hasRole("USER").and().httpBasic();
@@ -44,7 +44,9 @@ public class MultiHttpSecurityConfig {
 		protected void configure(HttpSecurity http) throws Exception {
 //			http.authorizeRequests().antMatchers("/registration","/registration**").permitAll();
 			
-			http.csrf().disable().authorizeRequests().antMatchers("/","/resources/**","/registration**","/test").permitAll();
+			http.csrf().disable().authorizeRequests().antMatchers("/","/resources/**","/registration**",
+					"/test").permitAll();
+			
 		}
 	}
 	
