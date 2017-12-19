@@ -27,24 +27,25 @@ import it.unical.asde.weather.model.bean.geographical.City;
 import it.unical.asde.weather.model.bean.weather.SingleWeatherForecast;
 
 @Service
-//TODO properties file is not working now.. i weill fix it as soon i can
-/*
 @Configuration
 @PropertySource("classpath:weatherAPI.properties")
-*/
 public class WeatherDataRequestexecutor {
 
 	private static final String ADD_PARAMEETER_CITY_ID="id=";
 	private static final String ADD_PARAMEETER_APP_KEY="&appid=";
-	//TODO maybe change this name whit something better
-//	private static final String ADD_PARAMEETER_SIGN="?";
+
 	
-//	@Value( "${asde.weather.openweatherapi.key1}" )
-	private String key1="9b6b06b0162f936dd91ff6a0978b875f";
+	//properties taken from configuration file
+	@Value( "${asde.weather.openweatherapi.endpoint}" )
+	private String openWeatherBaseEndpoint;
+	@Value( "${asde.weather.openweatherapi.key1}" )
+	private String key1;
+	@Value( "${asde.weather.openweatherapi.key2}" )
+	private String key2;
 	
 	
-//	@Value( "${asde.weather.openweatherapi.endpoint}" )
-	private String openWeatherBaseEndpoint="http://api.openweathermap.org/data/2.5/forecast?";
+	
+	
 	
 	
 	@Autowired
@@ -60,12 +61,11 @@ public class WeatherDataRequestexecutor {
 	 * @param city
 	 */
 	public java.util.List<SingleWeatherForecast> getWeatherForecastforCityFromAPI(City city){
-		
+			
 		if(city==null){
 			return null;
 		}
 		
-		//http://api.openweathermap.org/data/2.5/forecast?id=2524907&appid=80632c3603d35d937052d7efea13fac8
 		//1  prepare url String
 		String url = openWeatherBaseEndpoint+ADD_PARAMEETER_CITY_ID+city.getId()+
 				ADD_PARAMEETER_APP_KEY+key1;
@@ -98,19 +98,7 @@ public class WeatherDataRequestexecutor {
 //			input.close();
 		}
 		
-		
-		/*
-		String url = "http://freemusicarchive.org/api/get/genres.json?api_key=60BLHNQCAOUFPIBZ&limit=2";
-		String genreJson = IOUtils.toString(new URL(url));
-		JSONObject json = new JSONObject(genreJson);
-		// get the title
-		System.out.println(json.get("title"));
-		// get the data
-		JSONArray genreArray = (JSONArray) json.get("dataset");
-		// get the first genre
-		JSONObject firstGenre = (JSONObject) genreArray.get(0);
-		System.out.println(firstGenre.get("genre_title"));
-		*/
+
 		
 		
 		return null;
