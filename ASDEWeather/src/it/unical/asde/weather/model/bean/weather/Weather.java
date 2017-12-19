@@ -9,6 +9,8 @@ public class Weather {
 	private String icon;
 	
 	
+	//TODO if we want to persist this bean on DB we have to add ID and date when it was saved
+	
 	public Weather() {
 	}
 	

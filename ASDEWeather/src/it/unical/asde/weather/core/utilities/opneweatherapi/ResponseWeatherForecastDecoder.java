@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import it.unical.asde.weather.model.bean.weather.MainTemperature;
 import it.unical.asde.weather.model.bean.weather.Weather;
-import it.unical.asde.weather.model.bean.weather.SingleWeatherForecast;
+import it.unical.asde.weather.model.bean.weather.WeatherForecastData;
 import it.unical.asde.weather.model.bean.weather.Wind;
 
 @Service
@@ -20,9 +20,9 @@ public class ResponseWeatherForecastDecoder {
 	
 	private static final DateFormat forecastDateTimeCalulationFormatter  = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-	public SingleWeatherForecast elaborateForecastInformation(JSONObject object) {
+	public WeatherForecastData elaborateForecastInformation(JSONObject object) {
 		
-		SingleWeatherForecast forecast=new SingleWeatherForecast();
+		WeatherForecastData forecast=new WeatherForecastData();
 		forecast.setDateTimeOfForecast(decodeDateTime((Long)object.get("dt")) ); 
 		forecast.setMainTemperature(decodeMainObject((JSONObject) object.get("main")) );
 		forecast.setWeather(decodeWeatherObject((JSONObject) object.get("main")) );

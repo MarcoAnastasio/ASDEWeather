@@ -1,5 +1,6 @@
 package it.unical.asde.weather.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +12,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import it.unical.asde.weather.core.utilities.WeatherDataRequestexecutor;
+import it.unical.asde.weather.core.utilities.opneweatherapi.decoder.ResponseOpenWeatherApiDecoder;
+import it.unical.asde.weather.core.utilities.opneweatherapi.request.WeatherDataRequestExecutor;
+import it.unical.asde.weather.core.utilities.opneweatherapi.request.WeatherDataRequestExecutorImp;
 import it.unical.asde.weather.dao.CityDao;
+import it.unical.asde.weather.model.api.response.APICurrentResponse;
+import it.unical.asde.weather.model.api.response.APIForecastResponse;
 import it.unical.asde.weather.model.bean.comunication.request.WeatherForecastByCity;
 import it.unical.asde.weather.model.bean.geographical.City;
-import it.unical.asde.weather.model.bean.weather.SingleWeatherForecast;
+import it.unical.asde.weather.model.bean.weather.WeatherData;
+import it.unical.asde.weather.model.bean.weather.WeatherForecastData;
 
 
 
@@ -24,8 +30,8 @@ import it.unical.asde.weather.model.bean.weather.SingleWeatherForecast;
 public class TestController {
 
 	@Autowired
-	private WeatherDataRequestexecutor weatherDataRequestexecutor;
-
+	private WeatherDataRequestExecutor weatherDataRequestexecutor;
+	
 	@Autowired
 	private CityDao cityDao;
 	
@@ -33,7 +39,7 @@ public class TestController {
     public @ResponseBody ResponseEntity registration() {
     	
     	
-    	List<SingleWeatherForecast> weatherForecastforCityFromAPI = weatherDataRequestexecutor.getWeatherForecastforCityFromAPI(new City(2524907, "Cosenza",new Double(16.250191), new Double(16.250191),null));
+    	APIForecastResponse weatherForecastforCityFromAPI = weatherDataRequestexecutor.getWeatherForecastforCityFromAPI(new City(2524907, "Cosenza",new Double(16.250191), new Double(16.250191),null));
     	
     	
     	return new ResponseEntity<>(weatherForecastforCityFromAPI,HttpStatus.OK);
@@ -52,7 +58,7 @@ public class TestController {
     		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     	}
     	
-    	List<SingleWeatherForecast> weatherForecastforCityFromAPI = weatherDataRequestexecutor.getWeatherForecastforCityFromAPI(cityFromName);
+    	APIForecastResponse weatherForecastforCityFromAPI = weatherDataRequestexecutor.getWeatherForecastforCityFromAPI(cityFromName);
     	
   
 //    	weatherDataUpdate.getWeatherforCityFromAPI(new City(3418910, "Upernavik",new Double(16.250191), new Double(16.250191),null));
@@ -62,13 +68,11 @@ public class TestController {
     
     
     @RequestMapping(value = "/api/test3", method = RequestMethod.POST)
-    public @ResponseBody ResponseEntity test3(@RequestBody WeatherForecastByCity weatherCity) {
-    	
-    	System.out.println("city name"+weatherCity.getCityName());
+    public @ResponseBody ResponseEntity test3() {
     	
     	City cityFromName = new City(2524907, "Cosenza",new Double(16.250191), new Double(16.250191),null);
 
-    	List<SingleWeatherForecast> weatherForecastforCityFromAPI = weatherDataRequestexecutor.getWeatherForecastforCityFromAPI(cityFromName);
+    	APIForecastResponse weatherForecastforCityFromAPI = weatherDataRequestexecutor.getWeatherForecastforCityFromAPI(cityFromName);
     	
   
 //    	weatherDataUpdate.getWeatherforCityFromAPI(new City(3418910, "Upernavik",new Double(16.250191), new Double(16.250191),null));
@@ -76,4 +80,43 @@ public class TestController {
     	return new ResponseEntity<>(weatherForecastforCityFromAPI,HttpStatus.OK);
     }
 	
+    
+    
+    @RequestMapping(value = "/api/test4", method = RequestMethod.POST)
+    public @ResponseBody ResponseEntity test4() {
+
+    	City cityFromName = new City(2524907, "Cosenza",new Double(16.250191), new Double(16.250191),null);
+    	City cityFromName1 = new City(2523630, "Reggio Calabria",new Double(16.250191), new Double(16.250191),null);
+
+    	List<City> citiesList=new ArrayList<>();
+    	citiesList.add(cityFromName1);
+    	citiesList.add(cityFromName);
+    	
+//    	Object crrentForecastforCityFromAPI = weatherDataRequestexecutor.getCurrentWeatherforCityFromAPI(cityFromName);
+    	APICurrentResponse crrentForecastforCityListFromAPI = weatherDataRequestexecutor.getCurrentWeatherforCityListFromAPI(citiesList);;
+    	
+    	
+    	return new ResponseEntity<>(crrentForecastforCityListFromAPI,HttpStatus.OK);
+    	
+//      	return new ResponseEntity<>(HttpStatus.OK);
+    }
+    
+    
+    @RequestMapping(value = "/api/test5", method = RequestMethod.POST)
+    public @ResponseBody ResponseEntity test5() {
+
+    	City cityFromName = new City(2524907, "Cosenza",new Double(16.250191), new Double(16.250191),null);
+    	City cityFromName1 = new City(2523630, "Reggio Calabria",new Double(16.250191), new Double(16.250191),null);
+
+    	List<City> citiesList=new ArrayList<>();
+    	citiesList.add(cityFromName1);
+    	
+//    	Object crrentForecastforCityFromAPI = weatherDataRequestexecutor.getCurrentWeatherforCityFromAPI(cityFromName);
+    	APICurrentResponse crrentForecastforCityListFromAPI = weatherDataRequestexecutor.getCurrentWeatherforCityListFromAPI(citiesList);;
+    	
+    	
+    	return new ResponseEntity<>(crrentForecastforCityListFromAPI,HttpStatus.OK);
+    	
+//      	return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

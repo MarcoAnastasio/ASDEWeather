@@ -4,28 +4,38 @@ import java.util.Date;
 
 import org.json.simple.JSONObject;
 
-public class SingleWeatherForecast {
+public class WeatherData {
 	
-	private Date dateTimeOfForecast;
-	private Date dateTimeCalulation;	
-	private MainTemperature mainTemperature ;
-	private Weather weather;
-	private Float clouds;
-	private Wind wind;
-	private Float rain;
-	private Float snow;
-	
+	protected Date dateTimeCalulation;	
+	protected MainTemperature mainTemperature ;
+	protected Weather weather;
+	protected Float clouds;
+	protected Wind wind;
+	protected Float rain;
+	protected Float snow;
 	
 	
-	public SingleWeatherForecast() {
+	
+	public WeatherData() {
 		super();
 	}
-	public Date getDateTimeOfForecast() {
-		return dateTimeOfForecast;
+
+	
+	
+	public WeatherData(Date dateTimeCalulation, MainTemperature mainTemperature, Weather weather, Float clouds,
+			Wind wind, Float rain, Float snow) {
+		super();
+		this.dateTimeCalulation = dateTimeCalulation;
+		this.mainTemperature = mainTemperature;
+		this.weather = weather;
+		this.clouds = clouds;
+		this.wind = wind;
+		this.rain = rain;
+		this.snow = snow;
 	}
-	public void setDateTimeOfForecast(Date dateTimeOfForecast) {
-		this.dateTimeOfForecast = dateTimeOfForecast;
-	}
+
+
+
 	public Date getDateTimeCalulation() {
 		return dateTimeCalulation;
 	}
@@ -72,8 +82,8 @@ public class SingleWeatherForecast {
 	
 	@Override
 	public String toString() {
-		return "WeatherForecast [dateTimeOfForecast=" + dateTimeOfForecast + ", dateTimeCalulation="
-				+ dateTimeCalulation + ", mainTemperature=" + mainTemperature + ", weather=" + weather + ", clouds="
+		return "WeatherForecast [dateTimeCalulation="+ dateTimeCalulation + ", mainTemperature=" 
+				+ mainTemperature + ", weather=" + weather + ", clouds="
 				+ clouds + ", wind=" + wind + ", rain=" + rain + ", snow=" + snow + "]";
 	}
 	
