@@ -26,11 +26,23 @@ public class CityDao {
 	
 	@PostConstruct
 	public void inti(){
+		
+		cities=new  HashMap<>();
+		cities.put(new Long(6541467), new City(new Long(6541467), "Cosenza", null, null, null));
+		cities.put(new Long(4905006), new City(new Long(4905006), "Ottawa", null, null, null));
+		cities.put(new Long(4850657), new City(new Long(4850657), "Cedar", null, null, null));
+		cities.put(new Long(6362983), new City(new Long(6362983), "Zaragoza", null, null, null));
+		cities.put(new Long(3170196), new City(new Long(3170196), "Pontinia", null, null, null));
+		cities.put(new Long(6542115), new City(new Long(6542115), "Latina", null, null, null));
+		cities.put(new Long(6362437), new City(new Long(6362437), "Loiu", null, null, null));
+		
+		/*
 		try {
 			cities= bluckLoader.loadCityFromFile();
 		} catch (Exception e) {
 			cities=new  HashMap<>();
 		}
+		*/
 	}
 	
 	
