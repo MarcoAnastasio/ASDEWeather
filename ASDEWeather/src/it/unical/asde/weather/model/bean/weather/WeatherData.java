@@ -4,6 +4,8 @@ import java.util.Date;
 
 import org.json.simple.JSONObject;
 
+import it.unical.asde.weather.model.bean.geographical.City;
+
 public class WeatherData {
 	
 	protected Date dateTimeCalulation;	
@@ -14,6 +16,10 @@ public class WeatherData {
 	protected Float rain;
 	protected Float snow;
 	
+	//to store this information on DB i think is necessary to add an ID, and a City reference
+	
+	protected City city;
+	
 	
 	
 	public WeatherData() {
@@ -23,7 +29,7 @@ public class WeatherData {
 	
 	
 	public WeatherData(Date dateTimeCalulation, MainTemperature mainTemperature, Weather weather, Float clouds,
-			Wind wind, Float rain, Float snow) {
+			Wind wind, Float rain, Float snow,City city) {
 		super();
 		this.dateTimeCalulation = dateTimeCalulation;
 		this.mainTemperature = mainTemperature;
@@ -78,16 +84,22 @@ public class WeatherData {
 	public void setSnow(Float snow) {
 		this.snow = snow;
 	}
-	
-	
+	public City getCity() {
+		return city;
+	}
+	public void setCity(City city) {
+		this.city = city;
+	}
+
+
+
 	@Override
 	public String toString() {
-		return "WeatherForecast [dateTimeCalulation="+ dateTimeCalulation + ", mainTemperature=" 
-				+ mainTemperature + ", weather=" + weather + ", clouds="
-				+ clouds + ", wind=" + wind + ", rain=" + rain + ", snow=" + snow + "]";
+		return "WeatherData [dateTimeCalulation=" + dateTimeCalulation + ", mainTemperature=" + mainTemperature
+				+ ", weather=" + weather + ", clouds=" + clouds + ", wind=" + wind + ", rain=" + rain + ", snow=" + snow
+				+ ", city=" + city + "]";
 	}
-	
-	
+
 	
 	
 }

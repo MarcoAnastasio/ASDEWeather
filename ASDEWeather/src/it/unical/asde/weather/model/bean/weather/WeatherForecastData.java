@@ -4,6 +4,8 @@ import java.util.Date;
 
 import org.json.simple.JSONObject;
 
+import it.unical.asde.weather.model.bean.geographical.City;
+
 public class WeatherForecastData extends WeatherData{
 	
 	private Date dateTimeOfForecast;
@@ -14,8 +16,8 @@ public class WeatherForecastData extends WeatherData{
 	
 	
 	public WeatherForecastData(Date dateTimeCalulation, MainTemperature mainTemperature, Weather weather, Float clouds,
-			Wind wind, Float rain, Float snow,Date dateTimeOfForecast) {
-		super(dateTimeCalulation, mainTemperature, weather, clouds, wind, rain, snow);
+			Wind wind, Float rain, Float snow,City city,Date dateTimeOfForecast) {
+		super(dateTimeCalulation, mainTemperature, weather, clouds, wind, rain, snow,city);
 		this.dateTimeOfForecast=dateTimeOfForecast;
 	}
 

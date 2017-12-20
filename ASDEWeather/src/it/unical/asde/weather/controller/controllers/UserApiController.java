@@ -1,4 +1,4 @@
-package it.unical.asde.weather.controller;
+package it.unical.asde.weather.controller.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

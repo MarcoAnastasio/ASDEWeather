@@ -1,4 +1,4 @@
-package it.unical.asde.weather.core.utilities.opneweatherapi.request;
+package it.unical.asde.weather.core.external.opneweatherapi.request;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,9 +22,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
-import it.unical.asde.weather.core.general.web.request.RestRequestExecutor;
-import it.unical.asde.weather.core.utilities.opneweatherapi.ResponseWeatherForecastDecoder;
-import it.unical.asde.weather.core.utilities.opneweatherapi.decoder.ResponseOpenWeatherApiDecoder;
+import it.unical.asde.weather.core.external.RestRequestExecutor;
+import it.unical.asde.weather.core.external.opneweatherapi.decoder.ResponseOpenWeatherApiDecoder;
 import it.unical.asde.weather.model.api.response.APICurrentResponse;
 import it.unical.asde.weather.model.api.response.APIForecastResponse;
 import it.unical.asde.weather.model.bean.geographical.City;
@@ -34,26 +33,30 @@ import it.unical.asde.weather.model.bean.weather.WeatherForecastData;
 @Service
 @Configuration
 @PropertySource("classpath:weatherAPI.properties")
-public class WeatherDataRequestExecutorImp extends RestRequestExecutor implements WeatherDataRequestExecutor{
+public class WeatherDataRemoteRequestExecutorImp extends RestRequestExecutor implements WeatherDataRemoteRequestExecutor{
 
+	private static final String ADD_PARAMEETER_CITY_NAME="q=";
 	private static final String ADD_PARAMEETER_CITY_ID="id=";
+	
+	private static final String ADD_PARAMEETER_UNITS_FORMAT_CELSIUS="&units=metric";
+	
 	private static final String ADD_PARAMEETER_APP_KEY="&appid=";
-
+	
 	
 	@Value( "${asde.weather.openweatherapi.endpoint.forecast}" )
 	private String openForecastWeatherEndpoint;
-//	@Value( "${asde.weather.openweatherapi.endpoint.current}" )
-	@Value( "${asde.weather.openweatherapi.endpoint.group}" )
+
+	@Value( "${asde.weather.openweatherapi.endpoint.current}" )
 	private String openCurrentWeatherEndpoint;
+
+	@Value( "${asde.weather.openweatherapi.endpoint.group}" )
+	private String openCurrentWeatherGroupEndpoint;
 	
 	@Value( "${asde.weather.openweatherapi.key1}" )
 	private String key1;
 	@Value( "${asde.weather.openweatherapi.key2}" )
 	private String key2;
 	
-	
-	@Autowired
-	private ResponseWeatherForecastDecoder responseDecoder;
 	
 	@Autowired
 	private ResponseOpenWeatherApiDecoder responseOpenWeatherApiDecoder;
@@ -67,15 +70,14 @@ public class WeatherDataRequestExecutorImp extends RestRequestExecutor implement
 	 * @param city
 	 */
 	@Override
-	public APIForecastResponse getWeatherForecastforCityFromAPI(City city) {
+	public APIForecastResponse getForecastWeatherForCityFromAPI(City city) {
 			
 		if(city==null){
 			return null;
 		}
 		
 		//1  prepare url String
-		String url = openForecastWeatherEndpoint+ADD_PARAMEETER_CITY_ID+city.getId()+
-				ADD_PARAMEETER_APP_KEY+key1;
+		String url=generateUrlFromBaseEndpointAndCity(openForecastWeatherEndpoint,city);
 		
 		//2 execute request in the superclass
 		JSONObject response = super.executeRestRequestAndReturnJSONObject(url);
@@ -94,13 +96,12 @@ public class WeatherDataRequestExecutorImp extends RestRequestExecutor implement
 	 * @param city
 	 */
 	@Override
-	public APICurrentResponse getCurrentWeatherforCityFromAPI(City city) {
+	public APICurrentResponse getCurrentWeatherForCityFromAPI(City city) {
 		if(city== null){
 			return null;
 		}
 		
-		String url = openCurrentWeatherEndpoint+ADD_PARAMEETER_CITY_ID+city.getId()+
-				ADD_PARAMEETER_APP_KEY+key1;
+		String url=generateUrlFromBaseEndpointAndCity(openCurrentWeatherEndpoint,city);
 		
 		//2 execute request in the superclass
 		JSONObject response = super.executeRestRequestAndReturnJSONObject(url);
@@ -112,8 +113,12 @@ public class WeatherDataRequestExecutorImp extends RestRequestExecutor implement
 	}
 
 
+	/**
+	 * given a List of Cities retrive the current Weather for all, input cities must have a valid id, 
+	 * is not possible to submit request whitout the cities 's id 
+	 */
 	@Override
-	public APICurrentResponse getCurrentWeatherforCityListFromAPI(List<City> cities) {
+	public APICurrentResponse getCurrentWeatherForCityListFromAPI(List<City> cities) {
 		if(cities==null || cities.isEmpty()){
 			return null;			
 		}
@@ -130,20 +135,41 @@ public class WeatherDataRequestExecutorImp extends RestRequestExecutor implement
 		}
 		
 		//1  prepare url String
-		String url=openCurrentWeatherEndpoint+ADD_PARAMEETER_CITY_ID+citiesIds+ADD_PARAMEETER_APP_KEY+key1;
+		String url=openCurrentWeatherGroupEndpoint+ADD_PARAMEETER_CITY_ID+citiesIds+
+				ADD_PARAMEETER_UNITS_FORMAT_CELSIUS+ADD_PARAMEETER_APP_KEY+key1;
 		
 		//2 execute request in the superclass
 		JSONObject response = super.executeRestRequestAndReturnJSONObject(url);
 		
 		//3 if response is not null (so maybe no errors occur)
 		if(response!=null){
-			return responseOpenWeatherApiDecoder.decodeCurrentWeatherResponse(response);
+			return responseOpenWeatherApiDecoder.decodeCurrentWeatherGroupResponse(response);
 		}
 		
 		return null;
 	}
 	
 	
-	
+	/**
+	 * given a base nedpoint and a city generate the url, city mast have at least the id or the name
+	 * 
+	 * @param baseEndpoint
+	 * @param city
+	 * @return
+	 */
+	private String generateUrlFromBaseEndpointAndCity(String baseEndpoint,City city){
+		String url=null;
+		if(city.getId()!=null){
+			url=baseEndpoint+ADD_PARAMEETER_CITY_ID+city.getId();
+		}else{
+			if(city.getName()!=null){
+				url = baseEndpoint+ADD_PARAMEETER_CITY_NAME+city.getName();
+			}else{
+				return null;
+			}
+		}
+		url+=ADD_PARAMEETER_UNITS_FORMAT_CELSIUS+ADD_PARAMEETER_APP_KEY+key1;
+		return url;
+	}
 	
 }

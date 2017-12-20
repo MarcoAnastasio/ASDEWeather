@@ -1,4 +1,4 @@
-package it.unical.asde.weather.security;
+package it.unical.asde.weather.controller.security;
 
 import java.util.ArrayList;
 import java.util.Collection;

@@ -2,18 +2,18 @@ package it.unical.asde.weather.model.bean.weather;
 
 public class Wind {
 
-	private Float wind;
+	private Float speed;
 	private Float deg;
 	
 	public Wind(){
 		
 	}
 	
-	public Float getWind() {
-		return wind;
+	public Float getSpeed() {
+		return speed;
 	}
-	public void setWind(Float wind) {
-		this.wind = wind;
+	public void setSpeed(Float wind) {
+		this.speed = wind;
 	}
 	public Float getDeg() {
 		return deg;

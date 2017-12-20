@@ -1,4 +1,4 @@
-package it.unical.asde.weather.core.utilities.opneweatherapi.decoder;
+package it.unical.asde.weather.core.external.opneweatherapi.decoder;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import it.unical.asde.weather.model.api.response.APICurrentResponse;
 import it.unical.asde.weather.model.api.response.APIForecastResponse;
+import it.unical.asde.weather.model.bean.geographical.City;
 import it.unical.asde.weather.model.bean.weather.MainTemperature;
 import it.unical.asde.weather.model.bean.weather.Weather;
 import it.unical.asde.weather.model.bean.weather.WeatherData;
@@ -37,6 +38,11 @@ public class ResponseOpenWeatherApiDecoderImp implements ResponseOpenWeatherApiD
 			return forecastResponse;
 		}
 		
+		
+		City city=decodeCity((JSONObject)responseObject.get("city"));
+		forecastResponse.setCity(city);
+		
+		
 		List<WeatherForecastData> listPrevision=new ArrayList<>();
 		JSONArray listArray=(JSONArray) responseObject.get("list");
 		for(int i=0;i<listArray.size();i++){
@@ -47,10 +53,21 @@ public class ResponseOpenWeatherApiDecoderImp implements ResponseOpenWeatherApiD
 		return forecastResponse;	
 	}
 
-	
-	
 	@Override
 	public APICurrentResponse decodeCurrentWeatherResponse(JSONObject responseObject) {
+		APICurrentResponse response=new APICurrentResponse();
+		WeatherData elaborateWeatherInformation = elaborateWeatherInformation(responseObject);
+		
+		List<WeatherData> list=new ArrayList<>();
+		list.add(elaborateWeatherInformation);
+		response.setListForecastWeather(list);
+		
+		return response;
+	}
+
+	
+	@Override
+	public APICurrentResponse decodeCurrentWeatherGroupResponse(JSONObject responseObject) {
 
 		APICurrentResponse response=new APICurrentResponse();
 
@@ -66,7 +83,8 @@ public class ResponseOpenWeatherApiDecoderImp implements ResponseOpenWeatherApiD
 	}
 	
 	
-	
+	//TODO check how handle the city: now we just get it from the response, 
+	//but maybe can be necessary to retrive it from DB to have additional info
 	private WeatherData elaborateWeatherInformation(JSONObject object) {
 	
 		WeatherData weatherData=new WeatherData();
@@ -76,7 +94,10 @@ public class ResponseOpenWeatherApiDecoderImp implements ResponseOpenWeatherApiD
 		weatherData.setWind(decodeWindObject((JSONObject) object.get("wind")));
 		weatherData.setRain(decodeSimpleObjectHinnerValue((JSONObject) object.get("rain"),"3h") );
 		weatherData.setSnow(decodeSimpleObjectHinnerValue((JSONObject) object.get("snow"),"3h") );
-		
+		weatherData.setDateTimeCalulation( decodeDateTime((Long)object.get("dt")) );
+		Long cityID=(Long)object.get("id");
+		String cityName=(String)object.get("name");
+		weatherData.setCity(new City(cityID, cityName, null, null, null));
 		return weatherData;
 	}
 
@@ -92,7 +113,9 @@ public class ResponseOpenWeatherApiDecoderImp implements ResponseOpenWeatherApiD
 				weather.getWind(), 
 				weather.getRain(), 
 				weather.getSnow(), 
-				decodeDateTime((Long)object.get("dt"))
+				weather.getCity(),
+				//TODO change it whit thew others dt-****???
+				decodeDateTimeStringFormat((String)object.get("dt_txt"))
 		);
 				 
 		return forecast;
@@ -103,7 +126,7 @@ public class ResponseOpenWeatherApiDecoderImp implements ResponseOpenWeatherApiD
 			return null;
 		}
 		Wind wind=new Wind();
-		wind.setWind(castNumericValueToFloat(jsonObject.get("wind")));
+		wind.setSpeed(castNumericValueToFloat(jsonObject.get("speed")));
 		wind.setDeg(castNumericValueToFloat(jsonObject.get("deg")));
 		return wind;
 	}
@@ -116,8 +139,8 @@ public class ResponseOpenWeatherApiDecoderImp implements ResponseOpenWeatherApiD
 		//TODO i do not know why return a list, but i keep only the first if exists
 		JSONObject jsonObject=(JSONObject) jsonArray.get(0);
 		Weather weather=new Weather();
-		weather.setId((Long)jsonObject.get("id"));
-		weather.setDescritpion((String)jsonObject.get("descritpion"));
+		weather.setId((Long)jsonObject.get("id"));		
+		weather.setDescritpion((String)jsonObject.get("description"));
 		weather.setMain((String)jsonObject.get("main"));
 		weather.setIcon((String)jsonObject.get("icon"));
 		return weather;
@@ -139,6 +162,14 @@ public class ResponseOpenWeatherApiDecoderImp implements ResponseOpenWeatherApiD
 		mainTemp.setTempKf(castNumericValueToFloat(main.get("temp_kf")));
 		
 		return mainTemp;
+	}
+	
+	
+	private City decodeCity(JSONObject object){
+		City city=new City();
+		city.setId((Long)object.get("id"));
+		city.setName((String)object.get("name"));
+		return city;
 	}
 
 	//********************	GENERAL	*******************
@@ -181,8 +212,6 @@ public class ResponseOpenWeatherApiDecoderImp implements ResponseOpenWeatherApiD
 		if(string== null){
 			return null;
 		}
-		
-
 		try {
 			return forecastDateTimeCalulationFormatter.parse(string);
 		} catch (ParseException e) {
@@ -191,8 +220,6 @@ public class ResponseOpenWeatherApiDecoderImp implements ResponseOpenWeatherApiD
 		}
 
 	}
-
-	
 
 
 }

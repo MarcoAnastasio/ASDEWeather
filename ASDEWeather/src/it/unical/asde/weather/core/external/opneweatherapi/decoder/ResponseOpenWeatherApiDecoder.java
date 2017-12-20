@@ -1,4 +1,4 @@
-package it.unical.asde.weather.core.utilities.opneweatherapi.decoder;
+package it.unical.asde.weather.core.external.opneweatherapi.decoder;
 
 import org.json.simple.JSONObject;
 
@@ -13,8 +13,22 @@ public interface ResponseOpenWeatherApiDecoder {
 	 */
 	public APIForecastResponse decodeForecastWeatherResponse(JSONObject object);
 
+
+	/**
+	 * decode the result of current  Weather request for a single city
+	 * @param response
+	 * @return
+	 */
+	public APICurrentResponse decodeCurrentWeatherResponse(JSONObject response);
 	
-	public APICurrentResponse decodeCurrentWeatherResponse(JSONObject object);
+	/**
+	 * decode the result of current  Weather request for a list of cities
+	 * @param response
+	 * @return
+	 */
+	public APICurrentResponse decodeCurrentWeatherGroupResponse(JSONObject object);
+
+
 	
 	
 	
