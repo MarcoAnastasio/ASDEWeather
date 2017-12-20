@@ -19,6 +19,10 @@ public class RequestSingleCity {
 	public void setCityName(String cityName) {
 		this.cityName = cityName;
 	}
+	@Override
+	public String toString() {
+		return "RequestSingleCity [cityId=" + cityId + ", cityName=" + cityName + "]";
+	}
 	
 
 	
