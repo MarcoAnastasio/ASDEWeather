@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import it.unical.asde.weather.controller.controllers.GenericController;
 import it.unical.asde.weather.controller.controllers.WeatherContorller;
 import it.unical.asde.weather.core.services.WeatherDataProvider;
 import it.unical.asde.weather.model.bean.comunication.request.RequestListCities;
@@ -14,7 +15,7 @@ import it.unical.asde.weather.model.bean.comunication.request.RequestSingleCity;
 
 //@Controller(value="/api/weather")
 @Controller
-public class WeatherContorllerImp implements WeatherContorller{
+public class WeatherContorllerImp extends GenericController implements WeatherContorller{
 
 	
 	@Autowired
@@ -24,19 +25,31 @@ public class WeatherContorllerImp implements WeatherContorller{
 	@Override
     @RequestMapping(value = "/api/weather/currentWeatherByCity", method = RequestMethod.POST,consumes="application/json")
 	public @ResponseBody Object getCurrentWeatherByCity(@RequestBody RequestSingleCity request) {
-		return weatherDataProvider.getCurrentWeatherByCity(request);
+		try{
+			return fillCorrectGenericResponse(request, weatherDataProvider.getCurrentWeatherByCity(request));
+		}catch (Exception e) {
+			return fillWrongGenericResponse(e, request);
+		}
 	}
 
 	@Override
     @RequestMapping(value = "/api/weather/currentWeatherByCities", method = RequestMethod.POST,consumes="application/json")
-	public @ResponseBody Object getCurrentWeatherByCities(@RequestBody RequestListCities request) {		
-		return weatherDataProvider.getCurrentWeatherByCities(request);
+	public @ResponseBody Object getCurrentWeatherByCities(@RequestBody RequestListCities request) {	
+		try{
+			return fillCorrectGenericResponse(request, weatherDataProvider.getCurrentWeatherByCities(request));
+		}catch (Exception e) {
+			return fillWrongGenericResponse(e, request);
+		}
 	}
 
 	@Override
     @RequestMapping(value = "/api/weather/forecastWeatherByCity", method = RequestMethod.POST,consumes="application/json")
 	public @ResponseBody Object getForecastWeatherByCity(@RequestBody RequestSingleCity request) {
-		return weatherDataProvider.getForecastWeatherByCity(request);
+		try{
+			return fillCorrectGenericResponse(request, weatherDataProvider.getForecastWeatherByCity(request));
+		}catch (Exception e) {
+			return fillWrongGenericResponse(e, request);
+		}
 	}
 
 }

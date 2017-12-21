@@ -24,11 +24,13 @@ import org.springframework.stereotype.Service;
 
 import it.unical.asde.weather.core.external.RestRequestExecutor;
 import it.unical.asde.weather.core.external.opneweatherapi.decoder.ResponseOpenWeatherApiDecoder;
-import it.unical.asde.weather.model.api.response.APICurrentResponse;
-import it.unical.asde.weather.model.api.response.APIForecastResponse;
+import it.unical.asde.weather.model.bean.comunication.response.GenericResponse.ErrorCode;
 import it.unical.asde.weather.model.bean.geographical.City;
 import it.unical.asde.weather.model.bean.weather.WeatherData;
 import it.unical.asde.weather.model.bean.weather.WeatherForecastData;
+import it.unical.asde.weather.model.exception.ASDECustomException;
+import it.unical.asde.weather.model.openweatherapi.response.APICurrentResponse;
+import it.unical.asde.weather.model.openweatherapi.response.APIForecastResponse;
 
 @Service
 @Configuration
@@ -70,10 +72,10 @@ public class WeatherDataRemoteRequestExecutorImp extends RestRequestExecutor imp
 	 * @param city
 	 */
 	@Override
-	public APIForecastResponse getForecastWeatherForCityFromAPI(City city) {
+	public APIForecastResponse getForecastWeatherForCityFromAPI(City city) throws ASDECustomException{
 			
 		if(city==null){
-			return null;
+			throw new ASDECustomException(null, ErrorCode.WRONG_INPUT, null);
 		}
 		
 		//1  prepare url String
@@ -85,9 +87,10 @@ public class WeatherDataRemoteRequestExecutorImp extends RestRequestExecutor imp
 		//3 if response is not null (so maybe no errors occur)
 		if(response!=null){
 			return responseOpenWeatherApiDecoder.decodeForecastWeatherResponse(response);
+		}else{
+			throw new ASDECustomException(null, ErrorCode.UNKNOW_ERROR, null);
 		}
-		
-		return null;
+
 	}
 
 
@@ -96,9 +99,9 @@ public class WeatherDataRemoteRequestExecutorImp extends RestRequestExecutor imp
 	 * @param city
 	 */
 	@Override
-	public APICurrentResponse getCurrentWeatherForCityFromAPI(City city) {
+	public APICurrentResponse getCurrentWeatherForCityFromAPI(City city) throws ASDECustomException{
 		if(city== null){
-			return null;
+			throw new ASDECustomException(null, ErrorCode.WRONG_INPUT, null);
 		}
 		
 		String url=generateUrlFromBaseEndpointAndCity(openCurrentWeatherEndpoint,city);
@@ -108,8 +111,9 @@ public class WeatherDataRemoteRequestExecutorImp extends RestRequestExecutor imp
 
 		if(response!=null){
 			return responseOpenWeatherApiDecoder.decodeCurrentWeatherResponse(response);
+		}else{
+			throw new ASDECustomException(null, ErrorCode.UNKNOW_ERROR, null);
 		}
-		return null;
 	}
 
 
@@ -118,9 +122,9 @@ public class WeatherDataRemoteRequestExecutorImp extends RestRequestExecutor imp
 	 * is not possible to submit request whitout the cities 's id 
 	 */
 	@Override
-	public APICurrentResponse getCurrentWeatherForCityListFromAPI(List<City> cities) {
+	public APICurrentResponse getCurrentWeatherForCityListFromAPI(List<City> cities) throws ASDECustomException{
 		if(cities==null || cities.isEmpty()){
-			return null;			
+			throw new ASDECustomException(null, ErrorCode.WRONG_INPUT, null);
 		}
 		
 		String citiesIds="";
@@ -144,9 +148,9 @@ public class WeatherDataRemoteRequestExecutorImp extends RestRequestExecutor imp
 		//3 if response is not null (so maybe no errors occur)
 		if(response!=null){
 			return responseOpenWeatherApiDecoder.decodeCurrentWeatherGroupResponse(response);
+		}else{
+			throw new ASDECustomException(null, ErrorCode.UNKNOW_ERROR, null);
 		}
-		
-		return null;
 	}
 	
 	

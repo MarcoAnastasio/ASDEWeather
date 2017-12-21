@@ -2,9 +2,9 @@ package it.unical.asde.weather.core.external.opneweatherapi.decoder;
 
 import org.json.simple.JSONObject;
 
-import it.unical.asde.weather.model.api.response.APICurrentResponse;
-import it.unical.asde.weather.model.api.response.APIForecastResponse;
 import it.unical.asde.weather.model.bean.weather.WeatherForecastData;
+import it.unical.asde.weather.model.openweatherapi.response.APICurrentResponse;
+import it.unical.asde.weather.model.openweatherapi.response.APIForecastResponse;
 
 public interface ResponseOpenWeatherApiDecoder {
 
