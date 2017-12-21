@@ -10,6 +10,3 @@ If you find something useful ... take it! Just leave a thanks :)
 * Forte		Marco
 * Giuseppe  Ritacco
 * Abel 		Solomon
-
-
-Test commit
