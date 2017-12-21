@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import it.unical.asde.weather.dao.CityDao;
-import it.unical.asde.weather.model.api.response.APICurrentResponse;
-import it.unical.asde.weather.model.api.response.APIForecastResponse;
 import it.unical.asde.weather.model.bean.comunication.request.RequestSingleCity;
 import it.unical.asde.weather.model.bean.comunication.request.RequestListCities;
 import it.unical.asde.weather.model.bean.geographical.City;
 import it.unical.asde.weather.model.bean.weather.WeatherData;
 import it.unical.asde.weather.model.bean.weather.WeatherForecastData;
+import it.unical.asde.weather.model.openweatherapi.response.APICurrentResponse;
+import it.unical.asde.weather.model.openweatherapi.response.APIForecastResponse;
 
 
 

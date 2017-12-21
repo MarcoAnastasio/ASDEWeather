@@ -1,4 +1,4 @@
-package it.unical.asde.weather.model.api.response;
+package it.unical.asde.weather.model.openweatherapi.response;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -13,14 +13,14 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
 
-import it.unical.asde.weather.model.api.response.APICurrentResponse;
-import it.unical.asde.weather.model.api.response.APIForecastResponse;
 import it.unical.asde.weather.model.bean.geographical.City;
 import it.unical.asde.weather.model.bean.weather.MainTemperature;
 import it.unical.asde.weather.model.bean.weather.Weather;
 import it.unical.asde.weather.model.bean.weather.WeatherData;
 import it.unical.asde.weather.model.bean.weather.WeatherForecastData;
 import it.unical.asde.weather.model.bean.weather.Wind;
+import it.unical.asde.weather.model.openweatherapi.response.APICurrentResponse;
+import it.unical.asde.weather.model.openweatherapi.response.APIForecastResponse;
 
 @Service
 public class ResponseOpenWeatherApiDecoderImp implements ResponseOpenWeatherApiDecoder {
