@@ -2,6 +2,7 @@ package it.unical.asde.weather.config.spring.web;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import it.unical.asde.weather.config.spring.HibernateConfig;
 import it.unical.asde.weather.config.spring.security.MultiHttpSecurityConfig;
 
 

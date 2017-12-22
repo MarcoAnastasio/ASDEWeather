@@ -1,4 +1,4 @@
-package it.unical.asde.weather.dao;
+package it.unical.asde.weather.dao.geographical;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,8 +13,7 @@ import it.unical.asde.weather.model.bean.geographical.Country;
 
 
 @Service
-@Deprecated
-public class CountryDao {
+public class CountryDaoImp {
 
 	@Autowired
 	BulkLoaderCountryCities bulckLoader;

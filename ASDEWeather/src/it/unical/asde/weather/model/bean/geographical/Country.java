@@ -1,11 +1,30 @@
 package it.unical.asde.weather.model.bean.geographical;
 
+import javax.annotation.Generated;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
+import org.springframework.lang.NonNull;
+
+@Entity
+@Table
 public class Country {
 
 	//autoincrement
-	private long id;
+	@Id
+	@Column
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long id;
 	
+	@Column(unique=true,nullable=false)
 	private String name;
+	
+	@Column(unique=true,nullable=false,length=2)
 	private String code;
 	
 	
