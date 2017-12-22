@@ -1,7 +1,8 @@
-package it.unical.asde.weather.controller.security;
+package it.unical.asde.weather.config.spring.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,9 +12,25 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import it.unical.asde.weather.controller.security.WeatherUserDetailService;
+
+
+/**
+ * 
+ * @author haze
+ * This file configures the Spring-security module and it's relative filter-chain
+ */
+
+@Configuration
+@ComponentScan("it.unical")
 @EnableWebSecurity
 public class MultiHttpSecurityConfig {
 
+
+	
+	/*
+	 * Define the pasword encoder bean 
+	 */
 	@Bean
 	public PasswordEncoder passwordEncoder(){
 		PasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -23,6 +40,11 @@ public class MultiHttpSecurityConfig {
 	@Autowired
 	WeatherUserDetailService userDetailsService;
 	
+	
+	
+	/*
+	 * Configures the chain
+	 */
 	@Configuration
 	@Order(1)                                                        
 	public static class ApiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
@@ -58,6 +80,12 @@ public class MultiHttpSecurityConfig {
 		}
 	}
 
+	
+	
+	/*
+	 * Configure chain for login form
+	 */
+	
 	@Configuration
 	public static class FormLoginWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
 
