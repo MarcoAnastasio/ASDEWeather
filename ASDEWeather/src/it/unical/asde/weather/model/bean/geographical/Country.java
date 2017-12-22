@@ -1,5 +1,7 @@
 package it.unical.asde.weather.model.bean.geographical;
 
+import java.io.Serializable;
+
 import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,13 +14,16 @@ import javax.persistence.UniqueConstraint;
 import org.springframework.lang.NonNull;
 
 @Entity
-@Table
-public class Country {
+@Table(name="country")
+public class Country implements Serializable {
 
-	//autoincrement
+	private static final long serialVersionUID = 2264011199718340426L;
+
+	
 	@Id
 	@Column
-	@GeneratedValue(strategy=GenerationType.AUTO)
+//	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column(unique=true,nullable=false)
@@ -34,7 +39,7 @@ public class Country {
 	
 	
 	
-	public Country(long id, String name, String code) {
+	public Country(Long id, String name, String code) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -46,7 +51,7 @@ public class Country {
 	public long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getName() {

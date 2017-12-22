@@ -1,58 +1,62 @@
 package it.unical.asde.weather.dao.geographical;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 
 import it.unical.asde.weather.core.utilities.BulkLoaderCountryCities;
+import it.unical.asde.weather.dao.AbstarctGenericDAO;
+import it.unical.asde.weather.dao.GenericDao;
 import it.unical.asde.weather.model.bean.geographical.Country;
+import javassist.expr.Instanceof;
 
 
 @Service
-public class CountryDaoImp {
+public class CountryDaoImp extends AbstarctGenericDAO<Country> implements CountryDao{
 
-	@Autowired
-	BulkLoaderCountryCities bulckLoader;
-	
-	private static Map<Long, Country> countryList;
-	
-	
-	@PostConstruct
-	private void init(){
-		countryList=new HashMap<>();
-		try {
-			bulckLoader.loadCountryFromFile();
-//			bulckLoader.loadCityFromFile();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		//TODO use bulk loader service to load all data
+	@Override
+	@Transactional(readOnly=true)
+	public Country getCountryFromName(String name) {
+		Session session = getSession();
+		return session.createNativeQuery("SELECT * FROM country as c where c.name=:nameIn", Country.class).setParameter("nameIn",name ).uniqueResult();
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public Country getCountryFromCode(String code) {
+		return getSession().createNativeQuery("SELECT * FROM country as c where c.code=:codeIn", Country.class).setParameter("codeIn",code).uniqueResult();
 	}
 	
-	public Country getCountryFromName(String name){
-		for(long id:countryList.keySet()){
-			if(countryList.get(id).getName().equals(name)){
-				return countryList.get(id);
-			}
-		}
+	
+	@Override
+	@Transactional(propagation=Propagation.REQUIRES_NEW)
+	public Country mySave(Country country) {
+		Session openSession = getSession();		
+		Object o = openSession.save(country);
+		
+		System.out.println(o.getClass());
+		System.out.println("******new insert country="+country);
+
 		return null;
 	}
+
 	
-	public Country getCountryFromCode(String code){
-		for(long id:countryList.keySet()){
-			if(countryList.get(id).getCode().equals(code)){
-				return countryList.get(id);
-			}
-		}
+	@Override
+	@Transactional
+	public Country mySave2(Country country) {
+		
+		Session session = getSession();
+		session.save(country);
 		return null;
-	}
-	
-	public Country getCountryFromId(long id){
-		return countryList.get(id);
 	}
 }
