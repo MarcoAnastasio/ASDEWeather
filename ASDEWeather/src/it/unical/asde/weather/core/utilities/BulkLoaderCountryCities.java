@@ -31,13 +31,17 @@ public class BulkLoaderCountryCities {
 		HashMap<Long, Country> countries=new HashMap<>();
 		Long counter=new Long(0);
 		
+		String baseString="values (null,";
+		
 		Reader in = new FileReader(COUNTRY_LIST);
 		Iterable<CSVRecord> records = CSVFormat.EXCEL.parse(in);
+		
 		for (CSVRecord record : records) {
 		    String name= record.get(0);
 		    String code = record.get(1);
-		    countries.put(counter, new Country(counter++,name, code));
-		    System.out.println(countries.get(counter-1));
+		    
+		    
+		  //  System.out.println(countries.get(counter-1));
 		}
 		
 		return countries;

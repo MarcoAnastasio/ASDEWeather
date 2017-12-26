@@ -2,6 +2,7 @@ package it.unical.asde.weather.config.spring.web;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import it.unical.asde.weather.config.spring.HibernateConfig;
 import it.unical.asde.weather.config.spring.security.MultiHttpSecurityConfig;
 
 
@@ -15,7 +16,7 @@ public class ASDEWeatherInitializer extends AbstractAnnotationConfigDispatcherSe
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class[] {MultiHttpSecurityConfig.class};
+		return new Class[] {};
 	}
 
 	@Override

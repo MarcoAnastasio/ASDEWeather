@@ -17,7 +17,7 @@ import it.unical.asde.weather.core.utilities.BulkLoaderCountryCities;
 import it.unical.asde.weather.model.bean.geographical.City;
 
 @Service
-public class CityDao {
+public class OldStaticCityDao {
 
 	@Autowired
 	BulkLoaderCountryCities bluckLoader;

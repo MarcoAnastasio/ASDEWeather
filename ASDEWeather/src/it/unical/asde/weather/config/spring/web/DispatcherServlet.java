@@ -17,7 +17,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("it.unical")
+@ComponentScan({"it.unical.asde.weather"})
 public class DispatcherServlet implements WebMvcConfigurer{
 
 	private final String prefix = "/WEB-INF/views/";

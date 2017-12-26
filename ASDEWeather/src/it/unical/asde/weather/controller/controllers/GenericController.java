@@ -14,6 +14,8 @@ public abstract class GenericController {
 	
 	protected GenericResponse fillWrongGenericResponse(Exception e,Object originalRequest){
 		
+		e.printStackTrace();
+		
 		if(e instanceof ASDECustomException){
 			ASDECustomException customException=(ASDECustomException) e;
 

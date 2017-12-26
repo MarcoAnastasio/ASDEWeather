@@ -19,15 +19,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import it.unical.asde.weather.core.UserService;
-import it.unical.asde.weather.dao.CityDao;
-import it.unical.asde.weather.model.User;
+import it.unical.asde.weather.dao.OldStaticCityDao;
+import it.unical.asde.weather.model.bean.user.User;
 
 
 @Controller
 public class IndexController {
 
 	@Autowired
-	private CityDao cityDao;
+	private OldStaticCityDao cityDao;
 
 	
 	@RequestMapping("/")

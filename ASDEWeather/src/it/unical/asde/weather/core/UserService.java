@@ -7,11 +7,11 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.stereotype.Service;
 
-import it.unical.asde.weather.model.User;
+import it.unical.asde.weather.model.bean.user.User;
 
-@Service
+//@Service
 public class UserService {
-
+/*
 	private static List<User> users=new ArrayList<>();
 	
 	@PostConstruct
@@ -35,4 +35,5 @@ public class UserService {
 		users.add(user);
 	}
 	
+	*/
 }
