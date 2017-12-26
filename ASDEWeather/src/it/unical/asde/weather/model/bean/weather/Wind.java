@@ -1,8 +1,14 @@
 package it.unical.asde.weather.model.bean.weather;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Wind {
 
+	@Column
 	private Float speed;
+	@Column
 	private Float deg;
 	
 	public Wind(){

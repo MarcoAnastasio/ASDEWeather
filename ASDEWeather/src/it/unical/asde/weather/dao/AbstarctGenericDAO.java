@@ -39,25 +39,28 @@ public abstract class AbstarctGenericDAO<E> implements GenericDao<E> {
 	}
 
 	@Override
-	@Transactional(propagation=Propagation.REQUIRES_NEW)
+	@Transactional(propagation=Propagation.REQUIRED)
 	public Serializable save(E entity) {
-		return getSession().save(entity);
+		Session session = getSession();
+
+		System.out.println("save Session="+System.identityHashCode(session));
+		return session.save(entity);
 	}
 
 	@Override
-	@Transactional(propagation=Propagation.REQUIRES_NEW)
+	@Transactional(propagation=Propagation.REQUIRED)
 	public void saveOrUpdate(E entity) {
 		getSession().saveOrUpdate(entity);
 	}
 
 	@Override
-	@Transactional(propagation=Propagation.REQUIRES_NEW)
+	@Transactional(propagation=Propagation.REQUIRED)
 	public void delete(E entity) {
 		getSession().delete(entity);
 	}
 
 	@Override
-	@Transactional(propagation=Propagation.REQUIRES_NEW)
+	@Transactional(propagation=Propagation.REQUIRED)
 	public void deleteAll() {
 		List<E> entities = findAll();
 		for (E entity : entities) {
@@ -68,7 +71,9 @@ public abstract class AbstarctGenericDAO<E> implements GenericDao<E> {
 	@Override
 	@Transactional(readOnly=true)
 	public List<E> findAll() {
-		return getSession().createCriteria(this.entityClass).list();
+		Session session = getSession();
+		System.out.println("findAll Original Session="+System.identityHashCode(session));
+		return session.createCriteria(this.entityClass).list();
 	}
 
 	@Override

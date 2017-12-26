@@ -16,7 +16,7 @@ public class ASDEWeatherInitializer extends AbstractAnnotationConfigDispatcherSe
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class[] {MultiHttpSecurityConfig.class};
+		return new Class[] {};
 	}
 
 	@Override

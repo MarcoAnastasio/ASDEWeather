@@ -1,15 +1,35 @@
 package it.unical.asde.weather.model.bean.geographical;
 
+import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table
+public class City implements Serializable{
 
-public class City {
+	private static final long serialVersionUID = -5122728796174630673L;
 
-	
+	@Id
+	@Column
+	@GeneratedValue
 	private Long id;
+	
+	@Column(nullable=false,unique=true)
 	private String name;
+	
+	@Column
 	private Double longitude;
+	@Column
 	private Double latitude;	
+
+	@ManyToOne(fetch=FetchType.LAZY)
 	private Country country;
 
 	

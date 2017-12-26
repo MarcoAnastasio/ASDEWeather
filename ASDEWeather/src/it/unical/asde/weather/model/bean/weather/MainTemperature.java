@@ -1,14 +1,27 @@
 package it.unical.asde.weather.model.bean.weather;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+
+@Embeddable
 public class MainTemperature {
 
+	@Column
 	private Float temp;
+	@Column
 	private Float tempMin;
+	@Column
 	private Float tempMax;
+	@Column
 	private Float pressure;
+	@Column
 	private Float seaLevel;
+	@Column
 	private Float grndLevel;
+	@Column
 	private Float humidity;
+	@Column
 	private Float tempKf;
 	
 	

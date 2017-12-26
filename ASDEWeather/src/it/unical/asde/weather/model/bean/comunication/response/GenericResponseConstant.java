@@ -9,5 +9,13 @@ public class GenericResponseConstant {
 	public static final String WRONG_INPUT_MSG="Input provided isn't correct";
 	
 	
+	public static final int USERNAME_USED_CODE=2;
+	public static final String USERNAME_USED_MSG="Username is already used";
+	
+	public static final int EMAIL_USED_CODE=3;
+	public static final String EMAIL_USED_MSG="Email is already used";
+	
+	public static final int USERNAME_AND_EMAIL_USED_CODE=4;
+	public static final String USERNAME_AND_EMAIL_USED_MSG="Username and email are already used";
 	
 }

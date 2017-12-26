@@ -1,38 +1,23 @@
 package it.unical.asde.weather.controller.controllers;
 
-import org.springframework.http.HttpStatus;
+import it.unical.asde.weather.model.bean.comunication.response.GenericResponse;
+import it.unical.asde.weather.model.bean.user.User;
+
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import it.unical.asde.weather.model.User;
+public interface UserApiController {
 
-@Controller
-public class UserApiController {
-
-
+	/**
+	 * request for register new user, minimum requied information: 
+	 * 		username, password, firstName, lastName,email
+	 * can return few errors:
+	 * 	WRONG_INPUT, USERNAME_USED, EMAIL_USED, USERNAME_AND_EMAIL_USED
+	 * @param newUser
+	 * @return
+	 */
+	GenericResponse registerUser(User newUser);
 	
-	 @RequestMapping(value = "/api/showUser", method = RequestMethod.GET)
-	    public @ResponseBody ResponseEntity<?> showUSer() {
-	    	
-	    	Object ob = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-	    	
-	    	User temp=(User)ob;
-	    	
-	    	return new ResponseEntity<>( temp, HttpStatus.OK);
-	    }
-	 
-	 
-	 @RequestMapping(value = "/registration", method = RequestMethod.POST)
-	    public @ResponseBody ResponseEntity<?> registerUser(@RequestBody User newUser) {
-	    	
-		 System.out.println(newUser);
-		 
-	    	return new ResponseEntity<>( HttpStatus.OK);
-	    }
-	 
+	
+	
 }

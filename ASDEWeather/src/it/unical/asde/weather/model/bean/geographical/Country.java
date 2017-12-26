@@ -14,7 +14,7 @@ import javax.persistence.UniqueConstraint;
 import org.springframework.lang.NonNull;
 
 @Entity
-@Table(name="country")
+@Table
 public class Country implements Serializable {
 
 	private static final long serialVersionUID = 2264011199718340426L;

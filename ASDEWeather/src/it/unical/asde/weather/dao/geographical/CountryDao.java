@@ -10,7 +10,5 @@ public interface CountryDao extends GenericDao<Country>{
 	
 	public Country getCountryFromCode(String code);
 	
-	public Country mySave(Country country);
-	
-	public Country mySave2(Country country) ;
+
 }

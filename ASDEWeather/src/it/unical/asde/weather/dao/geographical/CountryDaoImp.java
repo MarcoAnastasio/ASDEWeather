@@ -37,26 +37,4 @@ public class CountryDaoImp extends AbstarctGenericDAO<Country> implements Countr
 		return getSession().createNativeQuery("SELECT * FROM country as c where c.code=:codeIn", Country.class).setParameter("codeIn",code).uniqueResult();
 	}
 	
-	
-	@Override
-	@Transactional(propagation=Propagation.REQUIRES_NEW)
-	public Country mySave(Country country) {
-		Session openSession = getSession();		
-		Object o = openSession.save(country);
-		
-		System.out.println(o.getClass());
-		System.out.println("******new insert country="+country);
-
-		return null;
-	}
-
-	
-	@Override
-	@Transactional
-	public Country mySave2(Country country) {
-		
-		Session session = getSession();
-		session.save(country);
-		return null;
-	}
 }

@@ -2,22 +2,47 @@ package it.unical.asde.weather.model.bean.weather;
 
 import java.util.Date;
 
+import javax.annotation.Generated;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.InheritanceType;
+
 import org.json.simple.JSONObject;
 
 import it.unical.asde.weather.model.bean.geographical.City;
 
+@Entity
+@Table
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class WeatherData {
 	
+	@Id
+	@GeneratedValue
+	@Column
+	protected Long id;
+	@Column
 	protected Date dateTimeCalulation;	
+	@Embedded
 	protected MainTemperature mainTemperature ;
+	@ManyToOne
 	protected Weather weather;
+	@Column
 	protected Float clouds;
+	@Embedded
 	protected Wind wind;
+	@Column
 	protected Float rain;
+	@Column
 	protected Float snow;
 	
-	//to store this information on DB i think is necessary to add an ID, and a City reference
-	
+
+	@ManyToOne
 	protected City city;
 	
 	

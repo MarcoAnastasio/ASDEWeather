@@ -1,5 +1,7 @@
 package it.unical.asde.weather.config.spring.security;
 
+import it.unical.asde.weather.core.services.user.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -12,8 +14,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import it.unical.asde.weather.controller.security.WeatherUserDetailService;
-
 
 /**
  * 
@@ -22,7 +22,7 @@ import it.unical.asde.weather.controller.security.WeatherUserDetailService;
  */
 
 @Configuration
-@ComponentScan("it.unical")
+//@ComponentScan({"it.unical.asde"})
 @EnableWebSecurity
 public class MultiHttpSecurityConfig {
 
@@ -38,7 +38,7 @@ public class MultiHttpSecurityConfig {
 	}
 	
 	@Autowired
-	WeatherUserDetailService userDetailsService;
+	UserService userService;
 	
 	
 	

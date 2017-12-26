@@ -16,7 +16,11 @@ public class GenericResponse {
 	
 	public enum ErrorCode {
 	    WRONG_INPUT(GenericResponseConstant.WRONG_INPUT_CODE,GenericResponseConstant.WRONG_INPUT_MSG),
-	    UNKNOW_ERROR(GenericResponseConstant.UNKNOW_ERROR_CODE,GenericResponseConstant.UNKNOW_ERROR_MSG);
+	    UNKNOW_ERROR(GenericResponseConstant.UNKNOW_ERROR_CODE,GenericResponseConstant.UNKNOW_ERROR_MSG),
+	    
+	    USERNAME_USED(GenericResponseConstant.USERNAME_USED_CODE,GenericResponseConstant.USERNAME_USED_MSG),
+	    EMAIL_USED(GenericResponseConstant.EMAIL_USED_CODE,GenericResponseConstant.EMAIL_USED_MSG),
+	    USERNAME_AND_EMAIL_USED(GenericResponseConstant.USERNAME_AND_EMAIL_USED_CODE,GenericResponseConstant.USERNAME_AND_EMAIL_USED_MSG );
 
 	    private final int value;
 	    private final String defaultErrorMessage;

@@ -1,20 +1,25 @@
 package it.unical.asde.weather.controller.controllers;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.criterion.Example;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import it.unical.asde.weather.dao.CityDao;
+import it.unical.asde.weather.core.services.test.TestDao;
+import it.unical.asde.weather.core.services.user.UserService;
+import it.unical.asde.weather.dao.geographical.CityDao;
 import it.unical.asde.weather.dao.geographical.CountryDao;
 import it.unical.asde.weather.model.bean.comunication.request.RequestSingleCity;
 import it.unical.asde.weather.model.bean.comunication.request.RequestListCities;
@@ -34,7 +39,11 @@ import it.unical.asde.weather.model.openweatherapi.response.APIForecastResponse;
 public class TestAuthController {
 
 	@Autowired
-	private CountryDao countryDao;
+	private TestDao testDao;
+	
+	@Autowired
+	private UserService userService;
+	
 	
 	@RequestMapping(value = "/api/testGET", method = RequestMethod.GET)
     public @ResponseBody ResponseEntity testGET() {
@@ -77,45 +86,15 @@ public class TestAuthController {
 	
 	
 	@RequestMapping(value = "/api/testDAO")
+	@Transactional
 	private @ResponseBody ResponseEntity useCountryDao(){
 		System.out.println("/api/testDAO DONE");
+		
+		userService.getUserByUsername("ciccio");
 
-		Country coun=new Country();
-		coun.setCode("IT");
-		coun.setName("Italy");
-		countryDao.mySave(coun);
-		
-		Country coun2=new Country();
-		coun2.setCode("SP");
-		coun2.setName("Spain");
-		countryDao.mySave2(coun2);
-		
-		
-		List<Country> findAll = countryDao.findAll();
-		for(Country c:findAll){
-			System.out.println(c);
-		}
-		
-		
-		Country coun3=new Country();
-		coun3.setCode("FR");
-		coun3.setName("France");
-		countryDao.save(coun3);
-		
-		
-		List<Country> findAll2 = countryDao.findAll();
-		for(Country c:findAll2){
-			System.out.println(c);
-		}
-		
-		System.out.println("IT country="+countryDao.getCountryFromCode("IT"));
-		System.out.println("Spain country="+countryDao.getCountryFromName("Spain"));
-		
-		
 		return new ResponseEntity<>(HttpStatus.OK);
 		
 	}
 	
-	
-	
+
 }
