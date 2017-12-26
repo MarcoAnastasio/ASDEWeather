@@ -96,4 +96,15 @@ public class UserServiceImp implements UserService{
 			}
 		}
 	}
+
+	
+	@Override
+	@Transactional(readOnly=true)
+	public User getCompleteInfo(User currentUser) throws ASDECustomException {
+		if(currentUser==null || currentUser.getId()==null){
+			throw new ASDECustomException(null, ErrorCode.NOT_LOGGED_USER, null);
+		}		
+		User tempUser =userDao.findCompleteUserInfoById(currentUser.getId());
+		return tempUser;
+	}
 }

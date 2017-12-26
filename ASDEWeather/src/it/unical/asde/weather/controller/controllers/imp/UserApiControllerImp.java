@@ -21,18 +21,39 @@ public class UserApiControllerImp extends GenericController implements UserApiCo
 
 	@Autowired
 	private UserService userService;
-	
-	 @RequestMapping(value = "/api/user/showUser", method = RequestMethod.GET)
-	    public @ResponseBody Object showUSer() {
-	    	Object ob = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-	    	User temp=(User)ob;
-	    	return new ResponseEntity<>( temp, HttpStatus.OK);
-	    }
-	 
+		 
 	 @Override
 	 @RequestMapping(value = "/api/user/registration", method = RequestMethod.POST,consumes="application/json",produces="application/json")
 	    public @ResponseBody GenericResponse registerUser(@RequestBody User request) {	
 		 
+		 try{
+			 	User tempUser=userService.registerNewUser(new User(request));
+			 	System.out.println("new USer="+tempUser);
+			 	GenericResponse response=fillCorrectGenericResponse(request,tempUser);
+				return response;
+			}catch (Exception e) {
+				return fillWrongGenericResponse(e, request);
+			}
+	    }
+	 
+	 
+	 @RequestMapping(value = "/api/auth/user/showUser", method = RequestMethod.GET)
+	    public @ResponseBody GenericResponse getUserInfo() {
+		 	try{
+		 		User currentUser=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		 		User response=userService.getCompleteInfo(currentUser);
+		 		return fillCorrectGenericResponse(null, response);
+		 	}catch(Exception e){
+		 		return fillWrongGenericResponse(e, null);
+		 	}
+
+	    }
+	 
+	 
+	 @Override
+	 @RequestMapping(value = "/api/auth/user/updateUser", method = RequestMethod.POST,consumes="application/json",produces="application/json")
+	    public @ResponseBody GenericResponse updateUserUser(@RequestBody User request) {	
+		 //TODO need to complete do this 
 		 try{
 			 	User tempUser=userService.registerNewUser(new User(request));
 			 	System.out.println("new USer="+tempUser);

@@ -7,17 +7,23 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
 @Entity
 @Table
+//hide password when return the bean User
+@JsonIgnoreProperties(value="password",allowSetters=true,allowGetters=false)
 public class User implements Serializable{
 	
 	private static final long serialVersionUID = 7388373041201405285L;
@@ -32,9 +38,9 @@ public class User implements Serializable{
 
 	@Column(nullable=false,unique=true)
 	private String username;
+
 	@Column(nullable=false)
 	private String password;
-
 	@Column(nullable=false)
 	private String firstName;
 	@Column(nullable=false)
@@ -42,7 +48,7 @@ public class User implements Serializable{
 	@Column(nullable=false)
 	private String email;
 	
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.LAZY)
 	private List<City> preferedCities;
 	
 	
@@ -159,6 +165,15 @@ public class User implements Serializable{
 
 	public void setPreferedCities(List<City> preferedCities) {
 		this.preferedCities = preferedCities;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password="
+				+ password + ", firstName=" + firstName + ", lastName="
+				+ lastName + ", email=" + email + ", preferedCities= NOT_FETCHED]";
 	}
 	
 	

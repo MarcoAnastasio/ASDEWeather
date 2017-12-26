@@ -14,6 +14,15 @@ public interface UserService extends UserDetailsService{
 	User getUserByUsername(String username);
 
 	User registerNewUser(User newUser) throws ASDECustomException;
+
+	/**
+	 * starting from an user , retrive all informatio (example prefered cities)
+	 * @param currentUser
+	 * @return
+	 * @throws ASDECustomException
+	 */
+	User getCompleteInfo(User currentUser) throws ASDECustomException;
+
 	
 	
 	
