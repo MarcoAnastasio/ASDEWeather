@@ -17,5 +17,8 @@ public class GenericResponseConstant {
 	
 	public static final int USERNAME_AND_EMAIL_USED_CODE=4;
 	public static final String USERNAME_AND_EMAIL_USED_MSG="Username and email are already used";
+
+	public static final int NOT_LOGGED_USER_CODE = 5;
+	public static final String NOT_LOGGED_USER_MSG = "Login for submit this request";
 	
 }

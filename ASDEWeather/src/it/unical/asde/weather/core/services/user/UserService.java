@@ -14,7 +14,23 @@ public interface UserService extends UserDetailsService{
 	User getUserByUsername(String username);
 
 	User registerNewUser(User newUser) throws ASDECustomException;
+
+	/**
+	 * starting from an user , retrive all informatio (example prefered cities)
+	 * @param currentUser
+	 * @return
+	 * @throws ASDECustomException
+	 */
+	User getCompleteInfo(User currentUser) throws ASDECustomException;
+
 	
-	
+	/**
+	 * update informatotion about user (id,username and password can not be changed)
+	 * will be changed firstName, lastNAme,email
+	 * @param currentUser
+	 * @return
+	 * @throws ASDECustomException
+	 */
+	User updateUser(User currentUser,User newValues) throws ASDECustomException;
 	
 }

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface UserApiController {
 
 	/**
+	 * URL: /api/user/registration
+	 * 
 	 * request for register new user, minimum requied information: 
 	 * 		username, password, firstName, lastName,email
 	 * can return few errors:
@@ -17,6 +19,32 @@ public interface UserApiController {
 	 * @return
 	 */
 	GenericResponse registerUser(User newUser);
+
+	/**
+	 * URL:  /api/auth/user/showUser
+	 * return the complete info for user, complete info mean all information about user entity and also 
+	 * the list of prefered cities
+	 * 
+	 * @return
+	 */
+	GenericResponse getUserInfo();
+	
+	
+	/**
+	 * URL: /api/auth/user/updateUser
+	 * 
+	 * user must be authenticated, logged
+	 * request for update user info, id,email and username can not be changed,
+	 * is possible to add new cities as prefered, or remove some from it.
+	 * 
+	 * Possible rorrors: WRONG_INPUT, NOT_LOGGED_USER
+	 * 
+	 * @param request
+	 * @return
+	 */
+	GenericResponse updateUser(User request);
+
+	
 	
 	
 	
