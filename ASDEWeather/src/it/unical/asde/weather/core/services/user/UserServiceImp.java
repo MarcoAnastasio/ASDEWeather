@@ -82,7 +82,11 @@ public class UserServiceImp implements UserService{
 		
 		updateDifferenceOnPreferedCities(currentUser,newValues);
 		
-		userDao.saveOrUpdate(new User(currentUser));
+		//TODO the list of cities added must contain at least the cities id, ithe other field 
+		//are not provided in the response will be null.. but in DB the situation is OK
+		
+		//TODO maybe add a check if cities exists...		
+		userDao.saveOrUpdate(currentUser);
 		
 		return currentUser;
 	}

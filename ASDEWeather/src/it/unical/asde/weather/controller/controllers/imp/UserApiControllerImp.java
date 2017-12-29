@@ -40,7 +40,7 @@ public class UserApiControllerImp extends GenericController implements UserApiCo
 	@RequestMapping(value = "/api/auth/user/showUser", method = RequestMethod.GET)
 	public @ResponseBody GenericResponse getUserInfo() {
 		 	try{
-		 		User currentUser=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		 		User currentUser=getCurrentLoggedUser();
 		 		User response=userService.getCompleteInfo(currentUser);
 		 		return fillCorrectGenericResponse(null, response);
 		 	}catch(Exception e){

@@ -26,6 +26,7 @@ import it.unical.asde.weather.model.bean.comunication.request.RequestListCities;
 import it.unical.asde.weather.model.bean.geographical.City;
 import it.unical.asde.weather.model.bean.geographical.Country;
 import it.unical.asde.weather.model.bean.user.User;
+import it.unical.asde.weather.model.bean.user.UserDetailsImp;
 import it.unical.asde.weather.model.bean.weather.WeatherData;
 import it.unical.asde.weather.model.bean.weather.WeatherForecastData;
 import it.unical.asde.weather.model.openweatherapi.response.APICurrentResponse;
@@ -73,7 +74,6 @@ public class TestAuthController {
 
 	@RequestMapping(value = "/api/auth/testPOST", method = RequestMethod.POST)
     public @ResponseBody ResponseEntity testAuthPOST(@RequestBody RequestSingleCity request) {
-    	
     	System.out.println("testAuthPOST Done");
     	showCurrentUser();
     	return new ResponseEntity<>(HttpStatus.OK);
@@ -82,7 +82,7 @@ public class TestAuthController {
 	
 	private void showCurrentUser() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		User user=(User)authentication.getPrincipal();
+		User user=((UserDetailsImp)authentication.getPrincipal()).getUser();
 		System.out.println("auth_user="+user);
 	}
 	
@@ -93,8 +93,6 @@ public class TestAuthController {
 		System.out.println("/api/testDAO DONE");
 		
 		userService.getUserByUsername("ciccio");
-		
-
 		return new ResponseEntity<>(HttpStatus.OK);
 		
 	}

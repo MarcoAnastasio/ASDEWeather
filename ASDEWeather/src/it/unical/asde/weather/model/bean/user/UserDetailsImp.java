@@ -18,10 +18,14 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-public class UserDetailsImp extends User implements UserDetails{
+public class UserDetailsImp implements UserDetails{
+	
+	protected static final String USER_ROLE = "ROLE_USER";
+	
+	private User user;
 	
 	public UserDetailsImp(User user) {
-		super(user);
+		this.user=user;
 	}
 
 	@Override
@@ -51,6 +55,29 @@ public class UserDetailsImp extends User implements UserDetails{
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	@Override
+	public String getName() {		
+		return null;
+	}
+
+	@Override
+	public String getPassword() {
+		return user.getPassword();
+	}
+
+	@Override
+	public String getUsername() {
+		return user.getUsername();
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 

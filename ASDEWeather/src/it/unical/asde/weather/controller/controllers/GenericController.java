@@ -7,6 +7,7 @@ import it.unical.asde.weather.model.bean.comunication.response.GenericResponse.E
 import it.unical.asde.weather.model.bean.comunication.response.GenericResponse.Status;
 import it.unical.asde.weather.model.bean.comunication.response.GenericResponseConstant;
 import it.unical.asde.weather.model.bean.user.User;
+import it.unical.asde.weather.model.bean.user.UserDetailsImp;
 import it.unical.asde.weather.model.exception.ASDECustomException;
 
 public abstract class GenericController {
@@ -40,6 +41,6 @@ public abstract class GenericController {
 	
 	//TODO test what appen if not user is logged , and maybe throws ASDECyustomException
 	protected User getCurrentLoggedUser(){
-		return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return ((UserDetailsImp) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUser();
 	}
 }

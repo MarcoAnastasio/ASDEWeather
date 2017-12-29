@@ -36,6 +36,9 @@ public interface UserApiController {
 	 * user must be authenticated, logged
 	 * request for update user info, id,email and username can not be changed,
 	 * is possible to add new cities as prefered, or remove some from it.
+	 * 
+	 * Possible rorrors: WRONG_INPUT, NOT_LOGGED_USER
+	 * 
 	 * @param request
 	 * @return
 	 */

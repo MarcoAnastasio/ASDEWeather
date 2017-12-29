@@ -29,9 +29,6 @@ public class User implements Serializable{
 	
 	private static final long serialVersionUID = 7388373041201405285L;
 
-	protected static final String USER_ROLE = "ROLE_USER";
-
-
 	@Id
 	@Column
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
