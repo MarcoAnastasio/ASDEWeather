@@ -24,7 +24,7 @@ public class UserApiControllerImp extends GenericController implements UserApiCo
 		 
 	 @Override
 	 @RequestMapping(value = "/api/user/registration", method = RequestMethod.POST,consumes="application/json",produces="application/json")
-	    public @ResponseBody GenericResponse registerUser(@RequestBody User request) {	
+	public @ResponseBody GenericResponse registerUser(@RequestBody User request) {	
 		 
 		 try{
 			 	User tempUser=userService.registerNewUser(new User(request));
@@ -36,9 +36,9 @@ public class UserApiControllerImp extends GenericController implements UserApiCo
 			}
 	    }
 	 
-	 
-	 @RequestMapping(value = "/api/auth/user/showUser", method = RequestMethod.GET)
-	    public @ResponseBody GenericResponse getUserInfo() {
+	@Override 
+	@RequestMapping(value = "/api/auth/user/showUser", method = RequestMethod.GET)
+	public @ResponseBody GenericResponse getUserInfo() {
 		 	try{
 		 		User currentUser=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		 		User response=userService.getCompleteInfo(currentUser);
@@ -52,12 +52,12 @@ public class UserApiControllerImp extends GenericController implements UserApiCo
 	 
 	 @Override
 	 @RequestMapping(value = "/api/auth/user/updateUser", method = RequestMethod.POST,consumes="application/json",produces="application/json")
-	    public @ResponseBody GenericResponse updateUserUser(@RequestBody User request) {	
-		 //TODO need to complete do this 
+	    public @ResponseBody GenericResponse updateUser(@RequestBody User request) {	
 		 try{
-			 	User tempUser=userService.registerNewUser(new User(request));
-			 	System.out.println("new USer="+tempUser);
-			 	GenericResponse response=fillCorrectGenericResponse(request,tempUser);
+		 		//clone request user for store original Request
+			 	User originalUserRequest=new User(request);
+			 	Object result=userService.updateUser(getCurrentLoggedUser(),request);
+			 	GenericResponse response=fillCorrectGenericResponse(originalUserRequest,result);
 				return response;
 			}catch (Exception e) {
 				return fillWrongGenericResponse(e, request);

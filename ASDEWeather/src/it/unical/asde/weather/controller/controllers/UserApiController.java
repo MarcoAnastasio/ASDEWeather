@@ -21,6 +21,16 @@ public interface UserApiController {
 	GenericResponse registerUser(User newUser);
 
 	/**
+	 * URL:  /api/auth/user/showUser
+	 * return the complete info for user, complete info mean all information about user entity and also 
+	 * the list of prefered cities
+	 * 
+	 * @return
+	 */
+	GenericResponse getUserInfo();
+	
+	
+	/**
 	 * URL: /api/auth/user/updateUser
 	 * 
 	 * user must be authenticated, logged
@@ -29,7 +39,9 @@ public interface UserApiController {
 	 * @param request
 	 * @return
 	 */
-	GenericResponse updateUserUser(User request);
+	GenericResponse updateUser(User request);
+
+	
 	
 	
 	
