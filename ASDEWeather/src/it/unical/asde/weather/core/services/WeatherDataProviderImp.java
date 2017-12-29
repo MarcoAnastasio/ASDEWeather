@@ -50,12 +50,8 @@ public class WeatherDataProviderImp implements WeatherDataProvider{
 			}
 			citiesToFind.add(new City(temp.getCityId(), temp.getCityName(), null, null, null));
 		}
-		//TODO check if the request for the current weather is present into DB and is not to old
 		
-		//suppose one or more cities are not present so call the services
-		APICurrentResponse currentWeatherForCityListFromAPI = weatherDataRemoteRequestExecutor.getCurrentWeatherForCityListFromAPI(citiesToFind);
-		
-		return currentWeatherForCityListFromAPI;
+		return this.getCurrentWeatherByCitiesList(citiesToFind);
 	}
 
 	@Override
@@ -74,11 +70,37 @@ public class WeatherDataProviderImp implements WeatherDataProvider{
 	}
 	
 	
+	@Override
+	public APICurrentResponse getCurrentWeatherByCities(List<City> citiesToFind)  throws ASDECustomException{
+		if(citiesToFind==null || citiesToFind.isEmpty()){
+			throw new ASDECustomException(null, ErrorCode.WRONG_INPUT, null);
+		}
+		
+		for(City tempC:citiesToFind){
+			if(tempC==null || (tempC.getId()==null && tempC.getName()==null)){
+				throw new ASDECustomException(null, ErrorCode.WRONG_INPUT, null);
+			}
+		}
+		
+		return this.getCurrentWeatherByCitiesList(citiesToFind);
+	}
+	
 	private boolean isRequestSingleCityValid(RequestSingleCity request){
 		if(request==null || (request.getCityId()==null && (request.getCityName()==null || request.getCityName().isEmpty()) ) ) {
 			return false;
 		}
 		return true;
+	}
+	
+	
+	
+	private APICurrentResponse getCurrentWeatherByCitiesList(List<City> cities) throws ASDECustomException{
+		//TODO check if the request for the current weather is present into DB and is not to old
+		
+		//suppose one or more cities are not present so call the services
+		APICurrentResponse currentWeatherForCityListFromAPI = weatherDataRemoteRequestExecutor.getCurrentWeatherForCityListFromAPI(cities);
+		
+		return currentWeatherForCityListFromAPI;
 	}
 	
 

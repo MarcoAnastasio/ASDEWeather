@@ -3,6 +3,7 @@ package it.unical.asde.weather.core.services.user;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.omg.CORBA.Current;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,20 +13,27 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import it.unical.asde.weather.core.services.WeatherDataProvider;
 import it.unical.asde.weather.dao.user.UserDao;
 import it.unical.asde.weather.model.bean.comunication.response.GenericResponse;
 import it.unical.asde.weather.model.bean.comunication.response.GenericResponse.ErrorCode;
 import it.unical.asde.weather.model.bean.comunication.response.GenericResponse.Status;
+import it.unical.asde.weather.model.bean.comunication.response.LoginResponseDTO;
 import it.unical.asde.weather.model.bean.geographical.City;
 import it.unical.asde.weather.model.bean.user.User;
 import it.unical.asde.weather.model.bean.user.UserDetailsImp;
 import it.unical.asde.weather.model.exception.ASDECustomException;
+import it.unical.asde.weather.model.openweatherapi.response.APICurrentResponse;
 
 @Service
 public class UserServiceImp implements UserService{
 
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	private WeatherDataProvider weatherDataProvider;
+	
 	
 	@Override
 	public User getUserByUsername(String username) {		
@@ -90,6 +98,38 @@ public class UserServiceImp implements UserService{
 		
 		return currentUser;
 	}
+	
+	
+	@Override
+	@Transactional(readOnly=true)
+	public LoginResponseDTO login(User currentUser) {
+		LoginResponseDTO returnObject=new LoginResponseDTO();
+		//1) ask system for retrive also prefered cities of user
+		returnObject.setUser( userDao.findCompleteUserInfoById(currentUser.getId()) );
+		
+		//the other information is "optional", so surround whit a try cathc and if will thorw 
+		//an exception the base information will returned whitout problems
+		try{
+		//2) for eatch prefered cities retrive current weather
+			List<City> preferedCities=returnObject.getUser().getPreferedCities();
+			if(preferedCities!=null && !preferedCities.isEmpty()){
+				APICurrentResponse currentWeather = weatherDataProvider.getCurrentWeatherByCities(preferedCities);
+				returnObject.setCurrentWeatherForPreferedCities(currentWeather.getListForecastWeather());
+			}
+			
+		//3) check notification to show
+			//TODO ....
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			return returnObject;
+		}
+	}
+	
+	
+	
+	
+	
 	
 	/**
 	 * check if preferedCitiesList is different, so assign the new Values to old Values
@@ -161,6 +201,5 @@ public class UserServiceImp implements UserService{
 			}
 		}
 	}
-
 	
 }

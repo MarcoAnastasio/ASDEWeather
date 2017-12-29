@@ -45,6 +45,18 @@ public interface UserApiController {
 	GenericResponse updateUser(User request);
 
 	
+	/**
+	 * this method is call for validate user credentials and also return a big DTO whit 
+	 * all the information to display in the homepage, this info inclued:
+	 * -user bean and prefered cities,
+	 * -for eatch prefered city the current wheater
+	 * -eventualy also a list of notification
+	 * 
+	 * @return
+	 */
+	GenericResponse login();
+
+	
 	
 	
 	

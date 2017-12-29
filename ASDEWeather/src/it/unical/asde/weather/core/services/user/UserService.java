@@ -2,6 +2,7 @@ package it.unical.asde.weather.core.services.user;
 
 import it.unical.asde.weather.dao.user.UserDao;
 import it.unical.asde.weather.model.bean.comunication.response.GenericResponse;
+import it.unical.asde.weather.model.bean.comunication.response.LoginResponseDTO;
 import it.unical.asde.weather.model.bean.user.User;
 import it.unical.asde.weather.model.exception.ASDECustomException;
 
@@ -32,5 +33,13 @@ public interface UserService extends UserDetailsService{
 	 * @throws ASDECustomException
 	 */
 	User updateUser(User currentUser,User newValues) throws ASDECustomException;
+
+	/**
+	 * after submission of user's credentials system has to display all information for user, 
+	 * like user info, current weather in preferedCities, and also notifications
+	 * @param currentLoggedUser
+	 * @return
+	 */
+	LoginResponseDTO login(User currentLoggedUser);
 	
 }
