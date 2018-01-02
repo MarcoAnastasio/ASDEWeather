@@ -21,4 +21,7 @@ public class GenericResponseConstant {
 	public static final int NOT_LOGGED_USER_CODE = 5;
 	public static final String NOT_LOGGED_USER_MSG = "Login for submit this request";
 	
+	public static final int CITY_NOT_EXISTS_CODE = 6;
+	public static final String CITY_NOT_EXISTS_MSG = "City not found";
+	
 }

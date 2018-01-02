@@ -6,6 +6,7 @@ import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
@@ -13,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.InheritanceType;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.json.simple.JSONObject;
 
 import it.unical.asde.weather.model.bean.geographical.City;
@@ -30,7 +33,7 @@ public class WeatherData {
 	protected Date dateTimeCalulation;	
 	@Embedded
 	protected MainTemperature mainTemperature ;
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	protected Weather weather;
 	@Column
 	protected Float clouds;
@@ -41,6 +44,8 @@ public class WeatherData {
 	@Column
 	protected Float snow;
 	
+	@Column
+	protected Date storeTime;
 
 	@ManyToOne
 	protected City city;
@@ -54,7 +59,7 @@ public class WeatherData {
 	
 	
 	public WeatherData(Date dateTimeCalulation, MainTemperature mainTemperature, Weather weather, Float clouds,
-			Wind wind, Float rain, Float snow,City city) {
+			Wind wind, Float rain, Float snow,City city,Date storeTime) {
 		super();
 		this.dateTimeCalulation = dateTimeCalulation;
 		this.mainTemperature = mainTemperature;
@@ -63,6 +68,7 @@ public class WeatherData {
 		this.wind = wind;
 		this.rain = rain;
 		this.snow = snow;
+		this.storeTime=storeTime;
 	}
 
 
@@ -115,15 +121,36 @@ public class WeatherData {
 	public void setCity(City city) {
 		this.city = city;
 	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Date getStoreTime() {
+		return storeTime;
+	}
+
+
+
+	public void setStoreTime(Date storeTime) {
+		this.storeTime = storeTime;
+	}
 
 
 
 	@Override
 	public String toString() {
-		return "WeatherData [dateTimeCalulation=" + dateTimeCalulation + ", mainTemperature=" + mainTemperature
-				+ ", weather=" + weather + ", clouds=" + clouds + ", wind=" + wind + ", rain=" + rain + ", snow=" + snow
-				+ ", city=" + city + "]";
+		return "WeatherData [id=" + id + ", dateTimeCalulation="
+				+ dateTimeCalulation + ", mainTemperature=" + mainTemperature
+				+ ", weather=" + weather + ", clouds=" + clouds + ", wind="
+				+ wind + ", rain=" + rain + ", snow=" + snow + ", storeTime="
+				+ storeTime + ", city=" + city + "]";
 	}
+
+
+
+
 
 	
 	

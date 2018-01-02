@@ -114,6 +114,7 @@ public class ResponseOpenWeatherApiDecoderImp implements ResponseOpenWeatherApiD
 				weather.getRain(), 
 				weather.getSnow(), 
 				weather.getCity(),
+				new Date(),		//storing time
 				//TODO change it whit thew others dt-****???
 				decodeDateTimeStringFormat((String)object.get("dt_txt"))
 		);
