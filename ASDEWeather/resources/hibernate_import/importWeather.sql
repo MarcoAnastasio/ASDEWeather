@@ -3,3 +3,7 @@ insert into Weather (id,main,descritpion) values (200,'Thunderstorm','THUNDERSTO
 
 insert into Weather (id,main,descritpion) values (300,'Drizzle','LIGHT_INTENSITY_DRIZZLE'),(301,'Drizzle','DRIZZLE'),(302,'Drizzle','HEAVY_INTENSITY_DRIZZLE'),(310,'Drizzle','LIGHT_INTENSITY_DRIZZLE_RAIN'),(311,'Drizzle','DRIZZLE_RAIN'),(312,'Drizzle','HEAVY_INTENSITY_DRIZZLE_RAIN'),(321,'Drizzle','SHOWER_DRIZZLE');
 
+
+insert into Weather (id,main,descritpion) values (741,'Atmosphere','FOG');
+
+insert into Weather (id,main,descritpion) values (500,'Rain','LIGHT_RAIN');

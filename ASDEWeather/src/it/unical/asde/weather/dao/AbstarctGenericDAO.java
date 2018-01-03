@@ -29,7 +29,9 @@ public abstract class AbstarctGenericDAO<E> implements GenericDao<E> {
 	private SessionFactory sessionFactory;
 
 	protected Session getSession() {
-		return this.sessionFactory.getCurrentSession();
+		Session currentSession = this.sessionFactory.getCurrentSession();
+		System.out.println("********** currentSession="+System.identityHashCode(currentSession));
+		return currentSession;
 	}
 
 	@Override
@@ -41,10 +43,7 @@ public abstract class AbstarctGenericDAO<E> implements GenericDao<E> {
 	@Override
 	@Transactional(propagation=Propagation.REQUIRED)
 	public Serializable save(E entity) {
-		Session session = getSession();
-
-		System.out.println("save Session="+System.identityHashCode(session));
-		return session.save(entity);
+		return getSession().save(entity);
 	}
 
 	@Override
