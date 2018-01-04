@@ -26,8 +26,8 @@ public class WeatherForecastData extends WeatherData{
 	
 	
 	public WeatherForecastData(Date dateTimeCalulation, MainTemperature mainTemperature, Weather weather, Float clouds,
-			Wind wind, Float rain, Float snow,City city,Date dateTimeOfForecast) {
-		super(dateTimeCalulation, mainTemperature, weather, clouds, wind, rain, snow,city);
+			Wind wind, Float rain, Float snow,City city,Date storeTime,Date dateTimeOfForecast) {
+		super(dateTimeCalulation, mainTemperature, weather, clouds, wind, rain, snow,city,storeTime);
 		this.dateTimeOfForecast=dateTimeOfForecast;
 	}
 

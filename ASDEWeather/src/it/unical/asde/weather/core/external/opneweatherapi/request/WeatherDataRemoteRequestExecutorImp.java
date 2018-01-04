@@ -86,7 +86,7 @@ public class WeatherDataRemoteRequestExecutorImp extends RestRequestExecutor imp
 		
 		//3 if response is not null (so maybe no errors occur)
 		if(response!=null){
-			return responseOpenWeatherApiDecoder.decodeForecastWeatherResponse(response);
+			return responseOpenWeatherApiDecoder.decodeForecastWeatherResponse(response,city);
 		}else{
 			throw new ASDECustomException(null, ErrorCode.UNKNOW_ERROR, null);
 		}

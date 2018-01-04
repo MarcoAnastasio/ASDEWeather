@@ -8,5 +8,9 @@ import it.unical.asde.weather.model.bean.geographical.City;
 public interface CityDao extends GenericDao<City>{
 
 	public List<City> findAll2();
+
+	public City findCityByIdAndName(Long cityId, String cityName);
+
+	public City findCityByName(String cityName);
 	
 }

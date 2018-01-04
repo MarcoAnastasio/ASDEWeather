@@ -28,7 +28,7 @@ public class ResponseOpenWeatherApiDecoderImp implements ResponseOpenWeatherApiD
 	private static final DateFormat forecastDateTimeCalulationFormatter  = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	@Override
-	public APIForecastResponse decodeForecastWeatherResponse(JSONObject responseObject) {
+	public APIForecastResponse decodeForecastWeatherResponse(JSONObject responseObject,City requestCity) {
 
 		//TODO we can had reference to cityes and/or to state if we want...
 		APIForecastResponse forecastResponse=new APIForecastResponse();
@@ -39,14 +39,14 @@ public class ResponseOpenWeatherApiDecoderImp implements ResponseOpenWeatherApiD
 		}
 		
 		
-		City city=decodeCity((JSONObject)responseObject.get("city"));
-		forecastResponse.setCity(city);
+		//City city=decodeCity((JSONObject)responseObject.get("city"));
+		forecastResponse.setCity(requestCity);
 		
 		
 		List<WeatherForecastData> listPrevision=new ArrayList<>();
 		JSONArray listArray=(JSONArray) responseObject.get("list");
 		for(int i=0;i<listArray.size();i++){
-			listPrevision.add( this.elaborateForecastInformation((JSONObject)listArray.get(i)) );
+			listPrevision.add( this.elaborateForecastInformation((JSONObject)listArray.get(i),requestCity ) );
 		}
 
 		forecastResponse.setListForecastWeather(listPrevision);
@@ -101,7 +101,7 @@ public class ResponseOpenWeatherApiDecoderImp implements ResponseOpenWeatherApiD
 		return weatherData;
 	}
 
-	private WeatherForecastData elaborateForecastInformation(JSONObject object) {
+	private WeatherForecastData elaborateForecastInformation(JSONObject object,City city) {
 		
 
 		WeatherData weather = this.elaborateWeatherInformation(object);		
@@ -113,7 +113,8 @@ public class ResponseOpenWeatherApiDecoderImp implements ResponseOpenWeatherApiD
 				weather.getWind(), 
 				weather.getRain(), 
 				weather.getSnow(), 
-				weather.getCity(),
+				city,
+				new Date(),		//storing time
 				//TODO change it whit thew others dt-****???
 				decodeDateTimeStringFormat((String)object.get("dt_txt"))
 		);

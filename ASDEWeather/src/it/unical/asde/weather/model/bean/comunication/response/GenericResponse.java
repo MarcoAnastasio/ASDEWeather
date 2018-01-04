@@ -22,6 +22,7 @@ public class GenericResponse {
 	    EMAIL_USED(GenericResponseConstant.EMAIL_USED_CODE,GenericResponseConstant.EMAIL_USED_MSG),
 	    USERNAME_AND_EMAIL_USED(GenericResponseConstant.USERNAME_AND_EMAIL_USED_CODE,GenericResponseConstant.USERNAME_AND_EMAIL_USED_MSG ),
 	    NOT_LOGGED_USER(GenericResponseConstant.NOT_LOGGED_USER_CODE,GenericResponseConstant.NOT_LOGGED_USER_MSG ),
+	    CITY_NOT_EXISTS(GenericResponseConstant.CITY_NOT_EXISTS_CODE,GenericResponseConstant.CITY_NOT_EXISTS_MSG),
 	    ;
 
 	    private final int value;
