@@ -7,11 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(indexes=@Index(columnList="name"))
 public class City implements Serializable{
 
 	private static final long serialVersionUID = -5122728796174630673L;

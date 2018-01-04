@@ -6,6 +6,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,10 +28,13 @@ import it.unical.asde.weather.model.openweatherapi.response.APICurrentResponse;
 import it.unical.asde.weather.model.openweatherapi.response.APIForecastResponse;
 
 @Service
+@Configuration
+@PropertySource("classpath:application.properties")
 public class WeatherDataProviderImp implements WeatherDataProvider{
 
-	//max old value stored into DB in minute 1h 
-	private static final Long MAX_OLD_VALUE=new Long(60*60*1000);
+	//max old value stored into DB in millis 1h 
+	@Value( "${asde.weather.data_refresh_time}" )
+	private Long MAX_OLD_VALUE;
 	
 	@Autowired
 	private WeatherDataRemoteRequestExecutor weatherDataRemoteRequestExecutor;
