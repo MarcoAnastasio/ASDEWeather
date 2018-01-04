@@ -68,6 +68,7 @@ public class WeatherData {
 		this.wind = wind;
 		this.rain = rain;
 		this.snow = snow;
+		this.city=city;
 		this.storeTime=storeTime;
 	}
 
