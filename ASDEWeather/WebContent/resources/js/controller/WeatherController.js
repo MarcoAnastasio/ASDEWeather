@@ -22,8 +22,9 @@ App.controller("WeatherController", function WeatherController($scope){
 
 	    			console.log("Weather Response");
 	    			console.log(res.data);
-
+	    			
 	    			$scope.setData(res.data);
+	    			$scope.displayWeatherGraph();
 	    			
 	    		}
 	    		else{
@@ -83,5 +84,69 @@ App.controller("WeatherController", function WeatherController($scope){
 		///alert("Dispay Weather detail")
 		$("#portfolioModal1").modal()
 		
+	}
+	
+	$scope.displayWeatherGraph = function(){
+		var chartColors = {
+				  red: 'rgb(255, 99, 132)',
+				  orange: 'rgb(255, 159, 64)',
+				  yellow: 'rgb(255, 205, 86)',
+				  green: 'rgb(75, 192, 192)',
+				  blue: 'rgb(54, 162, 235)',
+				  purple: 'rgb(153, 102, 255)',
+				  grey: 'rgb(231,233,237)'
+				};
+		
+		var ctx =$("#myChart");
+		var myChart = new Chart(ctx, {
+		    type: 'line',
+		    data: {
+		        labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thurday", "Friday","Saturday"],
+		        datasets: [{
+		            label: 'Temprature',
+		            backgroundColor: chartColors.red,
+		            borderColor: chartColors.red,
+		            data: [19, 19, 18, 14, 13,11,12],
+		            fill: false
+		            
+		        },
+		        {label: 'Humidity',
+		        backgroundColor: chartColors.blue,
+		         borderColor: chartColors.blue,
+	            data: [65, 60, 70, 63, 70,62,65],
+	            fill: false}
+		        
+		        ]
+		    },
+		    fill: false,
+		    options: {
+		        responsive: true,
+		        fill:false,
+		        title: {
+		          display: true,
+		          text: 'City Name Weather'
+		        },
+		        tooltips: {
+		          mode: 'label',
+		        },
+		       
+		        scales: {
+		          xAxes: [{
+		            display: true,scaleLabel: {
+		              display: true,
+		              labelString: 'Days'
+		            }
+		          }],
+		          yAxes: [{
+		            display: true,
+		            scaleLabel: {
+		              display: true,
+		              labelString: 'Value'
+		            }
+		          }]
+		        }
+		      }
+			
+		});
 	}
 });

@@ -29,12 +29,15 @@
 <link
 	href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700'
 	rel='stylesheet' type='text/css'>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- Custom styles for this template -->
 <link href="resources/css/agency.min.css" rel="stylesheet">
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	
+	<!-- Charts JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 
 <script src="resources/js/app.js"></script>
 <script src="resources/js/controller/UserController.js"></script>
@@ -100,9 +103,9 @@
 	</nav>
 
 	<!-- Header -->
-	<header class="masthead">
+	<header class="masthead" style="padding-top:60px">
 	<div class="container">
-		<div class="intro-text">
+		<!-- <div class="intro-text">
 			<div class="intro-lead-in">Welcome To UNICAL Weather!</div>
 			<form>
 				<div class="form-group">
@@ -114,7 +117,34 @@
 						href="#services">Search</a>
 				</div>
 			</form>
+		</div> -->
+	<div class="row">
+		<div class="col col-md-6 col-lg-6" style="top:5%">
+			<canvas id="myChart" width="100" height="100"></canvas>
+			
 		</div>
+		<div class="col col-md-6 col-lg-6">
+		 <div style="padding-top:20px">
+			<!-- <div class="intro-lead-in">Welcome To UNICAL Weather!</div> -->
+			<form>
+				<div class="form-group">
+					<input class="form-control form-control-lg" type="text"
+						placeholder="Search for a city">
+						<button class="btn btn-primary btn-md ">
+						Search
+						</button>
+				</div>
+				<!-- <div class="form-group">
+					<a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger"
+						href="#services">Search</a>
+				</div> -->
+			</form>
+			<div class="">
+				Log in to see your notifications
+			</div>
+		</div> 
+		</div>
+	</div>
 	</div>
 	</header>
 
@@ -531,8 +561,7 @@
 		integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
 		crossorigin="anonymous"></script>
 
-	<!-- Charts JS -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>
+	
 	<!-- Bootstrap core JavaScript -->
 
 	<script
