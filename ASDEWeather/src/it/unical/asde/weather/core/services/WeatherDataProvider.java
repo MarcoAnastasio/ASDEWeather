@@ -7,14 +7,15 @@ import it.unical.asde.weather.model.bean.comunication.request.RequestSingleCity;
 import it.unical.asde.weather.model.bean.geographical.City;
 import it.unical.asde.weather.model.exception.ASDECustomException;
 import it.unical.asde.weather.model.openweatherapi.response.APICurrentResponse;
+import it.unical.asde.weather.model.openweatherapi.response.APIForecastResponse;
 
 public interface WeatherDataProvider {
 
-	public Object getCurrentWeatherByCity(RequestSingleCity request) throws ASDECustomException;
+	public APICurrentResponse getCurrentWeatherByCity(RequestSingleCity request) throws ASDECustomException;
 	
-	public Object getCurrentWeatherByCities(RequestListCities request) throws ASDECustomException;
+	public APICurrentResponse getCurrentWeatherByCities(RequestListCities request) throws ASDECustomException;
 	
-	public Object getForecastWeatherByCity(RequestSingleCity request) throws ASDECustomException;
+	public APIForecastResponse getForecastWeatherByCity(RequestSingleCity request) throws ASDECustomException;
 
 	public APICurrentResponse getCurrentWeatherByCities(List<City> cities) throws ASDECustomException;
 	

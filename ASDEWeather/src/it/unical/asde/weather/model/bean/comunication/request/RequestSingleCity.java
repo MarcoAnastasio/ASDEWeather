@@ -5,7 +5,17 @@ public class RequestSingleCity {
 	private Long cityId;
 	private String cityName;
 	
+
 	
+	public RequestSingleCity() {
+		super();
+	}
+	
+	public RequestSingleCity(Long cityId, String cityName) {
+		super();
+		this.cityId = cityId;
+		this.cityName = cityName;
+	}
 	
 	public Long getCityId() {
 		return cityId;

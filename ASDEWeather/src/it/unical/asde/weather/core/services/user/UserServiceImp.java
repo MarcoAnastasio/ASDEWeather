@@ -1,6 +1,7 @@
 package it.unical.asde.weather.core.services.user;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.omg.CORBA.Current;
@@ -14,16 +15,21 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import it.unical.asde.weather.core.services.WeatherDataProvider;
+import it.unical.asde.weather.core.utilities.DateUtils;
 import it.unical.asde.weather.dao.user.UserDao;
+import it.unical.asde.weather.model.bean.comunication.request.RequestSingleCity;
 import it.unical.asde.weather.model.bean.comunication.response.GenericResponse;
 import it.unical.asde.weather.model.bean.comunication.response.GenericResponse.ErrorCode;
 import it.unical.asde.weather.model.bean.comunication.response.GenericResponse.Status;
 import it.unical.asde.weather.model.bean.comunication.response.LoginResponseDTO;
 import it.unical.asde.weather.model.bean.geographical.City;
+import it.unical.asde.weather.model.bean.user.Notification;
 import it.unical.asde.weather.model.bean.user.User;
 import it.unical.asde.weather.model.bean.user.UserDetailsImp;
+import it.unical.asde.weather.model.bean.weather.WeatherForecastData;
 import it.unical.asde.weather.model.exception.ASDECustomException;
 import it.unical.asde.weather.model.openweatherapi.response.APICurrentResponse;
+import it.unical.asde.weather.model.openweatherapi.response.APIForecastResponse;
 
 @Service
 public class UserServiceImp implements UserService{
@@ -200,6 +206,54 @@ public class UserServiceImp implements UserService{
 				}
 			}
 		}
+	}
+
+	
+	
+	
+	@Override
+	@Transactional
+	public List<Notification> getNotifications(User currentLoggedUser) throws ASDECustomException {
+		
+		List<Notification> notificationList=new ArrayList<Notification>();
+		
+		List<City> preferedCities = currentLoggedUser.getPreferedCities();
+		if(preferedCities.isEmpty()){
+			return notificationList;
+		}
+		
+		//if user has at least one prefered city, we have to chetck the weather in this city
+		for(City tempCity:preferedCities){
+			APIForecastResponse forecastWeatherByCity = weatherDataProvider.getForecastWeatherByCity(new RequestSingleCity(tempCity.getId(),null));
+			List<WeatherForecastData> listForecastWeather = forecastWeatherByCity.getListForecastWeather();
+			for(WeatherForecastData tempW:listForecastWeather){
+				if(tempW.getWeather().getMain().equals("Extreme")){
+					Notification notToAdd=new Notification(tempCity, tempW.getWeather(), tempW.getDateTimeOfForecast());
+					haveToAddNewNotInList(notificationList,notToAdd); 
+					notificationList.add(notToAdd);
+				}
+			}
+		}
+		
+		return notificationList;
+	}
+
+	private boolean haveToAddNewNotInList(List<Notification> notificationList, Notification not) {
+		if(notificationList.isEmpty()){
+			return false;
+		}
+		
+		for(Notification tempN:notificationList){
+			if(
+					tempN.getCity().getId().equals( not.getCity().getId() ) &&
+					tempN.getWeather().getId().equals(not.getWeather().getId()) &&
+					DateUtils.chackTwoDateSameDay(tempN.getDate(),not.getDate())
+					){
+				return true;
+			}
+		}
+		
+		return false;
 	}
 	
 }

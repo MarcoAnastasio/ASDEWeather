@@ -49,7 +49,7 @@ public class WeatherDataProviderImp implements WeatherDataProvider{
 	
 	@Override
 	@Transactional
-	public Object getCurrentWeatherByCity(RequestSingleCity request) throws ASDECustomException{
+	public APICurrentResponse getCurrentWeatherByCity(RequestSingleCity request) throws ASDECustomException{
 		//1 check if input is correct
 		if(!isRequestSingleCityValid(request)){
 			throw new ASDECustomException(null, ErrorCode.WRONG_INPUT,GenericResponseConstant.WRONG_INPUT_MSG);
@@ -86,7 +86,7 @@ public class WeatherDataProviderImp implements WeatherDataProvider{
 
 	@Override
 	@Transactional
-	public Object getCurrentWeatherByCities(RequestListCities request)  throws ASDECustomException{
+	public APICurrentResponse getCurrentWeatherByCities(RequestListCities request)  throws ASDECustomException{
 		if(request==null || request.getCities()==null || request.getCities().isEmpty()){
 			throw new ASDECustomException(null, ErrorCode.WRONG_INPUT, null);
 		}
@@ -104,7 +104,7 @@ public class WeatherDataProviderImp implements WeatherDataProvider{
 
 	@Override
 	@Transactional
-	public Object getForecastWeatherByCity(RequestSingleCity request)  throws ASDECustomException{
+	public APIForecastResponse getForecastWeatherByCity(RequestSingleCity request)  throws ASDECustomException{
 		if(!isRequestSingleCityValid(request)){
 			throw new ASDECustomException(null, ErrorCode.WRONG_INPUT, null);
 		}

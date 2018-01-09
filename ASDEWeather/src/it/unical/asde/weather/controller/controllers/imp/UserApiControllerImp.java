@@ -75,4 +75,15 @@ public class UserApiControllerImp extends GenericController implements UserApiCo
 			}
 	  }
 	 
+	 @Override
+	 @RequestMapping(value = "/api/auth/user/getNotifications", produces="application/json")
+	 public @ResponseBody GenericResponse getNotifications() {	
+		 try{
+			 	GenericResponse response=fillCorrectGenericResponse(null,userService.getNotifications(getCurrentLoggedUser()));
+				return response;
+			}catch (Exception e) {
+				return fillWrongGenericResponse(e, null);
+			}
+	 }
+	 
 }
