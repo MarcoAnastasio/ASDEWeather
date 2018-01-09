@@ -1,6 +1,6 @@
 App.controller("UserController", ['$scope', function($scope){
 	$scope.status = 0;
-	
+	$scope.regError = false;
 	$scope.reg_data = {
 			id:"", name:"test", lastname:"", email:"",
 			password:"", city:"", country:""
@@ -71,16 +71,17 @@ App.controller("UserController", ['$scope', function($scope){
 	    		'password':$scope.data.password};
 		
 		$.ajax({
-	    	type:'GET',
-	    	url:"/ASDEWeatherApp/register", 
-	    	data:{data:JSON.stringify(dataToSend)},
+	    	type:'POST',
+	    	url:"/ASDEWeather/api/user/registration", 
+	    	contentType:"application/json",
+	    	dataType:"json",
+	    	data:JSON.stringify(dataToSend),
 	    	success:function(response,status){
 	    		
-	    		if(response.status=="done"){
-	    			console.log(response.data);
-	    			
-	    			$scope.setData(response.data);
-	    			
+	    		if(response.status=="OK"){
+	    			$scope.regError = true;
+	    			console.log(response.data);	    			
+	    			$scope.setData(response.data);    			
 	    			
 	    			$('#registerModal').modal('hide')
 	    			//.on('hide.bs.modal',function(e){
@@ -88,6 +89,8 @@ App.controller("UserController", ['$scope', function($scope){
 	    			//});
 	    		}
 	    		else{
+	    			$scope.regError = true;
+	    			$("#error-form").html("Sorry,There seems to be an error");
 	    			console.log(response.data);
 	    		}
 	    	}	    	

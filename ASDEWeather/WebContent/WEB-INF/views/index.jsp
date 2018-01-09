@@ -46,7 +46,7 @@
 <body id="page-top" ng-app="myApp" ng-controller="UserController">
 
 	<!-- Navigation -->
-	<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav"
+	<nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-shrink" id="mainNav"
 		style="align:left">
 	<div class="container">
 		<a class="navbar-brand js-scroll-trigger" href="#page-top">Weather</a>
@@ -103,9 +103,9 @@
 	</nav>
 
 	<!-- Header -->
-	<header class="masthead" style="padding-top:60px">
+	<header class="masthead border" style="padding-top:60px">
 	<div class="container">
-		<!-- <div class="intro-text">
+		<div class="intro-text">
 			<div class="intro-lead-in">Welcome To UNICAL Weather!</div>
 			<form>
 				<div class="form-group">
@@ -117,35 +117,11 @@
 						href="#services">Search</a>
 				</div>
 			</form>
-		</div> -->
-	<div class="row">
-		<div class="col col-md-6 col-lg-6" style="top:5%">
-			<canvas id="myChart" width="100" height="100"></canvas>
-			
-		</div>
-		<div class="col col-md-6 col-lg-6">
-		 <div style="padding-top:20px">
-			<!-- <div class="intro-lead-in">Welcome To UNICAL Weather!</div> -->
-			<form>
-				<div class="form-group">
-					<input class="form-control form-control-lg" type="text"
-						placeholder="Search for a city">
-						<button class="btn btn-primary btn-md ">
-						Search
-						</button>
-				</div>
-				<!-- <div class="form-group">
-					<a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger"
-						href="#services">Search</a>
-				</div> -->
-			</form>
-			<div class="">
-				Log in to see your notifications
-			</div>
 		</div> 
-		</div>
+	
+			
 	</div>
-	</div>
+	
 	</header>
 
 	<!-- My cities -->
@@ -516,8 +492,8 @@
 				</div>
 
 				<div class="modal-body">
-					<div class="alert alert-danger" id="error-form">
-						<strong>Danger!</strong>Please Complete the form!
+					<div ngIf="regError" class="alert alert-danger" id="error-form">
+						
 					</div>
 					<br /> <label>Name:</label><input ng-model="user.name" type="text"
 						class="form-control" id="reg-name" name="reg-n-name"

@@ -7,6 +7,7 @@ App.controller("WeatherController", function WeatherController($scope){
 	
 	$scope.weatherData = [];
 	$scope.weatherForcastData =[];
+	$scope.currentLoation = {};
 	
 	$scope.search = function search(){}
 	
@@ -24,7 +25,9 @@ App.controller("WeatherController", function WeatherController($scope){
 	    			console.log(res.data);
 	    			
 	    			$scope.setData(res.data);
-	    			$scope.displayWeatherGraph();
+	    			//$scope.displayWeatherGraph();
+	    			$scope.loadOneCity();
+	    			//$scope.loadOneCity();
 	    			
 	    		}
 	    		else{
@@ -35,6 +38,37 @@ App.controller("WeatherController", function WeatherController($scope){
 	    });
 		
 	}// end of loadSelctedcity
+
+	$scope.loadOneCity  = function(){
+		console.log("In one City load");
+		var currentLocation = [];
+		// call the current location data
+		getCurrentLocation();
+		
+		console.log($scope.currentLoation)
+		dataToSend ={cityName:$scope.currentLoation.city};
+		$.ajax({
+	    	type:'POST',
+	    	url:"/ASDEWeather/api/weather/forecastWeatherByCity", 
+	    	contentType:"application/json",
+	    	dataType:"json",
+	    	data:JSON.stringify(dataToSend),
+	    	success:function(response,status){
+	    		//console.log(res.status);
+	    		if(response.status=="OK"){
+
+	    			console.log("Weather One City  Response");
+	    			console.log(response.response);
+	    			
+	    		}
+	    		else{
+	    			console.log("Weather Responce Error");
+	    			console.log(response);
+	    		}
+	    	}	    	
+	    });
+		
+	}// end of load One City 
 	
 	$scope.setData = function(input){
 		for(var i=0; i< input.length; i++ ){
@@ -86,6 +120,29 @@ App.controller("WeatherController", function WeatherController($scope){
 		
 	}
 	
+	//*****************************/
+	// Get Curent locatio --------*/
+	//							  */
+	//****************************/
+	
+	function getCurrentLocation (){
+		$.getJSON("http://ip-api.com/json/", function(data) {
+			$scope.currentLoation = data;
+        });
+			/*$.ajax({
+				type:"GET",
+				url:"http://ip-api.com/json",
+				dataType:"json",
+				
+				success:function(response,status){
+					console.log(response);
+					return response;
+				}
+			})		
+		*/
+	}
+	
+	// end of getCcurrent location
 	$scope.displayWeatherGraph = function(){
 		var chartColors = {
 				  red: 'rgb(255, 99, 132)',
