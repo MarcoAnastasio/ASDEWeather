@@ -1,8 +1,11 @@
 package it.unical.asde.weather.core.services.user;
 
+import java.util.List;
+
 import it.unical.asde.weather.dao.user.UserDao;
 import it.unical.asde.weather.model.bean.comunication.response.GenericResponse;
 import it.unical.asde.weather.model.bean.comunication.response.LoginResponseDTO;
+import it.unical.asde.weather.model.bean.user.Notification;
 import it.unical.asde.weather.model.bean.user.User;
 import it.unical.asde.weather.model.exception.ASDECustomException;
 
@@ -41,5 +44,14 @@ public interface UserService extends UserDetailsService{
 	 * @return
 	 */
 	LoginResponseDTO login(User currentLoggedUser);
+
+	
+	/**
+	 * check if for eatch prefered city of the user exists a forecast whit the weather type extreme
+	 * @param currentLoggedUser
+	 * @return
+	 * @throws ASDECustomException 
+	 */
+	List<Notification> getNotifications(User currentLoggedUser) throws ASDECustomException;
 	
 }

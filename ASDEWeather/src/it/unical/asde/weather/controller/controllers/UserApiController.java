@@ -58,6 +58,15 @@ public interface UserApiController {
 
 	
 	
+	/**
+	 * eatch Xtime (something like 1 h) the client have to call this methods,
+	 * to verify eventualy notifications
+	 * @return
+	 */
+	GenericResponse getNotifications();
+
+	
+	
 	
 	
 }
