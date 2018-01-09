@@ -1,6 +1,7 @@
 App.controller("UserController", ['$scope', function($scope){
 	$scope.status = 0;
 	$scope.regError = false;
+	$scope.preferedCities =[];
 	$scope.reg_data = {
 			id:"", name:"test", lastname:"", email:"",
 			password:"", city:"", country:""
@@ -18,28 +19,31 @@ App.controller("UserController", ['$scope', function($scope){
 		console.log("test");
 		$scope.status = 1;
 		
-		dataToSend = {'email':$scope.data.email, 'password':$scope.data.password}
+		dataToSend = {'username':$scope.data.email, 'password':$scope.data.password}
+		console.log(dataToSend);
 		
-	    $.ajax({
+	 $.ajax({
 	    	type:'GET',
-	    	url:"/ASDEWeatherApp/login", 
-	    	data:{data:JSON.stringify(dataToSend)},
+	    	url:"/ASDEWeather/api/auth/user/showUser", 
+	    	data:"Y2ljY2lvOmNpY2Npbw",
 	    	success:function(response,status){
 	    		
-	    		if(response.status=="done"){
-	    			console.log(response.data);
-	    			
-	    			$scope.setData(response.data);
-	    			
-	    			
-	    			$('#myModal').modal('hide').on('hide.bs.modal',function(e){
-	    				
+	    		if(response.status=="OK"){
+	    			$('#myModal').modal('hide').on('hide.bs.modal',function(e){	    				
 	    			});
+	    			//console.log(response.response);
+	    			//responseHandler(response.response);
+	    			$scope.setData(response.response);   			
+	    			
+	    			
 	    		}
 	    		else{
-	    			console.log(response.data);
+	    			console.log(response.status);
 	    		}
-	    	}	    	
+	    	},
+	    	error:function(e){
+	    		console.log(e)
+	    	}
 	    });
 		
 	}
@@ -63,12 +67,14 @@ App.controller("UserController", ['$scope', function($scope){
 	         
 	    console.log($scope.reg_data)
 		dataToSend = {
-	    		'name':$scope.reg_data.name,
-	    		'lastname':$scope.reg_data.lastname,
-	    		'email':$scope.reg_data.email,
-	    		'country':$scope.reg_data.country,
-	    		'city':$scope.reg_data.city,
-	    		'password':$scope.data.password};
+	    		'username':$scope.reg_data.username,
+	    		'password':$scope.data.password,
+	    		'firstName':$scope.reg_data.firstname,
+	    		'lastName':$scope.reg_data.lastname,	    		
+	    		'email':$scope.reg_data.email
+	    		/*'country':$scope.reg_data.country,
+	    		'city':$scope.reg_data.city,*/
+	    		};
 		
 		$.ajax({
 	    	type:'POST',
@@ -80,8 +86,8 @@ App.controller("UserController", ['$scope', function($scope){
 	    		
 	    		if(response.status=="OK"){
 	    			$scope.regError = true;
-	    			console.log(response.data);	    			
-	    			$scope.setData(response.data);    			
+	    			console.log(response.response);	    			
+	    			$scope.setData(response.response);    			
 	    			
 	    			$('#registerModal').modal('hide')
 	    			//.on('hide.bs.modal',function(e){
@@ -90,7 +96,7 @@ App.controller("UserController", ['$scope', function($scope){
 	    		}
 	    		else{
 	    			$scope.regError = true;
-	    			$("#error-form").html("Sorry,There seems to be an error");
+	    			$("#error-form").html(response.messageForUser);
 	    			console.log(response.data);
 	    		}
 	    	}	    	
@@ -109,12 +115,11 @@ App.controller("UserController", ['$scope', function($scope){
 		console.log(input.name +'='+selected.name );
 		$scope.status=1
 		//$scope.data.id = input.id;
-		$scope.data.name = input.name;
-		scope.data.lastname = input.lastname;
+		$scope.data.name = input.username;
+		$scope.data.lastname = input.lastname;
 		$scope.data.email = input.email;
 		$scope.data.password = input.password;
-		$scope.data.city = input.city;
-		$scope.data.country = input.country;
+		$scope.preferedCities = input.preferedCities;
 		if(type != 'logout'){
 			$scope.$apply();
 		}else{
