@@ -48,6 +48,11 @@ public class WeatherDataProviderImp implements WeatherDataProvider{
 	
 	
 	@Override
+	public APICurrentResponse getCurrentWeatherByCoords(Double latitude, Double longitude) throws ASDECustomException {
+		return  weatherDataRemoteRequestExecutor.getCurrentWeatherForCoordsFromAPI(latitude,longitude);
+	}
+	
+	@Override
 	@Transactional
 	public APICurrentResponse getCurrentWeatherByCity(RequestSingleCity request) throws ASDECustomException{
 		//1 check if input is correct

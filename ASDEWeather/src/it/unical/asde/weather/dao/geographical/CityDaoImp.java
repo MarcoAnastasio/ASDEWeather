@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import it.unical.asde.weather.dao.AbstarctGenericDAO;
 import it.unical.asde.weather.model.bean.geographical.City;
+import it.unical.asde.weather.model.bean.weather.WeatherData;
 
 @Service
 public class CityDaoImp extends AbstarctGenericDAO<City> implements CityDao{
@@ -27,6 +28,28 @@ public class CityDaoImp extends AbstarctGenericDAO<City> implements CityDao{
 		Session session = getSession();
 		System.out.println("findCityByNAme="+System.identityHashCode(session));
 		return (City)session.createQuery("from City where name =:cityName").setParameter("cityName", cityName).uniqueResult();
+	}
+	
+	
+	
+	@Override
+	@Transactional(readOnly=true)
+	public List<City> findCitiesByName(List<String> cityNameList) {
+		Session session = getSession();
+		System.out.println("findCityByNAme="+System.identityHashCode(session));
+		
+		return session.createQuery("from City where name IN (:cityNames)",City.class)
+				.setParameter("cityNames", cityNameList).list();
+	}
+	
+	@Override
+	@Transactional(readOnly=true)
+	public List<City> findCitiesByName(String[] cityNameList) {
+		Session session = getSession();
+		System.out.println("findCityByNAme="+System.identityHashCode(session));
+		
+		return session.createQuery("from City where name IN (:cityNames)",City.class)
+				.setParameter("cityNames", cityNameList).list();
 	}
 	
 	@Override

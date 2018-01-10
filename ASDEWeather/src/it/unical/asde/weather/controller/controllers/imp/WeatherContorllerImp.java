@@ -1,5 +1,7 @@
 package it.unical.asde.weather.controller.controllers.imp;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,7 +26,10 @@ public class WeatherContorllerImp extends GenericController implements WeatherCo
 	
 	@Override
     @RequestMapping(value = "/api/weather/currentWeatherByCity", method = RequestMethod.POST,consumes="application/json")
-	public @ResponseBody Object getCurrentWeatherByCity(@RequestBody RequestSingleCity request) {
+	public @ResponseBody Object getCurrentWeatherByCity(@RequestBody RequestSingleCity request,HttpServletRequest httpRequest) {
+		
+		System.out.println(httpRequest.getRemoteAddr());
+		
 		try{
 			return fillCorrectGenericResponse(request, weatherDataProvider.getCurrentWeatherByCity(request));
 		}catch (Exception e) {

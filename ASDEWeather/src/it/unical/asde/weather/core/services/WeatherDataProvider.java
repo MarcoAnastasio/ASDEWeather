@@ -18,5 +18,7 @@ public interface WeatherDataProvider {
 	public APIForecastResponse getForecastWeatherByCity(RequestSingleCity request) throws ASDECustomException;
 
 	public APICurrentResponse getCurrentWeatherByCities(List<City> cities) throws ASDECustomException;
+
+	public APICurrentResponse getCurrentWeatherByCoords(Double latitude, Double longitude) throws ASDECustomException;
 	
 }

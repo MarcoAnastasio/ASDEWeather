@@ -12,5 +12,9 @@ public interface CityDao extends GenericDao<City>{
 	public City findCityByIdAndName(Long cityId, String cityName);
 
 	public City findCityByName(String cityName);
+
+	List<City> findCitiesByName(List<String> cityNameList);
+
+	List<City> findCitiesByName(String[] cityNameList);
 	
 }

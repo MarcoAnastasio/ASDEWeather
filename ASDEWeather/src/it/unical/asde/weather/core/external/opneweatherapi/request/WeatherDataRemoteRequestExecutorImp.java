@@ -39,6 +39,9 @@ public class WeatherDataRemoteRequestExecutorImp extends RestRequestExecutor imp
 
 	private static final String ADD_PARAMEETER_CITY_NAME="q=";
 	private static final String ADD_PARAMEETER_CITY_ID="id=";
+
+	private static final String ADD_PARAMEETER_COORDS_LAT="lat=";
+	private static final String ADD_PARAMEETER_COORDS_LON="&lon=";
 	
 	private static final String ADD_PARAMEETER_UNITS_FORMAT_CELSIUS="&units=metric";
 	
@@ -173,6 +176,37 @@ public class WeatherDataRemoteRequestExecutorImp extends RestRequestExecutor imp
 			}
 		}
 		url+=ADD_PARAMEETER_UNITS_FORMAT_CELSIUS+ADD_PARAMEETER_APP_KEY+key1;
+		return url;
+	}
+
+
+	@Override
+	public APICurrentResponse getCurrentWeatherForCoordsFromAPI(Double latitude, Double longitude) throws ASDECustomException {
+		
+		//1  prepare url String
+		String url=generateUrlFromBaseEndpointAndCoords(openCurrentWeatherEndpoint,latitude,longitude);
+		
+		//2 execute request in the superclass
+		JSONObject response = super.executeRestRequestAndReturnJSONObject(url);
+		
+		//3 if response is not null (so maybe no errors occur)
+		if(response!=null){
+			return responseOpenWeatherApiDecoder.decodeCurrentWeatherResponse(response);
+		}else{
+			throw new ASDECustomException(null, ErrorCode.UNKNOW_ERROR, null);
+		}
+		
+		
+		
+	}
+
+
+	private String generateUrlFromBaseEndpointAndCoords(String baseEndpoint, Double latitude,Double longitude) {
+		
+		//api.openweathermap.org/data/2.5/weather?lat=35&lon=139
+		
+		String url=baseEndpoint+ADD_PARAMEETER_COORDS_LAT+latitude+ADD_PARAMEETER_COORDS_LON+longitude
+				+ADD_PARAMEETER_UNITS_FORMAT_CELSIUS+ADD_PARAMEETER_APP_KEY+key1;
 		return url;
 	}
 	
