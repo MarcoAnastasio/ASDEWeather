@@ -16,11 +16,11 @@
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
 					href="#contact">Contact</a></li>
 				<li class="nav-item"><a
-					class="nav-link js-scroll-trigger d-md-none d-lg-none"
-					href="#contact">Login</a></li>
+					class="nav-link"
+					href="#contact" id="mob-login" data-toggle="modal" data-target="#exampleModal">Login</a></li>
 				<li class="nav-item"><a
 					class="nav-link js-scroll-trigger d-md-none d-lg-none"
-					href="#contact">Register</a></li>
+					href="#contact" id="mob-reg">Register</a></li>
 			</ul>
 		</div>
 
@@ -28,10 +28,10 @@
 			data-toggle="collapse" data-target="#navbarResponsive"
 			aria-controls="navbarResponsive" aria-expanded="false"
 			aria-label="Toggle navigation">
-			Menu <i class="fa fa-bars"></i>
+			<i class="fa fa-bars"></i>
 		</button>
 
-		<div style="float: right;" ng-show="status==1">
+		<div style="float: right;" ng-if="status == 1">
 			<div style="float: right;">
 				<button class="btn btn-primary btn-md hidden-sm visible-md"
 					id="logout-top" ng-click="logout()">Log Out</button>

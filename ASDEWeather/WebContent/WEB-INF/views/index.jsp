@@ -41,7 +41,7 @@
 <script src="resources/js/controller/WeatherController.js"></script>
 <script src="resources/js/viewModel/responseHandler.js"></script>
 </head>
-<body id="page-top" ng-app="myApp" ng-controller="UserController">
+<body id="page-top" ng-app="myApp" ng-controller="UserController" ng-cloak>
 
 	<!-- Navigation -->
 

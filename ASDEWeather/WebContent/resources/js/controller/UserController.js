@@ -1,5 +1,4 @@
-App.controller("UserController", ['$scope', function($scope){
-	
+App.controller("UserController", ['$scope',function($scope){	
 	$scope.status = 0;
 	$scope.regError = false;
 	$scope.preferedCities =[];
