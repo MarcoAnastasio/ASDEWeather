@@ -1,4 +1,4 @@
-package it.unical.asde.weather.config.spring;
+package it.unical.asde.weather.config.hibernate;
 
 
 import java.io.IOException;

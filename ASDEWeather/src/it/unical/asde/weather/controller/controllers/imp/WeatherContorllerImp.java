@@ -49,9 +49,10 @@ public class WeatherContorllerImp extends GenericController implements WeatherCo
 	}
 
 	@Override
-    @RequestMapping(value = "/api/weather/forecastWeatherByCity", method = RequestMethod.POST,consumes="application/json")
+    @RequestMapping(value = "/api/weather/forecastWeatherByCity", method = RequestMethod.POST,consumes="application/json;charset=utf-8")
 	public @ResponseBody Object getForecastWeatherByCity(@RequestBody RequestSingleCity request) {
 		try{
+			System.out.println("In forcast");
 			return fillCorrectGenericResponse(request, weatherDataProvider.getForecastWeatherByCity(request));
 		}catch (Exception e) {
 			return fillWrongGenericResponse(e, request);
