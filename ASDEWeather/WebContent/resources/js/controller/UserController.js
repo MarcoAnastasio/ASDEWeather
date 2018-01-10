@@ -1,4 +1,5 @@
 App.controller("UserController", ['$scope', function($scope){
+	
 	$scope.status = 0;
 	$scope.regError = false;
 	$scope.preferedCities =[];
@@ -24,8 +25,13 @@ App.controller("UserController", ['$scope', function($scope){
 		
 	 $.ajax({
 	    	type:'GET',
-	    	url:"/ASDEWeather/api/auth/user/showUser", 
-	    	data:"Y2ljY2lvOmNpY2Npbw",
+	    	url:"/ASDEWeather/api/auth/user/login", 
+	    	contentType:"application/json",
+	    	dataType:"json",
+	    	//data:JSON.stringify(dataToSend),
+	    	beforeSend: function (xhr) {
+	    	    xhr.setRequestHeader ("Authorization", "Basic " + btoa($scope.data.email + ":" + $scope.data.password));
+	    	},
 	    	success:function(response,status){
 	    		
 	    		if(response.status=="OK"){
@@ -115,18 +121,21 @@ App.controller("UserController", ['$scope', function($scope){
 		console.log(input.name +'='+selected.name );
 		$scope.status=1
 		//$scope.data.id = input.id;
-		$scope.data.name = input.username;
-		$scope.data.lastname = input.lastname;
-		$scope.data.email = input.email;
-		$scope.data.password = input.password;
-		$scope.preferedCities = input.preferedCities;
+		$scope.data.name = input.user.username;
+		$scope.data.lastname = input.user.lastname;
+		$scope.data.email = input.user.email;
+		$scope.data.password = input.user.password;
+		$scope.preferedCities = input.user.preferedCities;
 		if(type != 'logout'){
 			$scope.$apply();
 		}else{
 
 			$scope.status = 0;
 		}
+		//$scope.setWeatherForcastData(preferedCities);
+		//console.log($scope.preferedCities);
 		console.log(input.name +'='+selected.name );
 	}
+	
 	
 }]);
