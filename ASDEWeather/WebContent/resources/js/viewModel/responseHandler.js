@@ -1,12 +1,7 @@
 /**
  * 
  */
-
-responseHandler =  function(data){
-	
-	console.log("hi abel");
-	console.log(data);
+App.service('locationService',function(){
 	
 	
-		
-}
+})

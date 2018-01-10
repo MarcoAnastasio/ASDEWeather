@@ -1,7 +1,7 @@
 /**
  * 
  */
-App.controller("WeatherController",['$scope', function($scope){
+App.controller("WeatherController", function($rootScope, $scope){
 	
 
 	$scope.query = {city:""};
@@ -12,31 +12,37 @@ App.controller("WeatherController",['$scope', function($scope){
 	
 	$scope.search = function search(){}
 	
-	$scope.loadSelectedCity = function loadSelectedCity(){
-		
+	$rootScope.loadSelectedCity = function loadSelectedCity(){
+		dataToSend = {
+	    		'latitude':"",
+	    		'longtidue':""
+	    		 		};
 		$.ajax({
 	    	type:'POST',
-	    	url:"/ASDEWeather/weather", 
+	    	url:"/ASDEWeather/api/weather/indexRequest", 
 	    	dataType:"json",
+	    	contentType:"application/json",
+	    	data:JSON.stringify(dataToSend),
 	    	success:function(response,status){
 	    		//console.log(res.status);
-	    		var res = JSON.parse(response);
-	    		if(res.status=="done"){
+	    		if(response.status=="OK"){
 
 	    			console.log("Weather Response");
-	    			console.log(res.data);
+	    			console.log(response.response);
 	    			
-	    			$scope.setData(res.data);
+	    			$scope.setWeatherData(response.response.randomCitiesWeather);
+	    			//console.log($scope.weatherData)
+	    			//$scope.setData(response.response);
 	    			//$scope.displayWeatherGraph();
-	    			$scope.loadOneCity();
-	    			//$scope.loadOneCity();
-	    			
 	    		}
 	    		else{
 	    			console.log("Weather Responce Error");
-	    			console.log(res);
+	    			console.log(response);
 	    		}
-	    	}	    	
+	    	},	
+	    	error:function(e){
+					console.log(e);
+		}
 	    });
 		
 	}// end of loadSelctedcity
@@ -60,7 +66,7 @@ App.controller("WeatherController",['$scope', function($scope){
 	    		if(response.status=="OK"){
 
 	    			console.log("Weather One City  Response");
-	    			console.log(response.response);
+	    			console.log(response);
 	    			
 	    		}
 	    		else{
@@ -71,7 +77,6 @@ App.controller("WeatherController",['$scope', function($scope){
 	    });
 		
 	}// end of load One City 
-	
 	$scope.setData = function(input){
 		for(var i=0; i< input.length; i++ ){
 						$scope.weatherData.push({id:input[i]["city"]["id"],
@@ -95,6 +100,28 @@ App.controller("WeatherController",['$scope', function($scope){
 	
 	}// end of setData function
 	
+	// setWeatherData
+	$scope.setWeatherData = function(input){
+		console.log("setWeatherData")
+		console.log(input);
+		for(var i=0; i<input.length; i++){
+			$scope.weatherData.push({
+					id:input[i]["city"]["id"],
+					name:input[i]["city"]["name"],
+					dataAndTime:input[i]["city"]["name"],
+					temp:input[i]["mainTemperature"]["temp"],
+					minTemp:input[i]["mainTemperature"]["tempMin"],
+					maxTemp:input[i]["mainTemperature"]["tempMax"],
+					humidity:input[i]["mainTemperature"]["humidity"],
+					pressure:input[i]["mainTemperature"]["pressure"],
+					description:input[i]["weather"]["descritpion"],
+					icon:'http://openweathermap.org/img/w/'+input[i]["weather"]["icon"]+'.png',
+			});
+			$scope.$apply();
+		}
+		console.log($scope.weatherData)
+		
+	}// end of setWeatherData
 	$scope.setWeatherForcastData= function(input){
 		console.log("in forcast");
 		console.log(input);
@@ -117,6 +144,7 @@ App.controller("WeatherController",['$scope', function($scope){
 	$scope.displayWeatherDetail = function(cityName){
 		console.log("----"+$scope.weatherData[0])
 		$scope.cityName = cityName;
+		
 		
 		///alert("Dispay Weather detail")
 		$("#portfolioModal1").modal()
@@ -146,6 +174,13 @@ App.controller("WeatherController",['$scope', function($scope){
 	}
 	
 	// end of getCcurrent location
+	
+	$rootScope.getPreferedCities = function(data){
+		console.log("Call from user controller")
+		console.log(data);
+		$scope.setWeatherData(data);
+		$scope.$apply();
+	}
 	$scope.displayWeatherGraph = function(){
 		var chartColors = {
 				  red: 'rgb(255, 99, 132)',
@@ -209,4 +244,4 @@ App.controller("WeatherController",['$scope', function($scope){
 			
 		});
 	}
-}]);
+});

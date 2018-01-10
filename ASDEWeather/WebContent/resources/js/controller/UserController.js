@@ -1,5 +1,4 @@
-App.controller("UserController", ['$scope', function($scope){
-	
+App.controller("UserController", function($rootScope, $scope){	
 	$scope.status = 0;
 	$scope.regError = false;
 	$scope.preferedCities =[];
@@ -125,17 +124,19 @@ App.controller("UserController", ['$scope', function($scope){
 		$scope.data.lastname = input.user.lastname;
 		$scope.data.email = input.user.email;
 		$scope.data.password = input.user.password;
-		$scope.preferedCities = input.user.preferedCities;
+		$scope.preferedCities = input.currentWeatherForPreferedCities;
 		if(type != 'logout'){
 			$scope.$apply();
 		}else{
 
 			$scope.status = 0;
+			$scope.loadSelectedCity();
 		}
-		//$scope.setWeatherForcastData(preferedCities);
+		$cookieStore.put('myCiteis',$scope.preferedCities);
+		$scope.getPreferedCities($scope.preferedCities);
 		//console.log($scope.preferedCities);
 		console.log(input.name +'='+selected.name );
 	}
 	
 	
-}]);
+});
