@@ -35,16 +35,23 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import it.unical.asde.weather.core.UserService;
+import it.unical.asde.weather.core.services.GeneralService;
+import it.unical.asde.weather.core.services.WeatherDataProvider;
 import it.unical.asde.weather.dao.OldStaticCityDao;
+import it.unical.asde.weather.model.bean.comunication.request.RequestGeolocation;
+import it.unical.asde.weather.model.bean.comunication.request.RequestSingleCity;
 import it.unical.asde.weather.model.bean.user.User;
 import it.unical.asde.weather.core.utilities.JsonReader;
 
 
 @Controller
-public class IndexController {
+public class IndexController extends GenericController{
 
 	@Autowired
 	private OldStaticCityDao cityDao;
+	
+	@Autowired
+	private GeneralService generalService;
 
 	
 	@RequestMapping("/")
@@ -57,6 +64,28 @@ public class IndexController {
 		return "index";
 	}
 	
+	
+	/**
+	 * this method is call as soon as possible when index age is loaded, 
+	 * and pass the current latitude and longitude, it will return a list of 
+	 * current weather from random cities and the current weather of the user location
+	 * 
+	 * @param request
+	 * @return
+	 */
+    @RequestMapping(value = "/api/weather/indexRequest", method = RequestMethod.POST,consumes="application/json")
+	public @ResponseBody Object getForecastWeatherByCity(@RequestBody RequestGeolocation request) {
+
+    	
+    	try{
+			return fillCorrectGenericResponse(request, generalService.getIndexInfo(request));
+		}catch (Exception e) {
+			return fillWrongGenericResponse(e, request);
+		}
+	}
+	
+	
+	//TODO test rest
 	@RequestMapping("/weather")
 	public ResponseEntity<String> weather() {
 		System.out.println("IN weather mapping");

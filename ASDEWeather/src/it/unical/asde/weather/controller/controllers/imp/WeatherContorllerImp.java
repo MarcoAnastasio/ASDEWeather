@@ -1,5 +1,7 @@
 package it.unical.asde.weather.controller.controllers.imp;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import it.unical.asde.weather.controller.controllers.GenericController;
 import it.unical.asde.weather.controller.controllers.WeatherContorller;
 import it.unical.asde.weather.core.services.WeatherDataProvider;
+import it.unical.asde.weather.model.bean.comunication.request.RequestGeolocation;
 import it.unical.asde.weather.model.bean.comunication.request.RequestListCities;
 import it.unical.asde.weather.model.bean.comunication.request.RequestSingleCity;
 
@@ -24,7 +27,10 @@ public class WeatherContorllerImp extends GenericController implements WeatherCo
 	
 	@Override
     @RequestMapping(value = "/api/weather/currentWeatherByCity", method = RequestMethod.POST,consumes="application/json")
-	public @ResponseBody Object getCurrentWeatherByCity(@RequestBody RequestSingleCity request) {
+	public @ResponseBody Object getCurrentWeatherByCity(@RequestBody RequestSingleCity request,HttpServletRequest httpRequest) {
+		
+		System.out.println(httpRequest.getRemoteAddr());
+		
 		try{
 			return fillCorrectGenericResponse(request, weatherDataProvider.getCurrentWeatherByCity(request));
 		}catch (Exception e) {
@@ -48,6 +54,16 @@ public class WeatherContorllerImp extends GenericController implements WeatherCo
 		try{
 			System.out.println("In forcast");
 			return fillCorrectGenericResponse(request, weatherDataProvider.getForecastWeatherByCity(request));
+		}catch (Exception e) {
+			return fillWrongGenericResponse(e, request);
+		}
+	}
+
+	@Override
+    @RequestMapping(value = "/api/weather/currentWeatherByCoords", method = RequestMethod.POST,consumes="application/json")
+	public @ResponseBody Object  getCurrentWeatherByCoords(@RequestBody RequestGeolocation request) {
+		try{
+			return fillCorrectGenericResponse(request, weatherDataProvider.getCurrentWeatherByCoords(request));
 		}catch (Exception e) {
 			return fillWrongGenericResponse(e, request);
 		}

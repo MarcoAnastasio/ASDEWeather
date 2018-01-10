@@ -17,5 +17,7 @@ public interface WeatherDataRemoteRequestExecutor {
 	
 	public APICurrentResponse getCurrentWeatherForCityListFromAPI(List<City> cities) throws ASDECustomException;
 
+	public APICurrentResponse getCurrentWeatherForCoordsFromAPI(Double latitude,Double longitude) throws ASDECustomException;
+
 	
 }
