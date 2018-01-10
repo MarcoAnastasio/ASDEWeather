@@ -17,4 +17,5 @@ public interface CityDao extends GenericDao<City>{
 
 	List<City> findCitiesByName(String[] cityNameList);
 	
+	List<City> findCityByNameSubstring(String searchKeyword);
 }

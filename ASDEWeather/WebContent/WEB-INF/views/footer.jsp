@@ -13,4 +13,6 @@
 			</div>
 		</div>
 	</div>
-	</footer>
+	<!-- it's an empty div for google API -->
+	<div id="hidden-map"></div>
+</footer>

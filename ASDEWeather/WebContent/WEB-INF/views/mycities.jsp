@@ -27,29 +27,6 @@
 				</div>
 
 
-
-
-				<!--  -->
-				<!-- <a class="portfolio-link" href="" ng-click="displayWeatherDetail(w.name)" >
-					<div class="">
-						<div class="portfolio-hover-content">
-							<i class="fa fa-plus fa-3x" style="color: #22222"></i>
-						</div>
-						<div>
-							Maxumum Temprature:{{w.maxTemp}}<br /> Minimuma
-							Temparature:{{w.minTemp}}<br /> Humidity:{{w.humidity}}<br />
-						</div>
-					</div> <img class="img-fluid" src="https://source.unsplash.com/"
-					+{{w.name}}+",weather" alt="">
-				</a>
-				<div class="portfolio-caption">
-					<button class="btn btn-primary" ng-click="displayWeatherDetail(w.name)">Detai</button>
-					<h4>{{w.name}}</h4>
-					<p class="text-muted">{{w.id}}</p> -->
-				</div>
-			</div>
-
-
 		</div>
 	</div>
 	</section>
