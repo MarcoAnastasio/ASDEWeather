@@ -2,6 +2,7 @@ package it.unical.asde.weather.core.services;
 
 import java.util.List;
 
+import it.unical.asde.weather.model.bean.comunication.request.RequestGeolocation;
 import it.unical.asde.weather.model.bean.comunication.request.RequestListCities;
 import it.unical.asde.weather.model.bean.comunication.request.RequestSingleCity;
 import it.unical.asde.weather.model.bean.geographical.City;
@@ -20,5 +21,7 @@ public interface WeatherDataProvider {
 	public APICurrentResponse getCurrentWeatherByCities(List<City> cities) throws ASDECustomException;
 
 	public APICurrentResponse getCurrentWeatherByCoords(Double latitude, Double longitude) throws ASDECustomException;
-	
+
+	public APICurrentResponse getCurrentWeatherByCoords(RequestGeolocation request) throws ASDECustomException;
+		
 }

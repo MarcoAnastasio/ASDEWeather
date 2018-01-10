@@ -16,6 +16,7 @@ import it.unical.asde.weather.core.external.opneweatherapi.request.WeatherDataRe
 import it.unical.asde.weather.dao.geographical.CityDao;
 import it.unical.asde.weather.dao.weather.WeatherDataDAO;
 import it.unical.asde.weather.dao.weather.WeatherForecastDataDAO;
+import it.unical.asde.weather.model.bean.comunication.request.RequestGeolocation;
 import it.unical.asde.weather.model.bean.comunication.request.RequestListCities;
 import it.unical.asde.weather.model.bean.comunication.request.RequestSingleCity;
 import it.unical.asde.weather.model.bean.comunication.response.GenericResponse.ErrorCode;
@@ -166,6 +167,19 @@ public class WeatherDataProviderImp implements WeatherDataProvider{
 	}
 	
 	
+	//no transactional, no interaction Whit DB....
+	@Override
+	public APICurrentResponse getCurrentWeatherByCoords(RequestGeolocation request) throws ASDECustomException {
+
+		if(request==null || request.getLatitude()==null || request.getLongitude()==null){
+			throw new ASDECustomException(null, ErrorCode.WRONG_INPUT, null);
+		}
+			
+		return this.getCurrentWeatherByCoords(request.getLatitude(),request.getLongitude());
+
+	}
+	
+	
 
 	private APICurrentResponse getCurrentWeatherByCitiesList(List<City> cities) throws ASDECustomException{
 		//1 check list of cities exists into DB
@@ -256,5 +270,7 @@ public class WeatherDataProviderImp implements WeatherDataProvider{
 		}
 		return returnList;
 	}
+
+
 	
 }
