@@ -2,7 +2,8 @@
  * 
  * 
  */
-preferedCities =  function(data){
-	console.log("")
+App.service("PreferedCities",function(){
 	
-}
+	
+	
+})

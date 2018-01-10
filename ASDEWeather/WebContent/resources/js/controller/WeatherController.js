@@ -1,8 +1,9 @@
 /**
  * 
  */
-App.controller("WeatherController", function WeatherController($scope){
-		
+App.controller("WeatherController",['$scope', function($scope){
+	
+
 	$scope.query = {city:""};
 	
 	$scope.weatherData = [];
@@ -12,6 +13,7 @@ App.controller("WeatherController", function WeatherController($scope){
 	$scope.search = function search(){}
 	
 	$scope.loadSelectedCity = function loadSelectedCity(){
+		
 		$.ajax({
 	    	type:'POST',
 	    	url:"/ASDEWeather/weather", 
@@ -94,7 +96,8 @@ App.controller("WeatherController", function WeatherController($scope){
 	}// end of setData function
 	
 	$scope.setWeatherForcastData= function(input){
-		
+		console.log("in forcast");
+		console.log(input);
 		/*for(vari=0; i<input.length; i++){
 			$scope.weatherForcastData.push ({
 							id:input[i]["city"]["id"],
@@ -206,4 +209,4 @@ App.controller("WeatherController", function WeatherController($scope){
 			
 		});
 	}
-});
+}]);
