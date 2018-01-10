@@ -49,31 +49,24 @@
 					</div>
 					<br /> 
 						
-						<label>Name:</label><input ng-model="user.firstname" type="text"
+						<label>Name:</label><input ng-bind="user.firstname" type="text"
 						class="form-control" id="reg-name" name="reg-n-name"
 						placeholder="Name" required> <label>Last Name:</label><input
-						ng-model="user.lastname" type="text" class="form-control"
+						ng-bind="user.lastname" type="text" class="form-control"
 						id="reg-lastname" name="reg-n-lastname" placeholder="Last Name"
 						required>
-						<label>Username:</label><input ng-model="user.username" type="text"
+						<label>Username:</label><input ng-bind="user.username" type="text"
 						class="form-control" id="reg-username" name="reg-n-username"
 						placeholder="Username" required>
 						 <label>Email:</label><input
-						ng-model="user.email" type="email" class="form-control"
+						ng-bind="user.email" type="email" class="form-control"
 						id="reg-email" name="reg-n-email"
 						placeholder="username@domain.com" required> <label>Password:</label><input
-						ng-model="user.password" type="password" class="form-control"
+						ng-bind="user.password" type="password" class="form-control"
 						id="reg-password" name="reg-n-password" placeholder="********"
 						required> <label>Re-Password:</label><input
 						type="password" class="form-control" id="reg-re-password"
 						name="reg-n-re-password" placeholder="********" required>
-					<label>Country:</label> <select class="form-control"
-						ng-model="user.country" id="reg-country" name="reg-n-country"></select>
-
-					<label>City:</label><input ng-model="user.city" type="text"
-						class="form-control" id="reg-city" name="reg-n-city"
-						placeholder="City" required>
-
 
 				</div>
 				<div class="modal-footer">
