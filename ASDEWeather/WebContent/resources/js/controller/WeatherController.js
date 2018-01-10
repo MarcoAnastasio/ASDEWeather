@@ -1,7 +1,7 @@
 /**
  * 
  */
-App.controller("WeatherController",['$scope', function($scope){
+App.controller("WeatherController", function($rootScope, $scope){
 	
 
 	$scope.query = {city:""};
@@ -12,7 +12,7 @@ App.controller("WeatherController",['$scope', function($scope){
 	
 	$scope.search = function search(){}
 	
-	$scope.loadSelectedCity = function loadSelectedCity(){
+	$rootScope.loadSelectedCity = function loadSelectedCity(){
 		dataToSend = {
 	    		'latitude':"",
 	    		'longtidue':""
@@ -103,7 +103,7 @@ App.controller("WeatherController",['$scope', function($scope){
 	// setWeatherData
 	$scope.setWeatherData = function(input){
 		console.log("setWeatherData")
-		console.log(input[0]["mainTemperature"]["temp"])
+		console.log(input);
 		for(var i=0; i<input.length; i++){
 			$scope.weatherData.push({
 					id:input[i]["city"]["id"],
@@ -145,6 +145,7 @@ App.controller("WeatherController",['$scope', function($scope){
 		console.log("----"+$scope.weatherData[0])
 		$scope.cityName = cityName;
 		
+		
 		///alert("Dispay Weather detail")
 		$("#portfolioModal1").modal()
 		
@@ -173,6 +174,13 @@ App.controller("WeatherController",['$scope', function($scope){
 	}
 	
 	// end of getCcurrent location
+	
+	$rootScope.getPreferedCities = function(data){
+		console.log("Call from user controller")
+		console.log(data);
+		$scope.setWeatherData(data);
+		$scope.$apply();
+	}
 	$scope.displayWeatherGraph = function(){
 		var chartColors = {
 				  red: 'rgb(255, 99, 132)',
@@ -236,4 +244,4 @@ App.controller("WeatherController",['$scope', function($scope){
 			
 		});
 	}
-}]);
+});

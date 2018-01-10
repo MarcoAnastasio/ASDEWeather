@@ -9,6 +9,7 @@
 			</div>
 		</div>
 		<div class="row">
+			<div ng-if="status==1">user logged in</div>
 			<div ng-repeat="w in weatherData track by $index"
 				class="col-md-4 col-sm-6 portfolio-item">
 				<!--  -->
