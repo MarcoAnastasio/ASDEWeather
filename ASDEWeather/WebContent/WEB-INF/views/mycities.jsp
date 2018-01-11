@@ -9,10 +9,10 @@
 			</div>
 		</div>
 		<div class="row">
-			
+
+			<!-- 
 			<div ng-repeat="w in weatherData track by $index"
 				class="col-md-4 col-sm-6 portfolio-item">
-				<!--  -->
 
 				<div class="card">
 					<div class="card-header deep-orange lighten-1 white-text" >
@@ -25,8 +25,39 @@
 						<a class="btn btn-primary" ng-click="WeatherForcast(w.name)">Detail</a>
 					</div>
 				</div>
+			-->
 
+
+			<div ng-repeat="w in weatherData track by $index"
+				ng-click="displayWeatherDetail(w.name)"
+				class="col-md-4 col-sm-6 portfolio-item ">
+				<div class="card portfolio-link ">
+					<a class="portfolio-link" data-toggle="modal"
+						href="#portfolioModal6">
+						<div class="portfolio-hover">
+							<div class="portfolio-hover-content">
+								<i class="fa fa-plus fa-3x"></i>
+							</div>
+						</div> <img class="img-fluid"
+						src="resources/img/portfolio/06-thumbnail.jpg" alt="City image">
+					</a>
+					<div class="card-body">
+						<h3 class="card-title">{{w.name}}</h3>
+						<p class="card-text ">
+							{{w.description}} <span><img src="{{w.icon}}" /></span>
+						</p>
+
+						<p class="card-text text-muted">
+							Maxumum Temprature: {{w.temp}} &deg C <br> Minimum
+							Temprature: {{w.minTemp}} &deg C <br> Humidity:
+							{{w.humidity}} &deg C
+						</p>
+
+					</div>
+
+				</div>
+			</div>
 
 		</div>
 	</div>
-	</section>
+</section>
