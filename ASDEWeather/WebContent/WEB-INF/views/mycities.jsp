@@ -38,16 +38,16 @@
 							<div class="portfolio-hover-content">
 								<i class="fa fa-plus fa-3x"></i>
 							</div>
-						</div> <img class="img-fluid"
+						</div> <img class="img-fluid" id="img-{{w.name}}"
 						src="resources/img/portfolio/06-thumbnail.jpg" alt="City image">
 					</a>
 					<div class="card-body">
-						<h3 class="card-title">{{w.name}}</h3>
-						<p class="card-text ">
+						<h3 class="card-title" >{{w.name}}</h3>
+						<p class="card-text "> 
 							{{w.description}} <span><img src="{{w.icon}}" /></span>
 						</p>
 
-						<p class="card-text text-muted">
+						<p class="cardtext text-muted">
 							Maxumum Temprature: {{w.temp}} &deg C <br> Minimum
 							Temprature: {{w.minTemp}} &deg C <br> Humidity:
 							{{w.humidity}} &deg C
