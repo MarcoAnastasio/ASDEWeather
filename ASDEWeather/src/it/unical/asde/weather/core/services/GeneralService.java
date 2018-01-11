@@ -9,7 +9,9 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 import it.unical.asde.weather.dao.geographical.CityDao;
+import it.unical.asde.weather.model.bean.comunication.request.RequestCityNameSubstring;
 import it.unical.asde.weather.model.bean.comunication.request.RequestGeolocation;
+import it.unical.asde.weather.model.bean.comunication.response.GenericResponse.ErrorCode;
 import it.unical.asde.weather.model.bean.comunication.response.IndexResponseDTO;
 import it.unical.asde.weather.model.bean.geographical.City;
 import it.unical.asde.weather.model.exception.ASDECustomException;
@@ -66,8 +68,14 @@ public class GeneralService {
 		return response;
 	}
 
-	
-	
+	@Transactional(readOnly=true)
+	public List<City>  getCityByNameSubstring(RequestCityNameSubstring request) throws ASDECustomException{
+
+		if(request==null || request.getSubName()==null || request.getSubName().isEmpty()){
+			throw new ASDECustomException(null, ErrorCode.WRONG_INPUT, null);
+		}
+		return cityDao.findCityByNameSubstring(request.getSubName());
+	}
 	
 	
 	private List<City> getRandomCitiesFromList(){

@@ -58,11 +58,8 @@
 	<%@include file="othercities.jsp"%>
 
 
-
-	<!-- About -->
-
-	<!-- Team -->
-	<%@include file="team.jsp"%>
+	<!-- Guide -->
+	<%@include file="guide.jsp"%>
 
 	<!-- Contact -->
 	<%@include file="contact.jsp"%>
@@ -103,6 +100,11 @@
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
 		integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
 		crossorigin="anonymous"></script>
+
+	<!-- Google API -->
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBr_onlsVMtLd-hHtEm_Os2-DZCtmgKc4Y&libraries=places"></script>
+  	<script src="resources/js/imageAPI.js" type="application/javascript"></script>
+  
 
 	<!-- Custom scripts for this template -->
 	<script src="resources/js/agency.min.js" type="application/javascript"></script>
