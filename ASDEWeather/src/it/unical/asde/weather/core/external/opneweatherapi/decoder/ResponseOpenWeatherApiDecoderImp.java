@@ -13,12 +13,13 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
 
+import it.unical.asde.weather.model.bean.data.extra.UVData;
+import it.unical.asde.weather.model.bean.data.weather.MainTemperature;
+import it.unical.asde.weather.model.bean.data.weather.Weather;
+import it.unical.asde.weather.model.bean.data.weather.WeatherData;
+import it.unical.asde.weather.model.bean.data.weather.WeatherForecastData;
+import it.unical.asde.weather.model.bean.data.weather.Wind;
 import it.unical.asde.weather.model.bean.geographical.City;
-import it.unical.asde.weather.model.bean.weather.MainTemperature;
-import it.unical.asde.weather.model.bean.weather.Weather;
-import it.unical.asde.weather.model.bean.weather.WeatherData;
-import it.unical.asde.weather.model.bean.weather.WeatherForecastData;
-import it.unical.asde.weather.model.bean.weather.Wind;
 import it.unical.asde.weather.model.openweatherapi.response.APICurrentResponse;
 import it.unical.asde.weather.model.openweatherapi.response.APIForecastResponse;
 
@@ -26,6 +27,7 @@ import it.unical.asde.weather.model.openweatherapi.response.APIForecastResponse;
 public class ResponseOpenWeatherApiDecoderImp implements ResponseOpenWeatherApiDecoder {
 
 	private static final DateFormat forecastDateTimeCalulationFormatter  = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	private static final DateFormat DAY_DATE_FORMATTER  = new SimpleDateFormat("yyyy-MM-dd");
 
 	@Override
 	public APIForecastResponse decodeForecastWeatherResponse(JSONObject responseObject,City requestCity) {
@@ -81,6 +83,31 @@ public class ResponseOpenWeatherApiDecoderImp implements ResponseOpenWeatherApiD
 		response.setListForecastWeather(currentListWeather);
 		return response;
 	}
+	
+	@Override
+	public Object decodeCurrentPollutionResponse(JSONObject response) {
+		
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+	@Override
+	public UVData decodeCurrentUVResponse(JSONObject jsonObject) {
+		
+		//{"lat":39.30999,"lon":16.250191,"date_iso":"2018-01-11T12:00:00Z","date":1515672000,"value":1.52}
+		if(jsonObject==null){
+			return null;
+		}
+		UVData data=new UVData();
+		
+		data.setDateCalulation(extractDayFromString((String)jsonObject.get("date_iso")));
+		data.setStoreTime(new Date());
+		data.setValue(castNumericValueToFloat(jsonObject.get("value")));
+				
+		return data;
+	}
+	
 	
 	
 	//TODO check how handle the city: now we just get it from the response, 
@@ -195,6 +222,18 @@ public class ResponseOpenWeatherApiDecoderImp implements ResponseOpenWeatherApiD
 		return null;
 	}
 	
+	private Date extractDayFromString(String inputSttring){
+		
+		String substring = inputSttring.substring(0, 10);
+		try {
+			return DAY_DATE_FORMATTER.parse(substring);
+		} catch (ParseException e) {
+			return null;
+		}
+		
+	}
+	
+	
 	private Date decodeDateTime(Long utcDateTime){
 		if(utcDateTime==null){
 			return null;
@@ -221,6 +260,8 @@ public class ResponseOpenWeatherApiDecoderImp implements ResponseOpenWeatherApiD
 		}
 
 	}
+
+
 
 
 }

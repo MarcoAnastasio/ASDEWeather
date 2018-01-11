@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import it.unical.asde.weather.controller.controllers.GenericController;
 import it.unical.asde.weather.controller.controllers.WeatherContorller;
-import it.unical.asde.weather.core.services.WeatherDataProvider;
+import it.unical.asde.weather.core.services.dataprovider.WeatherDataProvider;
 import it.unical.asde.weather.model.bean.comunication.request.RequestGeolocation;
 import it.unical.asde.weather.model.bean.comunication.request.RequestListCities;
 import it.unical.asde.weather.model.bean.comunication.request.RequestSingleCity;

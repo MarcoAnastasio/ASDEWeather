@@ -23,12 +23,12 @@ import it.unical.asde.weather.dao.geographical.CityDao;
 import it.unical.asde.weather.dao.geographical.CountryDao;
 import it.unical.asde.weather.model.bean.comunication.request.RequestSingleCity;
 import it.unical.asde.weather.model.bean.comunication.request.RequestListCities;
+import it.unical.asde.weather.model.bean.data.weather.WeatherData;
+import it.unical.asde.weather.model.bean.data.weather.WeatherForecastData;
 import it.unical.asde.weather.model.bean.geographical.City;
 import it.unical.asde.weather.model.bean.geographical.Country;
 import it.unical.asde.weather.model.bean.user.User;
 import it.unical.asde.weather.model.bean.user.UserDetailsImp;
-import it.unical.asde.weather.model.bean.weather.WeatherData;
-import it.unical.asde.weather.model.bean.weather.WeatherForecastData;
 import it.unical.asde.weather.model.openweatherapi.response.APICurrentResponse;
 import it.unical.asde.weather.model.openweatherapi.response.APIForecastResponse;
 

@@ -1,4 +1,4 @@
-package it.unical.asde.weather.dao.weather;
+package it.unical.asde.weather.dao.data.weather;
 
 import java.util.Date;
 import java.util.List;
@@ -9,8 +9,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import it.unical.asde.weather.dao.AbstarctGenericDAO;
-import it.unical.asde.weather.model.bean.weather.WeatherData;
-import it.unical.asde.weather.model.bean.weather.WeatherForecastData;
+import it.unical.asde.weather.model.bean.data.weather.WeatherData;
+import it.unical.asde.weather.model.bean.data.weather.WeatherForecastData;
 
 @Service
 public class WeatherForecastDataDAOImp extends AbstarctGenericDAO<WeatherForecastData> 
