@@ -1,7 +1,7 @@
 /**
  * This is the main 
  */
-var App = angular.module('myApp',[]);
+var App = angular.module('myApp',['ngStorage']);
 
 angular.module('cookieStoreExample', ['ngCookies'])
 .controller('UserController', ['$cookieStore', function($rootScope,$cookieStore) {

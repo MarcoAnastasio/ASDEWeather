@@ -37,7 +37,7 @@
 				role="button" data-toggle="dropdown" aria-haspopup="true"
 				aria-expanded="false"> <i class="fa fa-user-circle"  style="font-size:24px"></i> </a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item">Hi {{data.name}},</a>
+					<a class="dropdown-item">Hi {{$storage.userData.username}},</a>
 					<a class="dropdown-item" href="#" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg"">Settings</a> <a
 						class="dropdown-item" href="#">Edit Profile</a>
 					<div class="dropdown-divider"></div>
@@ -54,24 +54,24 @@
 			
 		</div>
 
-		<div ng-show="status==0" id="user-top-bar"
+		<div ng-show="$storage.status == 0" id="user-top-bar"
 			class="hidden-sm visible-md">
-			<form ng-submit="login(user)">
+			<form ng-submit="login(userInfo)">
 				  <div class="form-row">
 				    <div class="col">
-				      <input type="text" ng-bind="user.username" class="form-control form-control-sm" placeholder="First name" required>
+				      <input type="text" ng-model="userInfo.username" class="form-control form-control-sm" placeholder="Username" required>
 				    </div>
 				    <div class="col">
-				      <input type="password" ng-bind="user.password" class="form-control form-control-sm"  placeholder="*******" required>
+				      <input type="password" ng-model="userInfo.password" class="form-control form-control-sm"  placeholder="*******" required>
 				    </div>
 				    <div class="col">
-				    	<button
+				    	<button type="submit"
 				class="btn btn-primary btn-sm d-none d-sm-none d-md-inline d-lg-inline"
 				id="login-top">
 				Log In</button>
 				    </div>
 				    <div class="col">
-				    <button type="submit"
+				    <button 
 				class="btn btn-primary btn-sm  d-none d-sm-none d-md-inline d-lg-inline"
 				id="register-top">Register</button>
 				    </div>
