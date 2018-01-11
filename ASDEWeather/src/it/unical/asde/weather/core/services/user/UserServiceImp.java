@@ -107,7 +107,7 @@ public class UserServiceImp implements UserService{
 	
 	
 	@Override
-	@Transactional(readOnly=true)
+	@Transactional
 	public LoginResponseDTO login(User currentUser) {
 		LoginResponseDTO returnObject=new LoginResponseDTO();
 		//1) ask system for retrive also prefered cities of user
