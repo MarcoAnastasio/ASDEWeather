@@ -29,7 +29,7 @@
 <link
 	href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700'
 	rel='stylesheet' type='text/css'>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- Custom styles for this template -->
 <link href="resources/css/agency.min.css" rel="stylesheet">
 
@@ -39,6 +39,7 @@
 <script src="resources/js/app.js"></script>
 <script src="resources/js/controller/UserController.js"></script>
 <script src="resources/js/controller/WeatherController.js"></script>
+<script src="resources/js/controller/ForcastController.js"></script>
 <script src="resources/js/viewModel/responseHandler.js"></script>
 </head>
 <body id="page-top" ng-app="myApp" ng-controller="UserController" ng-cloak>
@@ -77,6 +78,10 @@
 	<!--  Modal login  -->
 
 	<%@include file="user_modal.jsp"%>
+	
+	<!--  Modal login  -->
+
+	<%@include file="settings.jsp"%>
 
 
 	<!--  JQeury UI -->

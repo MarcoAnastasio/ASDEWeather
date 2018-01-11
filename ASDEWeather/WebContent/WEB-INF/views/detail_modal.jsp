@@ -1,5 +1,5 @@
 <div class="portfolio-modal modal fade" id="portfolioModal1"
-		tabindex="-1" role="dialog" aria-hidden="true" ng-controller="WeatherController">
+		tabindex="-1" role="dialog" aria-hidden="true" ng-controller="ForcastController">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="close-modal" data-dismiss="modal">
@@ -18,15 +18,7 @@
 								<img class="img-fluid d-block mx-auto"
 									src="resources/img/portfolio/01-full.jpg" alt="">
 							<div id="openweathermap-widget-11"></div>
-									<pre>
-									
-									
-									
-									
-									
-									
-									
-									</pre>
+									{{city}}
 								<ul class="list-inline">
 									<li>Date: January 2017</li>
 									<li>Client: Threads</li>

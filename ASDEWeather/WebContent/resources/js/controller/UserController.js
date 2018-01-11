@@ -36,9 +36,9 @@ App.controller("UserController", function($rootScope, $scope){
 	    		if(response.status=="OK"){
 	    			$('#myModal').modal('hide').on('hide.bs.modal',function(e){	    				
 	    			});
-	    			//console.log(response.response);
+	    			console.log(response.response);
 	    			//responseHandler(response.response);
-	    			$scope.setData(response.response);   			
+	    			$scope.setData(response.response,"login");   			
 	    			
 	    			
 	    		}
@@ -56,7 +56,7 @@ App.controller("UserController", function($rootScope, $scope){
 	$scope.logout = function logout(){
 		
 		var data = {
-				id:"", name:"", email:"",
+				id:"", name:"test_data", email:"",
 				password:"", city:"", country:""
 			};
 		$scope.setData(data, 'logout');
@@ -114,10 +114,16 @@ App.controller("UserController", function($rootScope, $scope){
 		
 		
 		var selected = $scope.data;		
-		if(type === 'register')
+		if(type == 'register')
 			selected=$scope.reg_data;
-
-		console.log(input.name +'='+selected.name );
+		else if(type == 'logout'){
+			$scope.data = input;
+			$scope.status = 0;
+			$scope.$digest();
+			$scope.loadSelectedCity();
+		}
+		else if(type =="login"){
+		//console.log(input.name +'='+selected.name );
 		$scope.status=1
 		//$scope.data.id = input.id;
 		$scope.data.name = input.user.username;
@@ -127,15 +133,14 @@ App.controller("UserController", function($rootScope, $scope){
 		$scope.preferedCities = input.currentWeatherForPreferedCities;
 		if(type != 'logout'){
 			$scope.$apply();
-		}else{
-
-			$scope.status = 0;
-			$scope.loadSelectedCity();
 		}
-		$cookieStore.put('myCiteis',$scope.preferedCities);
+		console.log($scope.preferedCities);
 		$scope.getPreferedCities($scope.preferedCities);
-		//console.log($scope.preferedCities);
-		console.log(input.name +'='+selected.name );
+		
+		}
+		else {
+			console.log("Wrong Input")
+		}
 	}
 	
 	

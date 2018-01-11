@@ -12,7 +12,8 @@ App.controller("WeatherController", function($rootScope, $scope){
 	
 	$scope.search = function search(){}
 	
-	$rootScope.loadSelectedCity = function loadSelectedCity(){
+	$rootScope.loadSelectedCity = function (){
+		console.log("load selected city");
 		dataToSend = {
 	    		'latitude':"",
 	    		'longtidue':""
@@ -57,7 +58,7 @@ App.controller("WeatherController", function($rootScope, $scope){
 		dataToSend ={cityName:$scope.currentLoation.city};
 		$.ajax({
 	    	type:'POST',
-	    	url:"/ASDEWeather/api/weather/forecastWeatherByCity", 
+	    	url:"ASDEWeather/api/weather/forecastWeatherByCity", 
 	    	contentType:"application/json",
 	    	dataType:"json",
 	    	data:JSON.stringify(dataToSend),
@@ -103,7 +104,9 @@ App.controller("WeatherController", function($rootScope, $scope){
 	// setWeatherData
 	$scope.setWeatherData = function(input){
 		console.log("setWeatherData")
-		console.log(input);
+		
+		if(input!=null){
+			console.log(input);
 		for(var i=0; i<input.length; i++){
 			$scope.weatherData.push({
 					id:input[i]["city"]["id"],
@@ -118,6 +121,7 @@ App.controller("WeatherController", function($rootScope, $scope){
 					icon:'http://openweathermap.org/img/w/'+input[i]["weather"]["icon"]+'.png',
 			});
 			$scope.$apply();
+		}
 		}
 		console.log($scope.weatherData)
 		
@@ -174,6 +178,11 @@ App.controller("WeatherController", function($rootScope, $scope){
 	}
 	
 	// end of getCcurrent location
+	
+	//
+	$scope.weatherDetail = function(city){
+		
+	}
 	
 	$rootScope.getPreferedCities = function(data){
 		console.log("Call from user controller")
