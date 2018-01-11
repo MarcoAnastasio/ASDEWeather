@@ -1,4 +1,4 @@
-package it.unical.asde.weather.model.bean.weather;
+package it.unical.asde.weather.model.bean.data.weather;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

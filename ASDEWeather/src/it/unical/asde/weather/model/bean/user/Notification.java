@@ -2,8 +2,8 @@ package it.unical.asde.weather.model.bean.user;
 
 import java.util.Date;
 
+import it.unical.asde.weather.model.bean.data.weather.Weather;
 import it.unical.asde.weather.model.bean.geographical.City;
-import it.unical.asde.weather.model.bean.weather.Weather;
 
 
 //

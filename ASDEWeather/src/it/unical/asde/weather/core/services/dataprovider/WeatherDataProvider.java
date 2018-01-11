@@ -1,4 +1,4 @@
-package it.unical.asde.weather.core.services;
+package it.unical.asde.weather.core.services.dataprovider;
 
 import java.util.List;
 

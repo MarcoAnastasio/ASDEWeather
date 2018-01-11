@@ -1,4 +1,4 @@
-package it.unical.asde.weather.core.services;
+package it.unical.asde.weather.core.services.dataprovider;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,36 +12,25 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import it.unical.asde.weather.core.external.opneweatherapi.request.WeatherDataRemoteRequestExecutor;
+import it.unical.asde.weather.core.external.opneweatherapi.request.DataRemoteRequestExecutor;
+import it.unical.asde.weather.dao.data.weather.WeatherDataDAO;
+import it.unical.asde.weather.dao.data.weather.WeatherForecastDataDAO;
 import it.unical.asde.weather.dao.geographical.CityDao;
-import it.unical.asde.weather.dao.weather.WeatherDataDAO;
-import it.unical.asde.weather.dao.weather.WeatherForecastDataDAO;
 import it.unical.asde.weather.model.bean.comunication.request.RequestGeolocation;
 import it.unical.asde.weather.model.bean.comunication.request.RequestListCities;
 import it.unical.asde.weather.model.bean.comunication.request.RequestSingleCity;
 import it.unical.asde.weather.model.bean.comunication.response.GenericResponse.ErrorCode;
 import it.unical.asde.weather.model.bean.comunication.response.GenericResponseConstant;
+import it.unical.asde.weather.model.bean.data.weather.WeatherData;
+import it.unical.asde.weather.model.bean.data.weather.WeatherForecastData;
 import it.unical.asde.weather.model.bean.geographical.City;
-import it.unical.asde.weather.model.bean.weather.WeatherData;
-import it.unical.asde.weather.model.bean.weather.WeatherForecastData;
 import it.unical.asde.weather.model.exception.ASDECustomException;
 import it.unical.asde.weather.model.openweatherapi.response.APICurrentResponse;
 import it.unical.asde.weather.model.openweatherapi.response.APIForecastResponse;
 
 @Service
-@Configuration
-@PropertySource("classpath:application.properties")
-public class WeatherDataProviderImp implements WeatherDataProvider{
+public class WeatherDataProviderImp extends AbstarctGenericProvider implements WeatherDataProvider{
 
-	//max old value stored into DB in millis 1h 
-	@Value( "${asde.weather.data_refresh_time}" )
-	private Long MAX_OLD_VALUE;
-	
-	@Autowired
-	private WeatherDataRemoteRequestExecutor weatherDataRemoteRequestExecutor;
-	
-	@Autowired
-	private CityDao cityDao;
 	@Autowired
 	private WeatherDataDAO weatherDataDao;
 	@Autowired
@@ -159,12 +148,7 @@ public class WeatherDataProviderImp implements WeatherDataProvider{
 		return this.getCurrentWeatherByCitiesList(citiesToFind);
 	}
 	
-	private boolean isRequestSingleCityValid(RequestSingleCity request){
-		if(request==null || (request.getCityId()==null && (request.getCityName()==null || request.getCityName().isEmpty()) ) ) {
-			return false;
-		}
-		return true;
-	}
+
 	
 	
 	//no transactional, no interaction Whit DB....
@@ -211,65 +195,12 @@ public class WeatherDataProviderImp implements WeatherDataProvider{
 		return currentWeatherForCityListFromAPI;
 	}
 	
-	private List<City> removeFindedCities(List<City> cities,List<WeatherData> weatherDataDB) {
-		if(weatherDataDB.isEmpty()){
-			return cities;
-		}
-		List<City> returnList=new ArrayList<City>();
-		
-		
-		for(City tempCity:cities){
-			boolean find=false;
-		
-			for(WeatherData tempWeather:weatherDataDB){
-				Long tempId=tempWeather.getCity().getId();
-				if(tempCity.getId().equals(tempId)){
-					find=true;
-					break;
-				}
-			}
+	
 
-			if(!find){
-				returnList.add(tempCity);
-			}
-		}
-		return returnList;
-	}
 
-	/**
-	 * for Single City
-	 * this method have to be call befor process request, it return the stored instance of city, 
-	 * if return null the city doee not exist so thorw exception 
-	 * @param cityId
-	 * @param cityName
-	 * @return
-	 */
-	private City existsCityIntoDB(Long cityId,String cityName){
-//		cityDao.existsCity(cityId,cityName);
-		if(cityId==null){
-			return cityDao.findCityByName(cityName);
-		}
-		if(cityName==null){
-			return cityDao.findById(cityId);
-		}
-		return cityDao.findCityByIdAndName(cityId, cityName);
-	}
 
 	
 	
-	private Date decrementDateByMillis(Long millis){
-		return new Date(
-				new Date().getTime()-millis
-				);
-	}
-	
-	private List<Long> getIdsFromListCities(List<City> cities){
-		List<Long> returnList=new ArrayList<>();
-		for(City c:cities){
-			returnList.add(c.getId());
-		}
-		return returnList;
-	}
 
 
 	
