@@ -25,9 +25,10 @@ import org.springframework.stereotype.Service;
 import it.unical.asde.weather.core.external.RestRequestExecutor;
 import it.unical.asde.weather.core.external.opneweatherapi.decoder.ResponseOpenWeatherApiDecoder;
 import it.unical.asde.weather.model.bean.comunication.response.GenericResponse.ErrorCode;
+import it.unical.asde.weather.model.bean.data.extra.UVData;
+import it.unical.asde.weather.model.bean.data.weather.WeatherData;
+import it.unical.asde.weather.model.bean.data.weather.WeatherForecastData;
 import it.unical.asde.weather.model.bean.geographical.City;
-import it.unical.asde.weather.model.bean.weather.WeatherData;
-import it.unical.asde.weather.model.bean.weather.WeatherForecastData;
 import it.unical.asde.weather.model.exception.ASDECustomException;
 import it.unical.asde.weather.model.openweatherapi.response.APICurrentResponse;
 import it.unical.asde.weather.model.openweatherapi.response.APIForecastResponse;
@@ -35,7 +36,7 @@ import it.unical.asde.weather.model.openweatherapi.response.APIForecastResponse;
 @Service
 @Configuration
 @PropertySource("classpath:weatherAPI.properties")
-public class WeatherDataRemoteRequestExecutorImp extends RestRequestExecutor implements WeatherDataRemoteRequestExecutor{
+public class DataRemoteRequestExecutorImp extends RestRequestExecutor implements DataRemoteRequestExecutor{
 
 	private static final String ADD_PARAMEETER_CITY_NAME="q=";
 	private static final String ADD_PARAMEETER_CITY_ID="id=";
@@ -55,7 +56,13 @@ public class WeatherDataRemoteRequestExecutorImp extends RestRequestExecutor imp
 	private String openCurrentWeatherEndpoint;
 
 	@Value( "${asde.weather.openweatherapi.endpoint.group}" )
-	private String openCurrentWeatherGroupEndpoint;
+	private String openCurrentWeatherGroupEndpoint;	
+	
+	@Value( "${asde.pollution.openweatherapi.endpoint.current}" )
+	private String openCurrentPollutionEndpoint;
+	
+	@Value( "${asde.uv.openweatherapi.endpoint.current}" )
+	private String openCurrentUVEndpoint;
 	
 	@Value( "${asde.weather.openweatherapi.key1}" )
 	private String key1;
@@ -196,18 +203,64 @@ public class WeatherDataRemoteRequestExecutorImp extends RestRequestExecutor imp
 			throw new ASDECustomException(null, ErrorCode.UNKNOW_ERROR, null);
 		}
 		
-		
-		
 	}
 
+	
+	@Override
+	public Object getCurrentPollutionForCoordsFromAPI(Double latitude,Double longitude) throws ASDECustomException {
+		
+		//1  prepare url String
+		String url=generateUrlFromBaseEndpointAndCoords(openCurrentPollutionEndpoint,latitude,longitude);
+
+		//2 execute request in the superclass
+		JSONObject response = super.executeRestRequestAndReturnJSONObject(url);
+		
+		//3 if response is not null (so maybe no errors occur)
+		if(response!=null){
+			return responseOpenWeatherApiDecoder.decodeCurrentPollutionResponse(response);
+		}else{
+			throw new ASDECustomException(null, ErrorCode.UNKNOW_ERROR, null);
+		}
+
+	}
+	
+	
+	@Override
+	public UVData getCurrentUVForCoordsFromAPI(Double latiude, Double longitude) throws ASDECustomException {
+		//1  prepare url String
+		String url=generateUrlFromBaseEndpointAndCoordsForUV(latiude, longitude);
+
+		//2 execute request in the superclass
+		JSONObject response = super.executeRestRequestAndReturnJSONObject(url);
+		
+		//3 if response is not null (so maybe no errors occur)
+		if(response!=null){
+			return responseOpenWeatherApiDecoder.decodeCurrentUVResponse(response);
+		}else{
+			//TODO if null consider the possibility to return just null or throw a new kind of exception handled different
+			throw new ASDECustomException(null, ErrorCode.UNKNOW_ERROR, null);
+		}
+
+	}
+	
+	
+	
 
 	private String generateUrlFromBaseEndpointAndCoords(String baseEndpoint, Double latitude,Double longitude) {
-		
-		//api.openweathermap.org/data/2.5/weather?lat=35&lon=139
 		
 		String url=baseEndpoint+ADD_PARAMEETER_COORDS_LAT+latitude+ADD_PARAMEETER_COORDS_LON+longitude
 				+ADD_PARAMEETER_UNITS_FORMAT_CELSIUS+ADD_PARAMEETER_APP_KEY+key1;
 		return url;
 	}
+
+
+	private String generateUrlFromBaseEndpointAndCoordsForUV(Double latitude,Double longitude) {
+		//http://api.openweathermap.org/data/2.5/uvi?appid=9b6b06b0162f936dd91ff6a0978b875f&lat=39.30999&lon=16.250191
+		return openCurrentUVEndpoint+"appid="+key1+"&lat="+latitude+"&lon="+longitude;
+	}
+
+
+
+
 	
 }

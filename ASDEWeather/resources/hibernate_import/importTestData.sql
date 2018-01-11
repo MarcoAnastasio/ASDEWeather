@@ -6,4 +6,4 @@ insert into User_City (User_id,preferedCities_id) values (1,2524907), (1,2523630
 insert into City (id,name,latitude,longitude, country_id) values (2022572, 'Khatanga',40.833328,14.25,(	select id from country	where code='RU')	);
 
 
-insert into User_City (User_id,preferedCities_id) values (1,2524907), (1,2022572);
+insert into User_City (User_id,preferedCities_id) values  (1,2022572);

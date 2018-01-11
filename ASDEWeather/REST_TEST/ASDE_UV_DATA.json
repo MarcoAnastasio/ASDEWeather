@@ -1,0 +1,1127 @@
+{
+  "front-version": "2.13.2",
+  "version": 3,
+  "nodes": [
+    {
+      "type": "Project",
+      "id": "8daefa45-d533-4a66-9fab-cd92e620454a",
+      "lastModified": "2018-01-11T11:35:23.872+01:00",
+      "name": "ASDE"
+    },
+    {
+      "type": "Service",
+      "id": "89ad9454-ffdf-45d9-8cc5-537e4d94108c",
+      "lastModified": "2017-12-20T17:32:29.346+01:00",
+      "name": "/api/auth tester",
+      "parentId": "8daefa45-d533-4a66-9fab-cd92e620454a"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/ASDEWeather/api/auth/testGET"
+      },
+      "id": "77018c4f-149e-4002-be16-4166e310d2ec",
+      "lastModified": "2017-12-20T17:24:26.243+01:00",
+      "name": "/api/auth/testGET KO",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "89ad9454-ffdf-45d9-8cc5-537e4d94108c"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/ASDEWeather/api/auth/testGET"
+      },
+      "id": "6ad0c382-bdd5-4a01-a88b-8cf42f056c17",
+      "lastModified": "2017-12-20T17:24:13.444+01:00",
+      "name": "/api/auth/testGET OK",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Authorization",
+          "value": "Basic Y2ljY2lvOmNpY2Npbw=="
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "89ad9454-ffdf-45d9-8cc5-537e4d94108c"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n\t\"cityId\":2524907,\n\t\"cityName\":\"Cosenza\"\n}\n"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/ASDEWeather/api/auth/testPOST"
+      },
+      "id": "149d30cf-3fec-4d61-8f3f-7dfa6a3a22ce",
+      "lastModified": "2017-12-20T17:31:04.389+01:00",
+      "name": "/api/auth/testPOST KO",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "89ad9454-ffdf-45d9-8cc5-537e4d94108c"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n\t\"cityId\":2524907,\n\t\"cityName\":\"Cosenza\"\n}\n"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/ASDEWeather/api/auth/testPOST"
+      },
+      "id": "4e171326-5807-4eae-96d9-3ade6a1ba81d",
+      "lastModified": "2017-12-20T17:31:35.191+01:00",
+      "name": "/api/auth/testPOST OK",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "enabled": true,
+          "name": "Authorization",
+          "value": "Basic Y2ljY2lvOmNpY2Npbw=="
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "89ad9454-ffdf-45d9-8cc5-537e4d94108c"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/ASDEWeather/api/testGET"
+      },
+      "id": "642b4682-d5b4-46c3-b5ef-cfa6459b651d",
+      "lastModified": "2017-12-20T16:54:11.476+01:00",
+      "name": "/api/testGET",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "89ad9454-ffdf-45d9-8cc5-537e4d94108c"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n\t\"cityId\":2524907,\n\t\"cityName\":\"Cosenza\"\n}\n"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/ASDEWeather/api/testPOST"
+      },
+      "id": "6641f26e-963a-46c0-ae8e-ce9377e3980d",
+      "lastModified": "2017-12-20T16:55:52.706+01:00",
+      "name": "/api/testPOST",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "89ad9454-ffdf-45d9-8cc5-537e4d94108c"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/ASDEWeather/api/auth/testGET"
+      },
+      "id": "88ae06ad-8fa0-4e2d-b8d2-f71c91fd487a",
+      "lastModified": "2017-12-29T10:45:37.166+01:00",
+      "name": "Copy of /api/auth/testGET2 OK",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Authorization",
+          "value": "Basic Y2ljY2lvOmNpY2Npbw=="
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "89ad9454-ffdf-45d9-8cc5-537e4d94108c"
+    },
+    {
+      "type": "Service",
+      "id": "4d8942d0-58c3-4447-a9ee-58927361ac8e",
+      "lastModified": "2018-01-11T11:33:47.991+01:00",
+      "name": "/api/extra",
+      "parentId": "8daefa45-d533-4a66-9fab-cd92e620454a"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n\t\"cityId\":2524907,\n\t\"cityName\":\"Cosenza\"\n}\n"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/ASDEWeather/api/extra/currentUVByCity"
+      },
+      "id": "053cd967-5754-48c5-bb9b-f317a2527931",
+      "lastModified": "2018-01-11T11:35:23.872+01:00",
+      "name": "/api/extra/currentUVByCity",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "4d8942d0-58c3-4447-a9ee-58927361ac8e"
+    },
+    {
+      "type": "Service",
+      "id": "1ec4c473-2035-4674-8344-6152333e3e09",
+      "lastModified": "2017-12-22T14:06:00.032+01:00",
+      "name": "DAOTest",
+      "parentId": "8daefa45-d533-4a66-9fab-cd92e620454a"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/ASDEWeather/api/testDAO"
+      },
+      "id": "0827534f-0183-432e-8c9d-17af298c6387",
+      "lastModified": "2017-12-22T14:06:33.453+01:00",
+      "name": "CountryTest",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "1ec4c473-2035-4674-8344-6152333e3e09"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/ASDEWeather/api/testDAO"
+      },
+      "id": "9018e398-b0f8-4ebc-a11b-e4da3d079fb4",
+      "lastModified": "2017-12-24T12:25:04.475+01:00",
+      "name": "CountryTest2",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "1ec4c473-2035-4674-8344-6152333e3e09"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/ASDEWeather/api/testDAO"
+      },
+      "id": "14c59814-8284-46c5-8fae-2c4a307e3706",
+      "lastModified": "2018-01-10T13:35:31.537+01:00",
+      "name": "testSearch",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "1ec4c473-2035-4674-8344-6152333e3e09"
+    },
+    {
+      "type": "Service",
+      "id": "9d193861-dc4d-4546-b841-5e5ec7d7edb6",
+      "lastModified": "2018-01-09T17:18:23.649+01:00",
+      "name": "General",
+      "parentId": "8daefa45-d533-4a66-9fab-cd92e620454a"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"subName\":\"Cose\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/ASDEWeather/api/commons/cityByNameSubstring"
+      },
+      "id": "1fa0c3d7-1d13-4658-9135-66328b7a726f",
+      "lastModified": "2018-01-10T18:08:38.570+01:00",
+      "name": "/api/commons/cityByNameSubstring",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "9d193861-dc4d-4546-b841-5e5ec7d7edb6"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"latitude\":39.27,\n  \"longitude\":16.29\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/ASDEWeather/api/weather/currentWeatherByCoords"
+      },
+      "id": "4c621a6f-4071-4d72-a899-6d9474c40158",
+      "lastModified": "2018-01-10T11:33:13.094+01:00",
+      "name": "/api/weather/currentWeatherByCoords",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "9d193861-dc4d-4546-b841-5e5ec7d7edb6"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"latitude\":39.27,\n  \"longitude\":16.29\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/ASDEWeather/api/weather/indexRequest"
+      },
+      "id": "5388655f-0201-4634-b01d-cc2832c51199",
+      "lastModified": "2018-01-09T17:25:00.741+01:00",
+      "name": "IndexRequest",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "9d193861-dc4d-4546-b841-5e5ec7d7edb6"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"latitude\":null,\n  \"longitude\":null\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/ASDEWeather/api/weather/indexRequest"
+      },
+      "id": "1f948c43-3139-47f4-be07-c006f1e54a6e",
+      "lastModified": "2018-01-09T17:21:59.268+01:00",
+      "name": "IndexRequest null coords",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "9d193861-dc4d-4546-b841-5e5ec7d7edb6"
+    },
+    {
+      "type": "Service",
+      "description": "",
+      "id": "f1eaabf4-a609-46df-a968-0ef40a97a150",
+      "lastModified": "2017-12-26T01:46:39.308+01:00",
+      "name": "USER",
+      "parentId": "8daefa45-d533-4a66-9fab-cd92e620454a"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": ""
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/ASDEWeather/testSearch"
+      },
+      "id": "f6659cce-8049-49b9-a7ce-4bbe178a66dc",
+      "lastModified": "2018-01-10T14:58:18.150+01:00",
+      "name": "/api/auth/user/getNotifications",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "f1eaabf4-a609-46df-a968-0ef40a97a150"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/ASDEWeather/api/auth/user/login"
+      },
+      "id": "cc71841a-9785-4d27-b391-2f5267c222ef",
+      "lastModified": "2018-01-02T16:29:12.914+01:00",
+      "name": "/api/auth/user/login",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Authorization",
+          "value": "Basic Y2ljY2lvOmNpY2Npbw=="
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "f1eaabf4-a609-46df-a968-0ef40a97a150"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/ASDEWeather/api/auth/user/showUser"
+      },
+      "id": "a3adf9b7-868e-451f-bfca-e70dc394e95a",
+      "lastModified": "2017-12-29T10:09:13.791+01:00",
+      "name": "/api/auth/user/showUser KO",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "f1eaabf4-a609-46df-a968-0ef40a97a150"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/ASDEWeather/api/auth/user/showUser"
+      },
+      "id": "2b9db78b-b4d0-4060-bdc5-a06ae3ed53d9",
+      "lastModified": "2017-12-29T10:08:34.138+01:00",
+      "name": "/api/auth/user/showUser OK",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Authorization",
+          "value": "Basic Y2ljY2lvOmNpY2Npbw=="
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "f1eaabf4-a609-46df-a968-0ef40a97a150"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n\"id\": 1,\n\"username\": \"ciccio\",\n\"firstName\": \"testName\",\n\"lastName\": \"testLastName\",\n\"email\": \"email@test.com\",\n\"preferedCities\":[\n    {\"id\": 6541467, \"name\": \"Cosenza\"}\n\t]\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/ASDEWeather/api/auth/user/updateUser"
+      },
+      "id": "693274f4-3816-4631-b1e5-127c174193f7",
+      "lastModified": "2017-12-29T10:59:48.764+01:00",
+      "name": "/api/auth/user/updateUser OK",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Authorization",
+          "value": "Basic Y2ljY2lvOmNpY2Npbw=="
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "f1eaabf4-a609-46df-a968-0ef40a97a150"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n\t\"username\":\"ciccio2\",\n\t\"password\":\"ciccio\",\n    \"firstName\":\"ciccioName2\",\n    \"lastName\":\"ciccioSurname2\",\n    \"email\":\"ciccio@email2.com\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/ASDEWeather/api/user/registration"
+      },
+      "id": "93b095c9-1ae6-463f-b5b0-6f2ae3436f5a",
+      "lastModified": "2017-12-29T10:10:37.600+01:00",
+      "name": "/api/user/registration",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "f1eaabf4-a609-46df-a968-0ef40a97a150"
+    },
+    {
+      "type": "Scenario",
+      "id": "ef11e4a1-013b-4c2a-b3d1-eb398fea1422",
+      "lastModified": "2017-12-20T14:42:23.591+01:00",
+      "name": "/api/weather",
+      "requestOrder": [
+        "forecastWeatherByCity",
+        "forecastWeatherByCity (useName)",
+        "currentWeatherByCity",
+        "currentWeatherByCity (use cityName)",
+        "currentWeatherByCities"
+      ],
+      "parentId": "8daefa45-d533-4a66-9fab-cd92e620454a"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n\t\"cityId\":null,\n\t\"cityName\":\"Reggio Calabria\"\n}\n"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/ASDEWeather/api/weather/forecastWeatherByCity"
+      },
+      "id": "140a0b19-05b5-4662-90a6-40e7cd808d94",
+      "lastModified": "2017-12-21T15:20:05.874+01:00",
+      "name": "forecastWeatherByCity",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "ef11e4a1-013b-4c2a-b3d1-eb398fea1422"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n\t\"cityId\":null,\n\t\"cityName\":\"Cosenza\"\n}\n"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/ASDEWeather/api/weather/forecastWeatherByCity"
+      },
+      "id": "b4413a20-93f8-4634-8f67-5905258ec219",
+      "lastModified": "2017-12-20T14:44:13.634+01:00",
+      "name": "forecastWeatherByCity (useName)",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "ef11e4a1-013b-4c2a-b3d1-eb398fea1422"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n\t\"cityId\":2524907,\n\t\"cityName\":\"Cosenza\"\n}\n"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/ASDEWeather/api/weather/currentWeatherByCity"
+      },
+      "id": "a1dac8a8-b594-4892-aea8-d1033368894a",
+      "lastModified": "2018-01-03T22:48:55.845+01:00",
+      "name": "currentWeatherByCity",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "ef11e4a1-013b-4c2a-b3d1-eb398fea1422"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n\t\"cityId\":null,\n\t\"cityName\":\"Cosenza\"\n}\n"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/ASDEWeather/api/weather/currentWeatherByCity"
+      },
+      "id": "1684787c-7455-4b7a-bee0-3ac5147df0a8",
+      "lastModified": "2017-12-20T14:47:26.546+01:00",
+      "name": "currentWeatherByCity (use cityName)",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "ef11e4a1-013b-4c2a-b3d1-eb398fea1422"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n\t\"cities\":[\n\t\t{\n\t\t\"cityId\":2524907,\n\t\t\"cityName\":\"Cosenza\"\n\t\t},\n\t\t{\n\t\t\"cityId\":2524881,\n\t\t\"cityName\":\"Crotone\"\n\t\t}\n\t]\n}\n"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/ASDEWeather/api/weather/currentWeatherByCities"
+      },
+      "id": "9a30f729-f388-4ab0-b2ee-e1fd38ece07e",
+      "lastModified": "2018-01-03T23:04:57.366+01:00",
+      "name": "currentWeatherByCities",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "ef11e4a1-013b-4c2a-b3d1-eb398fea1422"
+    }
+  ]
+}
