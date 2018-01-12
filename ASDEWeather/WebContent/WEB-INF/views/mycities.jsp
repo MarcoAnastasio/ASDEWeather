@@ -30,7 +30,7 @@
 
 			<div ng-repeat="w in weatherData track by $index"
 				ng-click="displayWeatherDetail(w.name)"
-				class="col-md-4 col-sm-6 portfolio-item " emit-last-repeater-element>
+				class="col-md-4 col-sm-6 portfolio-item ">
 				<div class="card portfolio-link ">
 					<a class="portfolio-link" data-toggle="modal"
 						href="#portfolioModal6">
@@ -39,7 +39,7 @@
 								<i class="fa fa-plus fa-3x"></i>
 							</div>
 						</div> <img class="img-fluid" id="img-{{w.name}}"
-						src="resources/img/portfolio/06-thumbnail.jpg" alt="City image">
+						src="resources/img/portfolio/06-thumbnail.jpg" alt="City image" emit-last-repeater-element>
 					</a>
 					<div class="card-body">
 						<h3 class="card-title">{{w.name}}</h3>

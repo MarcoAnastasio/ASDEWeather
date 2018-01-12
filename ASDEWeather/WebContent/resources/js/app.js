@@ -15,8 +15,6 @@ angular.module('cookieStoreExample', ['ngCookies'])
 
 App.directive('emitLastRepeaterElement', function() {
 	return function(scope,element) {
-
-			angualrFinished();
-
+		getPhotoFromAPI(scope.w.name, 400, 300);
 	};
 });

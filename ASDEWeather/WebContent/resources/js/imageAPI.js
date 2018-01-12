@@ -1,22 +1,17 @@
-
-function angualrFinished(){
-	
-	
-	
-}
-
-
-
 function getPhotoFromAPI(myPlace, myWidth, myHeight) {
+	
+	
+	toQuery = myPlace.toLowerCase();
+	
 	var places = new google.maps.places.PlacesService($('#hidden-map').get(0));
 
 	var request = {
 		// aggiungere controlli a my place??
-		query : myPlace
+		query : toQuery
 	};
 
 	places.textSearch(request, callback);
-
+	
 	var url;
 	function callback(results, status) {
 		if (status == google.maps.places.PlacesServiceStatus.OK) {
@@ -35,8 +30,7 @@ function getPhotoFromAPI(myPlace, myWidth, myHeight) {
 					});
 					 console.log(url);
 				}
-				return url;
-
+				$("#img-"+myPlace).attr('src',url)
 			}
 		}
 	}
