@@ -1,4 +1,12 @@
 
+function angualrFinished(){
+	
+	
+	
+}
+
+
+
 function getPhotoFromAPI(myPlace, myWidth, myHeight) {
 	var places = new google.maps.places.PlacesService($('#hidden-map').get(0));
 
@@ -25,9 +33,9 @@ function getPhotoFromAPI(myPlace, myWidth, myHeight) {
 						'maxWidth' : myWidth,
 						'maxHeight' : myHeight
 					});
-					// console.log(url);
+					 console.log(url);
 				}
-				$("#img-" + myPlace).first().attr("src", url);
+				return url;
 
 			}
 		}
