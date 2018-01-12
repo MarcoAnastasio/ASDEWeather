@@ -37,6 +37,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 
 <script src="resources/js/app.js"></script>
+<script src="resources/js/imageAPI.js" type="application/javascript"></script>
 <script src="resources/js/controller/UserController.js"></script>
 <script src="resources/js/controller/WeatherController.js"></script>
 <script src="resources/js/controller/ForcastController.js"></script>
@@ -103,8 +104,7 @@
 
 	<!-- Google API -->
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBr_onlsVMtLd-hHtEm_Os2-DZCtmgKc4Y&libraries=places"></script>
-  	<script src="resources/js/imageAPI.js" type="application/javascript"></script>
-  
+  	
 
 	<!-- Custom scripts for this template -->
 	<script src="resources/js/agency.min.js" type="application/javascript"></script>
