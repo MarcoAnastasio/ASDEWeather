@@ -23,8 +23,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@PropertySource(value = { "classpath:hibernate_MYSQL.properties" })
-//@PropertySource(value = { "classpath:hibernate.properties" })
+//@ComponentScan({ "it.unical.asde.weather.model" })
+//@ComponentScan({ "it.unical.asde.weather.model" })
+@PropertySource(value = { "classpath:hibernate.properties" })
 public class HibernateConfig{
  
     @Autowired
