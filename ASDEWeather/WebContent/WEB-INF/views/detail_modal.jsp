@@ -12,9 +12,8 @@
 						<div class="col-lg-8 mx-auto">
 							<div class="modal-body">
 								<!-- Project Details Go Here -->
-								<h2 class="text-uppercase" ng-model="cityName">Project Name</h2>
-								<p class="item-intro text-muted">Lorem ipsum dolor sit amet
-									consectetur.</p>
+								<h2 class="text-uppercase" ng-model="cityName">{{city}}</h2>
+								<p class="item-intro text-muted">Weather Forcast</p>
 								<img class="img-fluid d-block mx-auto"
 									src="resources/img/portfolio/01-full.jpg" alt="">
 							<div id="openweathermap-widget-11"></div>

@@ -27,7 +27,8 @@
 
 		
 
-		<div class="form-inline my-2 my-lg-0"  ng-if="status == 1">
+
+		<div class="form-inline my-2 my-lg-0"  ng-if="$storage.status == 1">
 		<ul class=" navbar-nav">
 		<li class="nav-item">
 			<a class="nav-link"> <i class="fa fa-bell" style="font-size:24px; color:#FFF"></i></a>
@@ -36,9 +37,10 @@
 				class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 				role="button" data-toggle="dropdown" aria-haspopup="true"
 				aria-expanded="false"> <i class="fa fa-user-circle"  style="font-size:24px"></i> </a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				<div class="dropdown-menu dropdown-menu-right"  aria-labelledby="navbarDropdown">
 					<a class="dropdown-item">Hi {{$storage.userData.username}},</a>
-					<a class="dropdown-item" href="#" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg"">Settings</a> <a
+					<a class="dropdown-item" href="#" class="btn btn-primary" 
+						data-toggle="modal" data-target=".bd-example-modal-lg"">Settings</a> <a
 						class="dropdown-item" href="#">Edit Profile</a>
 					<div class="dropdown-divider"></div>
 					<a class="dropdown-item" ng-click="logout()">Log Out</a>
