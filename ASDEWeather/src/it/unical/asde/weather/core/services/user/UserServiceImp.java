@@ -48,7 +48,11 @@ public class UserServiceImp implements UserService{
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		return new UserDetailsImp(getUserByUsername(username));
+		User userByUsername = getUserByUsername(username);
+		if(userByUsername==null){
+			throw new UsernameNotFoundException(username);
+		}
+		return new UserDetailsImp(userByUsername);
 		
 	}
 
