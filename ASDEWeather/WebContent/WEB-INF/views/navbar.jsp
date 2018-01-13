@@ -27,7 +27,7 @@
 
 		
 
-		<div class="form-inline my-2 my-lg-0"  ng-if="status == 1">
+		<div class="form-inline my-2 my-lg-0"  ng-if="$storage.status == 1">
 		<ul class=" navbar-nav">
 		<li class="nav-item">
 			<a class="nav-link"> <i class="fa fa-bell" style="font-size:24px; color:#FFF"></i></a>
