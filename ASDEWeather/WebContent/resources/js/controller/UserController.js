@@ -27,7 +27,9 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 
 
 
-	//------------------------------------------
+/***
+ ****************************login*******************************
+ */
 	$scope.login = function(userInfo){
 		console.log("test");
 		$scope.status = 1;
@@ -60,31 +62,38 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 					$scope.setData(response.response,"login"); 
 					//UserService.setLoggedUser(response.response);
 				}
-				else{
-					$localStorage.$reset({
-						status: 0
-					});
-					$scope.status = 0;
-					console.log("Login non avvenuto, credenziali errate" + response.status);
-				}
 			},
-			complete:function(xhr,status){
+			error:function(xhr,status){
 				if(xhr.status == "401"){
 					$localStorage.$reset({
 						status: 0
 					});
 					$scope.status = 0;
 					console.error("Login not authorized");
+					// stampare modal!!!!!!!!!!!!!!!!!!!!
+				}
+				else{
+					$localStorage.$reset({
+						status: 0
+					});
+					$scope.status = 0;
+					console.error("Bad request");
+					// stampare modal!!!!!!!!!!!!!!!!!!!!
 				}
 			}
 		});
 
 	}
-	//-------------------------------------------------------------
+	
+	/***
+	 ****************************logout*******************************
+	 */
 	$scope.logout = function logout(){
 		$localStorage.$reset({
 			status: 0
 		});
+		//$scope.status = 0;   it's necessary habtamu???
+
 		var data = {
 				id:"", name:"test_data", email:"",
 				password:"", city:"", country:""
@@ -92,7 +101,9 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 		$scope.setData(data, 'logout');
 	}
 
-	//------------------------register
+	/***
+	 ****************************register*******************************
+	 */
 	$scope.register = function(user) {
 		$scope.master = angular.copy(user); 
 		console.log('User clicked register', user.lastname);
@@ -120,25 +131,33 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 			success:function(response,status){
 
 				if(response.status=="OK"){
-					$scope.regError = true;
+					$scope.regError = false;
 					console.log(response.response);	    			
 					$scope.setData(response.response);    			
 					$scope.setUser(response.response);
-					$('#registerModal').modal('hide')
-					//.on('hide.bs.modal',function(e){
-
+					
+					
+					$('#registerModal').modal('toggle');					
+					//.on('hide.bs.modal',function(e){s
 					//});
 				}
 				else{
 					$scope.regError = true;
 					$("#error-form").html(response.messageForUser);
-					console.log(response.data);
+					//console.log(response.data);
 				}
-			}	    	
+			},
+			error:function(){
+				$scope.regError = true;
+				$("#error-form").html("Generic error, try again!");				
+			}    	
 		});
 
 
 	}
+	
+	
+	
 //	--------------------------------------------------------------------------	
 	$scope.setData = function (input, type){
 
