@@ -1,5 +1,18 @@
-App.controller("UserController", function($rootScope, $scope){	
-	$scope.status = 0;
+App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessionStorage", 
+		function($rootScope, $scope, $window, $localStorage, $sessionStorage ){	
+	
+	$scope.$storage = $localStorage;
+	
+	$scope.$storage = $localStorage.$default({
+	    status: 0,
+	    userData:{
+	    	id:"", name:"test_data", email:"",
+			 city:"", country:""
+	    }
+	});
+	
+	$scope.status = $localStorage.status;
+	//$scope.status = UserService.loggedUser();
 	$scope.regError = false;
 	$scope.preferedCities =[];
 	$scope.reg_data = {
@@ -15,11 +28,13 @@ App.controller("UserController", function($rootScope, $scope){
 	 
     
 	//------------------------------------------
-	$scope.login = function(){
+	$scope.login = function(userInfo){
 		console.log("test");
 		$scope.status = 1;
-		
-		dataToSend = {'username':$scope.data.email, 'password':$scope.data.password}
+		  $scope.master = angular.copy(userInfo); 
+		  $scope.login_data = userInfo;
+		  console.log(userInfo)
+		dataToSend = {'username':$scope.login_data.username, 'password':$scope.login_data.password}
 		console.log(dataToSend);
 		
 	 $.ajax({
@@ -29,18 +44,20 @@ App.controller("UserController", function($rootScope, $scope){
 	    	dataType:"json",
 	    	//data:JSON.stringify(dataToSend),
 	    	beforeSend: function (xhr) {
-	    	    xhr.setRequestHeader ("Authorization", "Basic " + btoa($scope.data.email + ":" + $scope.data.password));
+	    	    xhr.setRequestHeader ("Authorization", "Basic " + btoa($scope.login_data.username + ":" + $scope.login_data.password));
 	    	},
 	    	success:function(response,status){
 	    		
 	    		if(response.status=="OK"){
 	    			$('#myModal').modal('hide').on('hide.bs.modal',function(e){	    				
 	    			});
+	    			$localStorage.$reset({
+	    			    status: 1
+	    			});
 	    			console.log(response.response);
 	    			//responseHandler(response.response);
-	    			$scope.setData(response.response,"login");   			
-	    			
-	    			
+	    			$scope.setData(response.response,"login"); 
+	    			//UserService.setLoggedUser(response.response);
 	    		}
 	    		else{
 	    			console.log(response.status);
@@ -54,7 +71,9 @@ App.controller("UserController", function($rootScope, $scope){
 	}
 	//-------------------------------------------------------------
 	$scope.logout = function logout(){
-		
+		$localStorage.$reset({
+		    status: 0
+		});
 		var data = {
 				id:"", name:"test_data", email:"",
 				password:"", city:"", country:""
@@ -93,7 +112,7 @@ App.controller("UserController", function($rootScope, $scope){
 	    			$scope.regError = true;
 	    			console.log(response.response);	    			
 	    			$scope.setData(response.response);    			
-	    			
+	    			$scope.setUser(response.response);
 	    			$('#registerModal').modal('hide')
 	    			//.on('hide.bs.modal',function(e){
 	    				
@@ -124,13 +143,27 @@ App.controller("UserController", function($rootScope, $scope){
 		}
 		else if(type =="login"){
 		//console.log(input.name +'='+selected.name );
+			
+			$scope.$storage = $localStorage.$reset({
+			    status: 1,
+			    userData:{
+			    	id:input.user.id, name:input.user.firstname, email:input.user.email,
+					 city:"", preferedCities:input.currentWeatherForPreferedCities
+			    }
+			});
 		$scope.status=1
 		//$scope.data.id = input.id;
-		$scope.data.name = input.user.username;
+		$localStorage.userData.id = input.user.id;
+		$localStorage.userData.name = input.user.name;
+		$localStorage.userData.username = input.user.username;
+		$localStorage.userData.lastname = input.user.lastname;
+		$localStorage.userData.email = input.user.email;
+		$localStorage.userData.preferedCities = input.currentWeatherForPreferedCities;
+		/*$scope.data.name = input.user.username;
 		$scope.data.lastname = input.user.lastname;
 		$scope.data.email = input.user.email;
 		$scope.data.password = input.user.password;
-		$scope.preferedCities = input.currentWeatherForPreferedCities;
+		$scope.preferedCities = input.currentWeatherForPreferedCities; */
 		if(type != 'logout'){
 			$scope.$apply();
 		}
@@ -144,4 +177,4 @@ App.controller("UserController", function($rootScope, $scope){
 	}
 	
 	
-});
+}]);

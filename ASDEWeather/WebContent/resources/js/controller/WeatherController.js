@@ -1,8 +1,7 @@
 /**
  * 
  */
-App.controller("WeatherController", function($rootScope, $scope){
-	
+App.controller("WeatherController", function($rootScope, $scope){	
 
 	$scope.query = {city:""};
 	

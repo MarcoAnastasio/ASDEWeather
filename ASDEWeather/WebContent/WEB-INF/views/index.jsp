@@ -35,12 +35,17 @@
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.js"></script>
+	
+	
 <script src="resources/js/app.js"></script>
 <script src="resources/js/imageAPI.js" type="application/javascript"></script>
+<script src="resources/js/viewModel/usersSession.js"></script>
 <script src="resources/js/controller/UserController.js"></script>
 <script src="resources/js/controller/WeatherController.js"></script>
 <script src="resources/js/controller/ForcastController.js"></script>
+
 <script src="resources/js/viewModel/responseHandler.js"></script>
 </head>
 <body id="page-top" ng-app="myApp" ng-controller="UserController" ng-cloak>
