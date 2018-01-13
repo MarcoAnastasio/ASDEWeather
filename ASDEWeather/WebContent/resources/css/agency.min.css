@@ -12,6 +12,7 @@ a {
 	color: #fed136
 }
 
+
 a:hover {
 	color: #fec503
 }
@@ -54,6 +55,11 @@ section h3.section-subheading {
 .btn {
 	font-family: Montserrat, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-weight: 700
+}
+
+.both-margin {
+	margin-left: 10px;
+	margin-right: 10px;
 }
 
 .btn-xl {
@@ -104,7 +110,6 @@ body {
 
 #mainNav .navbar-toggler {
 	font-size: 12px;
-	right: 0;
 	padding: 13px;
 	text-transform: uppercase;
 	color: #fff;
@@ -138,8 +143,14 @@ body {
 	color: #fed136
 }
 
-.navbar-list-left{
-	float:left;
+.navbar-list-left {
+	float: left;
+}
+
+.white-class, a {
+	font-family: 'Kaushan Script', 'Helvetica Neue', Helvetica, Arial,
+		cursive;
+	color: #fed136
 }
 
 @media ( min-width :992px) {
@@ -150,7 +161,6 @@ body {
 		-moz-transition: padding-top .3s, padding-bottom .3s;
 		transition: padding-top .3s, padding-bottom .3s;
 		border: none;
-		background-color: transparent
 	}
 	#mainNav .navbar-brand {
 		font-size: 1.75em;
@@ -174,7 +184,6 @@ body {
 
 header.masthead {
 	text-align: center;
-	
 }
 
 header.masthead .intro-text {
@@ -670,16 +679,6 @@ footer ul.quicklinks {
 	font-family: Montserrat, 'Helvetica Neue', Helvetica, Arial, sans-serif
 }
 
-
-
-
-
-
-
-
-
-
-
 ul.social-buttons {
 	margin-bottom: 0
 }
@@ -703,6 +702,3 @@ ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons l
 	{
 	background-color: #fed136
 }
-
-
-
