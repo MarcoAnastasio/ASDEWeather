@@ -116,25 +116,24 @@
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
 	<div class="container-fluid">
 		<a class="navbar-brand js-scroll-trigger" href="#page-top">Weather</a>
-		<button class="navbar-toggler navbar-toggler-right" type="button"
+		<button class="navbar-toggler navbar-toggler-right" type="button" 
 			data-toggle="collapse" data-target="#navbarResponsive"
 			aria-controls="navbarResponsive" aria-expanded="false"
 			aria-label="Toggle navigation">
 			<i class="fa fa-bars"></i>
 		</button>
-		<div class="collapse navbar-collapse" id="navbarResponsive">
+		<div class="collapse navbar-collapse" id="navbarResponsive"  >
 			<ul class="navbar-nav mr-auto">
+				<li class="nav-item" ><a class="nav-link js-scroll-trigger"
+					id="MyCities-btn" data-toggle="collapse"  data-target="#navbarResponsive"
+					>My cities</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="#portfolio" data-toggle="collapse"
-					data-target="#navbarResponsive">My cities</a></li>
+					href="#other-cities" data-toggle="collapse" data-target="#navbarResponsive"
+					>Cities</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="#other-cities" data-toggle="collapse"
-					data-target="#navbarResponsive">Other cities</a></li>
-
-				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="#other-cities" data-toggle="collapse"
-					data-target="#navbarResponsive">Other cities</a></li>
-
+					href="#other-cities" data-toggle="collapse" data-target="#navbarResponsive"
+					>Guide</a></li>
+<!--  data-target="#navbarResponsive" -->
 			</ul>
 			<div ng-show="$storage.status == 0" id="user-top-bar">
 				<form class="form-inline" ng-submit="login(userInfo)">
