@@ -14,14 +14,41 @@
 								<!-- Project Details Go Here -->
 								<h2 class="text-uppercase" ng-model="cityName">{{city}}</h2>
 								<p class="item-intro text-muted">Weather Forecast</p>
-								<table ng-repeat="hours in oneDayForcast">
-								<tbody>
+								<table class="table">
+									<thead>
+										<tr>
+											<th>Time</th>
+											<th>Max Temp</th>
+											<th>Min Temp</th>
+											<th>Humidity</th>
+											<th>Cloud</th>
+											<th>Description</th>
+											<th>Wind</th>
+										</tr>
+									</thead>
+								<tbody ng-repeat="hours in oneDayForcast">
 									<tr >
 										<td>
 										{{hours.dateData.times}}
 										</td>
 										<td>
+										{{hours.mainTemp.tempMin}}&deg C
+										</td>
+										<td>
 										{{hours.mainTemp.tempMax}}&deg C
+										</td>
+										<td>
+										{{hours.mainTemp.humidity}}&deg C
+										</td>
+										<td>
+										{{hours.clouds}}
+										</td>
+										<td>
+										{{hours.weather.descritpion}}
+										</td>
+										<td>
+										Degree:{{hours.wind.deg}} <br />
+										Speed:{{hours.wind.speed}}
 										</td>
 									</tr>
 								  
