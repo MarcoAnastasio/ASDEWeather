@@ -38,12 +38,15 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.js"></script>
 	
-	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-route.min.js"></script>	
+
+
 <script src="resources/js/app.js"></script>
 <script src="resources/js/viewModel/usersSession.js"></script>
 <script src="resources/js/controller/UserController.js"></script>
 <script src="resources/js/controller/WeatherController.js"></script>
 <script src="resources/js/controller/ForcastController.js"></script>
+<script src="resources/js/controller/ForcastWeatherDecoder.js"></script>
 
 <script src="resources/js/viewModel/responseHandler.js"></script>
 </head>
@@ -56,13 +59,13 @@
 	<%@include file="header.jsp"%>
 	</header>
 
-	<!-- My cities -->
+	 <!-- My cities -->
 	<%@include file="mycities.jsp"%>
 
-	<!-- Other cities -->
+	 <!--  Other cities -->
 	<%@include file="othercities.jsp"%>
-
-
+ 
+	<div ng-view></div>
 	<!-- Guide -->
 	<%@include file="guide.jsp"%>
 

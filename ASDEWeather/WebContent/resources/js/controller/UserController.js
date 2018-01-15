@@ -30,7 +30,7 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 	//------------------------------------------
 	$scope.login = function(userInfo){
 		console.log("test");
-		$scope.status = 1;
+		
 		  $scope.master = angular.copy(userInfo); 
 		  $scope.login_data = userInfo;
 		  console.log(userInfo)
@@ -49,6 +49,7 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 	    	success:function(response,status){
 	    		
 	    		if(response.status=="OK"){
+	    			$scope.status = 1;
 	    			$('#myModal').modal('hide').on('hide.bs.modal',function(e){	    				
 	    			});
 	    			$localStorage.$reset({
@@ -60,6 +61,8 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 	    			//UserService.setLoggedUser(response.response);
 	    		}
 	    		else{
+	    			alert("Either the Username or Password Incorrect")
+	    			$('#notifyUser').tooltip('show')
 	    			console.log(response.status);
 	    		}
 	    	},
@@ -139,7 +142,7 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 			$scope.data = input;
 			$scope.status = 0;
 			$scope.$digest();
-			$scope.loadSelectedCity();
+			//$scope.loadSelectedCity();
 		}
 		else if(type =="login"){
 		//console.log(input.name +'='+selected.name );

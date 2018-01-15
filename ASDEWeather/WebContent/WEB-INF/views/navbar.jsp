@@ -54,10 +54,15 @@
 			</div> -->
 			
 		</div>
-
+			<div class="tooltip bs-tooltip-top" role="tooltip" id="notifyUser">
+				<div class="arrow"></div>
+				<div class="tooltip-inner">Please Check your username or password!</div>
+			</div>
 		<div ng-show="$storage.status == 0" id="user-top-bar"
 			class="hidden-sm visible-md">
+		
 			<form ng-submit="login(userInfo)">
+				
 				  <div class="form-row">
 				    <div class="col">
 				      <input type="text" ng-model="userInfo.username" class="form-control form-control-sm" placeholder="Username" required>

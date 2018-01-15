@@ -1,7 +1,6 @@
-<section id="portfolio">
-
-	<div class="container" ng-controller="WeatherController"
-		ng-init="loadSelectedCity()">
+<section id="portfolio" ng-if="status == 1">
+	<div ng-if="$storage.userData.preferedCities == null">Add Cities</div>
+	<div class="container" ng-controller="WeatherController">
 		<div class="row">
 			<div class="col-lg-12 text-center">
 				<h2 class="section-heading text-uppercase">My cities</h2>
@@ -10,7 +9,7 @@
 		</div>
 		<div class="row">
 			
-			<div ng-repeat="w in weatherData track by $index"
+			<div ng-repeat="w in $storage.userData.preferedCities track by $index"
 				class="col-md-4 col-sm-6 portfolio-item">
 				<!--  -->
 
