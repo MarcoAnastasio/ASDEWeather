@@ -115,7 +115,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
 	<div class="container-fluid">
-		<a class="navbar-brand js-scroll-trigger" href="#page-top">Weather</a>
+		<a class="navbar-brand js-scroll-trigger" id="top-page-btn">Weather</a>
 		<button class="navbar-toggler navbar-toggler-right" type="button" 
 			data-toggle="collapse" data-target="#navbarResponsive"
 			aria-controls="navbarResponsive" aria-expanded="false"
@@ -128,10 +128,10 @@
 					id="MyCities-btn" data-toggle="collapse"  data-target="#navbarResponsive"
 					>My cities</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="#other-cities" data-toggle="collapse" data-target="#navbarResponsive"
+					id="Cities-btn" data-toggle="collapse" data-target="#navbarResponsive"
 					>Cities</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="#other-cities" data-toggle="collapse" data-target="#navbarResponsive"
+					id="Guide-btn" data-toggle="collapse" data-target="#navbarResponsive"
 					>Guide</a></li>
 <!--  data-target="#navbarResponsive" -->
 			</ul>

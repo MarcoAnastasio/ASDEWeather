@@ -1,4 +1,4 @@
-<section class="bg-light" id="portfolio">
+<section  id="portfolio">
 
 	<div class="container" ng-controller="WeatherController"
 		ng-init="loadSelectedCity()">
