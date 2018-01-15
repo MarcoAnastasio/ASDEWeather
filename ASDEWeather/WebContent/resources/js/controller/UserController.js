@@ -70,16 +70,51 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 					});
 					$scope.status = 0;
 					console.error("Login not authorized");
-					// stampare modal!!!!!!!!!!!!!!!!!!!!
+
+				    $.alert({
+				        title: 'Login not successed!',
+				        content: 'Username or password wrong!',
+				        type: 'red',
+				        typeAnimated: true,
+				        buttons: {
+				            tryAgain: {
+				                text: 'Try again',
+				                btnClass: 'btn-red',
+				                action: function(){
+				                	//$("#username").focus();??????????
+				                }
+				            },
+				            close: function () {
+				            }
+				        }
+				    });
+					
 				}
 				else{
 					$localStorage.$reset({
 						status: 0
 					});
 					$scope.status = 0;
-					console.error("Bad request");
-					// stampare modal!!!!!!!!!!!!!!!!!!!!
-				}
+					
+					  $.alert({
+					        title: 'Error!',
+					        content: 'Impossible execute request!',
+					        type: 'red',
+					        typeAnimated: true,
+					        buttons: {
+					            tryAgain: {
+					                text: 'Try again',
+					                btnClass: 'btn-red',
+					                action: function(){
+					                	//$("#username").focus();??????????
+					                }
+					            },
+					            close: function () {
+					            }
+					        }
+					    });
+					
+					}
 			}
 		});
 
@@ -92,10 +127,9 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 		$localStorage.$reset({
 			status: 0
 		});
-		//$scope.status = 0;   it's necessary habtamu???
 
 		var data = {
-				id:"", name:"test_data", email:"",
+				id:"", name:"", email:"",
 				password:"", city:"", country:""
 		};
 		$scope.setData(data, 'logout');
@@ -133,8 +167,8 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 				if(response.status=="OK"){
 					$scope.regError = false;
 					console.log(response.response);	    			
-					$scope.setData(response.response);    			
-					$scope.setUser(response.response);
+					$scope.setData(response.response,"register");    			
+				//	$scope.setUser(response.response,"register");
 					
 					
 					$('#registerModal').modal('toggle');					

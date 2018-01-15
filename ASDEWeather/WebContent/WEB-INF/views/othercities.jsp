@@ -12,18 +12,9 @@
 		<div class="row">
 
 			<div ng-repeat="w in weatherData track by $index"
-				ng-click="displayWeatherDetail(w.name)"
 				class="col-md-4 col-sm-6 portfolio-item ">
-				<div class="card portfolio-link ">
-
-					<div class="card-header">
-						<a href="#" class="btn btn-primary a-btn-slide-text"> <span
-							class="glyphicon glyphicon-plus" aria-hidden="true"></span> <span><strong>Add</strong></span>
-						</a>
-					</div>
-
-
-					<a class="portfolio-link" data-toggle="modal"
+				<div class="card">
+					<a class="portfolio-link" ng-click="displayWeatherDetail(w.name)" data-toggle="modal"
 						href="#portfolioModal6">
 						<div class="portfolio-hover">
 							<div class="portfolio-hover-content">
@@ -33,19 +24,21 @@
 						src="resources/img/portfolio/06-thumbnail.jpg" alt="City image">
 					</a>
 					<div class="card-body">
+					<div class="portfolio-link" ng-click="displayWeatherDetail(w.name)">
 						<h3 class="card-title">{{w.name}}</h3>
-						<p class="card-text ">
+						<p class="card-text">
 							{{w.description}} <span><img src="{{w.icon}}" /></span>
 						</p>
 
 						<p class="card-text text-muted">
 							Maxumum Temprature: {{w.temp}} &deg C <br> Minimum
 							Temprature: {{w.minTemp}} &deg C <br> Humidity:
-							{{w.humidity}} &deg C
+							{{w.humidity}} &deg C						
 						</p>
-
-					</div>
-
+						</div>
+							<button class="btn btn-lg btn-primary btn-circle pull-right"><i class="fa fa-star-o"></i></button>	
+							<button class="btn btn-lg btn-success btn-circle pull-right"><i class="fa fa-star"></i></button>		
+							<button class="btn btn-lg btn-danger btn-circle pull-right"><i class="fa fa-times"></i></button>								</div>
 				</div>
 			</div>
 
