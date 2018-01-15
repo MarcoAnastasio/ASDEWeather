@@ -39,7 +39,7 @@
 								<i class="fa fa-plus fa-3x"></i>
 							</div>
 						</div> <img class="img-fluid" id="img-{{w.name}}"
-						src="resources/img/portfolio/06-thumbnail.jpg" alt="City image" emit-last-repeater-element>
+						src="resources/img/portfolio/weather-default.jpg" alt="City image" emit-last-repeater-element>
 					</a>
 					<div class="card-body">
 						<h3 class="card-title">{{w.name}}</h3>
