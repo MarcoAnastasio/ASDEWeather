@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import it.unical.asde.weather.core.services.WeatherDataProvider;
+import it.unical.asde.weather.core.services.dataprovider.WeatherDataProvider;
 import it.unical.asde.weather.core.utilities.DateUtils;
 import it.unical.asde.weather.dao.user.UserDao;
 import it.unical.asde.weather.model.bean.comunication.request.RequestSingleCity;
@@ -22,11 +22,11 @@ import it.unical.asde.weather.model.bean.comunication.response.GenericResponse;
 import it.unical.asde.weather.model.bean.comunication.response.GenericResponse.ErrorCode;
 import it.unical.asde.weather.model.bean.comunication.response.GenericResponse.Status;
 import it.unical.asde.weather.model.bean.comunication.response.LoginResponseDTO;
+import it.unical.asde.weather.model.bean.data.weather.WeatherForecastData;
 import it.unical.asde.weather.model.bean.geographical.City;
 import it.unical.asde.weather.model.bean.user.Notification;
 import it.unical.asde.weather.model.bean.user.User;
 import it.unical.asde.weather.model.bean.user.UserDetailsImp;
-import it.unical.asde.weather.model.bean.weather.WeatherForecastData;
 import it.unical.asde.weather.model.exception.ASDECustomException;
 import it.unical.asde.weather.model.openweatherapi.response.APICurrentResponse;
 import it.unical.asde.weather.model.openweatherapi.response.APIForecastResponse;
@@ -48,7 +48,11 @@ public class UserServiceImp implements UserService{
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		return new UserDetailsImp(getUserByUsername(username));
+		User userByUsername = getUserByUsername(username);
+		if(userByUsername==null){
+			throw new UsernameNotFoundException(username);
+		}
+		return new UserDetailsImp(userByUsername);
 		
 	}
 
@@ -107,7 +111,7 @@ public class UserServiceImp implements UserService{
 	
 	
 	@Override
-	@Transactional(readOnly=true)
+	@Transactional
 	public LoginResponseDTO login(User currentUser) {
 		LoginResponseDTO returnObject=new LoginResponseDTO();
 		//1) ask system for retrive also prefered cities of user

@@ -1,8 +1,12 @@
-<section class="bg-light" id="other-cities">
+
+<section class="bg-light section-cities" id="portfolio">
+
+
 	<div class="container" ng-controller="WeatherController"
 		ng-init="loadSelectedCity()">
 		<div class="row">
 			<div class="col-lg-12 text-center">
+
 				<h2 class="section-heading text-uppercase">Popular City Weathers</h2>
 				<h3 class="section-subheading text-muted">Quello che vogliamo
 					scrivere.</h3>
@@ -32,23 +36,47 @@
 	</div>
 	
 	<!-- 	<div class="row">
+<!--
+=======
+				<h2 class="section-heading text-uppercase">Cities</h2>
+				<h3 class="section-subheading text-muted">Some cities chosen by
+					us</h3>
+			</div>
+		</div>
+		<div class="row">
 
-			<div class="col-md-4 col-sm-6 portfolio-item">
-				<a class="portfolio-link" data-toggle="modal"
-					href="#portfolioModal1">
-					<div class="portfolio-hover">
-						<div class="portfolio-hover-content">
-							<i class="fa fa-plus fa-3x"></i>
+-->
+			<div ng-repeat="w in weatherData track by $index"
+				class="col-md-4 col-sm-6 portfolio-item ">
+				<div class="card">
+					<a class="portfolio-link" ng-click="displayWeatherDetail(w.name)" data-toggle="modal"
+						href="#portfolioModal6">
+						<div class="portfolio-hover">
+							<div class="portfolio-hover-content">
+								<i class="fa fa-plus fa-3x"></i>
+							</div>
+						</div> <img class="img-fluid"
+						src="resources/img/portfolio/06-thumbnail.jpg" alt="City image">
+					</a>
+					<div class="card-body">
+					<div class="portfolio-link" ng-click="displayWeatherDetail(w.name)">
+						<h3 class="card-title">{{w.name}}</h3>
+						<p class="card-text">
+							{{w.description}} <span><img src="{{w.icon}}" /></span>
+						</p>
+
+						<p class="card-text text-muted">
+							Maxumum Temprature: {{w.temp}} &deg C <br> Minimum
+							Temprature: {{w.minTemp}} &deg C <br> Humidity:
+							{{w.humidity}} &deg C						
+						</p>
 						</div>
-					</div> <img class="img-fluid"
-					src="resources/img/portfolio/01-thumbnail.jpg" alt="">
-				</a>
-				<div class="portfolio-caption">
-					<h4>Threads</h4>
-					<p class="text-muted"></p>
+							<button class="btn btn-lg btn-primary btn-circle pull-right"><i class="fa fa-star-o"></i></button>	
+							<button class="btn btn-lg btn-success btn-circle pull-right"><i class="fa fa-star"></i></button>		
+							<button class="btn btn-lg btn-danger btn-circle pull-right"><i class="fa fa-times"></i></button>								</div>
 				</div>
 			</div>
 
 		</div> -->
 	</div>
-	</section>
+</section>
