@@ -14,6 +14,9 @@ angular.module('cookieStoreExample', ['ngCookies'])
 	// Get cookie
 	var favoriteCookie = $cookieStore.get('myFavorite');
 	// Removing a cookie
+	
+	console.log(favoriteCookie);
+	
 	$cookieStore.remove('myFavorite');
 }]);
 

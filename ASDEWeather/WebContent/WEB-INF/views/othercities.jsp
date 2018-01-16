@@ -79,7 +79,7 @@
 					<button class="btn btn-lg btn-primary btn-circle pull-right">
 						<i class="fa fa-star-o"></i>
 					</button>
-					<button class="btn btn-lg btn-success btn-circle pull-right">
+					<button class="btn btn-lg btn-success btn-circle pull-right" ng-click="AddToMyCities(w.name)">
 						<i class="fa fa-star"></i>
 					</button>
 					<button class="btn btn-lg btn-danger btn-circle pull-right">
