@@ -17,9 +17,10 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
 	integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
 	crossorigin="anonymous">
-	
+
 <!-- alert css -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
 
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
@@ -32,7 +33,8 @@
 <link
 	href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700'
 	rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- Custom styles for this template -->
 <link href="resources/css/main.css" rel="stylesheet">
 
@@ -40,8 +42,9 @@
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.js"></script>
-	
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-route.min.js"></script>	
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-route.min.js"></script>
 
 
 <script src="resources/js/app.js"></script>
@@ -51,10 +54,14 @@
 <script src="resources/js/controller/WeatherController.js"></script>
 <script src="resources/js/controller/ForcastController.js"></script>
 <script src="resources/js/controller/ForcastWeatherDecoder.js"></script>
-
+<script src="resources/js/utility/ForcastWeatherDecoderSearch.js"></script>
+<script src="resources/js/utility/DateDecoder.js"></script>
+<script src="resources/js/utility/chartPlugin.js"></script>
+<script src="resources/js/controller/SearchController.js"></script>
 <script src="resources/js/viewModel/responseHandler.js"></script>
 </head>
-<body id="page-top" ng-app="myApp" ng-controller="UserController" ng-cloak>
+<body id="page-top" ng-app="myApp" ng-controller="UserController"
+	ng-cloak>
 
 	<!-- Navigation -->
 
@@ -63,19 +70,19 @@
 	<%@include file="header.jsp"%>
 	</header>
 
-	 <!-- My cities -->
+	<!-- My cities -->
 	<%@include file="mycities.jsp"%>
 
-	 <!--  Other cities -->
+	<!--  Other cities -->
 	<%@include file="othercities.jsp"%>
- 
+
 	<div ng-view></div>
 	<!-- Guide -->
 	<%@include file="guide.jsp"%>
 
 	<!-- Contact -->
-	<%@include file="contact.jsp"%>
-
+	<%-- 	<%@include file="contact.jsp"%>
+ --%>
 	<!-- Footer -->
 	<%@include file="footer.jsp"%>
 
@@ -87,7 +94,7 @@
 	<!--  Modal login  -->
 
 	<%@include file="user_modal.jsp"%>
-	
+
 	<!--  Modal login  -->
 
 	<%@include file="settings.jsp"%>
@@ -95,12 +102,15 @@
 
 	<!--  JQeury UI -->
 	<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+	<script src="https:/<script src="./resources/js/utility/ForcastWeatherDecoder.js"></script>
+<script src="./resources/js/utility/DateDecoder.js"></script>
+<script src="./resources/js/utility/chartPlugin.js"></script>/code.jquery.com/ui/1.12.1/jquery-ui.js"
 		integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
 		crossorigin="anonymous"></script>
-		
+
 	<!-- alert jquery -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
 
 	<!-- Charts JS -->
 	<script
@@ -116,12 +126,19 @@
 		integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
 		crossorigin="anonymous"></script>
 
+
 	<!-- Google API -->
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBr_onlsVMtLd-hHtEm_Os2-DZCtmgKc4Y&libraries=places"></script>
-  	
+	<script type="text/javascript"
+		src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBr_onlsVMtLd-hHtEm_Os2-DZCtmgKc4Y&libraries=places"></script>
+
 
 	<!-- Custom scripts for this template -->
 	<script src="resources/js/agency.min.js" type="application/javascript"></script>
+
+<!-- Charts JS -->
+    <script
+        
+        src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
 
 </body>
 </html>

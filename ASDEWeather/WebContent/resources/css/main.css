@@ -12,6 +12,11 @@ a {
 	color: #fed136
 }
 
+.dark-footer {
+    background-color: #212529;
+    color: white;
+}
+
 a:hover {
 	color: #fec503
 }

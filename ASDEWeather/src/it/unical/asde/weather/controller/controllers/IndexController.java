@@ -88,6 +88,8 @@ public class IndexController extends GenericController{
     @RequestMapping(value = "/api/commons/cityByNameSubstring", method = RequestMethod.POST,consumes="application/json")
 	public @ResponseBody Object getForecastWeatherByCity(@RequestBody RequestCityNameSubstring request) {
     	try{
+    		
+    		System.out.println("Got called");
 			return fillCorrectGenericResponse(request, generalService.getCityByNameSubstring(request));
 		}catch (Exception e) {
 			return fillWrongGenericResponse(e, request);
