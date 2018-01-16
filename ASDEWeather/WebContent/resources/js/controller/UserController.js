@@ -150,18 +150,20 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 			$scope.$storage = $localStorage.$reset({
 			    status: 1,
 			    userData:{
-			    	id:input.user.id, name:input.user.firstname, email:input.user.email,
-					 city:"", preferedCities:input.currentWeatherForPreferedCities
+			    	id:input.user.id, name:input.user.firstname, email:input.user.email, password:sjcl.encrypt($scope.data.password, "data"),
+					 city:"", preferedCities:input.currentWeatherForPreferedCities, notifications:input.notifications
 			    }
 			});
 		$scope.status=1
 		//$scope.data.id = input.id;
 		$localStorage.userData.id = input.user.id;
-		$localStorage.userData.name = input.user.name;
+		$localStorage.userData.firstname = input.user.firstName;
 		$localStorage.userData.username = input.user.username;
-		$localStorage.userData.lastname = input.user.lastname;
+		$localStorage.userData.lastname = input.user.lastName;
 		$localStorage.userData.email = input.user.email;
+		//$localStorage.userData.password = sjcl.encrypt(input.user.password, "data");
 		$localStorage.userData.preferedCities = input.currentWeatherForPreferedCities;
+		$localStorage.userData.notifications = input.notifications;
 		/*$scope.data.name = input.user.username;
 		$scope.data.lastname = input.user.lastname;
 		$scope.data.email = input.user.email;
@@ -177,7 +179,78 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 		else {
 			console.log("Wrong Input")
 		}
+	}// end of setData function
+	
+	$rootScope.addUserCity = function(cityId,cityName){
+	
+		var prefedCities = [];
+		var prefedCitiesToSplit = []
+		if($scope.$storage.userData.preferedCities!=null){
+			console.log("prefered cities not null")
+			console.log($scope.$storage.userData.preferedCities)
+			prefedCitiesToSplit =  splitPreferredCities($scope.$storage.userData.preferedCities);
+			console.log($scope.$storage.userData.preferedCitie)
+			//prefedCities = prefedCitiesToSplit;
+		}
+		
+		prefedCities.push({id:cityId,name:cityName});
+		/*console.log(sjcl_decrypt($scope.$storage.userData))
+		
+		password:sjcl.encrypt($scope.data.password, "data")*/
+		dataToSend = {
+				'id':$scope.$storage.userData.id,
+	    		'username':$scope.$storage.userData.username,
+	    		'firstName':$scope.$storage.userData.firstname,
+	    		'lastName':$scope.$storage.userData.lastname,
+	    		'email':$scope.$storage.userData.email,
+	    		'preferedCities':prefedCities
+	    		/*'country':$scope.reg_data.country,
+	    		'city':$scope.reg_data.city,*/
+	    		};
+		//console.log(dataToSend)
+		$.ajax({
+	    	type:'POST',
+	    	url:"/ASDEWeather/api/auth/user/updateUser", 
+	    	contentType:"application/json",
+	    	dataType:"json",
+	    	//data:JSON.stringify(dataToSend),
+	    	beforeSend: function (xhr) {
+	    	    xhr.setRequestHeader ("Authorization", "Basic " + btoa(dataToSend.username + ":" + "ciccio"));
+	    	},
+	    	data:JSON.stringify(dataToSend),
+	    	success:function(response,status){
+	    		
+	    		if(response.status=="OK"){	    			
+	    			alert("Add successful") 	
+	    			$scope.$storage.userData
+	    			console.log(response.response);
+	    			//responseHandler(response.response);
+	    		//	$scope.setData(response.response,"login"); 
+	    			//UserService.setLoggedUser(response.response);
+	    		}
+	    		else{
+	    			alert("Add not successful")
+	    			
+	    			console.log(response.messageForUser);
+	    		}
+	    	},
+	    	error:function(e){
+	    		console.log(e)
+	    	}
+	    });
 	}
 	
+	
+	function splitPreferredCities (citiesList){
+		
+		var citieslist = [];
+		console.log("in split")
+		
+		for (var i=0; i<citiesList.length; i++){
+			citieslist.push({id:citiesList[i].city.id,name:citiesList[i].city.name})
+		}
+		console.log(citieslist);
+		return citieslist;
+	}
 	
 }]);

@@ -2,6 +2,7 @@
  * Author:Abel Mesfin
  */
 
+
 function Forecasts(forecasts_input) {
 	var forecastList = []
 	for (var i = 0; i < forecasts_input.length; i++) {

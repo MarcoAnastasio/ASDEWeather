@@ -9,7 +9,27 @@
         </button>
       </div>
       <div class="modal-body">
-        ...
+      <div class="row">
+       <div class="col col-3">
+       		<ul class="list-group">
+			  <li class="list-group-item active">Personal Details</li>
+			  <li class="list-group-item">Preferences</li>
+			</ul>
+       </div>
+       <div class="col col-9">
+       	<table>
+       		<tr>
+       			<td >Username</td>
+       			<td><input name="username" ng-model="$storage.userData.username" disabled />
+       		</tr>
+       		<tr>
+       		<td >Email</td>
+       			<td><input name="username" ng-model="$storage.userData.email" disabled />
+       			<td ng-model="$storage.userData.firstName"></td>
+       		</tr>
+       	</table>
+       </div>
+      </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

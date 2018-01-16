@@ -24,6 +24,7 @@
 						<p class="card-text">Maximum Temprature:{{w.temp}} &deg C<br /> Minimum
 							Temparature:{{w.minTemp}}  &deg C<br /> Humidity:{{w.humidity}}<br />.</p>
 						<a class="btn btn-primary" ng-click="WeatherForcast(w.name)">Detail</a>
+						<a class="btn btn-primary" ng-if="$storage.status" ng-click="addUserCity(w.id,w.name)">Add to Fev</a>
 					</div>
 				</div>
 

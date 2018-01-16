@@ -187,7 +187,7 @@ App.controller("WeatherController", function($rootScope, $scope){
 		console.log("Call from user controller")
 		console.log(data);
 		$scope.setWeatherData(data);
-		$scope.$apply();
+		//$scope.$apply();
 	}
 	$scope.displayWeatherGraph = function(){
 		var chartColors = {

@@ -30,6 +30,7 @@
 		<div class="form-inline my-2 my-lg-0"  ng-if="status == 1">
 		<ul class="navbar-nav pull-right" >
 		<li class="nav-item">
+			<!--  ng-if="$storage.uesrData.notifications" -->
 			<a class="nav-link"> <i class="fa fa-bell" style="font-size:24px; color:#FFF"></i></a>
 		</li>
 			<li class="nav-item dropdown"><a

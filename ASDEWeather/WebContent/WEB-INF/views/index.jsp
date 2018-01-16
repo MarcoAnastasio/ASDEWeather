@@ -116,6 +116,7 @@
 
 	<!-- Custom scripts for this template -->
 	<script src="resources/js/agency.min.js" type="application/javascript"></script>
+	<script src="resources/js/sjcl.js" type="application/javascript"></script>
 
 </body>
 </html>

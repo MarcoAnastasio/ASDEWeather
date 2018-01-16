@@ -15,13 +15,13 @@
 
 				<div class="card">
 					<div class="card-header deep-orange lighten-1 white-text" >
-						{{w.name}}</div>
+						{{w.city.name}}</div>
 					<div class="card-body">
 						<img src="{{w.icon}}" />
 						<h4 class="card-title">{{w.description}}</h4>
-						<p class="card-text">Maximum Temprature:{{w.temp}} &deg C<br /> Minimum
-							Temparature:{{w.minTemp}}  &deg C<br /> Humidity:{{w.humidity}}<br />.</p>
-						<a class="btn btn-primary" ng-click="WeatherForcast(w.name)">Detail</a>
+						<p class="card-text">Maximum Temprature:{{w.mainTemperature.temp}} &deg C<br /> Minimum
+							Temparature:{{w.mainTemperature.minTemp}}  &deg C<br /> Humidity:{{w.mainTemperature.humidity}}<br />.</p>
+						<a class="btn btn-primary" ng-click="WeatherForcast(w.city.name)">Detail</a>
 					</div>
 				</div>
 
