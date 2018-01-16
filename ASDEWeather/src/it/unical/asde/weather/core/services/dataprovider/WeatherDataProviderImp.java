@@ -117,7 +117,6 @@ public class WeatherDataProviderImp extends AbstarctGenericProvider implements W
 			APIForecastResponse forecastWeather=new APIForecastResponse(null, city, city.getCountry(), forecastDataFromDB);
 			return forecastWeather;
 		}
-
 		
 		//4 is not present so call the services
 		APIForecastResponse forecastWeather = weatherDataRemoteRequestExecutor.getForecastWeatherForCityFromAPI(city);

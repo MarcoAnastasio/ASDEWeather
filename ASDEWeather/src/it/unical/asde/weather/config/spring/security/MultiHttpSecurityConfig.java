@@ -22,7 +22,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  */
 
 @Configuration
-//@ComponentScan({"it.unical.asde"})
 @EnableWebSecurity
 public class MultiHttpSecurityConfig {
 
@@ -49,17 +48,7 @@ public class MultiHttpSecurityConfig {
 	@Order(1)                                                        
 	public static class ApiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
 		protected void configure(HttpSecurity http) throws Exception {
-	/*
-			http.csrf().disable()
-				.antMatcher("/api**").authorizeRequests().anyRequest().hasRole("USER").and().httpBasic();
-			
-			http.authorizeRequests().antMatchers("/registration","/registration**","/test**").permitAll();
-		*/
-	/*		
-			http
-			.antMatcher("/api**").authorizeRequests().anyRequest().hasRole("USER").and().httpBasic();
-			*/
-			
+
 			http
 			  .csrf()
 			    .disable()
@@ -69,11 +58,10 @@ public class MultiHttpSecurityConfig {
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				.and()
 
-				//.httpBasic() // optional, if you want to access 
-			//  .and()     // the services from a browser
+//				uncomment to use h2 console				
+//				.headers().frameOptions().disable().and()
+
 			  .authorizeRequests().antMatchers("/api/auth/**").hasRole("USER").and().httpBasic()
-//			  	.antMatchers("/api/auth/**").authorizeRequests().anyRequest().hasRole("USER")
-			//    .antMatchers("/api/**").permitAll()
 			    ;
 			
 			
@@ -93,8 +81,10 @@ public class MultiHttpSecurityConfig {
 		protected void configure(HttpSecurity http) throws Exception {
 //			http.authorizeRequests().antMatchers("/registration","/registration**").permitAll();
 			
+//			unccoment ot use H" console
+//			http.headers().frameOptions().disable();
 			http.csrf().disable().authorizeRequests().antMatchers("/","/resources/**","/registration**",
-					"/test").permitAll();
+					"/test","/console/**").permitAll();
 			
 		}
 	}
