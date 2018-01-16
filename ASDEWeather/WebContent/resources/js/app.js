@@ -34,7 +34,7 @@ var App = angular.module('myApp',['ngStorage']);
 	var favoriteCookie = $cookieStore.get('myFavorite');
 //	Removing a cookie
 	$cookieStore.remove('myFavorite');
-}])
+//}])
 
 App.directive('emitLastRepeaterElement', function() {
 	return function(scope,element) {
