@@ -34,7 +34,7 @@
 	rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- Custom styles for this template -->
-<link href="resources/css/agency.min.css" rel="stylesheet">
+<link href="resources/css/main.css" rel="stylesheet">
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
