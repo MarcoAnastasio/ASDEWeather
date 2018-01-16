@@ -28,7 +28,7 @@ function getPhotoFromAPI(myPlace, myWidth, myHeight) {
 						'maxWidth' : myWidth,
 						'maxHeight' : myHeight
 					});
-					 console.log(url);
+//					 console.log(url);
 				}
 				$("#img-"+myPlace).attr('src',url)
 			}
