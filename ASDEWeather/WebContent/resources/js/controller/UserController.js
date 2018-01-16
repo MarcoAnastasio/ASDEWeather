@@ -41,7 +41,7 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 		console.log(dataToSend);
 		
 	 $.ajax({
-	    	type:'GET',
+	    	type:'POST',
 	    	url:"/ASDEWeather/api/auth/user/login", 
 	    	contentType:"application/json",
 	    	dataType:"json",

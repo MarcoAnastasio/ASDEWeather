@@ -136,24 +136,24 @@
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
 	<div class="container-fluid">
 		<a class="navbar-brand js-scroll-trigger" id="top-page-btn">Weather</a>
-		<button class="navbar-toggler navbar-toggler-right" type="button" 
+		<button class="navbar-toggler navbar-toggler-right" type="button"
 			data-toggle="collapse" data-target="#navbarResponsive"
 			aria-controls="navbarResponsive" aria-expanded="false"
 			aria-label="Toggle navigation">
 			<i class="fa fa-bars"></i>
 		</button>
-		<div class="collapse navbar-collapse" id="navbarResponsive"  >
+		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item" ><a class="nav-link js-scroll-trigger"
-					id="MyCities-btn" data-toggle="collapse"  data-target="#navbarResponsive"
-					>My cities</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					id="Cities-btn" data-toggle="collapse" data-target="#navbarResponsive"
-					>Cities</a></li>
+					id="MyCities-btn" data-toggle="collapse"
+					data-target="#navbarResponsive">My cities</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					id="Guide-btn" data-toggle="collapse" data-target="#navbarResponsive"
-					>Guide</a></li>
-<!--  data-target="#navbarResponsive" -->
+					id="Cities-btn" data-toggle="collapse"
+					data-target="#navbarResponsive">Cities</a></li>
+				<li class="nav-item"><a class="nav-link js-scroll-trigger"
+					id="Guide-btn" data-toggle="collapse"
+					data-target="#navbarResponsive">Guide</a></li>
+				<!--  data-target="#navbarResponsive" -->
 			</ul>
 			<div ng-show="$storage.status == 0" id="user-top-bar">
 				<form class="form-inline" ng-submit="login(userInfo)">
@@ -182,13 +182,43 @@
 
 			</div>
 
-			<div class="white-class">
+			<div class="form-inline my-2 my-lg-0" ng-show="$storage.status == 1">
+				<ul class=" navbar-nav">
+					<li class="nav-item"><a class="nav-link"> <i
+							class="fa fa-bell" style="font-size: 24px; color: #FFF"></i></a></li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> <i class="fa fa-user-circle"
+							style="font-size: 24px"></i>
+					</a>
+						<div class="dropdown-menu dropdown-menu-right"
+							aria-labelledby="navbarDropdown">
+							<a class="dropdown-item">Hi {{$storage.userData.username}},</a> <a
+								class="dropdown-item" href="#" class="btn btn-primary"
+								data-toggle="modal" data-target=".bd-example-modal-lg"">Settings</a>
+							<a class="dropdown-item" href="#">Edit Profile</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" ng-click="logout()">Log Out</a>
+						</div></li>
+				</ul>
+				<div style="float: right;">
+					<i class="fa fa-bell" style="font-size: 36px; color: #FFF"></i>
+				</div>
+				<div style="float: right;">
+					<button class="btn btn-primary btn-md hidden-sm visible-md"
+						id="logout-top" ng-click="logout()">Log Out</button>
+				</div>
+
+			</div>
+
+
+			<div ng-show=" $storage.status == 0" class="white-class">
 				<a class='both-margin'> Or </a>
 			</div>
 
-			<button id="show-register-modal"
+			<button ng-show=" $storage.status == 0" id="show-register-modal"
 				class="btn btn-primary 5-margin-left">Register</button>
-
 		</div>
 	</div>
 </nav>

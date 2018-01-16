@@ -26,7 +26,6 @@
 						<a class="btn btn-primary" ng-click="WeatherForcast(w.name)">Detail</a>
 					</div>
 				</div>
-			-->
 
 
 			<div ng-repeat="w in weatherData track by $index"
