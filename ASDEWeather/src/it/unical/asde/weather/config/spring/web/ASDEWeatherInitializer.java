@@ -1,5 +1,10 @@
 package it.unical.asde.weather.config.spring.web;
 
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRegistration;
+
+import org.h2.server.web.WebServlet;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import it.unical.asde.weather.config.hibernate.HibernateConfig;
@@ -30,4 +35,14 @@ public class ASDEWeatherInitializer extends AbstractAnnotationConfigDispatcherSe
 		return new String[] {"/"};
 	}
 
+	//h2 console 
+	@Override
+	public void onStartup(ServletContext servletContext) 
+	  throws ServletException {
+	  super.onStartup(servletContext);
+	  ServletRegistration.Dynamic servlet = servletContext
+	    .addServlet("h2-console", new WebServlet());
+	  servlet.setLoadOnStartup(2);
+	  servlet.addMapping("/console/*");
+	}
 }
