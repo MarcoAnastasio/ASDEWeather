@@ -28,11 +28,14 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 	 
     
 	//------------------------------------------
-	$scope.login = function(userInfo){
+	$scope.login = function(userInfo,type){
 		console.log("test");
 		
-		  $scope.master = angular.copy(userInfo); 
+		  		  
 		  $scope.login_data = userInfo;
+		  if(type!= 'system')
+			  	$scope.master = angular.copy(userInfo); 
+		  
 		  console.log(userInfo)
 		dataToSend = {'username':$scope.login_data.username, 'password':$scope.login_data.password}
 		console.log(dataToSend);
@@ -185,15 +188,19 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 	
 		var prefedCities = [];
 		var prefedCitiesToSplit = []
+		var user = [];
+		
 		if($scope.$storage.userData.preferedCities!=null){
 			console.log("prefered cities not null")
 			console.log($scope.$storage.userData.preferedCities)
 			prefedCitiesToSplit =  splitPreferredCities($scope.$storage.userData.preferedCities);
-			console.log($scope.$storage.userData.preferedCitie)
+			prefedCities = prefedCitiesToSplit;
+			console.log($scope.$storage.userData.preferedCities)
 			//prefedCities = prefedCitiesToSplit;
 		}
 		
 		prefedCities.push({id:cityId,name:cityName});
+		console.log(prefedCities)
 		/*console.log(sjcl_decrypt($scope.$storage.userData))
 		
 		password:sjcl.encrypt($scope.data.password, "data")*/
@@ -222,8 +229,10 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 	    		
 	    		if(response.status=="OK"){	    			
 	    			alert("Add successful") 	
-	    			$scope.$storage.userData
-	    			console.log(response.response);
+	    			//$scope.$storage.userData
+	    			//console.log(response.response);
+	    			user.push({username:dataToSend.username,password:"ciccio"});
+	    			$scope.login({username:'ciccio',password:'ciccio'},'system');
 	    			//responseHandler(response.response);
 	    		//	$scope.setData(response.response,"login"); 
 	    			//UserService.setLoggedUser(response.response);
