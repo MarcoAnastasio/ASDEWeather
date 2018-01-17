@@ -32,7 +32,7 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- Custom styles for this template -->
-<link href="resources/css/agency.min.css" rel="stylesheet">
+<link href="resources/css/main.css" rel="stylesheet">
 
 <!-- Alert css -->
 <link rel="stylesheet"
