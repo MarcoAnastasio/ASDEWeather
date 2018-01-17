@@ -119,8 +119,9 @@ App.controller("WeatherController", function($rootScope, $scope){
 					description:input[i]["weather"]["descritpion"],
 					icon:'http://openweathermap.org/img/w/'+input[i]["weather"]["icon"]+'.png',
 			});
-			$scope.$apply();
+			
 		}
+		$scope.$apply();
 		}
 		console.log($scope.weatherData)
 		

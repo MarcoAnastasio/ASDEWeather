@@ -1,16 +1,16 @@
 App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessionStorage", 
-	function($rootScope, $scope, $window, $localStorage, $sessionStorage ){	
-
+		function($rootScope, $scope, $window, $localStorage, $sessionStorage ){	
+	
 	$scope.$storage = $localStorage;
-
+	
 	$scope.$storage = $localStorage.$default({
-		status: 0,
-		userData:{
-			id:"", name:"test_data", email:"",
-			city:"", country:""
-		}
+	    status: 0,
+	    userData:{
+	    	id:"", name:"test_data", email:"",
+			 city:"", country:""
+	    }
 	});
-
+	
 	$scope.status = $localStorage.status;
 	//$scope.status = UserService.loggedUser();
 	$scope.regError = false;
@@ -18,19 +18,18 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 	$scope.reg_data = {
 			id:"", name:"test", lastname:"", email:"",
 			password:"", city:"", country:""
-	};
+		};
 	$scope.data = {
 			id:"", name:"test_data", email:"",
 			password:"", city:"", country:""
-	};
+		};
+	
 
 	 
     
 	//------------------------------------------
 	$scope.login = function(userInfo,type){
-
 		console.log("test");
-
 		
 		  		  
 		  $scope.login_data = userInfo;
@@ -75,173 +74,70 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 	    	}
 	    });
 		
-/*
-**********************************************************giuseppe 
-		$scope.status = 1;
-		$scope.master = angular.copy(userInfo); 
-		$scope.login_data = userInfo;
-		console.log(userInfo)
-		dataToSend = {'username':$scope.login_data.username, 'password':$scope.login_data.password}
-		console.log(dataToSend);
-
-		$.ajax({
-			type:'POST',
-			url:"/ASDEWeather/api/auth/user/login", 
-			contentType:"application/json",
-			dataType:"json",
-			//data:JSON.stringify(dataToSend),
-			beforeSend: function (xhr) {
-				xhr.setRequestHeader ("Authorization", "Basic " + btoa($scope.login_data.username + ":" + $scope.login_data.password));
-			},
-			success:function(response,status){
-
-				if(response.status=="OK"){
-
-					$('#myModal').modal('hide').on('hide.bs.modal',function(e){	    				
-					});
-					$localStorage.$reset({
-						status: 1
-					});
-					console.log("Login avvenuto con successo!"+ response.response);
-					//responseHandler(response.response);
-					$scope.setData(response.response,"login"); 
-					//UserService.setLoggedUser(response.response);
-				}
-			},
-			error:function(xhr,status){
-				if(xhr.status == "401"){
-					$localStorage.$reset({
-						status: 0
-					});
-					$scope.status = 0;
-					console.error("Login not authorized");
-
-				    $.alert({
-				        title: 'Login not successed!',
-				        content: 'Username or password wrong!',
-				        type: 'red',
-				        typeAnimated: true,
-				        buttons: {
-				            tryAgain: {
-				                text: 'Try again',
-				                btnClass: 'btn-red',
-				                action: function(){
-				                	//$("#username").focus();??????????
-				                }
-				            },
-				            close: function () {
-				            }
-				        }
-				    });
-					
-				}
-				else{
-					$localStorage.$reset({
-						status: 0
-					});
-					$scope.status = 0;
-					
-					  $.alert({
-					        title: 'Error!',
-					        content: 'Impossible execute request!',
-					        type: 'red',
-					        typeAnimated: true,
-					        buttons: {
-					            tryAgain: {
-					                text: 'Try again',
-					                btnClass: 'btn-red',
-					                action: function(){
-					                	//$("#username").focus();??????????
-					                }
-					            },
-					            close: function () {
-					            }
-					        }
-					    });
-					
-					}
-			}
-		});
-
-*/
 	}
-	
-	/***
-	 ****************************logout*******************************
-	 */
+	//-------------------------------------------------------------
 	$scope.logout = function logout(){
 		$localStorage.$reset({
-			status: 0
+		    status: 0
 		});
-
 		var data = {
-				id:"", name:"", email:"",
+				id:"", name:"test_data", email:"",
 				password:"", city:"", country:""
-		};
+			};
 		$scope.setData(data, 'logout');
 	}
-
-	/***
-	 ****************************register*******************************
-	 */
-	$scope.register = function(user) {
-		$scope.master = angular.copy(user); 
-		console.log('User clicked register', user.lastname);
-
-		$scope.reg_data = user;
-
-
-		console.log($scope.reg_data)
+	
+	//------------------------register
+	   $scope.register = function(user) {
+	         $scope.master = angular.copy(user); 
+	         console.log('User clicked register', user.lastname);
+	         
+	         $scope.reg_data = user;
+	         
+	         
+	    console.log($scope.reg_data)
 		dataToSend = {
-			'username':$scope.reg_data.username,
-			'password':$scope.reg_data.password,
-			'firstName':$scope.reg_data.firstname,
-			'lastName':$scope.reg_data.lastname,	    		
-			'email':$scope.reg_data.email
-			/*'country':$scope.reg_data.country,
+	    		'username':$scope.reg_data.username,
+	    		'password':$scope.data.password,
+	    		'firstName':$scope.reg_data.firstname,
+	    		'lastName':$scope.reg_data.lastname,	    		
+	    		'email':$scope.reg_data.email
+	    		/*'country':$scope.reg_data.country,
 	    		'city':$scope.reg_data.city,*/
-		};
-
+	    		};
+		
 		$.ajax({
-			type:'POST',
-			url:"/ASDEWeather/api/user/registration", 
-			contentType:"application/json",
-			dataType:"json",
-			data:JSON.stringify(dataToSend),
-			success:function(response,status){
-
-				if(response.status=="OK"){
-					$scope.regError = false;
-					console.log(response.response);	    			
-					$scope.setData(response.response,"register");    			
-				//	$scope.setUser(response.response,"register");
-					
-					
-					$('#registerModal').modal('toggle');					
-					//.on('hide.bs.modal',function(e){s
-					//});
-				}
-				else{
-					$scope.regError = true;
-					$("#error-form").html(response.messageForUser);
-					//console.log(response.data);
-				}
-			},
-			error:function(){
-				$scope.regError = true;
-				$("#error-form").html("Generic error, try again!");				
-			}    	
-		});
-
-
+	    	type:'POST',
+	    	url:"/ASDEWeather/api/user/registration", 
+	    	contentType:"application/json",
+	    	dataType:"json",
+	    	data:JSON.stringify(dataToSend),
+	    	success:function(response,status){
+	    		
+	    		if(response.status=="OK"){
+	    			$scope.regError = true;
+	    			console.log(response.response);	    			
+	    			$scope.setData(response.response);    			
+	    			$scope.setUser(response.response);
+	    			$('#registerModal').modal('hide')
+	    			//.on('hide.bs.modal',function(e){
+	    				
+	    			//});
+	    		}
+	    		else{
+	    			$scope.regError = true;
+	    			$("#error-form").html(response.messageForUser);
+	    			console.log(response.data);
+	    		}
+	    	}	    	
+	    });
+		
+		
 	}
-	
-	
-	
-//	--------------------------------------------------------------------------	
+//--------------------------------------------------------------------------	
 	$scope.setData = function (input, type){
-
-
+		
+		
 		var selected = $scope.data;		
 		if(type == 'register')
 			selected=$scope.reg_data;
@@ -252,14 +148,15 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 			//$scope.loadSelectedCity();
 		}
 		else if(type =="login"){
-			//console.log(input.name +'='+selected.name );
-
+		//console.log(input.name +'='+selected.name );
+			
 			$scope.$storage = $localStorage.$reset({
-				status: 1,
-				userData:{
-					id:input.user.id, name:input.user.firstname, email:input.user.email,
-					city:"", preferedCities:input.currentWeatherForPreferedCities
-				}
+			    status: 1,
+			    userData:{
+			    	id:input.user.id, name:input.user.firstname, email:input.user.email, 
+					 city:"", preferedCities:input.currentWeatherForPreferedCities, notifications:input.notifications
+			    },
+				pd: sjcl.encrypt($scope.data.password, "data")
 			});
 		$scope.status=1
 		//$scope.data.id = input.id;
@@ -272,17 +169,16 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 		$localStorage.userData.preferedCities = input.currentWeatherForPreferedCities;
 		$localStorage.userData.notifications = input.notifications;
 		/*$scope.data.name = input.user.username;
-
 		$scope.data.lastname = input.user.lastname;
 		$scope.data.email = input.user.email;
 		$scope.data.password = input.user.password;
 		$scope.preferedCities = input.currentWeatherForPreferedCities; */
-			if(type != 'logout'){
-				$scope.$apply();
-			}
-			console.log($scope.preferedCities);
-			$scope.getPreferedCities($scope.preferedCities);
-
+		if(type != 'logout'){
+			$scope.$apply();
+		}
+		console.log($scope.preferedCities);
+		$scope.getPreferedCities($scope.preferedCities);
+		
 		}
 		else {
 			console.log("Wrong Input")
@@ -333,7 +229,7 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 	    	success:function(response,status){
 	    		
 	    		if(response.status=="OK"){	    			
-	    			alert("Add successful") 	
+	    			
 	    			//$scope.$storage.userData
 	    			//console.log(response.response);
 	    			user.push({username:dataToSend.username,password:"ciccio"});
@@ -343,7 +239,7 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 	    			//UserService.setLoggedUser(response.response);
 	    		}
 	    		else{
-	    			alert("Add not successful")
+	    			
 	    			
 	    			console.log(response.messageForUser);
 	    		}
@@ -353,7 +249,6 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 	    	}
 	    });
 	}
-
 	
 	
 	function splitPreferredCities (citiesList){
@@ -368,5 +263,4 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 		return citieslist;
 	}
 	
-
 }]);

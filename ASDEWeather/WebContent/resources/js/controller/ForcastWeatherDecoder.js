@@ -22,6 +22,7 @@ function ForecastWeatherDecoder(forecastWeather_input) {
 	this.wind = new WindDecoder(forecastWeather_input.wind);
 };
 function MainTempDecoder(main_temp_input) {
+	this.temp = main_temp_input.temp;
 	this.tempMin = main_temp_input.tempMin;
 	this.tempMax = main_temp_input.tempMax;
 	this.pressure = main_temp_input.pressure;
