@@ -1,4 +1,11 @@
-App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessionStorage", 
+App
+		.controller(
+				"UserController",
+				[
+						"$scope",
+						"$rootScope",
+						"$localStorage",
+						"$sessionStorage", 
 	function($rootScope, $scope, $window, $localStorage, $sessionStorage ){	
 
 	$scope.$storage = $localStorage;
@@ -33,13 +40,15 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 	$scope.login = function(userInfo){
 		console.log("test");
 
-		
+		//$scope.status = 1;
+	
 		  $scope.master = angular.copy(userInfo); 
 		  $scope.login_data = userInfo;
 		  console.log(userInfo)
-		dataToSend = {'username':$scope.login_data.username, 'password':$scope.login_data.password}
-		console.log(dataToSend);
-		
+		  dataToSend = {'username':$scope.login_data.username, 'password':$scope.login_data.password}
+		  console.log(dataToSend);
+		  
+		  
 	 $.ajax({
 	    	type:'POST',
 	    	url:"/ASDEWeather/api/auth/user/login", 
@@ -48,7 +57,7 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 	    	//data:JSON.stringify(dataToSend),
 	    	beforeSend: function (xhr) {
 	    	    xhr.setRequestHeader ("Authorization", "Basic " + btoa($scope.login_data.username + ":" + $scope.login_data.password));
-	    	},
+	    	},    	
 	    	success:function(response,status){
 	    		
 	    		if(response.status=="OK"){
@@ -63,50 +72,72 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 	    			$scope.setData(response.response,"login"); 
 	    			//UserService.setLoggedUser(response.response);
 	    		}
-	    		else{
-	    			alert("Either the Username or Password Incorrect")
-	    			$('#notifyUser').tooltip('show')
-	    			console.log(response.status);
-	    		}
+//	    		else{
+//	    			alert("Either the Username or Password Incorrect")
+//	    			$('#notifyUser').tooltip('show')
+//	    			console.log(response.status);
+//	    		}
 	    	},
-	    	error:function(e){
-	    		console.log(e)
-	    	}
+	    	error:function(xhr,status){
+				if(xhr.status == "401"){
+					$localStorage.$reset({
+						status: 0
+					});
+					$scope.status = 0;
+					console.error("Login not authorized");
+
+				    $.alert({
+				        title: 'Login not successed!',
+				        content: 'Username or password wrong!',
+				        type: 'red',
+				        typeAnimated: true,
+				        buttons: {
+				            tryAgain: {
+				                text: 'Try again',
+				                btnClass: 'btn-red',
+				                action: function(){
+				                	//$("#username").focus();??????????
+				                }
+				            },
+				            close: function () {
+				            }
+				        }
+				    });
+					
+				}
+				else{
+					$localStorage.$reset({
+						status: 0
+					});
+					$scope.status = 0;
+					
+					  $.alert({
+					        title: 'Error!',
+					        content: 'Impossible execute request!',
+					        type: 'red',
+					        typeAnimated: true,
+					        buttons: {
+					            tryAgain: {
+					                text: 'Try again',
+					                btnClass: 'btn-red',
+					                action: function(){
+					                	//$("#username").focus();??????????
+					                }
+					            },
+					            close: function () {
+					            }
+					        }
+					    });
+					
+					}
+			}
+
+	    	
 	    });
 		
 /*
 **********************************************************giuseppe 
-		$scope.status = 1;
-		$scope.master = angular.copy(userInfo); 
-		$scope.login_data = userInfo;
-		console.log(userInfo)
-		dataToSend = {'username':$scope.login_data.username, 'password':$scope.login_data.password}
-		console.log(dataToSend);
-
-		$.ajax({
-			type:'POST',
-			url:"/ASDEWeather/api/auth/user/login", 
-			contentType:"application/json",
-			dataType:"json",
-			//data:JSON.stringify(dataToSend),
-			beforeSend: function (xhr) {
-				xhr.setRequestHeader ("Authorization", "Basic " + btoa($scope.login_data.username + ":" + $scope.login_data.password));
-			},
-			success:function(response,status){
-
-				if(response.status=="OK"){
-
-					$('#myModal').modal('hide').on('hide.bs.modal',function(e){	    				
-					});
-					$localStorage.$reset({
-						status: 1
-					});
-					console.log("Login avvenuto con successo!"+ response.response);
-					//responseHandler(response.response);
-					$scope.setData(response.response,"login"); 
-					//UserService.setLoggedUser(response.response);
-				}
-			},
+		
 			error:function(xhr,status){
 				if(xhr.status == "401"){
 					$localStorage.$reset({
