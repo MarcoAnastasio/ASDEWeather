@@ -231,6 +231,16 @@ public class UserServiceImp implements UserService{
 			APIForecastResponse forecastWeatherByCity = weatherDataProvider.getForecastWeatherByCity(new RequestSingleCity(tempCity.getId(),null));
 			List<WeatherForecastData> listForecastWeather = forecastWeatherByCity.getListForecastWeather();
 			for(WeatherForecastData tempW:listForecastWeather){
+				//TEST----
+				/*
+				insert  into WeatherForecastData (city_id, clouds, dateTimeCalulation, grndLevel, humidity, pressure, seaLevel, temp, tempKf, tempMax, tempMin, rain, snow, storeTime, weather_id, deg, speed, dateTimeOfForecast, id) values
+		        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+				String temp="insert into WeatherForecastData "
+						+ "(city_id, clouds, dateTimeCalulation, grndLevel, humidity, pressure, seaLevel, temp, tempKf, tempMax, tempMin, rain, snow, storeTime, weather_id, deg, speed, dateTimeOfForecast, id) values ( "
+						+tempW.getCity().getId()+" , "+tempW.getClouds()+" , "+tempW.getDateTimeCalulation().getTime()+" , "+tempW.getMainTemperature().getGrndLevel()+" , "
+						+tempW.getMainTemperature().getHumidity()+" , "+tempW.getMainTemperature().getPressure()+" "+
+				 */
+				//ENDTEST
 				if(tempW.getWeather().getMain().equals("Extreme")){
 					Notification notToAdd=new Notification(tempCity, tempW.getWeather(), tempW.getDateTimeOfForecast());
 					haveToAddNewNotInList(notificationList,notToAdd); 
