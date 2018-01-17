@@ -34,7 +34,7 @@
 
 						<p class="card-text text-muted">
 							Maximum Temperature: {{w.mainTemperature.temp}} &deg C <br> Minimum
-							Temperature: {{w.mainTemperature.minTemp}} &deg C <br> Humidity:
+							Temperature: {{w.mainTemperature.tempMin}} &deg C <br> Humidity:
 							{{w.mainTemperature.humidity}} &deg C
 						</p>
 					</div>

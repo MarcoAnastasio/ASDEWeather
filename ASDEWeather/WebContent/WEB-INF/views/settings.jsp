@@ -20,7 +20,11 @@
        	<table>
        		<tr>
        			<td >Username</td>
-       			<td><input name="username" ng-model="$storage.userData.username" disabled />
+       			<td><input name="username" ng-model="$storage.userData.firstname" disabled />
+       		</tr>
+       		<tr>
+       			<td >Username</td>
+       			<td><input name="username" ng-model="$storage.userData.lastname" disabled />
        		</tr>
        		<tr>
        		<td >Email</td>
