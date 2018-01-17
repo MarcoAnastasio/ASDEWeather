@@ -2,56 +2,114 @@ package it.unical.asde.weather.model.bean.user;
 
 import java.util.Date;
 
+import it.unical.asde.weather.model.bean.comunication.response.GenericResponseConstant;
 import it.unical.asde.weather.model.bean.data.weather.Weather;
+import it.unical.asde.weather.model.bean.data.weather.WeatherData;
+import it.unical.asde.weather.model.bean.data.weather.WeatherForecastData;
 import it.unical.asde.weather.model.bean.geographical.City;
 
 
-//
+
 public class Notification {
+	
+	private static final Integer EXTREAM_WEATHER_CODE=0;
+	private static final String EXTREAM_WEATHER_MSG="";
+	private static final Integer WIND_SPEED_CODE=1;
+	private static final String WIND_SPEED_MSG="Wind speed allert";
+	private static final Integer COLD_TEMP_CODE=2;
+	private static final String COLD_TEMP_MSG="Cold temperature allert";
+	private static final Integer HOT_TEMP_CODE=3;
+	private static final String HOT_TEMP_MSG="Hot temperature allert";
+	private static final Integer RAIN_LEVEL_CODE=4;
+	private static final String RAIN_LEVEL_MSG="Rain level allert";
 
 	
-	private City city;
+	public enum NotificationReason {
+	    EXTREAM_WEATHER(Notification.EXTREAM_WEATHER_CODE,Notification.EXTREAM_WEATHER_MSG),
+	    WIND_SPEED(Notification.WIND_SPEED_CODE,Notification.WIND_SPEED_MSG),
+	    COLD_TEMP(Notification.COLD_TEMP_CODE,Notification.COLD_TEMP_MSG),
+	    HOT_TEMP(Notification.HOT_TEMP_CODE,Notification.HOT_TEMP_MSG),
+	    RAIN_LEVEL(Notification.RAIN_LEVEL_CODE,Notification.RAIN_LEVEL_MSG)
+	    ;
+
+	    private final int value;
+	    private final String defaultErrorMessage;
+	    
+	    private NotificationReason(int value,String defaultErrorMessage) {
+	        this.value = value;
+	        this.defaultErrorMessage=defaultErrorMessage;
+	    }
+	    public int getValue() {
+	        return value;
+	    }
+	    public String getMessage(){
+	    	return defaultErrorMessage;
+	    }
+	}
 	
-	private Weather weather;
 	
-	private Date date;
+//	private City city;
+//	
+//	private Weather weather;
+//	
+//	private Date date;
+	
+	private WeatherForecastData weatherData;
+	
+	private NotificationReason notificationReason;
+	
+	private String messageForUser;
 	
 	
 	public Notification() {
 		super();
 	}
 	
-	public Notification(City city, Weather weather, Date date) {
+	public Notification(WeatherForecastData weatherData,NotificationReason reason,String message) {
 		super();
-		this.city = city;
-		this.weather = weather;
-		this.date = date;
+		this.weatherData=weatherData;
+		this.messageForUser=message;
+		this.notificationReason=reason;
 	}
 
 
-
+/*
 	public City getCity() {
-		return city;
+		return weatherData.getCity();
 	}
 
-	public void setCity(City city) {
-		this.city = city;
-	}
 
 	public Weather getWeather() {
-		return weather;
-	}
-
-	public void setWeather(Weather weather) {
-		this.weather = weather;
+		return weatherData.getWeather();
 	}
 
 	public Date getDate() {
-		return date;
+		return weatherData.getDateTimeCalulation();
+	}
+*/
+
+	public NotificationReason getNotificationReason() {
+		return notificationReason;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setNotificationReason(NotificationReason notificationReason) {
+		this.notificationReason = notificationReason;
+	}
+
+	public String getMessageForUser() {
+		return messageForUser;
+	}
+
+	public void setMessageForUser(String messageForUser) {
+		this.messageForUser = messageForUser;
+	}
+
+	public WeatherForecastData getWeatherData() {
+		return weatherData;
+	}
+
+	public void setWeatherData(WeatherForecastData weatherData) {
+		this.weatherData = weatherData;
 	}
 	
 	

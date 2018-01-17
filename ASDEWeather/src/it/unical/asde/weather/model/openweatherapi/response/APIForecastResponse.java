@@ -12,7 +12,6 @@ public class APIForecastResponse {
 	private Integer requestCode;
 	private City city;	
 	private Country country;
-		
 	private List<WeatherForecastData> listForecastWeather;
 
 //coords are provide from the server but we just do not care...
