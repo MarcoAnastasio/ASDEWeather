@@ -32,7 +32,7 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- Custom styles for this template -->
-<link href="resources/css/agency.min.css" rel="stylesheet">
+<link href="resources/css/main.css" rel="stylesheet">
 
 <!-- Alert css -->
 <link rel="stylesheet"
@@ -62,11 +62,10 @@
 	ng-cloak>
 
 	<!-- Navigation -->
-
 	<%@include file="navbar.jsp"%>
+	
 	<!-- Header -->
 	<%@include file="header.jsp"%>
-	</header>
 
 	<!-- My cities -->
 	<%@include file="mycities.jsp"%>
@@ -74,17 +73,13 @@
 	<!--  Other cities -->
 	<%@include file="othercities.jsp"%>
 
-	<div ng-view></div>
+<!-- 	<div ng-view></div>   ?????????'
+ -->	
 	<!-- Guide -->
 	<%@include file="guide.jsp"%>
 
-	<!-- Contact -->
-	<%@include file="contact.jsp"%>
-
 	<!-- Footer -->
 	<%@include file="footer.jsp"%>
-
-	<!-- Portfolio Modals -->
 
 	<!-- Modal 1 -->
 	<%@include file="detail_modal.jsp"%>
@@ -93,7 +88,6 @@
 	<%@include file="registration_modal.jsp"%>
 
 	<!--  Modal login  -->
-
 	<%@include file="settings.jsp"%>
 
 

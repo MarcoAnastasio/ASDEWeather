@@ -15,7 +15,7 @@
 		<!-- Navbar elements left  -->
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item"><a class="nav-link js-scroll-trigger"
+				<li class="nav-item" ng-show="status==1"><a class="nav-link js-scroll-trigger"
 					id="MyCities-btn" data-toggle="collapse"
 					data-target="#navbarResponsive">My cities</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
