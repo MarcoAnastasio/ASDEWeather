@@ -17,9 +17,6 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
 	integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
 	crossorigin="anonymous">
-	
-<!-- alert css -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
 
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
@@ -45,12 +42,13 @@
 
 
 <script src="resources/js/app.js"></script>
-<script src="resources/js/imageAPI.js" type="application/javascript"></script>
 <script src="resources/js/viewModel/usersSession.js"></script>
 <script src="resources/js/controller/UserController.js"></script>
 <script src="resources/js/controller/WeatherController.js"></script>
 <script src="resources/js/controller/ForcastController.js"></script>
 <script src="resources/js/controller/ForcastWeatherDecoder.js"></script>
+<script src="resources/js/controller/SearchController.js"></script>
+<script src="resources/js/utility/chartPlugin.js"></script>
 
 <script src="resources/js/viewModel/responseHandler.js"></script>
 </head>
@@ -98,9 +96,6 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
 		integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
 		crossorigin="anonymous"></script>
-		
-	<!-- alert jquery -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
 
 	<!-- Charts JS -->
 	<script
@@ -118,10 +113,12 @@
 
 	<!-- Google API -->
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBr_onlsVMtLd-hHtEm_Os2-DZCtmgKc4Y&libraries=places"></script>
-  	
+  	<script src="resources/js/imageAPI.js" type="application/javascript"></script>
+  
 
 	<!-- Custom scripts for this template -->
 	<script src="resources/js/agency.min.js" type="application/javascript"></script>
+	<script src="resources/js/sjcl.js" type="application/javascript"></script>
 
 </body>
 </html>
