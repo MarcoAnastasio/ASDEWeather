@@ -26,9 +26,9 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 	};
 
 
-
-
-	//------------------------------------------
+/**
+ * ************************login************************
+ */
 	$scope.login = function(userInfo,type){
 		console.log("test");
 		//$scope.status = 1; ???????
@@ -49,7 +49,6 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 			url:"/ASDEWeather/api/auth/user/login", 
 			contentType:"application/json",
 			dataType:"json",
-			//data:JSON.stringify(dataToSend),
 			beforeSend: function (xhr) {
 				xhr.setRequestHeader ("Authorization", "Basic " + btoa($scope.login_data.username + ":" + $scope.login_data.password));
 			},    	
@@ -125,12 +124,12 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 
 				}
 			}
-
-
 		});
-
 	}
-	//-------------------------------------------------------------
+
+/**
+ * *************************logout************************
+ */
 	$scope.logout = function logout(){
 		$localStorage.$reset({
 			status: 0
@@ -142,7 +141,9 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 		$scope.setData(data, 'logout');
 	}
 
-	//------------------------register
+/**
+ * ************************Register************************
+ */
 	$scope.register = function(user) {
 		$scope.master = angular.copy(user); 
 		console.log('User clicked register', user.lastname);
@@ -167,8 +168,8 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 			contentType:"application/json",
 			dataType:"json",
 			data:JSON.stringify(dataToSend),
-			success:function(response,status){
-
+			success:function(response,status){				
+			
 				if(response.status=="OK"){
 					$scope.regError = true;
 					console.log(response.response);	    			
@@ -180,22 +181,31 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 						title: 'Success!',
 						content: 'Your account have been registered successfully',
 						type: 'green',
+						typeAnimated: true,
 					});
 				}
 				else{
-					$scope.regError = true;
-					$("#error-form").html(response.messageForUser);
+					$scope.regError = true;//?????
+					$("#error-form").html(response.messageForUser); //have a look on register modal?????
 					console.log(response.data);
 				}
+			},
+			error:function(xhr,status){
+				
+					$.alert({
+						title: 'Error!',
+						content: 'Impossible execute request!',
+						type: 'red',
+						typeAnimated: true,
+					});			
 			}	    	
 		});
-
-
 	}
-//	--------------------------------------------------------------------------	
+
+/**
+ * *************************set data??????????????????????************************
+ */	
 	$scope.setData = function (input, type){
-
-
 		var selected = $scope.data;		
 		if(type == 'register')
 			selected=$scope.reg_data;
