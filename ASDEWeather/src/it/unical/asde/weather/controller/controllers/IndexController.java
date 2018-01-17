@@ -33,7 +33,7 @@ import com.google.gson.reflect.TypeToken;
 
 import it.unical.asde.weather.core.UserService;
 import it.unical.asde.weather.core.services.GeneralService;
-import it.unical.asde.weather.core.services.dataprovider.WeatherDataProvider;
+import it.unical.asde.weather.core.services.data.dataprovider.WeatherDataProvider;
 import it.unical.asde.weather.dao.OldStaticCityDao;
 import it.unical.asde.weather.model.bean.comunication.request.RequestCityNameSubstring;
 import it.unical.asde.weather.model.bean.comunication.request.RequestGeolocation;
