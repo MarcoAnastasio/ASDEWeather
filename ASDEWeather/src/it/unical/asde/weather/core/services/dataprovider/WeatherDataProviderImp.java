@@ -19,8 +19,10 @@ import it.unical.asde.weather.dao.geographical.CityDao;
 import it.unical.asde.weather.model.bean.comunication.request.RequestGeolocation;
 import it.unical.asde.weather.model.bean.comunication.request.RequestListCities;
 import it.unical.asde.weather.model.bean.comunication.request.RequestSingleCity;
+import it.unical.asde.weather.model.bean.comunication.response.ForecastUVResponseDTO;
 import it.unical.asde.weather.model.bean.comunication.response.GenericResponse.ErrorCode;
 import it.unical.asde.weather.model.bean.comunication.response.GenericResponseConstant;
+import it.unical.asde.weather.model.bean.data.extra.UVData;
 import it.unical.asde.weather.model.bean.data.weather.WeatherData;
 import it.unical.asde.weather.model.bean.data.weather.WeatherForecastData;
 import it.unical.asde.weather.model.bean.geographical.City;
@@ -35,7 +37,8 @@ public class WeatherDataProviderImp extends AbstarctGenericProvider implements W
 	private WeatherDataDAO weatherDataDao;
 	@Autowired
 	private WeatherForecastDataDAO weatherForecastDataDAO;
-	
+	@Autowired
+	private ExtraDataProvider extraDataProvider;
 	
 	@Override
 	public APICurrentResponse getCurrentWeatherByCoords(Double latitude, Double longitude) throws ASDECustomException {
@@ -193,6 +196,16 @@ public class WeatherDataProviderImp extends AbstarctGenericProvider implements W
 		
 		return currentWeatherForCityListFromAPI;
 	}
+
+	@Override
+	@Transactional
+	public ForecastUVResponseDTO getForecastWeatherAndUvByCity(RequestSingleCity request) throws Exception {
+		APIForecastResponse forecastByCity = this.getForecastWeatherByCity(request);
+		UVData currentUVByCity = extraDataProvider.getCurrentUVByCity(request);
+		return new ForecastUVResponseDTO(forecastByCity.getCity(), forecastByCity.getListForecastWeather(), currentUVByCity);
+	}
+
+	
 	
 	
 

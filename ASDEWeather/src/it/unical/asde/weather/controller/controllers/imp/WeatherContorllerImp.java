@@ -68,5 +68,16 @@ public class WeatherContorllerImp extends GenericController implements WeatherCo
 			return fillWrongGenericResponse(e, request);
 		}
 	}
+	
+	
+	@Override
+    @RequestMapping(value = "/api/weather/forecastWeatherAndUVByCity", method = RequestMethod.POST,consumes="application/json")
+	public @ResponseBody Object  getForecastWeatherAndUVByCity(@RequestBody RequestSingleCity request) {
+		try{
+			return fillCorrectGenericResponse(request, weatherDataProvider.getForecastWeatherAndUvByCity(request));
+		}catch (Exception e) {
+			return fillWrongGenericResponse(e, request);
+		}
+	}
 
 }
