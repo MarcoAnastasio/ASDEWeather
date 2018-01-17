@@ -29,16 +29,22 @@
 <link
 	href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700'
 	rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- Custom styles for this template -->
 <link href="resources/css/agency.min.css" rel="stylesheet">
+
+<!-- Alert css -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.js"></script>
-	
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-route.min.js"></script>	
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-route.min.js"></script>
 
 
 <script src="resources/js/app.js"></script>
@@ -52,7 +58,8 @@
 
 <script src="resources/js/viewModel/responseHandler.js"></script>
 </head>
-<body id="page-top" ng-app="myApp" ng-controller="UserController" ng-cloak>
+<body id="page-top" ng-app="myApp" ng-controller="UserController"
+	ng-cloak>
 
 	<!-- Navigation -->
 
@@ -61,12 +68,12 @@
 	<%@include file="header.jsp"%>
 	</header>
 
-	 <!-- My cities -->
+	<!-- My cities -->
 	<%@include file="mycities.jsp"%>
 
-	 <!--  Other cities -->
+	<!--  Other cities -->
 	<%@include file="othercities.jsp"%>
- 
+
 	<div ng-view></div>
 	<!-- Guide -->
 	<%@include file="guide.jsp"%>
@@ -82,10 +89,9 @@
 	<!-- Modal 1 -->
 	<%@include file="detail_modal.jsp"%>
 
-	<!--  Modal login  -->
+	<!--  Modal registration  -->
+	<%@include file="registration_modal.jsp"%>
 
-	<%@include file="user_modal.jsp"%>
-	
 	<!--  Modal login  -->
 
 	<%@include file="settings.jsp"%>
@@ -112,13 +118,19 @@
 		crossorigin="anonymous"></script>
 
 	<!-- Google API -->
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBr_onlsVMtLd-hHtEm_Os2-DZCtmgKc4Y&libraries=places"></script>
-  	<script src="resources/js/imageAPI.js" type="application/javascript"></script>
-  
+	<script type="text/javascript"
+		src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBr_onlsVMtLd-hHtEm_Os2-DZCtmgKc4Y&libraries=places"></script>
+	<script src="resources/js/imageAPI.js" type="application/javascript"></script>
+
 
 	<!-- Custom scripts for this template -->
 	<script src="resources/js/agency.min.js" type="application/javascript"></script>
 	<script src="resources/js/sjcl.js" type="application/javascript"></script>
+
+	<!-- Alert jquery -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+
 
 </body>
 </html>

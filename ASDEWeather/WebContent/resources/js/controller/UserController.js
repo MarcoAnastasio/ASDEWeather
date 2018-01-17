@@ -31,10 +31,11 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 	//------------------------------------------
 	$scope.login = function(userInfo,type){
 		console.log("test");
-		//$scope.status = 1;
+		//$scope.status = 1; ???????
 	
 		  $scope.master = angular.copy(userInfo); 
 		  $scope.login_data = userInfo;
+		  // where type use?????????
 		  if(type!= 'system')
 			  	$scope.master = angular.copy(userInfo); 
 		  
@@ -56,8 +57,6 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 	    		
 	    		if(response.status=="OK"){
 	    			$scope.status = 1;
-	    			$('#myModal').modal('hide').on('hide.bs.modal',function(e){	    				
-	    			});
 	    			$localStorage.$reset({
 	    			    status: 1
 	    			});
