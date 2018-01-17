@@ -8,7 +8,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 
-import it.unical.asde.weather.core.services.dataprovider.WeatherDataProvider;
+import it.unical.asde.weather.core.services.data.dataprovider.WeatherDataProvider;
 import it.unical.asde.weather.dao.geographical.CityDao;
 import it.unical.asde.weather.model.bean.comunication.request.RequestCityNameSubstring;
 import it.unical.asde.weather.model.bean.comunication.request.RequestGeolocation;

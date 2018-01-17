@@ -14,7 +14,8 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import it.unical.asde.weather.core.services.dataprovider.WeatherDataProvider;
+import it.unical.asde.weather.core.services.data.NotificationManager;
+import it.unical.asde.weather.core.services.data.dataprovider.WeatherDataProvider;
 import it.unical.asde.weather.core.utilities.DateUtils;
 import it.unical.asde.weather.dao.user.UserDao;
 import it.unical.asde.weather.model.bean.comunication.request.RequestSingleCity;
@@ -39,6 +40,9 @@ public class UserServiceImp implements UserService{
 	
 	@Autowired
 	private WeatherDataProvider weatherDataProvider;
+	
+	@Autowired
+	private NotificationManager notificationManager;
 	
 	
 	@Override
@@ -226,48 +230,16 @@ public class UserServiceImp implements UserService{
 			return notificationList;
 		}
 		
+		List<WeatherForecastData> listForecastWeather=new ArrayList<>();
 		//if user has at least one prefered city, we have to chetck the weather in this city
 		for(City tempCity:preferedCities){
 			APIForecastResponse forecastWeatherByCity = weatherDataProvider.getForecastWeatherByCity(new RequestSingleCity(tempCity.getId(),null));
-			List<WeatherForecastData> listForecastWeather = forecastWeatherByCity.getListForecastWeather();
-			for(WeatherForecastData tempW:listForecastWeather){
-				//TEST----
-				/*
-				insert  into WeatherForecastData (city_id, clouds, dateTimeCalulation, grndLevel, humidity, pressure, seaLevel, temp, tempKf, tempMax, tempMin, rain, snow, storeTime, weather_id, deg, speed, dateTimeOfForecast, id) values
-		        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-				String temp="insert into WeatherForecastData "
-						+ "(city_id, clouds, dateTimeCalulation, grndLevel, humidity, pressure, seaLevel, temp, tempKf, tempMax, tempMin, rain, snow, storeTime, weather_id, deg, speed, dateTimeOfForecast, id) values ( "
-						+tempW.getCity().getId()+" , "+tempW.getClouds()+" , "+tempW.getDateTimeCalulation().getTime()+" , "+tempW.getMainTemperature().getGrndLevel()+" , "
-						+tempW.getMainTemperature().getHumidity()+" , "+tempW.getMainTemperature().getPressure()+" "+
-				 */
-				//ENDTEST
-				if(tempW.getWeather().getMain().equals("Extreme")){
-					Notification notToAdd=new Notification(tempCity, tempW.getWeather(), tempW.getDateTimeOfForecast());
-					haveToAddNewNotInList(notificationList,notToAdd); 
-					notificationList.add(notToAdd);
-				}
-			}
+			listForecastWeather.addAll(forecastWeatherByCity.getListForecastWeather() );
 		}
-		
-		return notificationList;
+
+		return notificationManager.extractNotificationFromForecastWeather(listForecastWeather);	
 	}
 
-	private boolean haveToAddNewNotInList(List<Notification> notificationList, Notification not) {
-		if(notificationList.isEmpty()){
-			return false;
-		}
-		
-		for(Notification tempN:notificationList){
-			if(
-					tempN.getCity().getId().equals( not.getCity().getId() ) &&
-					tempN.getWeather().getId().equals(not.getWeather().getId()) &&
-					DateUtils.chackTwoDateSameDay(tempN.getDate(),not.getDate())
-					){
-				return true;
-			}
-		}
-		
-		return false;
-	}
+
 	
 }
