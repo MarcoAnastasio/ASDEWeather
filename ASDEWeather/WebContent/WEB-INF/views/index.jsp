@@ -62,11 +62,10 @@
 	ng-cloak>
 
 	<!-- Navigation -->
-
 	<%@include file="navbar.jsp"%>
+	
 	<!-- Header -->
 	<%@include file="header.jsp"%>
-	</header>
 
 	<!-- My cities -->
 	<%@include file="mycities.jsp"%>
@@ -74,17 +73,13 @@
 	<!--  Other cities -->
 	<%@include file="othercities.jsp"%>
 
-	<div ng-view></div>
+<!-- 	<div ng-view></div>   ?????????'
+ -->	
 	<!-- Guide -->
 	<%@include file="guide.jsp"%>
 
-	<!-- Contact -->
-	<%@include file="contact.jsp"%>
-
 	<!-- Footer -->
 	<%@include file="footer.jsp"%>
-
-	<!-- Portfolio Modals -->
 
 	<!-- Modal 1 -->
 	<%@include file="detail_modal.jsp"%>
@@ -93,7 +88,6 @@
 	<%@include file="registration_modal.jsp"%>
 
 	<!--  Modal login  -->
-
 	<%@include file="settings.jsp"%>
 
 
