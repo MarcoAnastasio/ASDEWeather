@@ -16,12 +16,15 @@ import javax.persistence.InheritanceType;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.Polymorphism;
+import org.hibernate.annotations.PolymorphismType;
 import org.json.simple.JSONObject;
 
 import it.unical.asde.weather.model.bean.geographical.City;
 
 @Entity
 @Table
+@Polymorphism(type = PolymorphismType.EXPLICIT)
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class WeatherData {
 	
