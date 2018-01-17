@@ -65,7 +65,7 @@ public class UserApiControllerImp extends GenericController implements UserApiCo
 	    }
 	 
 	 @Override
-	 @RequestMapping(value = "/api/auth/user/login", produces="application/json")
+	 @RequestMapping(value = "/api/auth/user/login", produces="application/json", method= RequestMethod.POST)
 	 public @ResponseBody GenericResponse login() {	
 		 try{
 			 	GenericResponse response=fillCorrectGenericResponse(null,userService.login(getCurrentLoggedUser()));
