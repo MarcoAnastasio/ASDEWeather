@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import it.unical.asde.weather.dao.AbstarctGenericDAO;
 import it.unical.asde.weather.dao.geographical.CityDaoImp;
 import it.unical.asde.weather.model.bean.data.weather.WeatherData;
+import it.unical.asde.weather.model.bean.data.weather.WeatherForecastData;
 import it.unical.asde.weather.model.bean.geographical.City;
 
 @Service
@@ -51,6 +52,7 @@ public class WeatherDataDAOImp extends AbstarctGenericDAO<WeatherData> implement
 
 
 
+	@Deprecated
 	@Override
 	@Transactional(readOnly=true)
 	public WeatherData findWeatherDataFromCityNotOlderThan(Long cityId,Integer maxOldValue){
@@ -81,9 +83,21 @@ public class WeatherDataDAOImp extends AbstarctGenericDAO<WeatherData> implement
 	public WeatherData findWeatherDataFromCityNotOlderThan(Long cityId,Date maxOldDate){
 		Session session = getSession();
 		System.out.println("findAllSession="+System.identityHashCode(session));
-		//TODO maybe add TOP 1 and order by desc to have the newest result
 		
 		//is not possible to use datediff... so set a max value date
+		return getSession().createNativeQuery(
+				"SELECT * , 0 as clazz_ "
+				+ "FROM WeatherData f "
+				+ "JOIN City c ON (c.id=f.city_id) "
+				+ "JOIN Country cnt ON  (cnt.id=c.country_id) "
+				+ "JOIN Weather w ON (w.id=f.weather_id) "
+				+ "WHERE f.city_id=?1 "
+				+ "AND f.storeTime >?2 "
+				,WeatherData.class)
+				.setParameter(1, cityId)
+				.setParameter(2, maxOldDate).uniqueResult();
+
+		/*
 		return session.createQuery("from WeatherData where city_id=:cityId "
 				+ "and  storeTime > :maxOldDate order by storeTime desc",WeatherData.class)
 				.setParameter("cityId", cityId)
@@ -91,6 +105,7 @@ public class WeatherDataDAOImp extends AbstarctGenericDAO<WeatherData> implement
 				.setFirstResult(0)
 				.setMaxResults(1)
 				.uniqueResult();
+		 */
 	}
 	
 	
@@ -101,13 +116,27 @@ public class WeatherDataDAOImp extends AbstarctGenericDAO<WeatherData> implement
 		Session session = getSession();
 		System.out.println("findAllSession="+System.identityHashCode(session));
 		//TODO maybe add TOP 1 and order by desc to have the newest result
+
+		return getSession().createNativeQuery(
+				"SELECT * , 0 as clazz_  "
+				+ "FROM WeatherData f "
+				+ "JOIN City c ON (c.id=f.city_id) "
+				+ "JOIN Country cnt ON  (cnt.id=c.country_id) "
+				+ "JOIN Weather w ON (w.id=f.weather_id) "
+				+ "WHERE f.city_id IN (:citiesIds) "
+				+ "AND f.storeTime >:maxDate "
+				,WeatherData.class)
+				.setParameter("citiesIds", cityIds)
+				.setParameter("maxDate", maxOldDate).list();
 		
+/*
 		//is not possible to use datediff... so set a max value date
 		return session.createQuery("from WeatherData where city_id IN (:cityIds) "
 				+ "and  storeTime > :maxOldDate order by storeTime desc",WeatherData.class)
 				.setParameter("cityIds", cityIds)
 				.setParameter("maxOldDate", maxOldDate)
 				.list();
+*/
 	}
 
 
