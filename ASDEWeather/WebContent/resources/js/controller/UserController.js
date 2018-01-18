@@ -330,5 +330,18 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 		console.log(citieslist);
 		return citieslist;
 	}
+	
+	
+	/**
+	 * clean modal register
+	 */
+	function cleanRegisterModal(){	
+		$('#registerModal').on('hidden.bs.modal', function (e) {
+			  $(this).find("input,textarea,select")
+			       .val('')
+			       .end();
+			})
+		
+	}
 
 }]);
