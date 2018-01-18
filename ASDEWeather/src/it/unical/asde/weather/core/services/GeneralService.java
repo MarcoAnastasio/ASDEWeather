@@ -28,11 +28,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class GeneralService {
 
 	
-	private String[] randomCitiesName=new String[]{"Roma","London","Barcellona","Lisbon","Amsterdam","Prague","Napoli","Cosenza"};
 	
-	private int numberRandomCitiesInIndex=2;
-	
-	private City[] randomCities;
+	private static final int NUMBER_RANDOM_CITIES=4;
 	
 	@Autowired
 	private CityDao cityDao;
@@ -41,21 +38,12 @@ public class GeneralService {
 	private WeatherDataProvider weatherDataProvider;
 
 	
-	@PostConstruct
-	private void initListCities(){
-		List<City> findCitiesByName = cityDao.findCitiesByName(new ArrayList<String>(Arrays.asList(randomCitiesName)) );
-		randomCities = findCitiesByName.toArray(new City[findCitiesByName.size()]);
-	}
-	
-	
-	
-	
 	@Transactional
 	public IndexResponseDTO getIndexInfo(RequestGeolocation request) throws ASDECustomException{
 		IndexResponseDTO response=new IndexResponseDTO();
 	
 		//retrive info about X random cities,
-		List<City> randomCitiesFromList = getRandomCitiesFromList();
+		List<City> randomCitiesFromList = cityDao.findRandomCities(NUMBER_RANDOM_CITIES);
 		APICurrentResponse currentWeatherByCities = weatherDataProvider.getCurrentWeatherByCities(randomCitiesFromList);
 		response.setRandomCitiesWeather(currentWeatherByCities.getListForecastWeather());
 		
@@ -79,14 +67,6 @@ public class GeneralService {
 	}
 	
 	
-	private List<City> getRandomCitiesFromList(){
-		
-		ArrayList<City> arrayList = new ArrayList<City>();
-		for(int i=0;i<numberRandomCitiesInIndex;i++){
-			arrayList.add(randomCities[i]);
-		}
-		
-		return arrayList;
-	}
+
 	
 }

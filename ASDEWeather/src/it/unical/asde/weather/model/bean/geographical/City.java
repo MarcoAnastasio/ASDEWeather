@@ -30,7 +30,7 @@ public class City implements Serializable{
 	@Column
 	private Double latitude;	
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Country country;
 
 	
