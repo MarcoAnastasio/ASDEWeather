@@ -61,13 +61,38 @@
 				<ul class=" navbar-nav">
 					<li class="nav-item" ng-controller ="NotificationController" ng-init="getNotifications()">
 					
-					<a class="nav-link" ng-if="notificationsStatus > 0"> <i
-							class="fa fa-bell" style="font-size: 24px; color: #8B0000"></i></a>
+					<a class="nav-link dropdown" ng-if="notificationsStatus > 0"> 
+					<i	class="fa fa-bell drop-down-toggle" data-toggle ="dropdown" aria-haspopup="true" aria-expanded="false"
+							style="font-size: 24px; color: #8B0000">
+							
+							</i>
+							<div class="dropdown-menu dropdown-menu-right"
+							aria-labelledby="navbarDropdown" overflow = "scroll">
+								<span class="dropdown-item" ng-repeat="w in notificationList">
+								{{w.weatherData.city.name}}</br />
+								{{w.notificationReason}} <br /> 
+								{{w.messageForUser}}</span>
+								<hr>
+							</div>
+							
+					</a>
 							
 					
-					<a class="nav-link" ng-if="notificationsStatus == 0"> <i
-							class="fa fa-bell" style="font-size: 24px; color: #FFF">
-					</i></a>
+					<a class="nav-link" ng-if="notificationsStatus == 0" 
+						> <i
+							class="fa fa-bell  drop-down-toggle" data-toggle ="dropdown" aria-haspopup="true"  style="font-size: 24px; color: #FFF">
+					</i>
+						<div class="dropdown-menu dropdown-menu-right"
+							aria-labelledby="navbarDropdown">
+								<span class="dropdown-item">{{notificationsStatus}}</span>
+								<span class="dropdown-item">Noticfion slakdkjfslj alkjsdlkjf sa
+								adjfkj lj</span>
+								<hr>
+								<span class="dropdown-item">Noticfion slakdkjfslj alkjsdlkjf sa
+								adjfkj lj</span>
+							</div>
+					
+					</a>
 							
 					</li>
 					<li class="nav-item dropdown"><a
