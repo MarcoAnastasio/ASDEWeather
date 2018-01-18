@@ -38,13 +38,13 @@
 							{{w.mainTemperature.humidity}} &deg C
 						</p>
 					</div>
-					<button ng-if="$storage.status" ng-click="removeUserCity(w.city.id,w.city.name)" class="btn btn-lg btn-primary btn-circle pull-right">
+					<!-- <button class="btn btn-lg btn-primary btn-circle pull-right">
 						<i class="fa fa-star-o"></i>
 					</button>
 					<button ng-if="$storage.status" ng-click="addUserCity(w.city.id,w.city.name)" class="btn btn-lg btn-success btn-circle pull-right">
 						<i class="fa fa-star"></i>
-					</button>
-					<button class="btn btn-lg btn-danger btn-circle pull-right">
+					</button> -->
+					<button ng-if="$storage.status" ng-click="removeUserCity(w.city.id,w.city.name)" class="btn btn-lg btn-danger btn-circle pull-right">
 						<i class="fa fa-times"></i>
 					</button>
 				</div>

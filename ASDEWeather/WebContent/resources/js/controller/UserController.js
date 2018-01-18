@@ -206,15 +206,17 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 			//$scope.loadSelectedCity();
 		}
 		else if(type =="login"){
-			//console.log(input.name +'='+selected.name );
-
+			console.log("encryption test" );
+			
+			console.log(sjcl.encrypt("password", $scope.data.password))
+			console.log("password","{\"iv\":\"jQkXy84yDl7xoyITyUogog==\",\"v\":1,\"iter\":10000,\"ks\":128,\"ts\":64,\"mode\":\"ccm\",\"adata\":\"\",\"cipher\":\"aes\",\"salt\":\"V9+Eqx6m3aA=\",\"ct\":\"vtR64vdBfE4=\"}")
 			$scope.$storage = $localStorage.$reset({
 				status: 1,
 				userData:{
 					id:input.user.id, name:input.user.firstname, email:input.user.email, 
 					city:"", preferedCities:input.currentWeatherForPreferedCities, notifications:input.notifications
 				},
-				pd: sjcl.encrypt($scope.data.password, "data")
+				pd: sjcl.encrypt("password", $scope.data.password)
 			});
 			$scope.status=1
 			//$scope.data.id = input.id;
@@ -273,7 +275,56 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 			/*'country':$scope.reg_data.country,
 	    		'city':$scope.reg_data.city,*/
 		};
+		sendUpdate(dataToSend);
 		//console.log(dataToSend)
+		
+	}// END OF ADD UER CITY
+
+	// REMOVE USER CITY
+	$scope.removeUserCity = function(cityId,cityName){
+		console.log("remove city")
+		var prefedCities = [];
+		var newCitiesList = [];
+		var dataToSend = [];
+		var user = [];
+
+		prefedCities =  splitPreferredCities($scope.$storage.userData.preferedCities);
+		//var index = prefedCities.indexOf(cityId);
+		for(var i =0; i<prefedCities.length; i++){
+			if(cityId == prefedCities[i].id)
+					var index = i;
+		}
+		
+		prefedCities.splice(index,1);
+		console.log(prefedCities)
+		
+		dataToSend = {
+			'id':$scope.$storage.userData.id,
+			'username':$scope.$storage.userData.username,
+			'firstName':$scope.$storage.userData.firstname,
+			'lastName':$scope.$storage.userData.lastname,
+			'email':$scope.$storage.userData.email,
+			'preferedCities':prefedCities
+		}
+		
+		sendUpdate(dataToSend);
+		
+	}// END OF REMVOE USER CITY
+	
+	function splitPreferredCities (citiesList){
+
+		var citieslist = [];
+		console.log("in split")
+
+		for (var i=0; i<citiesList.length; i++){
+			citieslist.push({id:citiesList[i].city.id,name:citiesList[i].city.name})
+		}
+		console.log(citieslist);
+		return citieslist;
+	}
+	
+	function sendUpdate(dataToSend){
+		var user = [];
 		$.ajax({
 			type:'POST',
 			url:"/ASDEWeather/api/auth/user/updateUser", 
@@ -306,19 +357,6 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 				console.log(e)
 			}
 		});
-	}
-
-
-	function splitPreferredCities (citiesList){
-
-		var citieslist = [];
-		console.log("in split")
-
-		for (var i=0; i<citiesList.length; i++){
-			citieslist.push({id:citiesList[i].city.id,name:citiesList[i].city.name})
-		}
-		console.log(citieslist);
-		return citieslist;
 	}
 
 }]);
