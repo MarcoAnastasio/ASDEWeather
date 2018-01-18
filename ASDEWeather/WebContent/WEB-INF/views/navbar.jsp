@@ -59,8 +59,17 @@
 			<!-- NavBar logged user  -->
 			<div class="form-inline my-2 my-lg-0" ng-show="$storage.status == 1">
 				<ul class=" navbar-nav">
-					<li class="nav-item"><a class="nav-link"> <i
-							class="fa fa-bell" style="font-size: 24px; color: #FFF"></i></a></li>
+					<li class="nav-item" ng-controller ="NotificationController" ng-init="getNotifications()">
+					
+					<a class="nav-link" ng-if="notificationsStatus > 0"> <i
+							class="fa fa-bell" style="font-size: 24px; color: #8B0000"></i></a>
+							
+					
+					<a class="nav-link" ng-if="notificationsStatus == 0"> <i
+							class="fa fa-bell" style="font-size: 24px; color: #FFF">
+					</i></a>
+							
+					</li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 						role="button" data-toggle="dropdown" aria-haspopup="true"

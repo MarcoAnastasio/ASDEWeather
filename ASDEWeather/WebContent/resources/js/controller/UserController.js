@@ -216,15 +216,17 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 			//$scope.loadSelectedCity();
 		}
 		else if(type =="login"){
-			//console.log(input.name +'='+selected.name );
-
+			console.log("encryption test" );
+			
+			console.log(sjcl.encrypt("secret", $scope.data.password))
+			console.log("password","{\"iv\":\"jQkXy84yDl7xoyITyUogog==\",\"v\":1,\"iter\":10000,\"ks\":128,\"ts\":64,\"mode\":\"ccm\",\"adata\":\"\",\"cipher\":\"aes\",\"salt\":\"V9+Eqx6m3aA=\",\"ct\":\"vtR64vdBfE4=\"}")
 			$scope.$storage = $localStorage.$reset({
 				status: 1,
 				userData:{
 					id:input.user.id, name:input.user.firstname, email:input.user.email, 
 					city:"", preferedCities:input.currentWeatherForPreferedCities, notifications:input.notifications
 				},
-				pd: sjcl.encrypt($scope.data.password, "data")
+				pd: sjcl.encrypt("secret", $scope.data.password)
 			});
 			$scope.status=1
 			//$scope.data.id = input.id;
@@ -283,42 +285,42 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 			/*'country':$scope.reg_data.country,
 	    		'city':$scope.reg_data.city,*/
 		};
+		sendUpdate(dataToSend);
 		//console.log(dataToSend)
-		$.ajax({
-			type:'POST',
-			url:"/ASDEWeather/api/auth/user/updateUser", 
-			contentType:"application/json",
-			dataType:"json",
-			//data:JSON.stringify(dataToSend),
-			beforeSend: function (xhr) {
-				xhr.setRequestHeader ("Authorization", "Basic " + btoa(dataToSend.username + ":" + "ciccio"));
-			},
-			data:JSON.stringify(dataToSend),
-			success:function(response,status){
+		
+	}// END OF ADD UER CITY
 
-				if(response.status=="OK"){	    			
+	// REMOVE USER CITY
+	$scope.removeUserCity = function(cityId,cityName){
+		console.log("remove city")
+		var prefedCities = [];
+		var newCitiesList = [];
+		var dataToSend = [];
+		var user = [];
 
-					//$scope.$storage.userData
-					//console.log(response.response);
-					user.push({username:dataToSend.username,password:"ciccio"});
-					$scope.login({username:'ciccio',password:'ciccio'},'system');
-					//responseHandler(response.response);
-					//	$scope.setData(response.response,"login"); 
-					//UserService.setLoggedUser(response.response);
-				}
-				else{
-
-
-					console.log(response.messageForUser);
-				}
-			},
-			error:function(e){
-				console.log(e)
-			}
-		});
-	}
-
-
+		prefedCities =  splitPreferredCities($scope.$storage.userData.preferedCities);
+		//var index = prefedCities.indexOf(cityId);
+		for(var i =0; i<prefedCities.length; i++){
+			if(cityId == prefedCities[i].id)
+					var index = i;
+		}
+		
+		prefedCities.splice(index,1);
+		console.log(prefedCities)
+		
+		dataToSend = {
+			'id':$scope.$storage.userData.id,
+			'username':$scope.$storage.userData.username,
+			'firstName':$scope.$storage.userData.firstname,
+			'lastName':$scope.$storage.userData.lastname,
+			'email':$scope.$storage.userData.email,
+			'preferedCities':prefedCities
+		}
+		
+		sendUpdate(dataToSend);
+		
+	}// END OF REMVOE USER CITY
+	
 	function splitPreferredCities (citiesList){
 
 		var citieslist = [];
@@ -335,13 +337,55 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 	/**
 	 * clean modal register
 	 */
-	function cleanRegisterModal(){	
-		$('#registerModal').on('hidden.bs.modal', function (e) {
-			  $(this).find("input,textarea,select")
-			       .val('')
-			       .end();
-			})
+//	function cleanRegisterModal(){	
+//		$('#registerModal').on('hidden.bs.modal', function (e) {
+//			  $(this).find("input,textarea,select")
+//			       .val('')
+//			       .end();
+//			})
 		
+	function sendUpdate(dataToSend){
+		var user = [];
+		plainPD = sjcl.decrypt("secret",$scope.$storage.pd)
+		console.log(":"+plainPD)
+		
+		/* var cypheredMsg = sjcl.encrypt("secret", "Hi Amresh!");
+	    var plainMsg = sjcl.decrypt("secret", cypheredMsg);
+	
+	    console.log(cypheredMsg);
+	    console.log(plainMsg);*/
+		$.ajax({
+			type:'POST',
+			url:"/ASDEWeather/api/auth/user/updateUser", 
+			contentType:"application/json",
+			dataType:"json",
+			//data:JSON.stringify(dataToSend),
+			beforeSend: function (xhr) {
+				xhr.setRequestHeader ("Authorization", "Basic " + btoa(dataToSend.username + ":" + "ciccio"))//sjcl.decrypt("secret", $scope.$storage.pd)));
+			},
+			data:JSON.stringify(dataToSend),
+			success:function(response,status){
+
+				if(response.status=="OK"){	    			
+
+					//$scope.$storage.userData
+					//console.log(response.response);
+					user.push({username:dataToSend.username,password:"ciccio"});
+					$scope.login({username:'ciccio',password:"ciccio"},'system');
+					//responseHandler(response.response);
+					//	$scope.setData(response.response,"login"); 
+					//UserService.setLoggedUser(response.response);
+				}
+				else{
+
+
+					console.log(response.messageForUser);
+				}
+			},
+			error:function(e){
+				console.log(e)
+			}
+		});
 	}
 
 }]);
