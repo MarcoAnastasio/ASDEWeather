@@ -208,7 +208,7 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 		else if(type =="login"){
 			console.log("encryption test" );
 			
-			console.log(sjcl.encrypt("password", $scope.data.password))
+			console.log(sjcl.encrypt("secret", $scope.data.password))
 			console.log("password","{\"iv\":\"jQkXy84yDl7xoyITyUogog==\",\"v\":1,\"iter\":10000,\"ks\":128,\"ts\":64,\"mode\":\"ccm\",\"adata\":\"\",\"cipher\":\"aes\",\"salt\":\"V9+Eqx6m3aA=\",\"ct\":\"vtR64vdBfE4=\"}")
 			$scope.$storage = $localStorage.$reset({
 				status: 1,
@@ -216,7 +216,7 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 					id:input.user.id, name:input.user.firstname, email:input.user.email, 
 					city:"", preferedCities:input.currentWeatherForPreferedCities, notifications:input.notifications
 				},
-				pd: sjcl.encrypt("password", $scope.data.password)
+				pd: sjcl.encrypt("secret", $scope.data.password)
 			});
 			$scope.status=1
 			//$scope.data.id = input.id;
@@ -325,6 +325,14 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 	
 	function sendUpdate(dataToSend){
 		var user = [];
+		plainPD = sjcl.decrypt("secret",$scope.$storage.pd)
+		console.log(":"+plainPD)
+		
+		/* var cypheredMsg = sjcl.encrypt("secret", "Hi Amresh!");
+	    var plainMsg = sjcl.decrypt("secret", cypheredMsg);
+	
+	    console.log(cypheredMsg);
+	    console.log(plainMsg);*/
 		$.ajax({
 			type:'POST',
 			url:"/ASDEWeather/api/auth/user/updateUser", 
@@ -332,7 +340,7 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 			dataType:"json",
 			//data:JSON.stringify(dataToSend),
 			beforeSend: function (xhr) {
-				xhr.setRequestHeader ("Authorization", "Basic " + btoa(dataToSend.username + ":" + "ciccio"));
+				xhr.setRequestHeader ("Authorization", "Basic " + btoa(dataToSend.username + ":" + "ciccio"))//sjcl.decrypt("secret", $scope.$storage.pd)));
 			},
 			data:JSON.stringify(dataToSend),
 			success:function(response,status){
@@ -342,7 +350,7 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 					//$scope.$storage.userData
 					//console.log(response.response);
 					user.push({username:dataToSend.username,password:"ciccio"});
-					$scope.login({username:'ciccio',password:'ciccio'},'system');
+					$scope.login({username:'ciccio',password:"ciccio"},'system');
 					//responseHandler(response.response);
 					//	$scope.setData(response.response,"login"); 
 					//UserService.setLoggedUser(response.response);
