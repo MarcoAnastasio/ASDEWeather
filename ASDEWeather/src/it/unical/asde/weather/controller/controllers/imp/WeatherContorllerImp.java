@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import it.unical.asde.weather.controller.controllers.GenericController;
 import it.unical.asde.weather.controller.controllers.WeatherContorller;
-import it.unical.asde.weather.core.services.dataprovider.WeatherDataProvider;
+import it.unical.asde.weather.core.services.data.dataprovider.WeatherDataProvider;
 import it.unical.asde.weather.model.bean.comunication.request.RequestGeolocation;
 import it.unical.asde.weather.model.bean.comunication.request.RequestListCities;
 import it.unical.asde.weather.model.bean.comunication.request.RequestSingleCity;
@@ -64,6 +64,17 @@ public class WeatherContorllerImp extends GenericController implements WeatherCo
 	public @ResponseBody Object  getCurrentWeatherByCoords(@RequestBody RequestGeolocation request) {
 		try{
 			return fillCorrectGenericResponse(request, weatherDataProvider.getCurrentWeatherByCoords(request));
+		}catch (Exception e) {
+			return fillWrongGenericResponse(e, request);
+		}
+	}
+	
+	
+	@Override
+    @RequestMapping(value = "/api/weather/forecastWeatherAndUVByCity", method = RequestMethod.POST,consumes="application/json")
+	public @ResponseBody Object  getForecastWeatherAndUVByCity(@RequestBody RequestSingleCity request) {
+		try{
+			return fillCorrectGenericResponse(request, weatherDataProvider.getForecastWeatherAndUvByCity(request));
 		}catch (Exception e) {
 			return fillWrongGenericResponse(e, request);
 		}
