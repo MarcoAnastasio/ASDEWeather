@@ -36,7 +36,7 @@ public class UVData {
 	@Column
 	private Date storeTime;
 
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	private City city;
 
 	public Long getId() {

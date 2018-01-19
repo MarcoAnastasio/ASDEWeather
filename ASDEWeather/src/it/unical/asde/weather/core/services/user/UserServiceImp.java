@@ -131,8 +131,7 @@ public class UserServiceImp implements UserService{
 				returnObject.setCurrentWeatherForPreferedCities(currentWeather.getListForecastWeather());
 			}
 			
-		//3) check notification to show
-			//TODO ....
+		
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
@@ -223,6 +222,7 @@ public class UserServiceImp implements UserService{
 	@Transactional
 	public List<Notification> getNotifications(User currentLoggedUser) throws ASDECustomException {
 		
+		System.err.println("current user="+currentLoggedUser);
 		List<Notification> notificationList=new ArrayList<Notification>();
 		
 		List<City> preferedCities = currentLoggedUser.getPreferedCities();

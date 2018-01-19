@@ -1,4 +1,4 @@
-package it.unical.asde.weather.controller.controllers;
+package it.unical.asde.weather.controller.controllers.imp;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -10,7 +10,7 @@ import it.unical.asde.weather.model.bean.user.User;
 import it.unical.asde.weather.model.bean.user.UserDetailsImp;
 import it.unical.asde.weather.model.exception.ASDECustomException;
 
-public abstract class GenericController {
+public abstract class AbstractGenericController {
 
 	protected GenericResponse fillCorrectGenericResponse(Object originalRequest,Object response){
 		return new GenericResponse(Status.OK, null, null, originalRequest, response);

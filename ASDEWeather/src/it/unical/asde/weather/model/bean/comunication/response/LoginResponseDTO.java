@@ -11,6 +11,8 @@ public class LoginResponseDTO {
 	
 	private List<WeatherData> currentWeatherForPreferedCities;
 	
+	// notification is retrived whit a different services for performances reason
+	@Deprecated
 	private List<Object> notifications;
 
 	public User getUser() {
