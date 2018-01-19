@@ -68,13 +68,7 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 					//$scope.getNotifications();
 					//UserService.setLoggedUser(response.response);
 					$("#loginForm")[0].reset();
-				}
-//				else{
-//				alert("Either the Username or Password Incorrect")
-//				$('#notifyUser').tooltip('show')
-//				console.log(response.status);
-//				}   		
-
+				} 		
 			},
 			error:function(xhr,status){
 				if(xhr.status == "401"){
@@ -96,8 +90,6 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 								action: function(){
 									//$("#username").focus();??????????
 								}
-							},
-							close: function () {
 							}
 						}
 					});
@@ -350,23 +342,8 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 
 
 	/**
-	 * clean modal register
+	 * update user
 	 */
-//	$scope.cleanRegistrationModal = function(){
-//		if($scope.regError == true){
-//			$("#div").is(":visible");
-//			$scope.regError = false;
-//			return false;
-//		}
-//
-//		if($scope.regError != true){
-//			$("#div").not(":visible");
-//			$scope.regError = true;
-//			return true;
-//
-//		}
-//	}
-
 	function sendUpdate(dataToSend){
 		var user = [];
 
