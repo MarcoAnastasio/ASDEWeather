@@ -3,20 +3,21 @@
  */
 App.service('locationService',function(){
 	
-	var serverCall = function (url,type,auth,username,password){
+	var serverCall = function (url,type,dataToSend,auth,user){
 		
 		if(auth=="NONE"){
 			
 		}
 		else {
+			
 			$.ajax({
 				type:type,
 				url:url, 
 				contentType:"application/json",
 				dataType:"json",
-				//data:JSON.stringify(dataToSend),
+				data:JSON.stringify(dataToSend),
 				beforeSend: function (xhr) {
-					xhr.setRequestHeader ("Authorization", "Basic " + btoa($scope.login_data.username + ":" + $scope.login_data.password));
+					xhr.setRequestHeader ("Authorization", "Basic " + btoa(user.username + ":" + user.password));
 				},    	
 				success:function(response,status){
 
