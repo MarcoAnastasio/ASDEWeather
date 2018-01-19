@@ -30,7 +30,7 @@
 
 			<!-- Navabar login form -->
 			<div ng-show="$storage.status == 0" id="user-top-bar">
-				<form class="form-inline" ng-submit="login(userInfo)">
+				<form class="form-inline" ng-submit="login(userInfo)" id="loginForm">
 					<label class="sr-only" for="username">Username</label>
 					<div class="input-group mb-2 mr-sm-2 mb-sm-0">
 						<!-- 	<div class="input-group-addon">

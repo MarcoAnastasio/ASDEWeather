@@ -25,7 +25,7 @@
 							</div>
 						</div> <img class="img-fluid"
 						src="resources/img/portfolio/weather-default.jpg" alt="City image"
-						id="img-{{w.name}}" emit-last-repeater-element>
+						id="img-{{w.name.replace(' ','')}}" emit-last-repeater-element>
 					</a>
 					<div class="card-body">
 						<div class="portfolio-link" ng-click="WeatherForcast(w.name)">
