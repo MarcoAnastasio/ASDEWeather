@@ -6,9 +6,9 @@ import csv
 
 class City:
     def __init__(self,name,cityid,country,latitude,longitude):
-        self.name = name.encode("utf-8").replace("'",r"\'")
+        self.name = name.encode("utf-8").replace("'",r" ")
         self.cityid = str(cityid)
-        self.country = country.encode("utf-8").replace("'",r"\'")
+        self.country = country.encode("utf-8").replace("'",r" ")
         self.latitude = str(latitude)
         self.longitude = str(longitude)
 
@@ -68,4 +68,3 @@ with open('SimpleCountryList.csv') as f:
     data = csv.reader(f,delimiter=",")
     for row in data:
         writeCountryQuery(row)
-

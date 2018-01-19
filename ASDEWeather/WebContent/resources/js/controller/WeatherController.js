@@ -110,7 +110,7 @@ App.controller("WeatherController", function($rootScope, $scope){
 			$scope.weatherData.push({
 					id:input[i]["city"]["id"],
 					name:input[i]["city"]["name"],
-					dataAndTime:input[i]["city"]["name"],
+					dataAndTime:input[i]["city"]["date"],
 					temp:input[i]["mainTemperature"]["temp"],
 					minTemp:input[i]["mainTemperature"]["tempMin"],
 					maxTemp:input[i]["mainTemperature"]["tempMax"],

@@ -78,8 +78,8 @@
 					</a>
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdown">
-							<a class="dropdown-item">Hi {{$storage.userData.username}},</a> <a
-								class="dropdown-item" href="" class="btn btn-primary"
+							<a class="dropdown-header">Hi {{$storage.userData.username}},</a> 
+							<a class="dropdown-item" href="" class="btn btn-primary"
 								data-toggle="modal" data-target=".bd-example-modal-lg"">Settings</a>
 							<a class="dropdown-item" href="">Edit Profile</a>
 							<div class="dropdown-divider"></div>
