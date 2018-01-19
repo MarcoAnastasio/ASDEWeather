@@ -14,6 +14,7 @@ import it.unical.asde.weather.model.bean.comunication.request.RequestCityNameSub
 import it.unical.asde.weather.model.bean.comunication.request.RequestGeolocation;
 import it.unical.asde.weather.model.bean.comunication.response.GenericResponse.ErrorCode;
 import it.unical.asde.weather.model.bean.comunication.response.IndexResponseDTO;
+import it.unical.asde.weather.model.bean.data.weather.WeatherData;
 import it.unical.asde.weather.model.bean.geographical.City;
 import it.unical.asde.weather.model.exception.ASDECustomException;
 import it.unical.asde.weather.model.openweatherapi.response.APICurrentResponse;
@@ -63,7 +64,16 @@ public class GeneralService {
 		if(request==null || request.getSubName()==null || request.getSubName().isEmpty()){
 			throw new ASDECustomException(null, ErrorCode.WRONG_INPUT, null);
 		}
+		System.err.println("random substring="+request.getSubName());
 		return cityDao.findCityByNameSubstring(request.getSubName());
+	}
+
+	
+	@Transactional
+	public List<WeatherData> getRandomCitiesCurrentWeather() throws Exception{
+		List<City> randomCitiesFromList = cityDao.findRandomCities(NUMBER_RANDOM_CITIES);
+		APICurrentResponse currentWeatherByCities = weatherDataProvider.getCurrentWeatherByCities(randomCitiesFromList);
+		return currentWeatherByCities.getListForecastWeather();
 	}
 	
 	
