@@ -3,24 +3,12 @@
  */
 App.controller("SearchController", function($rootScope, $scope) {
 	
-	$scope.citis = [ {
-		"id" : '121212',
-		"name" : 'cosenza'
-	}, {
-		"id" : '131313',
-		"name" : 'rende'
-	}, {
-		"id" : '14141414',
-		"name" : 'london'
-	} ];
-	
-	
-	 console.log("Search Status");
-	  console.log($rootScope.searchStatus);
+	 // console.log("Search Status");
+	 // console.log($rootScope.searchStatus);
 	  
 	  $scope.clear=function(){
 		  $rootScope.searchStatus=0;
-		  console.log("am called");
+		  //console.log("am called");
 	  };
 	
 	$scope.autoComplateCall = function() {
@@ -72,17 +60,15 @@ App.controller("SearchController", function($rootScope, $scope) {
 
 				if (response.status == "OK") {
                      
-					$scope.searchStatus=1;
-					var current = response.response.listForecastWeather[0];
-					$rootScope.currentWeather= new ForecastWeatherDecoder(current);
+					  $scope.searchStatus=1;
+					  var current = response.response.listForecastWeather[0];
+					  $rootScope.currentWeather= new ForecastWeatherDecoder(current);
 					
-				 				 	
-					console.log("current");
-					console.log($rootScope.currentWeather)
-					
-					$rootScope.searchStatus=1;
-					$scope.$apply();
-				console.log(current);
+					    $rootScope.searchStatus=1;
+					    $scope.myMap($rootScope.currentWeather.city.latitude,
+								$rootScope.currentWeather.city.longitude);
+					    $rootScope.$apply();
+			         	//console.log($rootScope.currentWeather);
 					
 				} else {
 					console.log("Search Response for selected city Error");
@@ -114,22 +100,17 @@ App.controller("SearchController", function($rootScope, $scope) {
 
 					var forecasts = new Forecasts(response.response.listForecastWeather); //
 				
-				
-					console.log("forcast");
-					
-				
-
-					$rootScope.forcastByDay = groupBy(forecasts.forecastList,
+					$rootScope.forecastByDay = groupBy(forecasts.forecastList,
 							function(item) {
 								return [item.dateData.day ];
 							});
-					console.log("forcast by day");
-					console.log($scope.forcastByDay);
-	               $scope.currentDayForcast=$scope.forcastByDay[0];
-	               $scope.$apply();
-	               
-	               console.log( $scope.currentDayForcast[0].mainTemp);   
-	               $scope.startDraw();
+		
+					 //console.log($rootScope.forecastByDay);
+					 $rootScope.currentDayForecast=$rootScope.forecastByDay[0];
+	      
+					 $rootScope.$apply();	               
+	                 $scope.startDraw();
+	                
 				} else {
 					console.log("Search Response for selected city Error");
 					console.log(response);
@@ -153,11 +134,11 @@ App.controller("SearchController", function($rootScope, $scope) {
 		var temp=[];
 		var humid=[];
 		var pressure=[];
-			for (var i=0;i<$scope.currentDayForcast.length;i++){
-				 time_stamp[i]=$scope.currentDayForcast[i].dateData.time;
-				 temp[i]=$scope.currentDayForcast[i].mainTemp.temp;
-				 humid[i]=$scope.currentDayForcast[i].mainTemp.humidity;
-				 pressure[i]=$scope.currentDayForcast[i].mainTemp.pressure;
+			for (var i=0;i<$rootScope.currentDayForecast.length;i++){
+				 time_stamp[i]=$rootScope.currentDayForecast[i].dateData.time;
+				 temp[i]=$rootScope.currentDayForecast[i].mainTemp.temp;
+				 humid[i]=$rootScope.currentDayForecast[i].mainTemp.humidity;
+				 pressure[i]=$rootScope.currentDayForecast[i].mainTemp.pressure;
 		}
 		
 		
@@ -169,9 +150,9 @@ App.controller("SearchController", function($rootScope, $scope) {
 		        labels: ["Humidity"],
 		        fontColor: 'white',
 		        datasets: [
-		            {   label: 'of Votes',
-		                data:[humid[0],100-humid[0]],
-		                backgroundColor: ["#f44171", "#88918d"],
+		            {  
+		                data:[$rootScope.currentWeather.mainTemp.humidity,100-$rootScope.currentWeather.mainTemp.humidity],
+		                backgroundColor: ["#fed136", "#88918d"],
 		                borderWidth: 0
 		               
 		            }
@@ -183,7 +164,7 @@ App.controller("SearchController", function($rootScope, $scope) {
 		    	  
 		    	   elements: {
 						center: {
-							text: humid[0]+' '+'%',
+							text: $rootScope.currentWeather.mainTemp.humidity+' '+'%',
 		          color: 'white', // Default is #000000
 		          fontStyle: 'Arial', // Default is Arial
 		          sidePadding: 20 // Defualt is 20 (as a percentage)
@@ -196,43 +177,7 @@ App.controller("SearchController", function($rootScope, $scope) {
 		};
 	
 	
-		
-		var pc = document.getElementById("pressure__doughnutChart").getContext('2d');
-		var pressureChart_config={
-			    type: 'doughnut',
-			    data: {
-			        labels: ["Pressure"],
-			        datasets: [
-			            {
-			                data:[humid[0],100-humid[0]],
-			                backgroundColor: ["#35e099", "#88918d"], //rgba(244, 65, 113,0)
-		
-			                borderWidth: 0
-			               
-			               
-			            }
-			        ]
-			    },
-			    options: {
-			        responsive: true,
-			        segmentShowStroke: false,
-			        cutoutPercentage: 90,
-			        elements: {
-						center: {
-							text: pressure[0]+' '+'hPa',
-		          color: 'white', // Default is #000000
-		          fontStyle: 'Arial', // Default is Arial
-		          sidePadding: 20 // Defualt is 20 (as a percentage)
-						}
-					}
-			    
-			    }    
-			};
 
-		
-
-
-	
 			 chartPluginInit();
 
 			//var ctx = document.getElementById("humidty_doughnutChart").getContext("2d");
@@ -243,16 +188,17 @@ App.controller("SearchController", function($rootScope, $scope) {
 		
 		  
 		
-	/*	var time_stamp=[];
-		var temp=[];
-		var humid=[];
-			for (var i=0;i<$scope.currentDayForcast.length;i++){
-				 time_stamp[i]=$scope.currentDayForcast[i].date.time;
-				 temp[i]=$scope.currentDayForcast[i].mainTemp.temp;
-				 humid[i]=$scope.currentDayForcast[i].mainTemp.humidity;
+		var time_stamp=[];
+		var tempMin=[];
+		var tempMax=[];
+			for (var i=0;i<$rootScope.currentDayForecast.length;i++){
+				 time_stamp[i]=$rootScope.currentDayForecast[i].dateData.times;
+				 tempMax[i]=$rootScope.currentDayForecast[i].mainTemp.tempMax;
+				 tempMin[i]=$rootScope.currentDayForecast[i].mainTemp.tempMin;
 		}
 			console.log(  time_stamp);
 		var ctxL = document.getElementById("lineChart").getContext('2d');
+		 Chart.defaults.global.defaultFontColor = '#FFFFFF';
 		var myLineChart = new Chart(ctxL, {
 		    type: 'line',
 		 
@@ -260,37 +206,56 @@ App.controller("SearchController", function($rootScope, $scope) {
 		        labels: time_stamp,
 		        datasets: [
 		            {
-		                label: "Temprature",
+		                label: "Minimum Temprature",
 		       
-		                backgroundColor: "green",
-		                
+		             
+		                backgroundColor: "rgba(151,187,205,0.6)",
 		                fillColor: "rgba(220,220,220,0.2)",
 		                strokeColor: "rgba(220,220,220,1)",
 		                pointColor: "rgba(220,220,220,1)",
 		                pointStrokeColor: "#fff",
 		                pointHighlightFill: "#fff",
 		                pointHighlightStroke: "rgba(220,220,220,1)",
-		                data: temp
+		                data: tempMin
 		            },
 		            {
-		                label: "Humidity",
-		                backgroundColor: "#FFFFFF",
+		                label: "Maximum Temprature",
+		                backgroundColor: "#fed136",
 		                fillColor: "rgba(151,187,205,0.2)",
 		                strokeColor: "rgba(151,187,205,1)",
 		                pointColor: "rgba(151,187,205,1)",
 		                pointStrokeColor: "#fff",
 		                pointHighlightFill: "#fff",
 		                pointHighlightStroke: "rgba(151,187,205,1)",
-		                data: humid
+		                data: tempMax
 		            }
 		        ]
 		    },
 		    options: {
 		        responsive: true
 		    }    
-		});*/
+		});
 	};
 
+	
+	
+	$scope.myMap=function($lat,$lng) {
+		  //
+		  var mapCanvas = document.getElementById("map");
+		  var myLatLng =new google.maps.LatLng($lat,$lng);
+		  var mapOptions = {
+		    center: myLatLng, 
+		    zoom: 10
+		  };
+		  
+		 var map = new google.maps.Map(mapCanvas, mapOptions);
+	     var marker = new google.maps.Marker({
+	          position: myLatLng,
+	          map: map
+	       
+	        });
+		
+		}	
 	
 	
 });
