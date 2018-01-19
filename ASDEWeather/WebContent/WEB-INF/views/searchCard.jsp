@@ -113,7 +113,7 @@
 								</div>
 								<div class="col-sm">
 								
-												<div id="map" style="width:400px;height:250px;background:rgba(0,0,0,0)"></div>
+												<div id="map" style="width:100%; height:100%;background:rgba(0,0,0,0)"></div>
 								</div>
 							</div>
 						</div>
