@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import it.unical.asde.weather.controller.controllers.ExtraDataController;
-import it.unical.asde.weather.controller.controllers.GenericController;
 import it.unical.asde.weather.controller.controllers.WeatherContorller;
 import it.unical.asde.weather.core.services.data.dataprovider.ExtraDataProvider;
 import it.unical.asde.weather.core.services.data.dataprovider.WeatherDataProvider;
@@ -20,7 +19,7 @@ import it.unical.asde.weather.model.bean.comunication.request.RequestSingleCity;
 
 
 @Controller
-public class ExtraDataControllerImp extends GenericController implements ExtraDataController{
+public class ExtraDataControllerImp extends AbstractGenericController implements ExtraDataController{
 
 	@Autowired
 	public ExtraDataProvider extraDataProvider;

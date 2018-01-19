@@ -50,7 +50,7 @@ public class WeatherData {
 	@Column
 	protected Date storeTime;
 
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	protected City city;
 	
 	

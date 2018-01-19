@@ -5,7 +5,7 @@
     {
       "type": "Project",
       "id": "8daefa45-d533-4a66-9fab-cd92e620454a",
-      "lastModified": "2018-01-17T15:50:41.694+01:00",
+      "lastModified": "2018-01-20T00:30:23.183+01:00",
       "name": "ASDE"
     },
     {
@@ -485,7 +485,7 @@
         },
         "bodyType": "Text",
         "autoSetLength": true,
-        "textBody": "{\n  \"subName\":\"Cose\"\n}"
+        "textBody": "{\n  \"subName\":\"napoli\"\n}"
       },
       "headersType": "Form",
       "uri": {
@@ -501,7 +501,7 @@
         "path": "/ASDEWeather/api/commons/cityByNameSubstring"
       },
       "id": "1fa0c3d7-1d13-4658-9135-66328b7a726f",
-      "lastModified": "2018-01-10T18:08:38.570+01:00",
+      "lastModified": "2018-01-20T00:27:55.455+01:00",
       "name": "/api/commons/cityByNameSubstring",
       "headers": [
         {
@@ -553,6 +553,42 @@
           "value": "application/json"
         }
       ],
+      "metaInfo": {},
+      "parentId": "9d193861-dc4d-4546-b841-5e5ec7d7edb6"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": ""
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/ASDEWeather/api/weather/getRandomCities"
+      },
+      "id": "874e954e-e055-426f-8003-53cc8fbe563f",
+      "lastModified": "2018-01-20T00:30:23.183+01:00",
+      "name": "/api/weather/getRandomCities",
+      "headers": [],
       "metaInfo": {},
       "parentId": "9d193861-dc4d-4546-b841-5e5ec7d7edb6"
     },

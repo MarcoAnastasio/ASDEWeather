@@ -9,24 +9,16 @@ import org.springframework.transaction.annotation.Transactional;
 import it.unical.asde.weather.dao.AbstarctGenericDAO;
 import it.unical.asde.weather.model.bean.data.weather.WeatherData;
 import it.unical.asde.weather.model.bean.geographical.City;
+import it.unical.asde.weather.model.bean.geographical.Country;
 
 @Service
 public class CityDaoImp extends AbstarctGenericDAO<City> implements CityDao{
 
-	@Override
-	@Transactional(readOnly=true)
-	public List<City> findAll2(){
-		Session session = getSession();
-		System.out.println("findAllSession="+System.identityHashCode(session));
-		return session.createQuery("from City").list();
-	}
 
-	
 	@Override
 	@Transactional(readOnly=true)
 	public City findCityByName(String cityName) {
 		Session session = getSession();
-		System.out.println("findCityByNAme="+System.identityHashCode(session));
 		return (City)session.createQuery("from City where name =:cityName").setParameter("cityName", cityName).uniqueResult();
 	}
 	
@@ -36,8 +28,6 @@ public class CityDaoImp extends AbstarctGenericDAO<City> implements CityDao{
 	@Transactional(readOnly=true)
 	public List<City> findCitiesByName(List<String> cityNameList) {
 		Session session = getSession();
-		System.out.println("findCityByNAme="+System.identityHashCode(session));
-		
 		return session.createQuery("from City where name IN (:cityNames)",City.class)
 				.setParameter("cityNames", cityNameList).list();
 	}
@@ -46,8 +36,6 @@ public class CityDaoImp extends AbstarctGenericDAO<City> implements CityDao{
 	@Transactional(readOnly=true)
 	public List<City> findCitiesByName(String[] cityNameList) {
 		Session session = getSession();
-		System.out.println("findCityByNAme="+System.identityHashCode(session));
-		
 		return session.createQuery("from City where name IN (:cityNames)",City.class)
 				.setParameter("cityNames", cityNameList).list();
 	}
@@ -68,6 +56,20 @@ public class CityDaoImp extends AbstarctGenericDAO<City> implements CityDao{
 		return getSession().createQuery("from City where lower(name) LIKE lower(:searchKeyword)",City.class)
 				.setParameter("searchKeyword", "%"+searchKeyword+"%").list();
 	}
+
+
+
+	@Override
+	public List<City> findRandomCities(int number) {
+		return getSession().createNativeQuery(
+				"SELECT * FROM City ORDER BY RAND() LIMIT :number", City.class)
+				.setParameter("number",number ).list();
+	}
 	
-	
+	/*
+	get random cities
+	SELECT column FROM table
+	ORDER BY RAND()
+	LIMIT 5
+	*/
 }

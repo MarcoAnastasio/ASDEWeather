@@ -10,14 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import it.unical.asde.weather.controller.controllers.GenericController;
 import it.unical.asde.weather.controller.controllers.UserApiController;
 import it.unical.asde.weather.core.services.user.UserService;
 import it.unical.asde.weather.model.bean.comunication.response.GenericResponse;
 import it.unical.asde.weather.model.bean.user.User;
 
 @Controller
-public class UserApiControllerImp extends GenericController implements UserApiController{
+public class UserApiControllerImp extends AbstractGenericController implements UserApiController{
 
 	@Autowired
 	private UserService userService;
