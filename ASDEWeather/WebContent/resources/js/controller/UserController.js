@@ -317,7 +317,9 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 		}
 
 		sendUpdate(dataToSend);
-
+		$('#settingsModal').modal('hide');
+		
+		console.log("model shoudl disapear")
 	}// END OF REMVOE USER CITY
 
 	function splitPreferredCities (citiesList){
@@ -330,9 +332,32 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 		}
 		console.log(citieslist);
 		return citieslist;
+	} // end of Split Prefferred Cities
+
+	$scope.profileUpdate = function(userInfo){
+		var prefedCities = [];
+		var prefedCitiesToSplit = [];
+		console.log(userInfo)
+		if(userInfo.preferedCities!=null){
+			console.log("prefered cities not null")
+			console.log(userInfo.preferedCities)
+			prefedCitiesToSplit =  splitPreferredCities(userInfo.preferedCities);
+			prefedCities = prefedCitiesToSplit;
+			//console.log($scope.$storage.userData.preferedCities)
+			//prefedCities = prefedCitiesToSplit;
+		}
+		dataToSend = {
+				'id':userInfo.id,
+				'username':userInfo.username,
+				'firstName':userInfo.firstname,
+				'lastName':userInfo.lastname,
+				'email':userInfo.email,
+				'preferedCities':prefedCities
+			}
+		
+		sendUpdate(dataToSend);
+		
 	}
-
-
 	/**
 	 * clean modal register
 	 */
@@ -353,8 +378,7 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 		//console.log(plainMsg);
 		var pd = atob($scope.$storage.pd);
 		var plainPd = sjcl.decrypt("secret",pd);
-		console.log("Palin Password")
-		console.log(plainPd);
+		
 		$.ajax({
 			type:'POST',
 			url:"/ASDEWeather/api/auth/user/updateUser", 

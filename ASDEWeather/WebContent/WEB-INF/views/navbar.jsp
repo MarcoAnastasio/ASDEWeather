@@ -106,8 +106,8 @@
 							aria-labelledby="navbarDropdown">
 							<a class="dropdown-header">Hi {{$storage.userData.username}},</a> 
 							<a class="dropdown-item" href="" class="btn btn-primary"
-								data-toggle="modal" data-target=".bd-example-modal-lg"">Settings</a>
-							<a class="dropdown-item" href="">Edit Profile</a>
+								data-toggle="modal" data-target=".bd-example-modal-lg"">Edit Profile</a>
+							
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item" ng-click="logout()">Log Out</a>
 						</div></li>
