@@ -20,6 +20,7 @@ function ForecastWeatherDecoder(forecastWeather_input) {
 	this.mainTemp = new MainTempDecoder(forecastWeather_input.mainTemperature);
 	this.weather = new WeatherDecoder(forecastWeather_input.weather);
 	this.wind = new WindDecoder(forecastWeather_input.wind);
+	this.city=new CityDecoder(forecastWeather_input.city);
 };
 function MainTempDecoder(main_temp_input) {
 	this.temp = main_temp_input.temp;
@@ -43,6 +44,19 @@ function WindDecoder(wind_input) {
 	this.speed = wind_input.speed;
 	this.deg = wind_input.deg;
 
+}
+function CityDecoder(city_input){
+this.name=city_input.name;
+this.id=city_input.id;
+this.latitude=city_input.latitude;
+this.longitude=city_input.longitude;
+this.country=new CountryDeoder(city_input.country);
+}
+
+function CountryDeoder(country_input){
+	this.name=country_input.name;
+	this.id=country_input.id;
+	this.code=country_input.code;
 }
 
 function DayNamer(day, cond) {
@@ -78,9 +92,7 @@ function dateDecoder(date_input) {
 	this.minute = minute;
 	this.times = substrings[1];
 	this.dayName = dayName;
-	/* foreach (substring in substrings){
-		// Console.WriteLine(substring); 
-	 }*/
+
 }
 
 function groupBy(array_input, func_input) {

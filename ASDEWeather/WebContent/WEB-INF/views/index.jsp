@@ -31,8 +31,21 @@
 	rel='stylesheet' type='text/css'>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+
+<!-- weather font  -->
+<link href="resources/css/weather-icons.css" rel="stylesheet">
+<link href="resources/css/weather-icons.min.css" rel="stylesheet">
+<link href="resources/css/weather-icons-wind.css" rel="stylesheet">
+<link href="resources/css/weather-icons-wind.min.css" rel="stylesheet">
+
+
 <!-- Custom styles for this template -->
 <link href="resources/css/main.css" rel="stylesheet">
+
+
 
 <!-- Alert css -->
 <link rel="stylesheet"
@@ -49,7 +62,7 @@
 
 <script src="resources/js/app.js"></script>
 <script src="resources/js/viewModel/usersSession.js"></script>
-<script src="resources/js/controller/NotificationController.js"></script> 
+<script src="resources/js/controller/NotificationController.js"></script>
 <script src="resources/js/controller/UserController.js"></script>
 <script src="resources/js/controller/WeatherController.js"></script>
 <script src="resources/js/controller/ForcastController.js"></script>
@@ -65,7 +78,7 @@
 
 	<!-- Navigation -->
 	<%@include file="navbar.jsp"%>
-	
+
 	<!-- Header -->
 	<%@include file="header.jsp"%>
 
@@ -75,8 +88,8 @@
 	<!--  Other cities -->
 	<%@include file="othercities.jsp"%>
 
-<!-- 	<div ng-view></div>   ?????????'
- -->	
+	<!-- 	<div ng-view></div>   ?????????'
+ -->
 	<!-- Guide -->
 	<%@include file="guide.jsp"%>
 
@@ -115,7 +128,7 @@
 
 	<!-- Google API -->
 	<script type="text/javascript"
-		src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBr_onlsVMtLd-hHtEm_Os2-DZCtmgKc4Y&libraries=places"></script>
+		src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBr_onlsVMtLd-hHtEm_Os2-DZCtmgKc4Y&libraries=places,maps"></script>
 	<script src="resources/js/imageAPI.js" type="application/javascript"></script>
 
 
