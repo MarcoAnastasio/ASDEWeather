@@ -11,7 +11,7 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 			city:"", country:""
 		}
 	});
-
+	//getNotifications();
 	$scope.status = $localStorage.status;
 	//$scope.status = UserService.loggedUser();
 	$scope.regError = false;
@@ -42,8 +42,9 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 		console.log(userInfo)
 		dataToSend = {'username':$scope.login_data.username, 'password':$scope.login_data.password}
 		console.log(dataToSend);
-
-
+		
+		var notification = []
+		
 		$.ajax({
 			type:'POST',
 			url:"/ASDEWeather/api/auth/user/login", 
@@ -63,6 +64,7 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 					console.log(response.response);
 					//responseHandler(response.response);
 					$scope.setData(response.response,"login"); 
+					//$scope.getNotifications();
 					//UserService.setLoggedUser(response.response);
 				}
 //				else{
@@ -209,15 +211,16 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 			console.log("encryption test" );
 			
 			console.log(sjcl.encrypt("secret", $scope.data.password))
+		
 			console.log("password","{\"iv\":\"jQkXy84yDl7xoyITyUogog==\",\"v\":1,\"iter\":10000,\"ks\":128,\"ts\":64,\"mode\":\"ccm\",\"adata\":\"\",\"cipher\":\"aes\",\"salt\":\"V9+Eqx6m3aA=\",\"ct\":\"vtR64vdBfE4=\"}")
 			$scope.$storage = $localStorage.$reset({
 				status: 1,
 				userData:{
 					id:input.user.id, name:input.user.firstname, email:input.user.email, 
-					city:"", preferedCities:input.currentWeatherForPreferedCities, notifications:input.notifications
+					city:"", preferedCities:input.currentWeatherForPreferedCities
 				},
-				pd: sjcl.encrypt("secret", $scope.data.password)
-			});
+				pd: sjcl.encrypt("secret", $scope.data.password),
+				});
 			$scope.status=1
 			//$scope.data.id = input.id;
 			$localStorage.userData.id = input.user.id;

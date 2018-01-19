@@ -57,7 +57,7 @@
 			</div>
 
 			<!-- NavBar logged user  -->
-			<div class="form-inline my-2 my-lg-0" ng-show="$storage.status == 1">
+			<div class="form-inline my-2 my-lg-0" ng-if="$storage.status == 1">
 				<ul class=" navbar-nav">
 					<li class="nav-item" ng-controller ="NotificationController" ng-init="getNotifications()">
 					
@@ -67,12 +67,15 @@
 							
 							</i>
 							<div class="dropdown-menu dropdown-menu-right"
-							aria-labelledby="navbarDropdown" overflow = "scroll">
+							aria-labelledby="navbarDropdown"  style="overflow-y:scroll; max-height:300px;">
 								<span class="dropdown-item" ng-repeat="w in notificationList">
 								{{w.weatherData.city.name}}</br />
 								{{w.notificationReason}} <br /> 
-								{{w.messageForUser}}</span>
+								{{w.messageForUser}}
 								<hr>
+								</span>
+								
+								<button class="btn btn-sm btn-primary">clear</button>
 							</div>
 							
 					</a>
@@ -84,12 +87,10 @@
 					</i>
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdown">
-								<span class="dropdown-item">{{notificationsStatus}}</span>
-								<span class="dropdown-item">Noticfion slakdkjfslj alkjsdlkjf sa
-								adjfkj lj</span>
-								<hr>
-								<span class="dropdown-item">Noticfion slakdkjfslj alkjsdlkjf sa
-								adjfkj lj</span>
+								
+								<span class="dropdown-item">No Weather Notifications for your cities</span>
+							
+								
 							</div>
 					
 					</a>
