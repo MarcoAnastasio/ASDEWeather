@@ -49,12 +49,13 @@
 
 <script src="resources/js/app.js"></script>
 <script src="resources/js/viewModel/usersSession.js"></script>
+<script src="resources/js/controller/NotificationController.js"></script> 
 <script src="resources/js/controller/UserController.js"></script>
 <script src="resources/js/controller/WeatherController.js"></script>
 <script src="resources/js/controller/ForcastController.js"></script>
 <script src="resources/js/controller/ForcastWeatherDecoder.js"></script>
 <script src="resources/js/controller/SearchController.js"></script>
-<script src="resources/js/controller/NotificationController.js"></script>
+
 <script src="resources/js/utility/chartPlugin.js"></script>
 
 <script src="resources/js/viewModel/responseHandler.js"></script>

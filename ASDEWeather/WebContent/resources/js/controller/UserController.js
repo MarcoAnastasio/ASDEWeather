@@ -3,15 +3,15 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 	function($rootScope, $scope, $window, $localStorage, $sessionStorage ){	
 
 	$scope.$storage = $localStorage;
-
+	$scope.secret = "secret";
 	$scope.$storage = $localStorage.$default({
 		status: 0,
 		userData:{
 			id:"", name:"test_data", email:"",
-			city:"", country:""
+			city:"", country:"", pd:""
 		}
 	});
-
+	//getNotifications();
 	$scope.status = $localStorage.status;
 	//$scope.status = UserService.loggedUser();
 	$scope.regError = false;
@@ -26,9 +26,9 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 	};
 
 
-/**
- * ************************login************************
- */
+	/**
+	 * ************************login************************
+	 */
 	$scope.login = function(userInfo,type){
 		console.log("test");
 		//$scope.status = 1; ???????
@@ -43,6 +43,7 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 		dataToSend = {'username':$scope.login_data.username, 'password':$scope.login_data.password}
 		console.log(dataToSend);
 
+		var notification = []
 
 		$.ajax({
 			type:'POST',
@@ -56,12 +57,15 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 
 				if(response.status=="OK"){
 					$scope.status = 1;
+					$scope.passkey = btoa(sjcl.encrypt("secret",$scope.login_data.password));
 					$localStorage.$reset({
-						status: 1
+						status: 1,
+						pd:$scope.passkey
 					});
 					console.log(response.response);
 					//responseHandler(response.response);
 					$scope.setData(response.response,"login"); 
+					//$scope.getNotifications();
 					//UserService.setLoggedUser(response.response);
 				}
 //				else{
@@ -127,9 +131,9 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 		});
 	}
 
-/**
- * *************************logout************************
- */
+	/**
+	 * *************************logout************************
+	 */
 	$scope.logout = function logout(){
 		$localStorage.$reset({
 			status: 0
@@ -141,9 +145,9 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 		$scope.setData(data, 'logout');
 	}
 
-/**
- * ************************Register************************
- */
+	/**
+	 * ************************Register************************
+	 */
 	$scope.register = function(user) {
 		$scope.master = angular.copy(user); 
 		console.log('User clicked register', user.lastname);
@@ -169,7 +173,7 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 			dataType:"json",
 			data:JSON.stringify(dataToSend),
 			success:function(response,status){				
-			
+
 				if(response.status=="OK"){
 					$scope.regError = true;
 					console.log(response.response);	    			
@@ -191,21 +195,23 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 				}
 			},
 			error:function(xhr,status){
-				
-					$.alert({
-						title: 'Error!',
-						content: 'Impossible execute request!',
-						type: 'red',
-						typeAnimated: true,
-					});			
+
+				$.alert({
+					title: 'Error!',
+					content: 'Impossible execute request!',
+					type: 'red',
+					typeAnimated: true,
+				});			
 			}	    	
 		});
 	}
 
-/**
- * *************************set data??????????????????????************************
- */	
+	/**
+	 * *************************set data??????????????????????************************
+	 */	
 	$scope.setData = function (input, type){
+
+		console.log(input)
 		var selected = $scope.data;		
 		if(type == 'register')
 			selected=$scope.reg_data;
@@ -216,17 +222,14 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 			//$scope.loadSelectedCity();
 		}
 		else if(type =="login"){
-			console.log("encryption test" );
-			
-			console.log(sjcl.encrypt("secret", $scope.data.password))
-			console.log("password","{\"iv\":\"jQkXy84yDl7xoyITyUogog==\",\"v\":1,\"iter\":10000,\"ks\":128,\"ts\":64,\"mode\":\"ccm\",\"adata\":\"\",\"cipher\":\"aes\",\"salt\":\"V9+Eqx6m3aA=\",\"ct\":\"vtR64vdBfE4=\"}")
+
 			$scope.$storage = $localStorage.$reset({
 				status: 1,
 				userData:{
 					id:input.user.id, name:input.user.firstname, email:input.user.email, 
-					city:"", preferedCities:input.currentWeatherForPreferedCities, notifications:input.notifications
+					city:"", preferedCities:input.currentWeatherForPreferedCities
 				},
-				pd: sjcl.encrypt("secret", $scope.data.password)
+				pd: $scope.passkey
 			});
 			$scope.status=1
 			//$scope.data.id = input.id;
@@ -238,11 +241,7 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 			//$localStorage.userData.password = sjcl.encrypt(input.user.password, "data");
 			$localStorage.userData.preferedCities = input.currentWeatherForPreferedCities;
 			$localStorage.userData.notifications = input.notifications;
-			/*$scope.data.name = input.user.username;
-		$scope.data.lastname = input.user.lastname;
-		$scope.data.email = input.user.email;
-		$scope.data.password = input.user.password;
-		$scope.preferedCities = input.currentWeatherForPreferedCities; */
+
 			if(type != 'logout'){
 				$scope.$apply();
 			}
@@ -287,7 +286,7 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 		};
 		sendUpdate(dataToSend);
 		//console.log(dataToSend)
-		
+
 	}// END OF ADD UER CITY
 
 	// REMOVE USER CITY
@@ -302,12 +301,12 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 		//var index = prefedCities.indexOf(cityId);
 		for(var i =0; i<prefedCities.length; i++){
 			if(cityId == prefedCities[i].id)
-					var index = i;
+				var index = i;
 		}
-		
+
 		prefedCities.splice(index,1);
 		console.log(prefedCities)
-		
+
 		dataToSend = {
 			'id':$scope.$storage.userData.id,
 			'username':$scope.$storage.userData.username,
@@ -316,11 +315,11 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 			'email':$scope.$storage.userData.email,
 			'preferedCities':prefedCities
 		}
-		
+
 		sendUpdate(dataToSend);
-		
+
 	}// END OF REMVOE USER CITY
-	
+
 	function splitPreferredCities (citiesList){
 
 		var citieslist = [];
@@ -332,28 +331,30 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 		console.log(citieslist);
 		return citieslist;
 	}
-	
-	
+
+
 	/**
 	 * clean modal register
 	 */
 //	function cleanRegisterModal(){	
-//		$('#registerModal').on('hidden.bs.modal', function (e) {
-//			  $(this).find("input,textarea,select")
-//			       .val('')
-//			       .end();
-//			})
-		
+//	$('#registerModal').on('hidden.bs.modal', function (e) {
+//	$(this).find("input,textarea,select")
+//	.val('')
+//	.end();
+//	})
+
 	function sendUpdate(dataToSend){
 		var user = [];
-		plainPD = sjcl.decrypt("secret",$scope.$storage.pd)
-		console.log(":"+plainPD)
-		
+
 		/* var cypheredMsg = sjcl.encrypt("secret", "Hi Amresh!");
 	    var plainMsg = sjcl.decrypt("secret", cypheredMsg);
-	
-	    console.log(cypheredMsg);
-	    console.log(plainMsg);*/
+		 */
+		//console.log(atob(sjcl.decrypt("secret",$scope.$storage.pd)));
+		//console.log(plainMsg);
+		var pd = atob($scope.$storage.pd);
+		var plainPd = sjcl.decrypt("secret",pd);
+		console.log("Palin Password")
+		console.log(plainPd);
 		$.ajax({
 			type:'POST',
 			url:"/ASDEWeather/api/auth/user/updateUser", 
@@ -361,7 +362,7 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 			dataType:"json",
 			//data:JSON.stringify(dataToSend),
 			beforeSend: function (xhr) {
-				xhr.setRequestHeader ("Authorization", "Basic " + btoa(dataToSend.username + ":" + "ciccio"))//sjcl.decrypt("secret", $scope.$storage.pd)));
+				xhr.setRequestHeader ("Authorization", "Basic " + btoa(dataToSend.username + ":" + plainPd))//sjcl.decrypt("secret", $scope.$storage.pd)));
 			},
 			data:JSON.stringify(dataToSend),
 			success:function(response,status){
@@ -369,12 +370,10 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 				if(response.status=="OK"){	    			
 
 					//$scope.$storage.userData
-					//console.log(response.response);
-					user.push({username:dataToSend.username,password:"ciccio"});
-					$scope.login({username:'ciccio',password:"ciccio"},'system');
-					//responseHandler(response.response);
-					//	$scope.setData(response.response,"login"); 
-					//UserService.setLoggedUser(response.response);
+
+					user.push({username:dataToSend.username,password:plainPd});
+					$scope.login({username:dataToSend.username,password:plainPd},'system');
+
 				}
 				else{
 
