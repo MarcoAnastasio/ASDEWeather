@@ -52,13 +52,15 @@ this.name=city_input.name;
 this.id=city_input.id;
 this.latitude=city_input.latitude;
 this.longitude=city_input.longitude;
+if(city_input.country != null)
 this.country=new CountryDeoder(city_input.country);
 }
 
 function CountryDeoder(country_input){
-	this.name=country_input.name;
-	this.id=country_input.id;
-	this.code=country_input.code;
+	this.name=country_input.name != null ? country_input.name : "";
+	this.id=country_input.id != null ? country_input.id : 0;
+	this.code=country_input.code != null ? country_input.code : "";
+	
 }
 
 function DayNamer(day, cond) {
