@@ -3,14 +3,14 @@
  */
 
 
-function Forecasts(forecasts_input) {
+function Forecasts(forecasts_input,uvdata) {
 	var forecastList = []
 	for (var i = 0; i < forecasts_input.length; i++) {
-		forecastList[i] = new ForecastWeatherDecoder(forecasts_input[i])
+		forecastList[i] = new ForecastWeatherDecoder(forecasts_input[i],uvdata)
 
 	}
 	this.forecastList = forecastList;
-
+	this.uvdata= uvdata.value;
 }
 
 function ForecastWeatherDecoder(forecastWeather_input) {
@@ -22,6 +22,7 @@ function ForecastWeatherDecoder(forecastWeather_input) {
 	this.wind = new WindDecoder(forecastWeather_input.wind);
 	this.city=new CityDecoder(forecastWeather_input.city);
 };
+
 function MainTempDecoder(main_temp_input) {
 	this.temp = main_temp_input.temp;
 	this.tempMin = main_temp_input.tempMin;
