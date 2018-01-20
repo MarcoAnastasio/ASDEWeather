@@ -28,7 +28,8 @@ App.controller("NotificationController", ["$scope","$rootScope","$localStorage",
 					if (response.response.length > 0){
 						//$scope.$storage = $localStorage.setItem({
 							$scope.notificationsStatus= response.response.length,
-							$scope.notificationList =  response.response
+							$scope.notificationList =  new Notifications(response.response);
+							$scope.notificationList = $scope.notificationList.notification_list;
 						//});
 						$scope.$apply();
 						

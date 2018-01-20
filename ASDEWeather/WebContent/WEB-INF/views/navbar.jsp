@@ -68,12 +68,14 @@
 							</i>
 							<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdown"  style="overflow-y:scroll; max-height:300px;">
-								<span class="dropdown-item" ng-repeat="w in notificationList">
-								{{w.weatherData.city.name}}</br />
-								{{w.notificationReason}} <br /> 
-								{{w.messageForUser}}
-								<hr>
-								</span>
+								<spna class="dropdown-item" ng-repeat="w in notificationList">
+								{{w.cityName}}<br/>
+								{{w.message}}<br/>
+								<div class="dropdown-divider"></div>
+								<!-- {{w.weatherData.}}
+								{{w.notificationReason}} <br/> 
+								{{w.messageForUser}} -->
+								</spna>
 								
 								<button class="btn btn-sm btn-primary">clear</button>
 							</div>
