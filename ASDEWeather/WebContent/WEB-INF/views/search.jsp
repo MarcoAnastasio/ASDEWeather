@@ -8,9 +8,9 @@
 						<div class="col">
 							<label class="col-form-label text-right" for="searchQuery">
 								<span ng-if="query">{{ 'search for: ' + query}}</span>
-								<div ng-if="(query).length<=4">
+								<div ng-if="(query).length<=2">
 								
-								<div ng-init="clearSearch()"></div>
+								  <div ng-init="clearSearch()"></div> 
 								</div>
 							</label>
 						</div>
@@ -19,7 +19,7 @@
 						<div class="col-12">
 							<input class="form-control form-control-lg" id="searchQuery"
 								placeholder="Search for cities" autofocus ng-model="query"
-								ng-change="autoComplateCall()" onfocusout="">
+								ng-change="autoComplateCall()">
 						</div>
 						<!-- col-12 -->
 					</div>
@@ -37,7 +37,7 @@
 	</div>
 	<!-- col-container -->
 
-	<div class="cities-list container" ng-show="query&&(query.length)>4" >
+	<div class="cities-list container" ng-show="query" >
 		<div class="row justify-content-center">
 			<div class="col-12 col-sm-9 col-md-7 col-lg-5">
 				<ul class=" list-group">
@@ -62,4 +62,3 @@
 	</div>
 	
 </div>
-

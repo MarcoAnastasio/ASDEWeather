@@ -3,15 +3,15 @@
  */
 App.controller("SearchController", function($rootScope, $scope) {
 	
-	
+	//$scope.searchResponce=0;
 	
 	$scope.autoComplateCall = function() {
-		$scope.cityListHide=0;
+		 $rootScope.cityListHide=0;
 		var dataToSend = {
 			"subName" : $scope.query
 
 		};
-		if ($scope.query.length > 3) {
+		if ($scope.query.length) {
 			$.ajax({
 				type : 'POST',
 				url : "/ASDEWeather/api/commons/cityByNameSubstring",
@@ -21,8 +21,12 @@ App.controller("SearchController", function($rootScope, $scope) {
 				success : function(response, status) {
 
 					if (response.status == "OK") {
-						$rootScope.cities = response.response;
-						
+					 	$rootScope.cities = response.response;
+					 	
+					  //  console.log("am calld agaain"+$scope.query);
+					   // console.log($rootScope.cities);
+					    $rootScope.$apply();
+						 
 					} else {
 						console.log("Weather Response Error");
 						console.log(response);
@@ -38,7 +42,7 @@ App.controller("SearchController", function($rootScope, $scope) {
 
 	$scope.currentWeatherByCityCall = function($cityId, $cityName,$city) {	
 		$scope.forecastByCityCall($cityId, $cityName);  ///call the weather
-		$scope.cityListHide=1;
+		
 		var dataToSend = {
 				"cityId" : $cityId,
 				"cityName" : $cityName
@@ -64,7 +68,10 @@ App.controller("SearchController", function($rootScope, $scope) {
 					    
 					    $scope.myMap($rootScope.currentWeather.city.latitude,
 								$rootScope.currentWeather.city.longitude);
-					    $rootScope.searchStatus=1;
+					    
+					    $rootScope.searchStatus=1; //controls the  search status window
+					    
+					    $rootScope.cityListHide=1; //controls the list hider
 					    $rootScope.$apply();
 			         	
 					
@@ -80,6 +87,7 @@ App.controller("SearchController", function($rootScope, $scope) {
 	}
 	
 	$scope.forecastByCityCall = function($cityId, $cityName) {
+		console.log("abel"+$cityId);
 		var dataToSend = {
 			"cityId" : $cityId,
 			"cityName" : $cityName
@@ -122,9 +130,9 @@ App.controller("SearchController", function($rootScope, $scope) {
 
 	};	
 	
-	$rootScope.clearSearch = function(){
-		$rootScope.searchStatus=0;
-		$rootScope.$apply();
+	$rootScope.clearSearch = function (){
+	 	$rootScope.searchStatus=0;
+		 $rootScope.$apply();
 	}
 
 	$rootScope.startDraw =function () {
