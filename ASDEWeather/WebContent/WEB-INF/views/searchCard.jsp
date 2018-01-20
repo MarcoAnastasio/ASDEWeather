@@ -16,16 +16,30 @@
 								{{currentWeather.weather.descritpion}}</h6>
 						</div>
 
-						<div class="container">
+						<div class="container" style="padding-bottom:10px">
 							<div class="row">
 								<div class="col-sm">
 									<h1 style="text-align: left; color: white; font-size: 70px;">{{currentWeather.mainTemp.temp}}
 										&deg C</h1>
 								</div>
 								<div class="col-sm">
-									<h3 style="text-align: center; color: white; font-size: 40px;">
-										{{currentWeather.city.name}}
-										,{{currentWeather.city.country.name}}</h3>
+
+
+
+									<div class="container">
+										<div class="row">
+											<div class="col-sm">
+												<h3
+													style="text-align: center; color: white; font-size: 40px;">
+													{{currentWeather.city.name}}</h3>
+
+												<h6
+													style="text-align: center; color: white; font-size: 20px;  font-style: italic;">
+													{{currentWeather.city.country.name}}</h6>
+											</div>
+
+										</div>
+									</div>
 								</div>
 								<div class="col-sm">
 									<div style="padding-left: 5px;">
@@ -83,31 +97,8 @@
 												<td>{{currentWeather.mainTemp.pressure}}</td>
 
 											</tr>
-											<tr>
-
-												<td>
-													<h6 style="text-align: left;">Sea Level</h6>
-												</td>
-												<td>{{currentWeather.mainTemp.seaLevel}}</td>
-
-											</tr>
-											<tr>
-
-												<td>
-													<h6 style="text-align: left;">Ground Level</h6>
-												</td>
-												<td>{{currentWeather.mainTemp.groundLevel}}</td>
-
-											</tr>
-
-											<tr>
-
-												<td>
-													<h6 style="text-align: left;">TempKf</h6>
-												</td>
-												<td>{{currentWeather.mainTemp.tempKf}}</td>
-
-											</tr>
+											
+											
 										</tbody>
 									</table>
 								</div>
@@ -188,4 +179,3 @@
 	</div>
 
 </div>
-
