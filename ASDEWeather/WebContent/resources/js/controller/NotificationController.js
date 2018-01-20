@@ -13,7 +13,10 @@ App.controller("NotificationController", ["$scope","$rootScope","$window","$loca
 	$interval(function(){$rootScope.getNotifications();},3600000);
 	
 	$rootScope.getNotifications = function(){
-
+		
+		var pd = atob($scope.$storage.pd);
+		var plainPd = sjcl.decrypt("secret",pd);
+		
 		console.log("IN GET NOtificatios")
 		var notificationList = [];
 		$.ajax({
@@ -22,7 +25,7 @@ App.controller("NotificationController", ["$scope","$rootScope","$window","$loca
 			contentType:"application/json",
 			dataType:"json",
 			beforeSend: function (xhr) {
-				xhr.setRequestHeader ("Authorization", "Basic " + btoa("ciccio"+ ":" + "ciccio"))
+				xhr.setRequestHeader ("Authorization", "Basic " + btoa($scope.$storage.userData.username+ ":" + plainPd))
 			},
 			success:function(response,status){
 
