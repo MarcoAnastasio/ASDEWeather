@@ -33,7 +33,7 @@
 
 							<div class="table-responsive">
 								<table class="table ">
-									<thead class="thead-dark">
+									<thead style="background:#fed136;">
 										<tr>
 											<th>Time</th>
 											<th>Max Temp</th>
@@ -51,7 +51,8 @@
 											<td>{{hours.mainTemp.tempMax}}&deg C</td>
 											<td>{{hours.mainTemp.humidity}}&deg C</td>
 											<td>{{hours.clouds}}</td>
-											<td>{{hours.weather.descritpion}}</td>
+											<td><i class="wi wi-{{hours.weather.icon}}"
+									style="font-size: 46px; color: #fed136;"></i></td>
 											<td>Degree:{{hours.wind.deg}} <br />
 												Speed:{{hours.wind.speed}}
 											</td>
