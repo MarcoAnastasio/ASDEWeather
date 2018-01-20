@@ -39,7 +39,11 @@ function WeatherDecoder(weather_input) {
 	this.id=weather_input.id;
 	this.main = weather_input.main;
 	this.descritpion = weather_input.descritpion;
-	this.icon = weather_input.icon;
+	//this.icon = weather_input.icon;
+	this.icon=iconList[weather_input.id];
+	//decodeIcon(weather_input.id);
+	console.log(iconList[weather_input.id]);
+
 
 }
 function WindDecoder(wind_input) {
@@ -94,6 +98,7 @@ function dateDecoder(date_input) {
 	this.minute = minute;
 	this.times = substrings[1];
 	this.dayName = dayName;
+	
 
 }
 
@@ -108,3 +113,29 @@ function groupBy(array_input, func_input) {
 		return groups[group];
 	})
 }
+
+var icons={};
+function decodeIcon(key) {
+
+	$.getJSON("resources/css/icons.json", function(json) {
+
+	});
+
+}
+
+
+function getValues(obj, key) {
+    var objects = [];
+    for (var i in obj) {
+        if (!obj.hasOwnProperty(i)) continue;
+        if (typeof obj[i] == 'object') {
+            objects = objects.concat(getValues(obj[i], key));
+        } else if (i == key) {
+            objects.push(obj[i]);
+        }
+    }
+    return objects;
+    }
+
+
+

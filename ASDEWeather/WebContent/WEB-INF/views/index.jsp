@@ -61,6 +61,7 @@
 
 
 <script src="resources/js/app.js"></script>
+<script src="resources/js/iconList.js"></script>
 <script src="resources/js/viewModel/usersSession.js"></script>
 <script src="resources/js/controller/NotificationController.js"></script>
 <script src="resources/js/controller/UserController.js"></script>
