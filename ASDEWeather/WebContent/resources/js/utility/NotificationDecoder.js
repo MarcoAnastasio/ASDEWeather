@@ -19,7 +19,9 @@ function Notifications(notification_list){
 
 function NotificationDecoder(notification_list){
 	this.cityName = notification_list.weatherData.city.name;
-	this.message = notification_list.notificationReason+": "+notification_list.messageForUser;
+	this.message = (notification_list.notificationReason).replace("_", " ");+": "+notification_list.messageForUser;
+	this.date = notification_list.weatherData.dateTimeOfForecast;
+
 }
 
 

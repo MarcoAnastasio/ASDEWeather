@@ -64,19 +64,16 @@
 					<a class="nav-link dropdown" ng-if="notificationsStatus > 0"> 
 					<i	class="fa fa-bell drop-down-toggle" data-toggle ="dropdown" aria-haspopup="true" aria-expanded="false"
 							style="font-size: 24px; color: #8B0000">
-							
 							</i>
+							
 							<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdown"  style="overflow-y:scroll; max-height:300px;">
-								<spna class="dropdown-item" ng-repeat="w in notificationList">
+								<span class="dropdown-item" ng-repeat="w in notificationList" ng-click="WeatherForcast(w.cityName)">
 								{{w.cityName}}<br/>
 								{{w.message}}<br/>
+								{{w.date}}<br/>
 								<div class="dropdown-divider"></div>
-								<!-- {{w.weatherData.}}
-								{{w.notificationReason}} <br/> 
-								{{w.messageForUser}} -->
-								</spna>
-								
+								</span>
 								<button class="btn btn-sm btn-primary">clear</button>
 							</div>
 							
