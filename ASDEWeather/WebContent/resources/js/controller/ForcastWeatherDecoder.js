@@ -10,6 +10,7 @@ function Forecasts(forecasts_input,uvdata) {
 
 	}
 	this.forecastList = forecastList;
+	if(uvdata != null)
 	this.uvdata= uvdata.value;
 }
 
