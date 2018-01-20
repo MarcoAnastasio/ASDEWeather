@@ -67,13 +67,8 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 					$scope.setData(response.response,"login"); 
 					//$scope.getNotifications();
 					//UserService.setLoggedUser(response.response);
-				}
-//				else{
-//				alert("Either the Username or Password Incorrect")
-//				$('#notifyUser').tooltip('show')
-//				console.log(response.status);
-//				}   		
-
+					$("#loginForm")[0].reset();
+				} 		
 			},
 			error:function(xhr,status){
 				if(xhr.status == "401"){
@@ -95,8 +90,6 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 								action: function(){
 									//$("#username").focus();??????????
 								}
-							},
-							close: function () {
 							}
 						}
 					});
@@ -187,11 +180,26 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 						type: 'green',
 						typeAnimated: true,
 					});
+
 				}
 				else{
-					$scope.regError = true;//?????
-					$("#error-form").html(response.messageForUser); //have a look on register modal?????
-					console.log(response.data);
+					$scope.regError = true;
+					
+					$.alert({
+						title: 'Error!',
+						content: response.messageForUser,
+						type: 'red',
+						typeAnimated: true,
+						buttons: {
+							tryAgain: {
+								text: 'Try again',
+								btnClass: 'btn-red',
+								action: function(){
+									//$("#username").focus();??????????
+								}
+							}
+						}
+					});
 				}
 			},
 			error:function(xhr,status){
@@ -359,15 +367,8 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 		
 	}
 	/**
-	 * clean modal register
+	 * update user
 	 */
-//	function cleanRegisterModal(){	
-//	$('#registerModal').on('hidden.bs.modal', function (e) {
-//	$(this).find("input,textarea,select")
-//	.val('')
-//	.end();
-//	})
-
 	function sendUpdate(dataToSend){
 		var user = [];
 

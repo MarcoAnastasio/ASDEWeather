@@ -2,7 +2,7 @@
 <div class="modal fade" id="registerModal" tabindex="-1" role="dialog"
 	aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
-		<form ng-submit="register(user)">
+		<form ng-submit="register(user)" id="registrationForm">
 
 			<div class="modal-content">
 				<div class="modal-header">
@@ -14,9 +14,10 @@
 				</div>
 
 				<div class="modal-body">
-					<div ng-if="regError" class="alert alert-danger" id="error-form">
+					<!-- <div ng-if="regError" class="alert alert-danger" id="error-form">
 					</div>
-					<br /> <label>Name:</label><input ng-model="user.firstname"
+					<br />  -->
+					<label>Name:</label><input ng-model="user.firstname"
 						type="text" class="form-control" id="reg-name" name="reg-n-name"
 						placeholder="Name" required> <label>Last Name:</label><input
 						ng-model="user.lastname" type="text" class="form-control"

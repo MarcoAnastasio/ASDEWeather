@@ -25,7 +25,7 @@
 							</div>
 						</div> <img class="img-fluid"
 						src="resources/img/portfolio/weather-default.jpg" alt="City image"
-						id="img-{{w.name}}" emit-last-repeater-element>
+						id="img-{{w.name.replace(' ','')}}" emit-last-repeater-element>
 					</a>
 					<div class="card-body">
 						<div class="portfolio-link" ng-click="WeatherForcast(w.name)">
@@ -35,7 +35,7 @@
 							</p>
 
 							<p class="card-text text-muted">
-								Maximum Temperature: {{w.temp}} &deg C <br> Minimum
+								Maximum Temperature: {{w.temp}} &deg C <br> MinimumThere is a new 
 								Temperature: {{w.minTemp}} &deg C <br> Humidity:
 								{{w.humidity}} &deg C
 							</p>

@@ -13,7 +13,7 @@ App	.controller("ForcastController", function($rootScope, $scope) {
 						$
 								.ajax({
 									type : 'POST',
-									url : "/ASDEWeather/api/weather/forecastWeatherByCity",
+									url : "/ASDEWeather/api/weather/forecastWeatherAndUVByCity",
 									contentType : "application/json",
 									dataType : "json",
 									data : JSON.stringify(dataToSend),
@@ -25,7 +25,7 @@ App	.controller("ForcastController", function($rootScope, $scope) {
 													.log("Weather Forcast Response");
 										
 											
-											var forcasts =new Forecasts(response.response.listForecastWeather);
+											var forcasts = new Forecasts(response.response.listForecastWeather,response.response.uvdata);
 											//console.log(forcasts.);
 											
 											
@@ -33,6 +33,7 @@ App	.controller("ForcastController", function($rootScope, $scope) {
 												return [item.dateData.day];
 											});
 											$scope.oneDayForcast = $scope.fiveDaysForcastData[0];
+											$scope.uvforecast = forcasts.uvdata;
 											$scope.$apply();
 											console.log($scope.oneDayForcast);
 											//$scope.setFiveDaysForcastData($scope.fiveDaysForcastData )

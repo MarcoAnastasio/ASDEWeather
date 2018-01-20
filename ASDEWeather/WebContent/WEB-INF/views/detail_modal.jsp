@@ -14,6 +14,7 @@
 						<div class="modal-body">
 							<!-- Project Details Go Here -->
 							<h2 class="text-uppercase" ng-model="cityName">{{city}}</h2>
+							<h3 ng-if= uvforecast !== null>{{uvforecast}} UV   </h3>
 							<p class="item-intro text-muted">Weather Forecast</p>
 
 							<div class="table-responsive">

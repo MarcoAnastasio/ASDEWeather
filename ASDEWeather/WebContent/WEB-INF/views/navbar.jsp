@@ -30,7 +30,7 @@
 
 			<!-- Navabar login form -->
 			<div ng-show="$storage.status == 0" id="user-top-bar">
-				<form class="form-inline" ng-submit="login(userInfo)">
+				<form class="form-inline" ng-submit="login(userInfo)" id="loginForm">
 					<label class="sr-only" for="username">Username</label>
 					<div class="input-group mb-2 mr-sm-2 mb-sm-0">
 						<!-- 	<div class="input-group-addon">
@@ -64,17 +64,16 @@
 					<a class="nav-link dropdown" ng-if="notificationsStatus > 0"> 
 					<i	class="fa fa-bell drop-down-toggle" data-toggle ="dropdown" aria-haspopup="true" aria-expanded="false"
 							style="font-size: 24px; color: #8B0000">
-							
 							</i>
+							
 							<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdown"  style="overflow-y:scroll; max-height:300px;">
-								<span class="dropdown-item" ng-repeat="w in notificationList">
-								{{w.weatherData.city.name}}</br />
-								{{w.notificationReason}} <br /> 
-								{{w.messageForUser}}
-								<hr>
+								<span class="dropdown-item" ng-repeat="w in notificationList" ng-click="WeatherForcast(w.cityName)">
+								{{w.cityName}}<br/>
+								{{w.message}}<br/>
+								{{w.date}}<br/>
+								<div class="dropdown-divider"></div>
 								</span>
-								
 								<button class="btn btn-sm btn-primary">clear</button>
 							</div>
 							
