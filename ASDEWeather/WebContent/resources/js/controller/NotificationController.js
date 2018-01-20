@@ -1,5 +1,5 @@
-App.controller("NotificationController", ["$scope","$rootScope","$localStorage","$sessionStorage", 
-	function($rootScope, $scope, $window, $localStorage, $sessionStorage ){	
+App.controller("NotificationController", ["$scope","$rootScope","$window","$localStorage","$sessionStorage","$interval", 
+	function($rootScope, $scope, $window, $localStorage, $sessionStorage,$interval ){	
 
 
 	$scope.setNotification = function(username, password){		
@@ -8,6 +8,10 @@ App.controller("NotificationController", ["$scope","$rootScope","$localStorage",
 		if(username != null && password != null)
 			$rootScope.getNotifications();
 	}
+	
+	
+	$interval(function(){$rootScope.getNotifications();},3600000);
+	
 	$rootScope.getNotifications = function(){
 
 		console.log("IN GET NOtificatios")
@@ -46,6 +50,9 @@ App.controller("NotificationController", ["$scope","$rootScope","$localStorage",
 
 		return notificationList;
 	} // END OF GET NOTIFICATIONS 
+	
+	
+	
 
 	$scope.clearNotification = function(){
 		$localStorage.$reset({
