@@ -3,13 +3,7 @@
  */
 App.controller("SearchController", function($rootScope, $scope) {
 	
-	 // console.log("Search Status");
-	 // console.log($rootScope.searchStatus);
-	  
-	  $scope.clear=function(){
-		  $rootScope.searchStatus=0;
-		  //console.log("am called");
-	  };
+	
 	
 	$scope.autoComplateCall = function() {
 		$scope.cityListHide=0;
@@ -59,16 +53,20 @@ App.controller("SearchController", function($rootScope, $scope) {
 			success : function(response, status) {
 
 				if (response.status == "OK") {
-                     
-					  $scope.searchStatus=1;
+					
+					  
+
 					  var current = response.response.listForecastWeather[0];
 					  $rootScope.currentWeather= new ForecastWeatherDecoder(current);
 					
-					    $rootScope.searchStatus=1;
+					    
+					    
+					    
 					    $scope.myMap($rootScope.currentWeather.city.latitude,
 								$rootScope.currentWeather.city.longitude);
+					    $rootScope.searchStatus=1;
 					    $rootScope.$apply();
-			         	//console.log($rootScope.currentWeather);
+			         	
 					
 				} else {
 					console.log("Search Response for selected city Error");
@@ -105,11 +103,12 @@ App.controller("SearchController", function($rootScope, $scope) {
 								return [item.dateData.day ];
 							});
 		
-					 //console.log($rootScope.forecastByDay);
+					 console.log($rootScope.forecastByDay);
 					 $rootScope.currentDayForecast=$rootScope.forecastByDay[0];
 	      
 					 $rootScope.$apply();	               
-	                 $scope.startDraw();
+	                 $rootScope.startDraw();
+	                 console.log("start Draw");
 	                
 				} else {
 					console.log("Search Response for selected city Error");
@@ -123,12 +122,12 @@ App.controller("SearchController", function($rootScope, $scope) {
 
 	};	
 	
-	$scope.clearSearch = function(){
-		$scope.searchStatus=0;
-		$scope.$apply();
+	$rootScope.clearSearch = function(){
+		$rootScope.searchStatus=0;
+		$rootScope.$apply();
 	}
 
-	$scope.startDraw =function () {
+	$rootScope.startDraw =function () {
 		console.log("draw");
 		var time_stamp=[];
 		var temp=[];

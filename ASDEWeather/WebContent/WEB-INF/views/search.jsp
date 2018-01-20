@@ -10,7 +10,7 @@
 								<span ng-if="query">{{ 'search for: ' + query}}</span>
 								<div ng-if="(query).length<=4">
 								
-								<div ng-init="clear()"></div>
+								<div ng-init="clearSearch()"></div>
 								</div>
 							</label>
 						</div>
