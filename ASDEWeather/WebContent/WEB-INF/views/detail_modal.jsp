@@ -53,8 +53,8 @@
 											<td>{{hours.clouds}}</td>
 											<td><i class="wi wi-{{hours.weather.icon}}"
 									style="font-size: 46px; color: #fed136;"></i></td>
-											<td>Degree:{{hours.wind.deg}} <br />
-												Speed:{{hours.wind.speed}}
+											<td>{{hours.wind.speed}} m/s <br />
+												{{hours.wind.deg}}
 											</td>
 										</tr>
 									</tbody>
