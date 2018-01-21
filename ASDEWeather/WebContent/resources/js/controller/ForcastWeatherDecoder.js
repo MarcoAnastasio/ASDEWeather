@@ -42,6 +42,7 @@ function ForecastWeatherDecoder(forecastWeather_input) {
 	this.mainTemp = new MainTempDecoder(forecastWeather_input.mainTemperature);
 	this.weather = new WeatherDecoder(forecastWeather_input.weather);
 	this.wind = new WindDecoder(forecastWeather_input.wind);
+	this.cloud= forecastWeather_input.clouds;
 	this.city=new CityDecoder(forecastWeather_input.city);
 };
 

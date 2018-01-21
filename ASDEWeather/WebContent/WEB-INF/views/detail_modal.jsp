@@ -49,8 +49,8 @@
 											<td>{{hours.dateData.times}}</td>
 											<td>{{hours.mainTemp.tempMin}}&deg C</td>
 											<td>{{hours.mainTemp.tempMax}}&deg C</td>
-											<td>{{hours.mainTemp.humidity}}&deg C</td>
-											<td>{{hours.clouds}}</td>
+											<td>{{hours.mainTemp.humidity}}&#37</td>
+											<td>{{hours.cloud}}&#37</td>
 											<td><i class="wi wi-{{hours.weather.icon}}"
 									style="font-size: 46px; color: #fed136;"></i></td>
 											<td>{{hours.wind.speed}} m/s <br />
