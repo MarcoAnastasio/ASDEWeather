@@ -3,7 +3,10 @@
  */
 App.controller("SearchController", function($rootScope, $scope) {
 	
-	//$scope.searchResponce=0;
+	
+
+	
+	
 	
 	$scope.autoComplateCall = function() {
 		 $rootScope.cityListHide=0;
