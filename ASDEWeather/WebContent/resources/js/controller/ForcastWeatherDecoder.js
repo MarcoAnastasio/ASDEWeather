@@ -69,8 +69,8 @@ function WeatherDecoder(weather_input) {
 
 }
 function WindDecoder(wind_input) {
-	this.speed = wind_input.speed;
-	this.deg = CalculateCompassDirection(wind_input.deg);
+	this.speed = wind_input.speed != null ? wind_input.speed : "0";
+	this.deg = wind_input.deg != null ? CalculateCompassDirection(wind_input.deg): "none";
 
 }
 
