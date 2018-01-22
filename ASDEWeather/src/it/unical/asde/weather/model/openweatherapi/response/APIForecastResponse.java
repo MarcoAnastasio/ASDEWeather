@@ -1,11 +1,11 @@
 package it.unical.asde.weather.model.openweatherapi.response;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import it.unical.asde.weather.model.bean.data.weather.WeatherForecastData;
 import it.unical.asde.weather.model.bean.geographical.City;
 import it.unical.asde.weather.model.bean.geographical.Country;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class APIForecastResponse {
 

@@ -5,7 +5,6 @@ import it.unical.asde.weather.model.bean.comunication.request.RequestSingleCity;
 import it.unical.asde.weather.model.bean.data.extra.UVData;
 import it.unical.asde.weather.model.bean.geographical.City;
 import it.unical.asde.weather.model.exception.ASDECustomException;
-import it.unical.asde.weather.model.openweatherapi.response.APICurrentResponse;
 
 public interface ExtraDataProvider {
 

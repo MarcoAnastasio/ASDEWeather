@@ -1,13 +1,5 @@
 package it.unical.asde.weather.core;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.PostConstruct;
-
-import org.springframework.stereotype.Service;
-
-import it.unical.asde.weather.model.bean.user.User;
 
 //@Service
 public class UserService {

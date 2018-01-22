@@ -1,19 +1,13 @@
 package it.unical.asde.weather.model.bean.user;
 
-import java.util.Date;
-
-import it.unical.asde.weather.model.bean.comunication.response.GenericResponseConstant;
-import it.unical.asde.weather.model.bean.data.weather.Weather;
-import it.unical.asde.weather.model.bean.data.weather.WeatherData;
 import it.unical.asde.weather.model.bean.data.weather.WeatherForecastData;
-import it.unical.asde.weather.model.bean.geographical.City;
 
 
 
 public class Notification {
 	
-	private static final Integer EXTREAM_WEATHER_CODE=0;
-	private static final String EXTREAM_WEATHER_MSG="";
+	private static final Integer EXTREME_WEATHER_CODE=0;
+	private static final String EXTREME_WEATHER_MSG="";
 	private static final Integer WIND_SPEED_CODE=1;
 	private static final String WIND_SPEED_MSG="Wind speed allert";
 	private static final Integer COLD_TEMP_CODE=2;
@@ -25,7 +19,7 @@ public class Notification {
 
 	
 	public enum NotificationReason {
-	    EXTREAM_WEATHER(Notification.EXTREAM_WEATHER_CODE,Notification.EXTREAM_WEATHER_MSG),
+	    EXTREM_WEATHER(Notification.EXTREME_WEATHER_CODE,Notification.EXTREME_WEATHER_MSG),
 	    WIND_SPEED(Notification.WIND_SPEED_CODE,Notification.WIND_SPEED_MSG),
 	    COLD_TEMP(Notification.COLD_TEMP_CODE,Notification.COLD_TEMP_MSG),
 	    HOT_TEMP(Notification.HOT_TEMP_CODE,Notification.HOT_TEMP_MSG),

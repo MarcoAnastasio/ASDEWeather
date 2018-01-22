@@ -1,9 +1,9 @@
 package it.unical.asde.weather.dao.geographical;
 
-import java.util.List;
-
 import it.unical.asde.weather.dao.GenericDao;
 import it.unical.asde.weather.model.bean.geographical.City;
+
+import java.util.List;
 
 public interface CityDao extends GenericDao<City>{
 

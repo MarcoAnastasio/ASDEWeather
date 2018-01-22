@@ -1,10 +1,10 @@
 package it.unical.asde.weather.controller.controllers;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import it.unical.asde.weather.core.services.user.UserService;
+import it.unical.asde.weather.model.bean.comunication.request.RequestSingleCity;
+import it.unical.asde.weather.model.bean.user.User;
+import it.unical.asde.weather.model.bean.user.UserDetailsImp;
 
-import org.hibernate.criterion.Example;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,21 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import it.unical.asde.weather.core.services.test.TestDao;
-import it.unical.asde.weather.core.services.user.UserService;
-import it.unical.asde.weather.dao.geographical.CityDao;
-import it.unical.asde.weather.dao.geographical.CountryDao;
-import it.unical.asde.weather.model.bean.comunication.request.RequestSingleCity;
-import it.unical.asde.weather.model.bean.comunication.request.RequestListCities;
-import it.unical.asde.weather.model.bean.data.weather.WeatherData;
-import it.unical.asde.weather.model.bean.data.weather.WeatherForecastData;
-import it.unical.asde.weather.model.bean.geographical.City;
-import it.unical.asde.weather.model.bean.geographical.Country;
-import it.unical.asde.weather.model.bean.user.User;
-import it.unical.asde.weather.model.bean.user.UserDetailsImp;
-import it.unical.asde.weather.model.openweatherapi.response.APICurrentResponse;
-import it.unical.asde.weather.model.openweatherapi.response.APIForecastResponse;
-
 
 
 //this controller was used for testing the security filter chain,
@@ -40,8 +25,6 @@ import it.unical.asde.weather.model.openweatherapi.response.APIForecastResponse;
 @Controller
 public class TestAuthController {
 
-	@Autowired
-	private TestDao testDao;
 	
 	@Autowired
 	private UserService userService;

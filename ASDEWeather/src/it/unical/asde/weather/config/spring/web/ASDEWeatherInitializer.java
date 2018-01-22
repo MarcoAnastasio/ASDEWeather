@@ -7,9 +7,6 @@ import javax.servlet.ServletRegistration;
 import org.h2.server.web.WebServlet;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import it.unical.asde.weather.config.hibernate.HibernateConfig;
-import it.unical.asde.weather.config.spring.security.MultiHttpSecurityConfig;
-
 
 /**
  * 

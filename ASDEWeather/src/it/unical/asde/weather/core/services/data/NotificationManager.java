@@ -1,5 +1,10 @@
 package it.unical.asde.weather.core.services.data;
 
+import it.unical.asde.weather.core.utilities.DateUtils;
+import it.unical.asde.weather.model.bean.data.weather.WeatherForecastData;
+import it.unical.asde.weather.model.bean.user.Notification;
+import it.unical.asde.weather.model.bean.user.Notification.NotificationReason;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,12 +12,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
-
-import it.unical.asde.weather.core.utilities.DateUtils;
-import it.unical.asde.weather.model.bean.data.weather.WeatherForecastData;
-import it.unical.asde.weather.model.bean.user.Notification;
-import it.unical.asde.weather.model.bean.user.Notification.NotificationReason;
-import it.unical.asde.weather.model.openweatherapi.response.APIForecastResponse;
 
 @Service
 @Configuration
@@ -44,7 +43,7 @@ public class NotificationManager {
 				continue;
 			}
 			if(tempW.getWeather().getMain().equals("Extreme")){
-				NotificationReason reason = NotificationReason.EXTREAM_WEATHER;
+				NotificationReason reason = NotificationReason.EXTREM_WEATHER;
 				Notification notToAdd=new Notification(tempW,reason,reason.getMessage());
 				if(haveToAddNewExtreameNotInList(notificationList,notToAdd)) {
 					notificationList.add(notToAdd);						
@@ -89,7 +88,7 @@ public class NotificationManager {
 			return true;
 		}
 		
-		if(not.getNotificationReason().getValue()==NotificationReason.EXTREAM_WEATHER.getValue()) {
+		if(not.getNotificationReason().getValue()==NotificationReason.EXTREM_WEATHER.getValue()) {
 			for(Notification tempN:notificationList){
 				if(
 						tempN.getNotificationReason().getValue()==not.getNotificationReason().getValue() &&

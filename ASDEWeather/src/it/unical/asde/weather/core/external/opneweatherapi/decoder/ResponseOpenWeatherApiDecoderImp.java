@@ -1,18 +1,5 @@
 package it.unical.asde.weather.core.external.opneweatherapi.decoder;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.springframework.stereotype.Service;
-
 import it.unical.asde.weather.model.bean.data.extra.UVData;
 import it.unical.asde.weather.model.bean.data.weather.MainTemperature;
 import it.unical.asde.weather.model.bean.data.weather.Weather;
@@ -23,6 +10,18 @@ import it.unical.asde.weather.model.bean.geographical.City;
 import it.unical.asde.weather.model.openweatherapi.response.APICurrentResponse;
 import it.unical.asde.weather.model.openweatherapi.response.APIForecastResponse;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.springframework.stereotype.Service;
+
 @Service
 public class ResponseOpenWeatherApiDecoderImp implements ResponseOpenWeatherApiDecoder {
 
@@ -32,7 +31,6 @@ public class ResponseOpenWeatherApiDecoderImp implements ResponseOpenWeatherApiD
 	@Override
 	public APIForecastResponse decodeForecastWeatherResponse(JSONObject responseObject,City requestCity) {
 
-		//TODO we can had reference to cityes and/or to state if we want...
 		APIForecastResponse forecastResponse=new APIForecastResponse();
 		
 		forecastResponse.setRequestCode(Integer.parseInt((String)responseObject.get("cod")) );
@@ -41,7 +39,6 @@ public class ResponseOpenWeatherApiDecoderImp implements ResponseOpenWeatherApiD
 		}
 		
 		
-		//City city=decodeCity((JSONObject)responseObject.get("city"));
 		forecastResponse.setCity(requestCity);
 		
 		
@@ -78,7 +75,6 @@ public class ResponseOpenWeatherApiDecoderImp implements ResponseOpenWeatherApiD
 		for(int i=0;i<listArray.size();i++){
 			currentListWeather.add( this.elaborateWeatherInformation((JSONObject)listArray.get(i)) );
 		}
-		//TODO why response not return code??? for now i set it.. after we will see...
 		response.setRequestCode(200);
 		response.setListForecastWeather(currentListWeather);
 		return response;
@@ -87,7 +83,7 @@ public class ResponseOpenWeatherApiDecoderImp implements ResponseOpenWeatherApiD
 	@Override
 	public Object decodeCurrentPollutionResponse(JSONObject response) {
 		
-		// TODO Auto-generated method stub
+		//pollution service not work
 		return null;
 	}
 	
@@ -95,7 +91,6 @@ public class ResponseOpenWeatherApiDecoderImp implements ResponseOpenWeatherApiD
 	@Override
 	public UVData decodeCurrentUVResponse(JSONObject jsonObject) {
 		
-		//{"lat":39.30999,"lon":16.250191,"date_iso":"2018-01-11T12:00:00Z","date":1515672000,"value":1.52}
 		if(jsonObject==null){
 			return null;
 		}
@@ -110,8 +105,6 @@ public class ResponseOpenWeatherApiDecoderImp implements ResponseOpenWeatherApiD
 	
 	
 	
-	//TODO check how handle the city: now we just get it from the response, 
-	//but maybe can be necessary to retrive it from DB to have additional info
 	private WeatherData elaborateWeatherInformation(JSONObject object) {
 	
 		WeatherData weatherData=new WeatherData();
@@ -142,7 +135,7 @@ public class ResponseOpenWeatherApiDecoderImp implements ResponseOpenWeatherApiD
 				weather.getSnow(), 
 				city,
 				new Date(),		//storing time
-				//TODO change it whit thew others dt-****???
+				
 				decodeDateTimeStringFormat((String)object.get("dt_txt"))
 		);
 				 
@@ -164,7 +157,7 @@ public class ResponseOpenWeatherApiDecoderImp implements ResponseOpenWeatherApiD
 		if(jsonArray==null || jsonArray.isEmpty()){
 			return null;
 		}
-		//TODO i do not know why return a list, but i keep only the first if exists
+
 		JSONObject jsonObject=(JSONObject) jsonArray.get(0);
 		Weather weather=new Weather();
 		weather.setId((Long)jsonObject.get("id"));		

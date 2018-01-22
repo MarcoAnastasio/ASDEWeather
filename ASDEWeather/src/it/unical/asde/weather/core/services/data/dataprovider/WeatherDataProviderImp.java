@@ -1,21 +1,7 @@
 package it.unical.asde.weather.core.services.data.dataprovider;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import it.unical.asde.weather.core.external.opneweatherapi.request.DataRemoteRequestExecutor;
 import it.unical.asde.weather.dao.data.weather.WeatherDataDAO;
 import it.unical.asde.weather.dao.data.weather.WeatherForecastDataDAO;
-import it.unical.asde.weather.dao.geographical.CityDao;
 import it.unical.asde.weather.model.bean.comunication.request.RequestGeolocation;
 import it.unical.asde.weather.model.bean.comunication.request.RequestListCities;
 import it.unical.asde.weather.model.bean.comunication.request.RequestSingleCity;
@@ -29,6 +15,15 @@ import it.unical.asde.weather.model.bean.geographical.City;
 import it.unical.asde.weather.model.exception.ASDECustomException;
 import it.unical.asde.weather.model.openweatherapi.response.APICurrentResponse;
 import it.unical.asde.weather.model.openweatherapi.response.APIForecastResponse;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class WeatherDataProviderImp extends AbstarctGenericProvider implements WeatherDataProvider{
@@ -77,7 +72,6 @@ public class WeatherDataProviderImp extends AbstarctGenericProvider implements W
 		if(dataToSave!=null){
 			weatherDataDao.save(dataToSave);			
 		}
-		//TODO store this data in the DB (maybe we can think to use another thread)
 
 		return currentWeatherforCityFromAPI;
 	}
@@ -168,8 +162,6 @@ public class WeatherDataProviderImp extends AbstarctGenericProvider implements W
 	
 
 	private APICurrentResponse getCurrentWeatherByCitiesList(List<City> cities) throws ASDECustomException{
-		//1 check list of cities exists into DB
-		//TODO analyze the usage of this method.. maybe this test can be skippedd as i think... so for now it is not implemented...
 		
 		//2 check if the request for the current weather is present into DB and is not to old... 
 		Date maxOldValue=this.decrementDateByMillis(MAX_OLD_VALUE);

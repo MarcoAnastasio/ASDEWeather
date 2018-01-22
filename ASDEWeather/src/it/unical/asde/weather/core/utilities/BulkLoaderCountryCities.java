@@ -1,21 +1,18 @@
 package it.unical.asde.weather.core.utilities;
 
+import it.unical.asde.weather.model.bean.geographical.City;
+import it.unical.asde.weather.model.bean.geographical.Country;
+
 import java.io.FileReader;
 import java.io.Reader;
 import java.util.HashMap;
-import java.util.Iterator;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
-import org.eclipse.jdt.internal.compiler.impl.ITypeRequestor;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
-
-import it.unical.asde.weather.model.bean.geographical.City;
-import it.unical.asde.weather.model.bean.geographical.Country;
 
 @Service
 public class BulkLoaderCountryCities {

@@ -4,16 +4,12 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import it.unical.asde.weather.model.bean.geographical.Country;
-
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 
 public abstract class AbstarctGenericDAO<E> implements GenericDao<E> {
@@ -30,7 +26,7 @@ public abstract class AbstarctGenericDAO<E> implements GenericDao<E> {
 
 	protected Session getSession() {
 		Session currentSession = this.sessionFactory.getCurrentSession();
-		System.out.println("********** currentSession="+System.identityHashCode(currentSession));
+//		System.out.println("********** currentSession="+System.identityHashCode(currentSession));
 		return currentSession;
 	}
 

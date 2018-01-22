@@ -14,10 +14,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
-import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module.Feature;
 
 
 
@@ -68,12 +65,6 @@ public class DispatcherServlet implements WebMvcConfigurer{
 	
 	 @Override
 	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-
-		 
-//		 Hibernate5Module module = new Hibernate5Module(sf);
-//			 Hibernate5Module module = new Hibernate5Module();
-//		     module.disable(Feature.USE_TRANSIENT_ANNOTATION);
-//		     module.enable(Feature.FORCE_LAZY_LOADING);
 		 
 		 	Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder();
 	        builder.dateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm"));

@@ -1,27 +1,10 @@
 package it.unical.asde.weather.core.services.user;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import org.omg.CORBA.Current;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
-
 import it.unical.asde.weather.core.services.data.NotificationManager;
 import it.unical.asde.weather.core.services.data.dataprovider.WeatherDataProvider;
-import it.unical.asde.weather.core.utilities.DateUtils;
 import it.unical.asde.weather.dao.user.UserDao;
 import it.unical.asde.weather.model.bean.comunication.request.RequestSingleCity;
-import it.unical.asde.weather.model.bean.comunication.response.GenericResponse;
 import it.unical.asde.weather.model.bean.comunication.response.GenericResponse.ErrorCode;
-import it.unical.asde.weather.model.bean.comunication.response.GenericResponse.Status;
 import it.unical.asde.weather.model.bean.comunication.response.LoginResponseDTO;
 import it.unical.asde.weather.model.bean.data.weather.WeatherForecastData;
 import it.unical.asde.weather.model.bean.geographical.City;
@@ -31,6 +14,18 @@ import it.unical.asde.weather.model.bean.user.UserDetailsImp;
 import it.unical.asde.weather.model.exception.ASDECustomException;
 import it.unical.asde.weather.model.openweatherapi.response.APICurrentResponse;
 import it.unical.asde.weather.model.openweatherapi.response.APIForecastResponse;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserServiceImp implements UserService{
@@ -60,7 +55,6 @@ public class UserServiceImp implements UserService{
 		
 	}
 
-	//TODO check different isolation level
 	@Override
 	@Transactional(isolation=Isolation.SERIALIZABLE,propagation=Propagation.REQUIRES_NEW)
 	public User registerNewUser(User newUser) throws ASDECustomException{
@@ -103,11 +97,7 @@ public class UserServiceImp implements UserService{
 		currentUser.setEmail(newValues.getEmail());
 		
 		updateDifferenceOnPreferedCities(currentUser,newValues);
-		
-		//TODO the list of cities added must contain at least the cities id, ithe other field 
-		//are not provided in the response will be null.. but in DB the situation is OK
-		
-		//TODO maybe add a check if cities exists...		
+
 		userDao.saveOrUpdate(currentUser);
 		
 		return currentUser;

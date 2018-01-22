@@ -1,12 +1,10 @@
 package it.unical.asde.weather.model.bean.comunication.response;
 
-import java.util.List;
-
 import it.unical.asde.weather.model.bean.data.extra.UVData;
 import it.unical.asde.weather.model.bean.data.weather.WeatherForecastData;
 import it.unical.asde.weather.model.bean.geographical.City;
-import it.unical.asde.weather.model.bean.geographical.Country;
-import it.unical.asde.weather.model.openweatherapi.response.APIForecastResponse;
+
+import java.util.List;
 
 public class ForecastUVResponseDTO {
 

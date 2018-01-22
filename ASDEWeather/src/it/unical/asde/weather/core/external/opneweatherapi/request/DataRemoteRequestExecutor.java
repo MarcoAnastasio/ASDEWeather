@@ -1,13 +1,12 @@
 package it.unical.asde.weather.core.external.opneweatherapi.request;
 
-import java.util.List;
-
 import it.unical.asde.weather.model.bean.data.extra.UVData;
-import it.unical.asde.weather.model.bean.data.weather.WeatherForecastData;
 import it.unical.asde.weather.model.bean.geographical.City;
 import it.unical.asde.weather.model.exception.ASDECustomException;
 import it.unical.asde.weather.model.openweatherapi.response.APICurrentResponse;
 import it.unical.asde.weather.model.openweatherapi.response.APIForecastResponse;
+
+import java.util.List;
 
 public interface DataRemoteRequestExecutor {
 

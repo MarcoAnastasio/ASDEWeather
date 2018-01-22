@@ -7,8 +7,6 @@ import org.apache.commons.io.IOUtils;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import it.unical.asde.weather.model.exception.ASDECustomException;
-
 /**
  * this class is used to generalize the method of executing request,
  * so eatch class that need to submit a request to an external service 
@@ -30,7 +28,6 @@ public abstract class RestRequestExecutor {
 			responseObject =(JSONObject) jsonParser.parse(inputString);
 		} catch (Exception e) {
 			e.printStackTrace();
-//			throw new ASDECustomException(cause, errorCode, message)
 		}finally{
 			try{
 				input.close();								

@@ -1,13 +1,5 @@
 package it.unical.asde.weather.core.services;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-import javax.annotation.PostConstruct;
-
 import it.unical.asde.weather.core.services.data.dataprovider.WeatherDataProvider;
 import it.unical.asde.weather.dao.geographical.CityDao;
 import it.unical.asde.weather.model.bean.comunication.request.RequestCityNameSubstring;
@@ -18,6 +10,8 @@ import it.unical.asde.weather.model.bean.data.weather.WeatherData;
 import it.unical.asde.weather.model.bean.geographical.City;
 import it.unical.asde.weather.model.exception.ASDECustomException;
 import it.unical.asde.weather.model.openweatherapi.response.APICurrentResponse;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

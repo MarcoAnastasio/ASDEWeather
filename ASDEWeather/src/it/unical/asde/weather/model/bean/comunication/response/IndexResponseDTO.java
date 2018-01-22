@@ -1,7 +1,6 @@
 package it.unical.asde.weather.model.bean.comunication.response;
 
 import it.unical.asde.weather.model.bean.data.weather.WeatherData;
-import it.unical.asde.weather.model.bean.geographical.City;
 
 import java.util.List;
 

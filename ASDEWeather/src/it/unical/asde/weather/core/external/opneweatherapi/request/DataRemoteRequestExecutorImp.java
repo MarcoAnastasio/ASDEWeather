@@ -1,19 +1,16 @@
 package it.unical.asde.weather.core.external.opneweatherapi.request;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
-import java.time.Instant;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.Date;
+import it.unical.asde.weather.core.external.RestRequestExecutor;
+import it.unical.asde.weather.core.external.opneweatherapi.decoder.ResponseOpenWeatherApiDecoder;
+import it.unical.asde.weather.model.bean.comunication.response.GenericResponse.ErrorCode;
+import it.unical.asde.weather.model.bean.data.extra.UVData;
+import it.unical.asde.weather.model.bean.geographical.City;
+import it.unical.asde.weather.model.exception.ASDECustomException;
+import it.unical.asde.weather.model.openweatherapi.response.APICurrentResponse;
+import it.unical.asde.weather.model.openweatherapi.response.APIForecastResponse;
+
 import java.util.List;
 
-import org.apache.commons.io.IOUtils;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,17 +18,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
-
-import it.unical.asde.weather.core.external.RestRequestExecutor;
-import it.unical.asde.weather.core.external.opneweatherapi.decoder.ResponseOpenWeatherApiDecoder;
-import it.unical.asde.weather.model.bean.comunication.response.GenericResponse.ErrorCode;
-import it.unical.asde.weather.model.bean.data.extra.UVData;
-import it.unical.asde.weather.model.bean.data.weather.WeatherData;
-import it.unical.asde.weather.model.bean.data.weather.WeatherForecastData;
-import it.unical.asde.weather.model.bean.geographical.City;
-import it.unical.asde.weather.model.exception.ASDECustomException;
-import it.unical.asde.weather.model.openweatherapi.response.APICurrentResponse;
-import it.unical.asde.weather.model.openweatherapi.response.APIForecastResponse;
 
 @Service
 @Configuration
@@ -237,7 +223,6 @@ public class DataRemoteRequestExecutorImp extends RestRequestExecutor implements
 		if(response!=null){
 			return responseOpenWeatherApiDecoder.decodeCurrentUVResponse(response);
 		}else{
-			//TODO if null consider the possibility to return just null or throw a new kind of exception handled different
 			throw new ASDECustomException(null, ErrorCode.UNKNOW_ERROR, null);
 		}
 
@@ -255,7 +240,7 @@ public class DataRemoteRequestExecutorImp extends RestRequestExecutor implements
 
 
 	private String generateUrlFromBaseEndpointAndCoordsForUV(Double latitude,Double longitude) {
-		//http://api.openweathermap.org/data/2.5/uvi?appid=9b6b06b0162f936dd91ff6a0978b875f&lat=39.30999&lon=16.250191
+		//Example: http://api.openweathermap.org/data/2.5/uvi?appid=9b6b06b0162f936dd91ff6a0978b875f&lat=39.30999&lon=16.250191
 		return openCurrentUVEndpoint+"appid="+key1+"&lat="+latitude+"&lon="+longitude;
 	}
 

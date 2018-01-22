@@ -1,12 +1,9 @@
 package it.unical.asde.weather.model.openweatherapi.response;
 
+import it.unical.asde.weather.model.bean.data.weather.WeatherData;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import it.unical.asde.weather.model.bean.data.weather.WeatherData;
-import it.unical.asde.weather.model.bean.data.weather.WeatherForecastData;
-import it.unical.asde.weather.model.bean.geographical.City;
-import it.unical.asde.weather.model.bean.geographical.Country;
 
 public class APICurrentResponse {
 
