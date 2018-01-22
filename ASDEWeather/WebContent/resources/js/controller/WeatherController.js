@@ -1,149 +1,59 @@
 /**
  * 
  */
-App.controller("WeatherController", function($rootScope, $scope){	
+App.controller("WeatherController", function($rootScope, $scope, responseHandler){	
 
 	$scope.query = {city:""};
 	
 	$scope.weatherData = [];
 	$scope.weatherForcastData =[];
 	$scope.currentLoation = {};
+	$scope.cuttentLocationFound = 0;
 	
 	$scope.search = function search(){}
 	
+	
+	
 	$rootScope.loadSelectedCity = function (){
-		console.log("load selected city");
-		dataToSend = {
-	    		'latitude':"",
-	    		'longtidue':""
-	    		 		};
-		$.ajax({
-	    	type:'POST',
-	    	url:"/ASDEWeather/api/weather/indexRequest", 
-	    	dataType:"json",
-	    	contentType:"application/json",
-	    	data:JSON.stringify(dataToSend),
-	    	success:function(response,status){
-	    		//console.log(res.status);
-	    		if(response.status=="OK"){
-
-	    			console.log("Weather Response");
-	    			console.log(response.response);
-	    			
-	    			$scope.setWeatherData(response.response.randomCitiesWeather);
-	    			//console.log($scope.weatherData)
-	    			//$scope.setData(response.response);
-	    			//$scope.displayWeatherGraph();
-	    		}
-	    		else{
-	    			console.log("Weather Responce Error");
-	    			console.log(response);
-	    		}
-	    	},	
-	    	error:function(e){
-					console.log(e);
-		}
-	    });
+		var dataToSend = {
+			    		'latitude':"",
+			    		'longtidue':""
+			    		 		};
+		var url = "/ASDEWeather/api/weather/indexRequest";
+		var method="POST";
+		var caller="index";
+		responseHandler.serverCall(url,method, dataToSend,null, null,caller);
 		
+
+		$scope.getUserLocation();
 	}// end of loadSelctedcity
 
-	$scope.loadOneCity  = function(){
-		console.log("In one City load");
-		var currentLocation = [];
-		// call the current location data
-		getCurrentLocation();
-		
-		console.log($scope.currentLoation)
-		dataToSend ={cityName:$scope.currentLoation.city};
-		$.ajax({
-	    	type:'POST',
-	    	url:"ASDEWeather/api/weather/forecastWeatherByCity", 
-	    	contentType:"application/json",
-	    	dataType:"json",
-	    	data:JSON.stringify(dataToSend),
-	    	success:function(response,status){
-	    		//console.log(res.status);
-	    		if(response.status=="OK"){
-
-	    			console.log("Weather One City  Response");
-	    			console.log(response);
-	    			
-	    		}
-	    		else{
-	    			console.log("Weather Responce Error");
-	    			console.log(response);
-	    		}
-	    	}	    	
-	    });
-		
-	}// end of load One City 
-	$scope.setData = function(input){
-		for(var i=0; i< input.length; i++ ){
-						$scope.weatherData.push({id:input[i]["city"]["id"],
-							name:input[i]["city"]["name"],
-							icon:'http://openweathermap.org/img/w/'+input[i]["list"][0]["weather"][0]["icon"]+'.png',
-							description:input[i]["list"][0]["weather"][0]["description"],
-							temp:input[i]["list"][0]["main"]["temp"],
-							minTemp:input[i]["list"][0]["main"]["temp_min"],
-							humidity:input[i]["list"][0]["main"]["humidity"]}
-						);
-			console.log(input[i]["list"][0]["main"]["temp_min"]);
-			//console.log(input[i][3][0]["main"]["temp"]);
-//			for(var j=0; j< input[i]["list"]["main"].length; j++ )
-//				{
-//				console.log(input[i]["list"][j]["main"])
-//				}
-		
-		}
-		console.log($scope.weatherData)
-		$scope.$apply();
 	
-	}// end of setData function
+	$rootScope.response=function(response,caller){
+		console.log("finished");
+		switch(caller){
+		case 'index':
+			//index(response);
+			 var forecasts = new Forecasts(response.randomCitiesWeather); 
+			 $scope.currentWeathers=forecasts.forecastList;
+			 $scope.$apply();
+			break;
+		case 'login':
+			break;
+		case 'search':
+			break;
+		case 'location':
+			var locationWeather = new Forecasts(response.listForecastWeather);
+			$rootScope.locationWeatherData = locationWeather.forecastList;
+			console.log($scope.locationWeatherData);
+			$rootScope.$apply();
+			break;
+		}
+		
+	}
 	
 	// setWeatherData
-	$scope.setWeatherData = function(input){
-		console.log("setWeatherData")
-		
-		if(input!=null){
-			console.log(input);
-		for(var i=0; i<input.length; i++){
-			$scope.weatherData.push({
-					id:input[i]["city"]["id"],
-					name:input[i]["city"]["name"],
-					dataAndTime:input[i]["city"]["date"],
-					temp:input[i]["mainTemperature"]["temp"],
-					minTemp:input[i]["mainTemperature"]["tempMin"],
-					maxTemp:input[i]["mainTemperature"]["tempMax"],
-					humidity:input[i]["mainTemperature"]["humidity"],
-					pressure:input[i]["mainTemperature"]["pressure"],
-					description:input[i]["weather"]["descritpion"],
-					icon:'http://openweathermap.org/img/w/'+input[i]["weather"]["icon"]+'.png',
-			});
-			
-		}
-		$scope.$apply();
-		}
-		console.log($scope.weatherData)
-		
-	}// end of setWeatherData
-	$scope.setWeatherForcastData= function(input){
-		console.log("in forcast");
-		console.log(input);
-		/*for(vari=0; i<input.length; i++){
-			$scope.weatherForcastData.push ({
-							id:input[i]["city"]["id"],
-							name:input[i]["city"]["name"],
-							icon:'http://openweathermap.org/img/w/'+input[i]["list"][0]["weather"][0]["icon"]+'.png',							
-							for(var j = 0; j< input[i]["list"].length; j++){
-							description:input[i]["list"][j]["weather"][0]["description"],
-							temp:input[i]["list"][j]["main"]["temp"],
-							minTemp:input[i]["list"][j]["main"]["temp_min"],
-							humidity:input[i]["list"][j]["main"]["humidity"],
-							}
-							})
-			
-		}*/
-	}
+	
 	
 	$scope.displayWeatherDetail = function(cityName){
 		console.log("----"+$scope.weatherData[0])
@@ -159,23 +69,43 @@ App.controller("WeatherController", function($rootScope, $scope){
 	// Get Curent locatio --------*/
 	//							  */
 	//****************************/
-	
-	function getCurrentLocation (){
-		$.getJSON("http://ip-api.com/json/", function(data) {
-			$scope.currentLoation = data;
-        });
-			/*$.ajax({
-				type:"GET",
-				url:"http://ip-api.com/json",
-				dataType:"json",
-				
-				success:function(response,status){
-					console.log(response);
-					return response;
-				}
-			})		
-		*/
+	$scope.getUserLocation = function(){
+		console.log("In get location weather")
+		var locationData = [];
+			if(navigator.geolocation){
+				console.log("Location enabled")
+				navigator.geolocation.getCurrentPosition(function(position){
+					$rootScope.userLocationEnbled = true;
+					$scope.getCurrentLocationName(position.coords.latitude, position.coords.longitude);					
+				});
+			}
+			else {
+				$rootScope.userLocationEnbled = false; 
+				$scope.$apply();
+				console.log("Location disabled")
+			}
+			console.log("geolocation response")
+			console.log(locationData)
 	}
+	
+	$scope.getCurrentLocationName = function(lat, long){
+	
+		var dataToSend =  {"latitude":lat,"longitude":long}
+		var url = "/ASDEWeather/api/weather/currentWeatherByCoords";
+		var caller = "location";
+		var method = "POST"
+		responseHandler.serverCall(url,method, dataToSend,null, null,caller);
+	
+	}
+	
+	//-------------------------------------------------------------------------------------
+	$scope.currentWeatherByCityCall = function(location) {	
+		var dataToSend = location;	
+		
+	
+	}
+	//------------------------------------------------------------------------------------
+	
 	
 	// end of getCcurrent location
 	
@@ -190,67 +120,6 @@ App.controller("WeatherController", function($rootScope, $scope){
 		$scope.setWeatherData(data);
 		//$scope.$apply();
 	}
-	$scope.displayWeatherGraph = function(){
-		var chartColors = {
-				  red: 'rgb(255, 99, 132)',
-				  orange: 'rgb(255, 159, 64)',
-				  yellow: 'rgb(255, 205, 86)',
-				  green: 'rgb(75, 192, 192)',
-				  blue: 'rgb(54, 162, 235)',
-				  purple: 'rgb(153, 102, 255)',
-				  grey: 'rgb(231,233,237)'
-				};
-		
-		var ctx =$("#myChart");
-		var myChart = new Chart(ctx, {
-		    type: 'line',
-		    data: {
-		        labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thurday", "Friday","Saturday"],
-		        datasets: [{
-		            label: 'Temprature',
-		            backgroundColor: chartColors.red,
-		            borderColor: chartColors.red,
-		            data: [19, 19, 18, 14, 13,11,12],
-		            fill: false
-		            
-		        },
-		        {label: 'Humidity',
-		        backgroundColor: chartColors.blue,
-		         borderColor: chartColors.blue,
-	            data: [65, 60, 70, 63, 70,62,65],
-	            fill: false}
-		        
-		        ]
-		    },
-		    fill: false,
-		    options: {
-		        responsive: true,
-		        fill:false,
-		        title: {
-		          display: true,
-		          text: 'City Name Weather'
-		        },
-		        tooltips: {
-		          mode: 'label',
-		        },
-		       
-		        scales: {
-		          xAxes: [{
-		            display: true,scaleLabel: {
-		              display: true,
-		              labelString: 'Days'
-		            }
-		          }],
-		          yAxes: [{
-		            display: true,
-		            scaleLabel: {
-		              display: true,
-		              labelString: 'Value'
-		            }
-		          }]
-		        }
-		      }
-			
-		});
-	}
+	
+
 });

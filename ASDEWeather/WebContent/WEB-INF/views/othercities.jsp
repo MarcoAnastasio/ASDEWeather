@@ -1,9 +1,9 @@
 
 <section class="bg-light section-cities" id="portfolio">
 
-
 	<div class="container" ng-controller="WeatherController"
 		ng-init="loadSelectedCity()">
+		
 		<div class="row">
 			<div class="col-lg-12 text-center">
 
@@ -14,10 +14,11 @@
 
 		<div class="row">
 
-			<div ng-repeat="w in weatherData track by $index"
+			<div ng-repeat="currentWeather in currentWeathers"
 				class="col-md-4 col-sm-6 portfolio-item ">
+				
 				<div class="card">
-					<a class="portfolio-link" ng-click="WeatherForcast(w.name)"
+					<a class="portfolio-link" ng-click="WeatherForcast(currentWeather.city.name)"
 						data-toggle="modal" href="#portfolioModal6">
 						<div class="portfolio-hover">
 							<div class="portfolio-hover-content">
@@ -25,32 +26,33 @@
 							</div>
 						</div> <img class="img-fluid"
 						src="resources/img/portfolio/weather-default.jpg" alt="City image"
-						id="img-{{w.name.replace(' ','')}}" emit-last-repeater-element>
+						id="img-{{currentWeather.city.name.replace(' ','')}}" emit-last-repeater-element>
 					</a>
 					<div class="card-body">
-						<div class="portfolio-link" ng-click="WeatherForcast(w.name)">
-							<h3 class="card-title">{{w.name}}</h3>
+						<div class="portfolio-link" ng-click="WeatherForcast(currentWeather.city.name.name)">
+							<h3 class="card-title">{{currentWeather.city.name}}</h3>
 							<p class="card-text">
-								{{w.description}} <span><img src="{{w.icon}}" /></span>
+								<i class="wi wi-{{currentWeather.weather.icon}}"
+										style="font-size: 46px; color: #fed136; padding-top: 10px;"></i>
 							</p>
 
 							<p class="card-text text-muted">
-								Maximum Temperature: {{w.temp}} &deg C <br> MinimumThere is a new 
-								Temperature: {{w.minTemp}} &deg C <br> Humidity:
-								{{w.humidity}} &deg C
+								Maximum Temperature: {{currentWeather.mainTemp.tempMax}} &deg C <br> Minimum
+								Temperature: {{currentWeather.mainTemp.tempMin}} &deg C <br> Humidity:
+								{{currentWeather.mainTemp.humidity}} &deg C
 							</p>
 						</div>
-						<!-- 					<button ng-if="$storage.status" ng-click="removeUserCity(w.id,w.name)" class="btn btn-lg btn-primary btn-circle pull-right">
+											<button ng-if="$storage.status" ng-click="removeUserCity(currentWeather.city.id,currentWeather.city.name)" class="btn btn-lg btn-primary btn-circle pull-right">
 						<i class="fa fa-star-o"></i>
-					</button> -->
+					</button>
 						<button ng-if="$storage.status"
-							ng-click="addUserCity(w.id,w.name)"
+							ng-click="addUserCity(currentWeather.city.id,currentWeather.city.name)"
 							class="btn btn-lg btn-success btn-circle pull-right">
 							<i class="fa fa-star"></i>
 						</button>
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
+		</div> 
+	</div> 
 </section>

@@ -36,12 +36,12 @@ angular.module('cookieStoreExample', ['ngCookies'])
 
 App.directive('emitLastRepeaterElement', function() {
 	return function(scope,element) {
-		getPhotoFromAPI(scope.w.name, 400, 300,false);
+		getPhotoFromAPI(scope.currentWeather.city.name, 400, 300,false);
 	};
 });
 
 App.directive('emitLastRepeaterElementCity', function() {
 	return function(scope,element) {
-		getPhotoFromAPI(scope.w.city.name, 400, 300,true);
+		getPhotoFromAPI(scope.currentWeather.city.name, 400, 300,true);
 	};
 });

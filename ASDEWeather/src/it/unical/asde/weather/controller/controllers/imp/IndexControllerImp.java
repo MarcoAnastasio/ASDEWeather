@@ -95,7 +95,6 @@ public class IndexControllerImp extends AbstractGenericController implements Ind
 			return fillWrongGenericResponse(e, request);
 		}
 	}
-    
 
 
 }
