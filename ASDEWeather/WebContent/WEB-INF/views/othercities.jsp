@@ -42,7 +42,7 @@
 								{{currentWeather.mainTemp.humidity}} &deg C
 							</p>
 						</div>
-											<button ng-if="$storage.status" ng-click="removeUserCity(currentWeather.city.id,currentWeather.city.name)" class="btn btn-lg btn-primary btn-circle pull-right">
+							<button ng-if="$storage.status" ng-click="removeUserCity(currentWeather.city.id,currentWeather.city.name)" class="btn btn-lg btn-primary btn-circle pull-right">
 						<i class="fa fa-star-o"></i>
 					</button>
 						<button ng-if="$storage.status"
