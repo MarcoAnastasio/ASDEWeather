@@ -1,5 +1,8 @@
 package it.unical.asde.weather.dao.data.weather;
 
+import it.unical.asde.weather.dao.AbstarctGenericDAO;
+import it.unical.asde.weather.model.bean.data.weather.WeatherData;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -8,12 +11,6 @@ import org.hibernate.Session;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import it.unical.asde.weather.dao.AbstarctGenericDAO;
-import it.unical.asde.weather.dao.geographical.CityDaoImp;
-import it.unical.asde.weather.model.bean.data.weather.WeatherData;
-import it.unical.asde.weather.model.bean.data.weather.WeatherForecastData;
-import it.unical.asde.weather.model.bean.geographical.City;
 
 @Service
 public class WeatherDataDAOImp extends AbstarctGenericDAO<WeatherData> implements WeatherDataDAO{
@@ -58,20 +55,9 @@ public class WeatherDataDAOImp extends AbstarctGenericDAO<WeatherData> implement
 	public WeatherData findWeatherDataFromCityNotOlderThan(Long cityId,Integer maxOldValue){
 		Session session = getSession();
 		System.out.println("findAllSession="+System.identityHashCode(session));
-		//TODO maybe add TOP 1 and order by desc to have the newest result
-		/*
-		return (WeatherData) session.createQuery("from WeatherData where city_id=:cityId "
-				+ "and  DATEDIFF('MINUTE',CURRENT_TIMESTAMP(),storeTime ) <= :maxOldValue")
-				.setParameter("cityId", cityId)
-				.setParameter("maxOldValue", maxOldValue)
-				.uniqueResult();
-				*/
 		
-		//is not possible to use datediff... so set a max value date
 		return (WeatherData) session.createQuery("from WeatherData where city_id=:cityId ")
-				//+ "and  DATEDIFF('MINUTE',CURRENT_TIMESTAMP(),storeTime ) <= :maxOldValue")
 				.setParameter("cityId", cityId)
-//				.setParameter("maxOldValue", maxOldValue)
 				.uniqueResult();
 	}
 	
@@ -97,15 +83,6 @@ public class WeatherDataDAOImp extends AbstarctGenericDAO<WeatherData> implement
 				.setParameter(1, cityId)
 				.setParameter(2, maxOldDate).uniqueResult();
 
-		/*
-		return session.createQuery("from WeatherData where city_id=:cityId "
-				+ "and  storeTime > :maxOldDate order by storeTime desc",WeatherData.class)
-				.setParameter("cityId", cityId)
-				.setParameter("maxOldDate", maxOldDate)
-				.setFirstResult(0)
-				.setMaxResults(1)
-				.uniqueResult();
-		 */
 	}
 	
 	
@@ -115,7 +92,6 @@ public class WeatherDataDAOImp extends AbstarctGenericDAO<WeatherData> implement
 	public List<WeatherData> findWeatherDataFromCitiesNotOlderThan(List<Long> cityIds,Date maxOldDate){
 		Session session = getSession();
 		System.out.println("findAllSession="+System.identityHashCode(session));
-		//TODO maybe add TOP 1 and order by desc to have the newest result
 
 		return getSession().createNativeQuery(
 				"SELECT * , 0 as clazz_  "
@@ -129,14 +105,7 @@ public class WeatherDataDAOImp extends AbstarctGenericDAO<WeatherData> implement
 				.setParameter("citiesIds", cityIds)
 				.setParameter("maxDate", maxOldDate).list();
 		
-/*
-		//is not possible to use datediff... so set a max value date
-		return session.createQuery("from WeatherData where city_id IN (:cityIds) "
-				+ "and  storeTime > :maxOldDate order by storeTime desc",WeatherData.class)
-				.setParameter("cityIds", cityIds)
-				.setParameter("maxOldDate", maxOldDate)
-				.list();
-*/
+
 	}
 
 

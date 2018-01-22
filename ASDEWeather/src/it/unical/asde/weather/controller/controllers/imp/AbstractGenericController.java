@@ -1,14 +1,13 @@
 package it.unical.asde.weather.controller.controllers.imp;
 
-import org.springframework.security.core.context.SecurityContextHolder;
-
 import it.unical.asde.weather.model.bean.comunication.response.GenericResponse;
 import it.unical.asde.weather.model.bean.comunication.response.GenericResponse.ErrorCode;
 import it.unical.asde.weather.model.bean.comunication.response.GenericResponse.Status;
-import it.unical.asde.weather.model.bean.comunication.response.GenericResponseConstant;
 import it.unical.asde.weather.model.bean.user.User;
 import it.unical.asde.weather.model.bean.user.UserDetailsImp;
 import it.unical.asde.weather.model.exception.ASDECustomException;
+
+import org.springframework.security.core.context.SecurityContextHolder;
 
 public abstract class AbstractGenericController {
 
@@ -39,7 +38,6 @@ public abstract class AbstractGenericController {
 	}
 	
 	
-	//TODO test what appen if not user is logged , and maybe throws ASDECyustomException
 	protected User getCurrentLoggedUser(){
 		return ((UserDetailsImp) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUser();
 	}

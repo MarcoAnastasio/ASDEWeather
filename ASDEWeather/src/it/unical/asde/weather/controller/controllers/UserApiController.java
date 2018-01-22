@@ -3,9 +3,6 @@ package it.unical.asde.weather.controller.controllers;
 import it.unical.asde.weather.model.bean.comunication.response.GenericResponse;
 import it.unical.asde.weather.model.bean.user.User;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-
 public interface UserApiController {
 
 	/**

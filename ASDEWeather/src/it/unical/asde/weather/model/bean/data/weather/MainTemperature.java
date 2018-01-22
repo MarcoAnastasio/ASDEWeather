@@ -2,7 +2,6 @@ package it.unical.asde.weather.model.bean.data.weather;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.Entity;
 
 @Embeddable
 public class MainTemperature {

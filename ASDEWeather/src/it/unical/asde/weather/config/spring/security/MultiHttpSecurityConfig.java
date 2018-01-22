@@ -4,7 +4,6 @@ import it.unical.asde.weather.core.services.user.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -79,9 +78,8 @@ public class MultiHttpSecurityConfig {
 
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
-//			http.authorizeRequests().antMatchers("/registration","/registration**").permitAll();
 			
-//			unccoment ot use H" console
+//			unccoment ot use H2 console
 //			http.headers().frameOptions().disable();
 			http.csrf().disable().authorizeRequests().antMatchers("/","/resources/**","/registration**",
 					"/test","/console/**").permitAll();

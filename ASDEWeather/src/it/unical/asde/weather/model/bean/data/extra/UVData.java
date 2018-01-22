@@ -1,14 +1,10 @@
 package it.unical.asde.weather.model.bean.data.extra;
 
-import it.unical.asde.weather.model.bean.data.weather.MainTemperature;
-import it.unical.asde.weather.model.bean.data.weather.Weather;
-import it.unical.asde.weather.model.bean.data.weather.Wind;
 import it.unical.asde.weather.model.bean.geographical.City;
 
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;

@@ -1,8 +1,9 @@
 package it.unical.asde.weather.model.bean.data.weather;
 
+import it.unical.asde.weather.model.bean.geographical.City;
+
 import java.util.Date;
 
-import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -10,17 +11,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.InheritanceType;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Polymorphism;
 import org.hibernate.annotations.PolymorphismType;
-import org.json.simple.JSONObject;
-
-import it.unical.asde.weather.model.bean.geographical.City;
 
 @Entity
 @Table

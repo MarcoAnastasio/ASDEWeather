@@ -3,8 +3,6 @@ package it.unical.asde.weather.dao;
 import java.io.Serializable;
 import java.util.List;
 
-import it.unical.asde.weather.model.bean.geographical.Country;
-
 public interface GenericDao<E>
 {
 

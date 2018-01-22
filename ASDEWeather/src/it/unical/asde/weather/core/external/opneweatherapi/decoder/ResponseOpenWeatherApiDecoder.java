@@ -1,12 +1,11 @@
 package it.unical.asde.weather.core.external.opneweatherapi.decoder;
 
-import org.json.simple.JSONObject;
-
 import it.unical.asde.weather.model.bean.data.extra.UVData;
-import it.unical.asde.weather.model.bean.data.weather.WeatherForecastData;
 import it.unical.asde.weather.model.bean.geographical.City;
 import it.unical.asde.weather.model.openweatherapi.response.APICurrentResponse;
 import it.unical.asde.weather.model.openweatherapi.response.APIForecastResponse;
+
+import org.json.simple.JSONObject;
 
 public interface ResponseOpenWeatherApiDecoder {
 

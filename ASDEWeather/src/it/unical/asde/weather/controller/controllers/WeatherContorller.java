@@ -1,12 +1,12 @@
 package it.unical.asde.weather.controller.controllers;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.web.bind.annotation.RequestBody;
-
 import it.unical.asde.weather.model.bean.comunication.request.RequestGeolocation;
 import it.unical.asde.weather.model.bean.comunication.request.RequestListCities;
 import it.unical.asde.weather.model.bean.comunication.request.RequestSingleCity;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.web.bind.annotation.RequestBody;
 
 public interface WeatherContorller {
 
