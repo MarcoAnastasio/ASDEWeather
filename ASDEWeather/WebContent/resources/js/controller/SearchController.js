@@ -14,7 +14,7 @@ App.controller("SearchController", function($rootScope, $scope) {
 			"subName" : $scope.query
 
 		};
-		if ($scope.query.length) {
+		if ($scope.query.length>2) {
 			$.ajax({
 				type : 'POST',
 				url : "/ASDEWeather/api/commons/cityByNameSubstring",
