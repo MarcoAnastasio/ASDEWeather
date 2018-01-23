@@ -134,7 +134,7 @@ App.controller("SearchController", function($rootScope, $scope) {
 	};	
 	
 	$rootScope.clearSearch = function (){
-	 	$rootScope.searchStatus=0;
+	 	 $rootScope.searchStatus=0;
 		 $rootScope.$apply();
 	}
 
