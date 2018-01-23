@@ -41,7 +41,7 @@ function ForecastWeatherDecoder(forecastWeather_input) {
 	var dateData = new dateDecoder(forecastWeather_input.dateTimeCalulation);
 	this.dateData = dateData;
 	this.mainTemp = new MainTempDecoder(forecastWeather_input.mainTemperature);
-	this.weather = new WeatherDecoder(forecastWeather_input.weather);
+	this.weather = new WeatherDecoder(forecastWeather_input.weather,dateData);
 	this.wind = new WindDecoder(forecastWeather_input.wind);
 	this.cloud= forecastWeather_input.clouds;
 	this.city=new CityDecoder(forecastWeather_input.city);
@@ -58,14 +58,16 @@ function MainTempDecoder(main_temp_input) {
 	this.tempKf = main_temp_input.tempKf;
 }
 
-function WeatherDecoder(weather_input) {
+function WeatherDecoder(weather_input,dateData) {
 	this.id=weather_input.id;
 	this.main = weather_input.main;
 	this.descritpion = weather_input.descritpion;
 	//this.icon = weather_input.icon;
+	var hour = (new Date).getHours();
 	this.icon=iconList[weather_input.id];
+	if (parseInt(dateData.hour)>18)
+		this.icon=iconList["night-"+weather_input.id];
 	//decodeIcon(weather_input.id);
-	console.log(iconList[weather_input.id]);
 
 
 }
@@ -90,6 +92,7 @@ function CityDecoder(city_input){
 	this.id=city_input.id;
 	this.latitude=city_input.latitude;
 	this.longitude=city_input.longitude;
+	
 	this.country=new CountryDeoder(city_input.country);
 }
 

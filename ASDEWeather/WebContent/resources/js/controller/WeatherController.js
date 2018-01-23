@@ -97,7 +97,8 @@ App.controller("WeatherController", function($rootScope, $scope, responseHandler
 		var caller = "location";
 		var method = "POST"
 		responseHandler.serverCall(url,method, dataToSend,null, null,caller);
-	
+		
+		
 	}
 	
 	//-------------------------------------------------------------------------------------
@@ -123,5 +124,6 @@ App.controller("WeatherController", function($rootScope, $scope, responseHandler
 		//$scope.$apply();
 	}
 	
+
 
 });

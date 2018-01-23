@@ -19,4 +19,3 @@ App.directive('emitLastRepeaterElementCity', function() {
 		//getPhotoFromAPI(scope.currentWeather.city.name, 400, 300,true);
 	};
 });
-$("#notification").click($('.dropdown-toggle').dropdown())
