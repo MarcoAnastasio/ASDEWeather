@@ -21,8 +21,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-//@PropertySource(value = { "classpath:hibernate_MYSQL.properties" })
-@PropertySource(value = { "classpath:hibernate.properties" })
+@PropertySource(value = { "classpath:hibernate_MYSQL.properties" })
+//@PropertySource(value = { "classpath:hibernate.properties" })
 public class HibernateConfig{
  
     @Autowired
@@ -65,7 +65,7 @@ public class HibernateConfig{
         properties.put("hibernate.format_sql", environment.getRequiredProperty("hibernate.format_sql"));
         
         properties.put("hibernate.hbm2ddl.auto", environment.getRequiredProperty("hibernate.hbm2ddl.auto"));
-        properties.put("hibernate.hbm2ddl.import_files", environment.getRequiredProperty("hibernate.hbm2ddl.import_files"));
+//        properties.put("hibernate.hbm2ddl.import_files", environment.getRequiredProperty("hibernate.hbm2ddl.import_files"));
         
         
         
