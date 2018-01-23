@@ -65,7 +65,7 @@ function WeatherDecoder(weather_input,dateData) {
 	//this.icon = weather_input.icon;
 	var hour = (new Date).getHours();
 	this.icon=iconList[weather_input.id];
-	if (parseInt(dateData.hour)>18)
+	if (parseInt(dateData.hour)>18 | parseInt(dateData.hour)<7 )
 		this.icon=iconList["night-"+weather_input.id];
 	//decodeIcon(weather_input.id);
 
