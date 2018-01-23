@@ -14,7 +14,7 @@ App.controller("SearchController", function($rootScope, $scope) {
 			"subName" : $scope.query
 
 		};
-		if ($scope.query.length) {
+		if ($scope.query.length>2) {
 			$.ajax({
 				type : 'POST',
 				url : "/ASDEWeather/api/commons/cityByNameSubstring",
@@ -25,9 +25,6 @@ App.controller("SearchController", function($rootScope, $scope) {
 
 					if (response.status == "OK") {
 					 	$rootScope.cities = response.response;
-					 	
-					  //  console.log("am calld agaain"+$scope.query);
-					   // console.log($rootScope.cities);
 					    $rootScope.$apply();
 						 
 					} else {
@@ -64,10 +61,7 @@ App.controller("SearchController", function($rootScope, $scope) {
 					  
 
 					  var current = response.response.listForecastWeather[0];
-					  $rootScope.currentWeather= new ForecastWeatherDecoder(current);
-					
-					    
-					    
+					  $rootScope.currentWeather= new ForecastWeatherDecoder(current);					    
 					    
 					    $scope.myMap($rootScope.currentWeather.city.latitude,
 								$rootScope.currentWeather.city.longitude);
@@ -134,7 +128,7 @@ App.controller("SearchController", function($rootScope, $scope) {
 	};	
 	
 	$rootScope.clearSearch = function (){
-	 	$rootScope.searchStatus=0;
+	     $rootScope.searchStatus=0;
 		 $rootScope.$apply();
 	}
 

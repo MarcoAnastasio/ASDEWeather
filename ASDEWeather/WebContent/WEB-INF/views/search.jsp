@@ -42,7 +42,7 @@
 			<div class="col-12 col-sm-9 col-md-7 col-lg-5">
 				<ul class=" list-group">
 
-					 <button ng-repeat="city in cities" type="button"
+					 <button ng-repeat="city in cities| orderBy:city" type="button"
 						class="list-group-item list-group-item-action"
 						ng-click="currentWeatherByCityCall(city.id,city.name,city)" ng-hide="cityListHide">
 						

@@ -57,10 +57,7 @@ App.controller("SearchController", function($rootScope, $scope) {
 					  
 
 					  var current = response.response.listForecastWeather[0];
-					  $rootScope.currentWeather= new ForecastWeatherDecoder(current);
-					
-					    
-					    
+					  $rootScope.currentWeather= new ForecastWeatherDecoder(current);   
 					    
 					    $scope.myMap($rootScope.currentWeather.city.latitude,
 								$rootScope.currentWeather.city.longitude);

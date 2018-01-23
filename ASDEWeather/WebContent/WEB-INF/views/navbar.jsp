@@ -60,40 +60,34 @@
 			<div class="form-inline my-2 my-lg-0" ng-if="$storage.status == 1">
 				<ul class=" navbar-nav">
 					<li class="nav-item" ng-controller ="NotificationController" ng-init="getNotifications()">
+					<a class="nav-link dropdown" style="cursor:pointer" ng-if="notificationsStatus > 0" > 
+						<i	id="notifcation" class="fa fa-bell drop-down-toggle notifcation-warning" data-toggle ="dropdown" aria-haspopup="true" aria-expanded="false"
+								ng-click="notificationViewd()">
+								</i>
 					
-					<a class="nav-link dropdown" ng-if="notificationsStatus > 0"> 
-					<i	class="fa fa-bell drop-down-toggle" data-toggle ="dropdown" aria-haspopup="true" aria-expanded="false"
-							style="font-size: 24px; color: #8B0000">
-							</i>
-							
-							<div class="dropdown-menu dropdown-menu-right"
-							aria-labelledby="navbarDropdown"  style="overflow-y:scroll; max-height:300px;">
+							 <div id="notification" class="dropdown-menu dropdown-menu-right"
+							aria-labelledby="navbarDropdown"  style="overflow-y:scroll; width:400px; max-height:300px;">
 								<span class="dropdown-item" ng-repeat="w in notificationList" ng-click="WeatherForcast(w.cityName)">
 								{{w.cityName}}<br/>
 								{{w.message}}<br/>
 								{{w.date}}<br/>
 								<div class="dropdown-divider"></div>
 								</span>
-								<button class="btn btn-sm btn-primary">clear</button>
 							</div>
 							
 					</a>
 							
 					
-					<a class="nav-link" ng-if="notificationsStatus == 0" 
-						> <i
-							class="fa fa-bell  drop-down-toggle" data-toggle ="dropdown" aria-haspopup="true"  style="font-size: 24px; color: #FFF">
+					<a ng-if="notificationsStatus == 0" class="nav-link dropdown"> 
+					<i  class="fa fa-bell drop-down-toggle notification-none" data-toggle ="dropdown" aria-haspopup="true">
 					</i>
 						<div class="dropdown-menu dropdown-menu-right"
-							aria-labelledby="navbarDropdown">
-								
-								<span class="dropdown-item">No Weather Notifications for your cities</span>
-							
+							aria-labelledby="navbarDropdown">								
+								<span class="dropdown-item">No Weather Notifications for your cities</span>						
 								
 							</div>
 					
-					</a>
-							
+</a>
 					</li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
