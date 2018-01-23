@@ -1,9 +1,0 @@
-/**
- * 
- * 
- */
-App.service("PreferedCities",function(){
-	
-	
-	
-})

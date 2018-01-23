@@ -61,11 +61,11 @@
 				<ul class=" navbar-nav">
 					<li class="nav-item" ng-controller ="NotificationController" ng-init="getNotifications()">
 					
-					<a class="nav-link dropdown" style="cursor:pointer"> 
-					<i	id="notifcation" ng-if="(notificationsStatus) > 0" class="fa fa-bell drop-down-toggle notifcation-warning" data-toggle ="dropdown" aria-haspopup="true" aria-expanded="false"
-							ng-click="notificationViewd()" ng-class="{font-size: 24px; color:#FFF}">
-							</i>
-					</i>
+					<a class="nav-link dropdown" style="cursor:pointer" ng-if="notificationsStatus > 0" > 
+						<i	id="notifcation" class="fa fa-bell drop-down-toggle notifcation-warning" data-toggle ="dropdown" aria-haspopup="true" aria-expanded="false"
+								ng-click="notificationViewd()">
+								</i>
+					
 							 <div id="notification" class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdown"  style="overflow-y:scroll; width:400px; max-height:300px;">
 								<span class="dropdown-item" ng-repeat="w in notificationList" ng-click="WeatherForcast(w.cityName)">
@@ -79,9 +79,8 @@
 					</a>
 							
 					
-					<a class="nav-link" ng-if="notificationsStatus == 0" 
-						> <i
-							class="fa fa-bell  drop-down-toggle notifcation-none" data-toggle ="dropdown" aria-haspopup="true">
+					<a ng-if="notificationsStatus == 0" class="nav-link dropdown"> 
+					<i  class="fa fa-bell drop-down-toggle notification-none" data-toggle ="dropdown" aria-haspopup="true">
 					</i>
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdown">								

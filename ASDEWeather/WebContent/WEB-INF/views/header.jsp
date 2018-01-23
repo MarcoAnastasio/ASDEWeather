@@ -1,4 +1,4 @@
-<header class="masthead border" style="padding-top: 60px">
+<header class="masthead" style="padding-top: 60px;">
 	<div class="container" >
 			<div class="col" style="margin-top: 25px">
 				<div ng-contoller="WeatherController">
@@ -29,5 +29,4 @@
 			<div style="padding-top: 10px"><%@include file="searchCard.jsp"%>
 			</div>
 		</div>
-	</div>
 </header>
