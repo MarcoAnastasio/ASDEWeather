@@ -3,27 +3,6 @@
  */
 
 
-var directions = [ "",
-	"N",
-	"NNE",
-	"NE",
-	"ENE",
-	"E",
-	"ESE",
-	"SE",
-	"SSE",
-	"S",
-	"SSW",
-	"SW",
-	"WSW",
-	"W",
-	"WNW",
-	"NW",
-	"NNW",
-	"N"
-	];
-
-
 function Forecasts(forecasts_input,uvdata) {
 	var forecastList = []
 	for (var i = 0; i < forecasts_input.length; i++) {
@@ -32,7 +11,7 @@ function Forecasts(forecasts_input,uvdata) {
 	}
 	this.forecastList = forecastList;
 	if(uvdata != null)
-		this.uvdata= uvdata.value;
+	this.uvdata= uvdata.value;
 }
 
 function ForecastWeatherDecoder(forecastWeather_input) {
@@ -42,7 +21,6 @@ function ForecastWeatherDecoder(forecastWeather_input) {
 	this.mainTemp = new MainTempDecoder(forecastWeather_input.mainTemperature);
 	this.weather = new WeatherDecoder(forecastWeather_input.weather);
 	this.wind = new WindDecoder(forecastWeather_input.wind);
-	this.cloud= forecastWeather_input.clouds;
 	this.city=new CityDecoder(forecastWeather_input.city);
 };
 
@@ -64,48 +42,41 @@ function WeatherDecoder(weather_input) {
 	//this.icon = weather_input.icon;
 	this.icon=iconList[weather_input.id];
 	//decodeIcon(weather_input.id);
-	/*	console.log(iconList[weather_input.id]);
-	 */
+	console.log(iconList[weather_input.id]);
+
 
 }
 function WindDecoder(wind_input) {
-	this.speed = wind_input.speed != null ? wind_input.speed : "0";
-	this.deg = wind_input.deg != null ? CalculateCompassDirection(wind_input.deg): "none";
+	this.speed = wind_input.speed;
+	this.deg = wind_input.deg;
 
 }
-
-function CalculateCompassDirection(wind_degree){
-	var Index = wind_degree % 360;
-	Index = Math.round(Index/ 22.5,0) +1;
-	return directions[Index];
-}
-
-
 function CityDecoder(city_input){
-	this.name=city_input.name;
-	this.id=city_input.id;
-	this.latitude=city_input.latitude;
-	this.longitude=city_input.longitude;
-	if(city_input.country != null)
-		this.country=new CountryDeoder(city_input.country);
+this.name=city_input.name;
+this.id=city_input.id;
+this.latitude=city_input.latitude;
+this.longitude=city_input.longitude;
+this.country=new CountryDeoder(city_input.country);
 }
 
 function CountryDeoder(country_input){
-	this.name=country_input.name != null ? country_input.name : "";
-	this.id=country_input.id != null ? country_input.id : 0;
-	this.code=country_input.code != null ? country_input.code : "";
-
+	if(country_input!=null){
+	this.name=country_input.name;
+	this.id=country_input.id;
+	this.code=country_input.code;}
 }
 
 function DayNamer(day, cond) {
+	if(!null){
 	days_name = [ "Sunday", "Monday", "Tuesday", "Wedensday", "Thursday",
-		"Friday", "Saturday" ];
+			"Friday", "Saturday" ];
 	days_short_name = [ "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" ];
 	var d = new Date(day);
-	return cond ? days_name[d.getDay()] : days_short_name[d.getDay()];
+	return cond ? days_name[d.getDay()] : days_short_name[d.getDay()];}
 }
 
 function dateDecoder(date_input) {
+	if(date_input!=null){
 	this.dateData = date_input;
 	var substrings = [];
 	substrings = date_input.split(" ");
@@ -130,11 +101,13 @@ function dateDecoder(date_input) {
 	this.minute = minute;
 	this.times = substrings[1];
 	this.dayName = dayName;
-
+	}
+	
 
 }
 
 function groupBy(array_input, func_input) {
+	
 	var groups = {};
 	array_input.forEach(function(o) {
 		var group = JSON.stringify(func_input(o));
@@ -144,6 +117,7 @@ function groupBy(array_input, func_input) {
 	return Object.keys(groups).map(function(group) {
 		return groups[group];
 	})
+	
 }
 
 var icons={};
@@ -157,17 +131,17 @@ function decodeIcon(key) {
 
 
 function getValues(obj, key) {
-	var objects = [];
-	for (var i in obj) {
-		if (!obj.hasOwnProperty(i)) continue;
-		if (typeof obj[i] == 'object') {
-			objects = objects.concat(getValues(obj[i], key));
-		} else if (i == key) {
-			objects.push(obj[i]);
-		}
-	}
-	return objects;
-}
+    var objects = [];
+    for (var i in obj) {
+        if (!obj.hasOwnProperty(i)) continue;
+        if (typeof obj[i] == 'object') {
+            objects = objects.concat(getValues(obj[i], key));
+        } else if (i == key) {
+            objects.push(obj[i]);
+        }
+    }
+    return objects;
+    }
 
 
 

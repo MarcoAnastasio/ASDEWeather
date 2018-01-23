@@ -695,3 +695,12 @@ footer ul.quicklinks {
 	background-color: #212529;
 	color: white;
 }
+
+/* NOtificatin */
+
+.notifcation-warning {
+	font-size: 24px; color:#D52D2D
+}
+.notification-none{
+	font-size: 24px; color:#FFF
+}

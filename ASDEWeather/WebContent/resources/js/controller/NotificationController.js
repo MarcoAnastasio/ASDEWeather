@@ -13,7 +13,7 @@ App.controller("NotificationController", ["$scope","$rootScope","$window","$loca
 	$interval(function(){$rootScope.getNotifications();},3600000);
 	
 	$rootScope.getNotifications = function(){
-		
+		$scope.notificationsReadStatus = 0
 		var pd = atob($scope.$storage.pd);
 		var plainPd = sjcl.decrypt("secret",pd);
 		
@@ -37,11 +37,15 @@ App.controller("NotificationController", ["$scope","$rootScope","$window","$loca
 						$scope.notificationsStatus= response.response.length,
 						$scope.notificationList =  new Notifications(response.response);
 						$scope.notificationList = $scope.notificationList.notification_list;
+						$scope.notificationsReadStatus = 0;	
+						//$scope.notificationViewd()
 						//});
 						$scope.$apply();
 
 
 					}// end of length of response > 0
+					else 
+						$scope.notificationsStatus = 0
 
 				}// end of if response is OK
 				else{
@@ -62,6 +66,13 @@ App.controller("NotificationController", ["$scope","$rootScope","$window","$loca
 			notificationsStatus: 0,
 			notificationList : []
 		});
+	}
+	$scope.notificationViewd = function(){		
+			$rootScope.notificationsReadStatus = 1;	
+			$('#notifcation').addClass('notification-none');
+			$scope.$apply();
+			
+		
 	}
 
 }]);

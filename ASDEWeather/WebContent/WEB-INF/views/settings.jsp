@@ -18,28 +18,28 @@
        <div class="col col-9">
        	
        		<form ng-submit="profileUpdate($storage.userData)">
-			  <div class="form-group">
+       			<div ng-if ="userUPdateError"></div>
 			   <div class="form-group">
 			    <label for="exampleInputPassword1">First Name</label>
-			    <input type="text"   ng-model="$storage.userData.firstname" ng-bind="userInfo.username" class="form-control">
-			  </div>
+			    <input type="text"   ng-model="$storage.userData.firstname" ng-bind="userInfo.username" class="form-control" required>
+			   </div>
 			   <div class="form-group">
 			    <label for="exampleInputPassword1">Last Name</label>
-			    <input type="text" name ="userInfo.lastname" class="form-control" ng-model="$storage.userData.lastname" >
-			  </div>
+			    <input type="text" name ="userInfo.lastname" class="form-control" ng-model="$storage.userData.lastname"  required>
+			    </div>
+			  <div>
 			    <label for="exampleInputEmail1">Email address</label>
-			    <input type="userInfo.email"   ng-model="$storage.userData.email"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+			    <input type="email"   ng-model="$storage.userData.email"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
 			    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
 			  </div>
-	 
-       </div>
-      </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
-      </div>
+	 	
+      	
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		        <button type="submit" class="btn btn-primary">Save changes</button>
+		      </div>
       	</form>
+      	</div>
     </div>
   </div>
 </div>
