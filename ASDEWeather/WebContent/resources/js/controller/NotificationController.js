@@ -68,7 +68,8 @@ App.controller("NotificationController", ["$scope","$rootScope","$window","$loca
 		});
 	}
 	$scope.notificationViewd = function(){		
-			$rootScope.notificationsReadStatus = 1;			
+			$rootScope.notificationsReadStatus = 1;	
+			$('#notifcation').addClass('notification-none');
 			$scope.$apply();
 			
 		
