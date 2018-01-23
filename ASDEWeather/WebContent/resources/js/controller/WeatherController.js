@@ -35,8 +35,10 @@ App.controller("WeatherController", function($rootScope, $scope, responseHandler
 		case 'index':
 			//index(response);
 			 var forecasts = new Forecasts(response.randomCitiesWeather); 
-			 $scope.currentWeathers=forecasts.forecastList;
-			 $scope.$apply();
+			 $rootScope.currentWeathers=forecasts.forecastList;
+			 console.log("index request")
+			 console.log($scope.currentWeathers);
+			 $rootScope.$apply();
 			break;
 		case 'login':
 			break;
@@ -117,7 +119,7 @@ App.controller("WeatherController", function($rootScope, $scope, responseHandler
 	$rootScope.getPreferedCities = function(data){
 		console.log("Call from user controller")
 		console.log(data);
-		$scope.setWeatherData(data);
+		//$scope.setWeatherData(data);
 		//$scope.$apply();
 	}
 	

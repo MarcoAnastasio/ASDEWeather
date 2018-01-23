@@ -1,6 +1,8 @@
-
+/*
+ * 
+ */
 App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessionStorage", 
-	function($rootScope, $scope, $window, $localStorage, $sessionStorage ){	
+	function($rootScope, $scope, $window, $localStorage, $sessionStorage,responseHandler ){	
 
 	$scope.$storage = $localStorage;
 	$scope.secret = "secret";
@@ -13,7 +15,6 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 	});
 	//getNotifications();
 	$scope.status = $localStorage.status;
-	//$scope.status = UserService.loggedUser();
 	$scope.regError = false;
 	$scope.preferedCities =[];
 	$scope.reg_data = {
@@ -39,12 +40,10 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 		if(type!= 'system')
 			$scope.master = angular.copy(userInfo); 
 
-		console.log(userInfo)
+	
 		dataToSend = {'username':$scope.login_data.username, 'password':$scope.login_data.password}
-		console.log(dataToSend);
-
+		
 		var notification = []
-
 		$.ajax({
 			type:'POST',
 			url:"/ASDEWeather/api/auth/user/login", 
@@ -269,19 +268,15 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 		var user = [];
 
 		if($scope.$storage.userData.preferedCities!=null){
-			console.log("prefered cities not null")
 			console.log($scope.$storage.userData.preferedCities)
 			prefedCitiesToSplit =  splitPreferredCities($scope.$storage.userData.preferedCities);
 			prefedCities = prefedCitiesToSplit;
 			console.log($scope.$storage.userData.preferedCities)
-			//prefedCities = prefedCitiesToSplit;
+			
 		}
 
 		prefedCities.push({id:cityId,name:cityName});
 		console.log(prefedCities)
-		/*console.log(sjcl_decrypt($scope.$storage.userData))
-
-		password:sjcl.encrypt($scope.data.password, "data")*/
 		dataToSend = {
 			'id':$scope.$storage.userData.id,
 			'username':$scope.$storage.userData.username,
@@ -289,8 +284,7 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 			'lastName':$scope.$storage.userData.lastname,
 			'email':$scope.$storage.userData.email,
 			'preferedCities':prefedCities
-			/*'country':$scope.reg_data.country,
-	    		'city':$scope.reg_data.city,*/
+			
 		};
 		sendUpdate(dataToSend);
 		//console.log(dataToSend)
@@ -325,7 +319,7 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 		}
 
 		sendUpdate(dataToSend);
-		$('#settingsModal').modal('hide');
+
 		
 		console.log("model shoudl disapear")
 	}// END OF REMVOE USER CITY
@@ -347,12 +341,9 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 		var prefedCitiesToSplit = [];
 		console.log(userInfo)
 		if(userInfo.preferedCities!=null){
-			console.log("prefered cities not null")
 			console.log(userInfo.preferedCities)
 			prefedCitiesToSplit =  splitPreferredCities(userInfo.preferedCities);
 			prefedCities = prefedCitiesToSplit;
-			//console.log($scope.$storage.userData.preferedCities)
-			//prefedCities = prefedCitiesToSplit;
 		}
 		dataToSend = {
 				'id':userInfo.id,
@@ -364,19 +355,13 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 			}
 		
 		sendUpdate(dataToSend);
-		
+	
 	}
 	/**
 	 * update user
 	 */
 	function sendUpdate(dataToSend){
 		var user = [];
-
-		/* var cypheredMsg = sjcl.encrypt("secret", "Hi Amresh!");
-	    var plainMsg = sjcl.decrypt("secret", cypheredMsg);
-		 */
-		//console.log(atob(sjcl.decrypt("secret",$scope.$storage.pd)));
-		//console.log(plainMsg);
 		var pd = atob($scope.$storage.pd);
 		var plainPd = sjcl.decrypt("secret",pd);
 		
@@ -385,25 +370,32 @@ App.controller("UserController", ["$scope","$rootScope","$localStorage","$sessio
 			url:"/ASDEWeather/api/auth/user/updateUser", 
 			contentType:"application/json",
 			dataType:"json",
-			//data:JSON.stringify(dataToSend),
 			beforeSend: function (xhr) {
 				xhr.setRequestHeader ("Authorization", "Basic " + btoa(dataToSend.username + ":" + plainPd))//sjcl.decrypt("secret", $scope.$storage.pd)));
 			},
 			data:JSON.stringify(dataToSend),
 			success:function(response,status){
 
-				if(response.status=="OK"){	    			
-
-					//$scope.$storage.userData
+				if(response.status=="OK"){	 
 
 					user.push({username:dataToSend.username,password:plainPd});
 					$scope.login({username:dataToSend.username,password:plainPd},'system');
-
+					$('#settingsModal').modal('hide');
+					$.alert({
+						title: 'Success!',
+						content: 'Your changes have been Updated',
+						type: 'green',
+						typeAnimated: true,
+					});
 				}
 				else{
-
-
 					console.log(response.messageForUser);
+					$.alert({
+						title: 'Error!',
+						content: 'Sorry, We could not excute your request!',
+						type: 'red',
+						typeAnimated: true,
+					});		
 				}
 			},
 			error:function(e){
