@@ -51,8 +51,8 @@ public class CityDaoImp extends AbstarctGenericDAO<City> implements CityDao{
 	@Override
 	@Transactional(readOnly=true)
 	public List<City> findCityByNameSubstring(String searchKeyword) {
-		return getSession().createQuery("from City where lower(name) LIKE lower(:searchKeyword)",City.class)
-				.setParameter("searchKeyword", "%"+searchKeyword+"%").list();
+		return getSession().createQuery("from City where lower(name) LIKE lower(:searchKeyword) ORDER BY name",City.class)
+				.setParameter("searchKeyword", searchKeyword+"%").list();
 	}
 
 
