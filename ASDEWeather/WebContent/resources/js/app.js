@@ -16,6 +16,6 @@ App.directive('emitLastRepeaterElement', function() {
 
 App.directive('emitLastRepeaterElementCity', function() {
 	return function(scope,element) {
-		//getPhotoFromAPI(scope.currentWeather.city.name, 400, 300,true);
+		getPhotoFromAPI(scope.w.city.name, 400, 300,true);
 	};
 });

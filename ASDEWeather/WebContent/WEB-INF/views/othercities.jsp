@@ -26,7 +26,7 @@
 							</div>
 						</div> <img class="img-fluid"
 						src="resources/img/portfolio/weather-default.jpg" alt="City image"
-						id="img-{{currentWeather.city.name.replace(' ','')}}" emit-last-repeater-element>
+						id="img-{{currentWeather.city.name.replace(' ','')}}" >
 					</a>
 					<div class="card-body">
 						<div class="portfolio-link" ng-click="WeatherForcast(currentWeather.city.name.name)">
@@ -42,9 +42,9 @@
 								{{currentWeather.mainTemp.humidity}} &deg C
 							</p>
 						</div>
-							<button ng-if="$storage.status" ng-click="removeUserCity(currentWeather.city.id,currentWeather.city.name)" class="btn btn-lg btn-primary btn-circle pull-right">
+							<!-- <button ng-if="$storage.status" ng-click="removeUserCity(currentWeather.city.id,currentWeather.city.name)" class="btn btn-lg btn-primary btn-circle pull-right">
 						<i class="fa fa-star-o"></i>
-					</button>
+					</button> -->
 						<button ng-if="$storage.status"
 							ng-click="addUserCity(currentWeather.city.id,currentWeather.city.name)"
 							class="btn btn-lg btn-success btn-circle pull-right">
